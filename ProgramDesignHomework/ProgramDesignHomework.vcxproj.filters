@@ -39,9 +39,6 @@
     <ClCompile Include="data\time.c">
       <Filter>data</Filter>
     </ClCompile>
-    <ClCompile Include="data\money.c">
-      <Filter>data</Filter>
-    </ClCompile>
     <ClCompile Include="utils\cJSON\cJSON.c">
       <Filter>utils\cJSON</Filter>
     </ClCompile>
@@ -81,9 +78,6 @@
       <Filter>data</Filter>
     </ClInclude>
     <ClInclude Include="data\time.h">
-      <Filter>data</Filter>
-    </ClInclude>
-    <ClInclude Include="data\money.h">
       <Filter>data</Filter>
     </ClInclude>
     <ClInclude Include="utils\cJSON\cJSON.h">

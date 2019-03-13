@@ -117,7 +117,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="data\component.c" />
-    <ClCompile Include="data\money.c" />
     <ClCompile Include="data\purchase.c" />
     <ClCompile Include="data\sales.c" />
     <ClCompile Include="data\time.c" />
@@ -135,7 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data\component.h" />
-    <ClInclude Include="data\money.h" />
     <ClInclude Include="data\purchase.h" />
     <ClInclude Include="data\sales.h" />
     <ClInclude Include="data\time.h" />
