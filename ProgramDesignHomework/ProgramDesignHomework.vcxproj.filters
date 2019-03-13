@@ -35,6 +35,21 @@
     <ClCompile Include="utils\fs.c">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="data\component.c">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="data\purchase.c">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="data\sales.c">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="data\time.c">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\money.c">
+      <Filter>data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Readme.md">
@@ -57,6 +72,21 @@
     </ClInclude>
     <ClInclude Include="utils\fs.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="data\component.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="data\purchase.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="data\sales.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="data\time.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\money.h">
+      <Filter>data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

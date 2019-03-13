@@ -115,9 +115,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="data\component.c" />
+    <ClCompile Include="data\purchase.c" />
+    <ClCompile Include="data\sales.c" />
+    <ClCompile Include="data\time.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="utils\fs.c" />
     <ClCompile Include="utils\linkedlist.c" />
+    <ClCompile Include="utils\money.c" />
     <ClCompile Include="utils\utils.c" />
   </ItemGroup>
   <ItemGroup>
@@ -126,9 +131,14 @@
     <None Include="..\Readme.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="data\component.h" />
+    <ClInclude Include="data\purchase.h" />
+    <ClInclude Include="data\sales.h" />
+    <ClInclude Include="data\time.h" />
     <ClInclude Include="linkedlist.h" />
     <ClInclude Include="utils\fs.h" />
     <ClInclude Include="utils\linkedlist.h" />
+    <ClInclude Include="utils\money.h" />
     <ClInclude Include="utils\utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
