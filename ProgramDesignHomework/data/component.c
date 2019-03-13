@@ -1,5 +1,5 @@
 #include "component.h"
-#include <stdio.h>
+#include "../utils/io.h"
 
 Component ReadComponent() {
   Component comp;
