@@ -6,3 +6,11 @@
 - [宋申苧](https://github.com/shenningsong)
 - [耿堂睿](https://github.com/gengtr)
 - [崔贺然](https://github.com/cuihr2118)
+
+## 代码风格
+
+`Google Style`
+
+## 单元测试
+
+`Google Test`
