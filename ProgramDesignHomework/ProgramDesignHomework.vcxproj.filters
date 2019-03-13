@@ -52,6 +52,9 @@
     <ClCompile Include="utils\cJSON\cJSON.c">
       <Filter>utils\cJSON</Filter>
     </ClCompile>
+    <ClCompile Include="utils\io.c">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Readme.md">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="utils\cJSON\cJSON.h">
       <Filter>utils\cJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\io.h">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

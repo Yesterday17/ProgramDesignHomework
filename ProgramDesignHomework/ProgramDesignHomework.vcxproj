@@ -124,6 +124,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="utils\cJSON\cJSON.c" />
     <ClCompile Include="utils\fs.c" />
+    <ClCompile Include="utils\io.c" />
     <ClCompile Include="utils\linkedlist.c" />
     <ClCompile Include="utils\utils.c" />
   </ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="data\time.h" />
     <ClInclude Include="utils\cJSON\cJSON.h" />
     <ClInclude Include="utils\fs.h" />
+    <ClInclude Include="utils\io.h" />
     <ClInclude Include="utils\linkedlist.h" />
     <ClInclude Include="utils\utils.h" />
   </ItemGroup>
