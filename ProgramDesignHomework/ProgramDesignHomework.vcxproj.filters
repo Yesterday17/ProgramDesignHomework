@@ -24,9 +24,6 @@
     <ClCompile Include="utils\linkedlist.c">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="utils\fs.c">
-      <Filter>utils</Filter>
-    </ClCompile>
     <ClCompile Include="data\component.c">
       <Filter>data</Filter>
     </ClCompile>
@@ -46,6 +43,9 @@
       <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="main.c" />
+    <ClCompile Include="utils\fs.c">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Readme.md">
