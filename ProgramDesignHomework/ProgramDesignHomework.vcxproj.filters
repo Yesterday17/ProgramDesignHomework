@@ -66,7 +66,6 @@
     <ClInclude Include="utils\utils.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="linkedlist.h" />
     <ClInclude Include="utils\linkedlist.h">
       <Filter>utils</Filter>
     </ClInclude>

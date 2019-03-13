@@ -84,6 +84,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -136,7 +137,6 @@
     <ClInclude Include="data\purchase.h" />
     <ClInclude Include="data\sales.h" />
     <ClInclude Include="data\time.h" />
-    <ClInclude Include="linkedlist.h" />
     <ClInclude Include="utils\fs.h" />
     <ClInclude Include="utils\linkedlist.h" />
     <ClInclude Include="utils\utils.h" />
