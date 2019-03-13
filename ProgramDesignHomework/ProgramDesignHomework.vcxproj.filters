@@ -21,6 +21,9 @@
     <Filter Include="data">
       <UniqueIdentifier>{bd21b990-1852-4208-a45b-af340bd8839f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils\cJSON">
+      <UniqueIdentifier>{2c4c296f-ea67-4a74-84c8-bdef555291c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -49,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="data\money.c">
       <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\cJSON\cJSON.c">
+      <Filter>utils\cJSON</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="data\money.h">
       <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\cJSON\cJSON.h">
+      <Filter>utils\cJSON</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
