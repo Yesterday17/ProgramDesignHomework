@@ -1,3 +1,4 @@
+#define UNIT_TEST
 #include "gtest/gtest.h"
 
 extern "C" {

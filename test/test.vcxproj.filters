@@ -7,6 +7,9 @@
     <ClCompile Include="utils\fs_test.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="utils\linkedlist_test.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="data">

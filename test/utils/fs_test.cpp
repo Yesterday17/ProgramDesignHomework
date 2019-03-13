@@ -1,4 +1,4 @@
-#define UNIT_TEST 
+#define UNIT_TEST
 #include "gtest/gtest.h"
 
 extern "C" {
@@ -6,7 +6,7 @@ extern "C" {
 }
 
 TEST(Not_Exist, TestFileExist) {
-  ASSERT_FALSE(FileExist("FILE_NOT_EXIST"));
+  ASSERT_FALSE(FileExist("THIS_FILE_NOT_EXIST"));
 }
 
 TEST(Exist, TestFileExist) {
