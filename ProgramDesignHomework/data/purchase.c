@@ -4,9 +4,9 @@ Purchase ReadPurchase()
 {
 	Purchase prime;
 	Readtime();
-	scanf("%d" ,prime.price);
-	scanf("%d", prime.quantity);
-	prime.total = prime.price*prime.quantity;
-	scanf("%s", prime.retailer);
+	scanf("%d" ,prime.price);//输入进货单价
+	scanf("%d", prime.quantity);//输入进货数量
+	prime.total = prime.price*prime.quantity;//  输入商品总价
+	scanf("%s", prime.retailer);//输入进货供应商
 	return prime;
 }
