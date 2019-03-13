@@ -1,5 +1,11 @@
 #pragma once
-typedef struct str {
-  struct node* next;
+typedef struct LinkedListNode {//链表结点
   void* data;
-} ComponentList;
+  struct LinkedListNode* next;
+} LinkedListNode;
+
+
+typedef struct {// 链表指针
+  LinkedListNode* top;
+  LinkedListNode* rear;
+}LinkedList;
