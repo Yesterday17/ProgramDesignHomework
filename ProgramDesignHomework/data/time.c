@@ -1,5 +1,6 @@
 #include "time.h"
 #include<stdio.h>
+
 Time ReadTime() {
   Time t0;
   printf("Month: ");

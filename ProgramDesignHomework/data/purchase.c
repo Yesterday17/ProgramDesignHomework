@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "io.h"
 #include "time.h"
+
 Purchase ReadPurchase() {
   Purchase prime;
   prime.time = ReadTime();

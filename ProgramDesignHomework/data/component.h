@@ -14,5 +14,10 @@ typedef struct {
   char* manufacturer;  // ÷∆‘Ï…Ã
 } Component;
 
+
+#ifndef UNIT_TEST
+
 Component ReadComponent();
 ComponentType ReadComponentType();
+
+#endif

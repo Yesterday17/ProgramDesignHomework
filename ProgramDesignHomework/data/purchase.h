@@ -8,3 +8,10 @@ typedef struct {
   int total;       //商品总价
   char *retailer;  //商品销售商
 } Purchase;
+
+
+#ifndef UNIT_TEST
+
+Purchase ReadPurchase();
+
+#endif

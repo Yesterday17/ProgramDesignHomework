@@ -13,4 +13,9 @@ typedef struct sales {
   Component gift;  //ÔùÆ·
 } Sales;
 
+
+#ifndef UNIT_TEST
+
 Sales ReadSales();
+
+#endif

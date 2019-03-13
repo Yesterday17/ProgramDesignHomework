@@ -7,4 +7,9 @@ typedef struct {
   int minute;  //·ÖÖÓ
 } Time;
 
+
+#ifndef UNIT_TEST
+
 Time ReadTime();
+
+#endif
