@@ -1,7 +1,7 @@
 #include "linkedlist.h"
 #include <malloc.h>
 #include <stdio.h>
-LinkedList CreateLinkedList(void) {
+LinkedList CreateLinkedList(void) {  //定义空链表
   LinkedListNode *top, *rear;
   top = NULL;
   rear = NULL;
@@ -26,10 +26,16 @@ void InsertLinkedList(LinkedList list, void *data) {  //目标链表  存储数据
   return;
 }
 
-void DeleteLinkedList(LinkedListNode *p, LinkedListNode *p0) {
-  p0 = p0->next;  //删除p0所指项
-  free(p->next);  //释放空间
-  p->next = p0;   //指向删除项的下一项
+void DeleteLinkedList(LinkedList list, bool *callback(LinkedListNode *)) {
+  LinkedListNode *p,*p0;
+  p0 = NULL;
+  for (p = list.top; p != NULL; p0 = p,p = p->next) {
+    if (callback(p)) {
+      p0->next = p->next;  //删除p0所指项
+      free(p->next);  //释放空间
+      p = p0;              //指向删除项的下一项
+    }
+  }
 }
 void InsertLinkList(LinkedListNode *p, LinkedListNode *r,
                     LinkedListNode *p0) {  // p为前一项,r为插入项，p0为后一项

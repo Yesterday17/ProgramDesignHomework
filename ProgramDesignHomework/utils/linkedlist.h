@@ -1,4 +1,6 @@
 #pragma once
+#include <stdbool.h>
+
 typedef struct LinkedListNode {//链表结点
   void* data;
   struct LinkedListNode* next;
@@ -11,4 +13,5 @@ typedef struct {// 链表指针
 }LinkedList;
 
 LinkedList CreateLinkedList(void);
-void InsertLinkedList(LinkedList list, void* data)
+void InsertLinkedList(LinkedList list, void* data);
+void DeleteLinkedList(LinkedList list, bool* callback(LinkedListNode*));
