@@ -7,10 +7,6 @@
     <Filter Include="utils">
       <UniqueIdentifier>{2106b43c-50f6-40ea-8ddd-7f88894a6463}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="data">
       <UniqueIdentifier>{bd21b990-1852-4208-a45b-af340bd8839f}</UniqueIdentifier>
     </Filter>
@@ -22,9 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="utils\utils.c">
       <Filter>utils</Filter>
     </ClCompile>
@@ -55,6 +48,7 @@
     <ClCompile Include="utils\io.c">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Readme.md">
