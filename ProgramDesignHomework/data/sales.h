@@ -13,3 +13,5 @@ typedef struct sales {
 	char *customer; //客户信息
 	Component gift; //赠品
 }Sales;
+
+Sales ReadSales();
