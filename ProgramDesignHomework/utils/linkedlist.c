@@ -15,5 +15,4 @@ void InsertLinkList(ComponentList *p,ComponentList *r,ComponentList *p0){//pΪǰ
      r->next=p0;
      p->next=r;
      p = r;
-
 }
