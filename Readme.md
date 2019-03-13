@@ -1,6 +1,8 @@
-# 《程序设计基础课程设计》（2018 级）
-## 组员
-- [江昊哲](https://github.com/Yesterday17)
-- [宋申苧](https://github.com/shenningsong)
-- [耿堂睿](https://github.com/gengtr)
-- [崔贺然](https://github.com/cuihr2118)
+# 銆婄▼搴忚璁″熀纭�璇剧▼璁捐銆嬶紙2018 绾э級
+
+## 缁勫憳
+
+- [姹熸槉鍝瞉(https://github.com/Yesterday17)
+- [瀹嬬敵鑻(https://github.com/shenningsong)
+- [鑰垮爞鐫縘(https://github.com/gengtr)
+- [宕旇春鐒禲(https://github.com/cuihr2118)
