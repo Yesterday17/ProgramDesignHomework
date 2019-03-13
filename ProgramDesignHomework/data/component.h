@@ -1,5 +1,9 @@
 #pragma once
 
+typedef struct {
+	char* name;          // 型号名称
+}ComponentType;
+
 /** 
  * 计算机配件 - 管理系统所管理物品
  */
@@ -9,10 +13,6 @@ typedef struct {
 	ComponentType type; // 配件型号
 	char* manufacturer;  // 制造商
 }Component;
-
-typedef struct {
-	char* name;          // 型号名称
-}ComponentType;
 
 Component ReadComponent();
 ComponentType ReadComponentType();
