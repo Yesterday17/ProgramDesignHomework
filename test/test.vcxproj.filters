@@ -1,14 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="data\component_test.cpp">
       <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\fs_test.cpp">
+      <Filter>utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="data">
       <UniqueIdentifier>{cec24b09-d5ad-4dbe-94a3-d0833ff5c93e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{431ac40c-0811-4252-a397-db94fa7a185e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

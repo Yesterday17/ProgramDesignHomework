@@ -35,7 +35,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClCompile Include="data\component_test.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="utils\fs_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProgramDesignHomework\ProgramDesignHomework.vcxproj">
@@ -82,6 +82,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>C:\Users\t\source\repos\ProgramDesignHomework\ProgramDesignHomework\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

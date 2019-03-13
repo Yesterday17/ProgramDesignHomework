@@ -45,7 +45,7 @@ int InputInteger(char* comment, char* errorMessage, int defaultValue) {
   if (strcmp(input, "\n") == 0) {
     return defaultValue;
   }
-
+  
   while (sscanf(input, "%d", &ans) != 1) {
     printf("%s\n", errorMessage);
     free(input);
@@ -54,6 +54,8 @@ int InputInteger(char* comment, char* errorMessage, int defaultValue) {
   return ans;
 }
 
-int InputInt(char* comment) { return InputInteger(comment, "Error inputing integer, retry please.", 0); }
+int InputInt(char* comment) {
+  return InputInteger(comment, "Error inputing integer, retry please.", 0);
+}
 
 char* InputStr(char* comment) { return InputString(comment, ""); }
