@@ -9,3 +9,6 @@ typedef struct {// ¡¥±Ì÷∏’Î
   LinkedListNode* top;
   LinkedListNode* rear;
 }LinkedList;
+
+LinkedList CreateLinkedList(void);
+void InsertLinkedList(LinkedList list, void* data)
