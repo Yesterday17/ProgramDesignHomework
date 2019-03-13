@@ -1,5 +1,16 @@
 #include "component.h"
+
+#ifndef UNIT_TEST
 #include "../utils/io.h"
+#else
+#include "../utils/io.c"
+#endif
+
+ComponentType ReadComponentType() {
+  ComponentType type;
+  type.name = InputString("Input component type name:", "3021type");
+  return type;
+}
 
 Component ReadComponent() {
   Component comp;
@@ -7,10 +18,4 @@ Component ReadComponent() {
   comp.type = ReadComponentType();
   comp.manufacturer = InputString("manufacturer", "3021");
   return comp;
-}
-
-ComponentType ReadComponentType() {
-  ComponentType type;
-  type.name = InputString("Input component type name:", "3021type");
-  return type;
 }

@@ -6,7 +6,7 @@
 
 char* InputString(char* comment, char* defaultValue) {
   int len = 0, capability = 16;
-  char c, *ans = malloc(capability * sizeof(char));
+  char c, *ans = (char*)malloc(capability * sizeof(char));
 
   // 输出提示信息
   printf("%s: ", comment);
@@ -22,7 +22,7 @@ char* InputString(char* comment, char* defaultValue) {
     // 容量已满
     if (len == capability - 1) {
       capability *= 2;
-      ans = realloc(ans, capability * sizeof(char));
+      ans = (char*)realloc(ans, capability * sizeof(char));
     }
     ans[len] = c;
     len++;
@@ -32,7 +32,7 @@ char* InputString(char* comment, char* defaultValue) {
   // 加入 \0
   if (len == capability - 1) {
     capability++;
-    ans = realloc(ans, capability * sizeof(char));
+    ans = (char*)realloc(ans, capability * sizeof(char));
   }
   ans[len] = '\0';
   return ans;
@@ -45,7 +45,7 @@ int InputInteger(char* comment, char* errorMessage, int defaultValue) {
   if (strcmp(input, "\n") == 0) {
     return defaultValue;
   }
-  
+
   while (sscanf(input, "%d", &ans) != 1) {
     printf("%s\n", errorMessage);
     free(input);
