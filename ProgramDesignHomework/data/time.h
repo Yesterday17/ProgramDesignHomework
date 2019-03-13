@@ -6,3 +6,5 @@ typedef struct {
 	int hour;    //–° ±
 	int minute;  //∑÷÷”
 }Time;
+
+Time ReadTime();
