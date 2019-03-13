@@ -1,12 +1,18 @@
 #pragma once
 
+/** 
+ * 计算机配件 - 管理系统所管理物品
+ */
 typedef struct {
-	int index;
-	char* name;
-	ComponentType* type;
-	char* manufacturer;
+	int index;           // 索引
+	char* name;          // 配件名称
+	ComponentType type; // 配件型号
+	char* manufacturer;  // 制造商
 }Component;
 
 typedef struct {
-	char* name;
+	char* name;          // 型号名称
 }ComponentType;
+
+Component ReadComponent();
+ComponentType ReadComponentType();
