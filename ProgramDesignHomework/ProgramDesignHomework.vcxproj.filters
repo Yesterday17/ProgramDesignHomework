@@ -1,30 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="源文件">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="资源文件">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="repo">
+      <UniqueIdentifier>{7d63b4f1-562b-4a88-a948-3868efae96bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{58b4c10f-232e-47e2-8316-05f347d4d685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{2106b43c-50f6-40ea-8ddd-7f88894a6463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{bd21b990-1852-4208-a45b-af340bd8839f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
-      <Filter>源文件</Filter>
+      <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="utils.c">
-      <Filter>源文件</Filter>
+    <ClCompile Include="utils\utils.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\linkedlist.c">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\fs.c">
+      <Filter>utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="utils.h">
-      <Filter>头文件</Filter>
+    <None Include="..\Readme.md">
+      <Filter>repo</Filter>
+    </None>
+    <None Include="..\LICENSE">
+      <Filter>repo</Filter>
+    </None>
+    <None Include="..\docs\index.md">
+      <Filter>docs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utils\utils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="linkedlist.h" />
+    <ClInclude Include="utils\linkedlist.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\fs.h">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
