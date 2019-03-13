@@ -19,6 +19,6 @@ LinkedList CreateLinkedList(void);
 
 void InsertLinkedList(LinkedList list, void* data);
 
-void DeleteLinkedList(LinkedList list, bool* callback(LinkedListNode*));
+LinkedListNode* DeleteLinkedList(LinkedList list, bool* callback(LinkedListNode*));
 
 #endif
