@@ -7,4 +7,4 @@ typedef struct {
 	int quantity;    // 进货数量
 	int total;//商品总价
 	char *retailer; //商品销售商
-}Purchse;
+}Purchase;
