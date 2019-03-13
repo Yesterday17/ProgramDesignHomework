@@ -47,7 +47,7 @@
     <ClCompile Include="data\time.c">
       <Filter>data</Filter>
     </ClCompile>
-    <ClCompile Include="utils\money.c">
+    <ClCompile Include="data\money.c">
       <Filter>data</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,7 +85,7 @@
     <ClInclude Include="data\time.h">
       <Filter>data</Filter>
     </ClInclude>
-    <ClInclude Include="utils\money.h">
+    <ClInclude Include="data\money.h">
       <Filter>data</Filter>
     </ClInclude>
   </ItemGroup>
