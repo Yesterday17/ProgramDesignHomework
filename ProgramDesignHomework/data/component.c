@@ -3,19 +3,14 @@
 
 Component ReadComponent() {
   Component comp;
-  printf("Input component name: ");
-  scanf("%s", &comp.name);
-
+  comp.name = InputString("Input component name:", "Computer");
   comp.type = ReadComponentType();
-
-  printf("Input manufacturer: ");
-  scanf("%s", &comp.manufacturer);
+  comp.manufacturer = InputString("manufacturer", "3021");
   return comp;
 }
 
 ComponentType ReadComponentType() {
   ComponentType type;
-  printf("Input component type name: ");
-  scanf("%s", &type.name);
+  type.name = InputString("Input component type name:", "3021type");
   return type;
 }
