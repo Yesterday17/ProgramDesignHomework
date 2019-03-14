@@ -1,0 +1,19 @@
+language: bash
+os: windows
+
+env:
+  - MSBUILD_PATH="c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
+
+install:
+  - choco install nuget.commandline
+  - choco install opencppcoverage
+  - nuget restore ProgramDesignHomework.sln
+
+script:
+  - export PATH=$MSBUILD_PATH:$PATH
+  - MSBuild.exe ProgramDesignHomework.sln
+  - cp -r "C:\\Program Files\\OpenCppCoverage\\" "./"
+  - ./OpenCppCoverage/OpenCppCoverage.exe --sources=ProgramDesignHomework --working_dir=test --excluded_sources=packages --export_type=cobertura -- ".\\x64\\Debug\\ProgramDesignTest.exe"
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -f "./ProgramDesignTestCoverage.xml" -t "14cc9c3f-873d-48c7-95d6-c78c7a17b1ba" || "Codecov did not collect coverage reports"
