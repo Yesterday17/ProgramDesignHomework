@@ -11,9 +11,9 @@ install:
 
 script:
   - export PATH=$MSBUILD_PATH:$PATH
-  - MSBuild.exe ProgramDesignHomework.sln
   - cp -r "C:\\Program Files\\OpenCppCoverage\\" "./"
-  - ./OpenCppCoverage/OpenCppCoverage.exe --sources=ProgramDesignHomework --working_dir=test --excluded_sources=packages --export_type=cobertura -- ".\\x64\\Debug\\ProgramDesignTest.exe"
+  - MSBuild.exe ProgramDesignHomework.sln
 
 after_success:
+  - ./OpenCppCoverage/OpenCppCoverage.exe --sources=ProgramDesignHomework --working_dir=test --excluded_sources=packages --export_type=cobertura -- ".\\x64\\Debug\\ProgramDesignTest.exe"
   - bash <(curl -s https://codecov.io/bash) -f "./ProgramDesignTestCoverage.xml" -t "14cc9c3f-873d-48c7-95d6-c78c7a17b1ba" || "Codecov did not collect coverage reports"
