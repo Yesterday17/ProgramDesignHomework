@@ -1,5 +1,7 @@
 #include "global.h"
-#include "./ui/ui.h"
+
+const char NAME[] = "SALES_MANAGEMENT_SYSTEM";
+const char VERSION[] = "0.0.1-SNAPSHOT";
 
 Menu menuNow = MENU_Welcome;
 

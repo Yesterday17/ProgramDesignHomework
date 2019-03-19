@@ -1,9 +1,10 @@
 #pragma once
 #include <stdint.h>
+#include "./ui/ui.h"
 #include "./data/component.h"
 
-const char NAME[] = "SALES_MANAGEMENT_SYSTEM";
-const char VERSION[] = "0.0.1-SNAPSHOT";
+extern const char NAME[];
+extern const char VERSION[];
 
 extern Menu menuNow;
 
