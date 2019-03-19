@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../utils/linkedlist.h"
+
 typedef struct {
   char* name;  // ĞÍºÅÃû³Æ
 } ComponentType;
