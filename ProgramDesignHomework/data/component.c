@@ -1,4 +1,5 @@
 #include "component.h"
+#include "../global.h"
 
 #ifndef UNIT_TEST
 #include "../utils/io.h"
@@ -20,16 +21,6 @@ Component ReadComponent() {
   return comp;
 }
 
-ComponentType ReadComponentType() {
-  ComponentType type;
-  type.name = InputString("Input component type name:", "3021type");
-  return type;
-}
-
-bool find_name(LinkedListNode *linkprime, char *wantname) {
-  Component* comp = linkprime->data;
-  if (strcmp(comp->name, wantname) == 0)
-    return true;
-  else
-    return false;
+bool FindName_Component(LinkedListNode *node) {
+  return strcmp(((Component *)node->data)->name, nameToSearch) == 0;
 }

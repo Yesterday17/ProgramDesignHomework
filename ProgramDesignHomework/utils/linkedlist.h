@@ -1,5 +1,6 @@
 #pragma once
 #include <stdbool.h>
+#include <stdint.h>
 
 typedef struct LinkedListNode {  //Á´±í½áµã
   void* data;
