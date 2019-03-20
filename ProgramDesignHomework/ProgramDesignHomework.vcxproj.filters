@@ -16,6 +16,9 @@
     <Filter Include="repo\docs">
       <UniqueIdentifier>{58b4c10f-232e-47e2-8316-05f347d4d685}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ui">
+      <UniqueIdentifier>{8ca666d3-541c-4a0d-a942-c70ce2a176c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="utils\utils.c">
@@ -46,6 +49,10 @@
     <ClCompile Include="utils\fs.c">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="ui\ui.c">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="global.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Readme.md">
@@ -86,5 +93,9 @@
     <ClInclude Include="utils\io.h">
       <Filter>utils</Filter>
     </ClInclude>
+    <ClInclude Include="ui\ui.h">
+      <Filter>ui</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h" />
   </ItemGroup>
 </Project>

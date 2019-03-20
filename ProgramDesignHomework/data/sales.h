@@ -1,6 +1,5 @@
 #pragma once
 #include "component.h"
-#include "sales.h"
 #include "time.h"
 
 typedef struct sales {
