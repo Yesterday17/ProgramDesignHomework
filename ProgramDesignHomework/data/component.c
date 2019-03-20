@@ -1,10 +1,11 @@
 #include "component.h"
-#include "../global.h"
 
 #ifndef UNIT_TEST
 #include "../utils/io.h"
+#include "../global.h"
 #else
 #include "../utils/io.c"
+#include "../global.c"
 #endif
 
 ComponentType ReadComponentType() {

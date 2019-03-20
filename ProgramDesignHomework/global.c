@@ -10,3 +10,7 @@ uint64_t timeToSearch = 0;
 Component* componentToSearch = NULL;
 char* customerToSearch;
 char* retailerToSearch;
+
+LinkedList component;
+LinkedList purchase;
+LinkedList sales;
