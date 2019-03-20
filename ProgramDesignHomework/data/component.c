@@ -8,16 +8,12 @@
 #include "../utils/io.c"
 #endif
 
-ComponentType ReadComponentType() {
-  ComponentType type;
-  type.name = InputString("Input component type name:", "3021type");
-  return type;
-}
+
 
 Component ReadComponent() {
   Component comp;
   comp.name = InputString("Input component name:", "Computer");
-  comp.type = ReadComponentType();
+  comp.type = InputString("Input component type:", "3021");
   comp.manufacturer = InputString("manufacturer", "3021");
   return comp;
 }
