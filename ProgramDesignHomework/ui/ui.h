@@ -1,4 +1,6 @@
 #pragma once
+#include<conio.h>
+#include<stdlib.h>
 
 typedef enum {
   MENU_Exit = -1,
