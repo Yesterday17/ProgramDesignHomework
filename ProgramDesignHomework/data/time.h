@@ -1,15 +1,6 @@
 #pragma once
 
-typedef struct {
-  int month;   //月份
-  int day;     //日期
-  int hour;    //小时
-  int minute;  //分钟
-} Time;
-
-
-#ifndef UNIT_TEST
-
-Time ReadTime();
-
+bool prime(int a);
+bool mistake(int year, int month, int day, int hour, int minute, int second);
+void timemaking();
 #endif
