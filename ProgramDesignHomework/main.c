@@ -8,7 +8,7 @@ int main() {
   UI_Welcome();
   UI_WaitForNext(UI_Clear);
 
-  UI_MainMenu();
+  // UI_MainMenu();
 
   while (menuNow != MENU_Exit) {
     UI_SubMenu(menuNow);
