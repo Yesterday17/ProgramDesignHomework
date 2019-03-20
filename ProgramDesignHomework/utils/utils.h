@@ -2,6 +2,6 @@
 
 #ifndef UNIT_TEST
 
-int rand(int min, int max);
+int Rand(int min, int max);
 
 #endif
