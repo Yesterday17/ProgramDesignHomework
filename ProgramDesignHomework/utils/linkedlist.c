@@ -1,5 +1,5 @@
 #include "linkedlist.h"
-#include <malloc.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 LinkedList CreateLinkedList(void) {  //¶¨Òå¿ÕÁ´±í
@@ -38,4 +38,23 @@ LinkedListNode* DeleteLinkedList(LinkedList list, bool *callback(LinkedListNode 
     }
   }
   return p;
+}
+
+LinkedListFindResult FindLinkedList(LinkedList list, bool* callback(LinkedListNode*)) {
+	LinkedListNode *p;
+	LinkedListFindResult res;
+	res.count = 0;
+	int a = 100;
+	res.result = (LinkedListNode **)malloc(sizeof(LinkedListNode*)*a);
+	for (p = list.top; p != NULL;p = p->next) {
+		if (callback(p)) {
+			res.result[res.count] = p;
+			res.count++;
+		}
+		if (count + 1 == 100) {
+			a *= 2;
+			res.result = realloc(res.result, sizeof(LinkedListNode*)*a);
+		}
+	}
+	return res;
 }
