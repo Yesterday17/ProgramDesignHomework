@@ -4,7 +4,6 @@
 #include "./ui/ui.h"
 #include "./utils/linkedlist.h"
 
-
 #ifndef UNIT_TEST
 
 extern const char NAME[];

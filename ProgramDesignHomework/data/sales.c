@@ -8,7 +8,7 @@ Sales ReadSales() {
   printf("批发/零售数量：");//批发/零售数量：
   scanf("%d", &prime.quantity);
   prime.total = prime.price * prime.quantity;
-  prime.customer=InputString("please input customer：", "3021 bosses");
+  prime.customer = InputString("please input customer：", "3021 bosses");
   ReadComponent();
   return prime;
 }
