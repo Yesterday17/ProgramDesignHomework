@@ -130,6 +130,7 @@
     <ClCompile Include="utils\fs.c" />
     <ClCompile Include="utils\io.c" />
     <ClCompile Include="utils\linkedlist.c" />
+    <ClCompile Include="utils\readjson.c" />
     <ClCompile Include="utils\utils.c" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,7 @@
     <ClInclude Include="utils\fs.h" />
     <ClInclude Include="utils\io.h" />
     <ClInclude Include="utils\linkedlist.h" />
+    <ClInclude Include="utils\readjson.h" />
     <ClInclude Include="utils\utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

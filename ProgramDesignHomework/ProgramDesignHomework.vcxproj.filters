@@ -53,6 +53,9 @@
       <Filter>ui</Filter>
     </ClCompile>
     <ClCompile Include="global.c" />
+    <ClCompile Include="utils\readjson.c">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Readme.md">
@@ -97,5 +100,8 @@
       <Filter>ui</Filter>
     </ClInclude>
     <ClInclude Include="global.h" />
+    <ClInclude Include="utils\readjson.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
