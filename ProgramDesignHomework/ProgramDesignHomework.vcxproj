@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -123,6 +123,7 @@
     <ClCompile Include="data\purchase.c" />
     <ClCompile Include="data\sales.c" />
     <ClCompile Include="data\time.c" />
+    <ClCompile Include="find_name.cpp" />
     <ClCompile Include="global.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="ui\ui.c" />
@@ -142,6 +143,7 @@
     <ClInclude Include="data\purchase.h" />
     <ClInclude Include="data\sales.h" />
     <ClInclude Include="data\time.h" />
+    <ClInclude Include="find_name.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="ui\ui.h" />
     <ClInclude Include="utils\cJSON\cJSON.h" />
