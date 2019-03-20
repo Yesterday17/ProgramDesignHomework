@@ -1,12 +1,12 @@
-#include<stdbool.h>
-#include<cstdio>
-#include"time.h"
+#include "time.h"
+
 bool prime(int a) {
   if ((a % 4 == 0 && a % 100 != 0) || (a % 400 == 0))
     return true;
   else
     return false;
 }
+
 bool mistake(int year, int month, int day, int hour, int minute, int second) {
   if ((year < 1970) || (month < 1) || (month > 12) || (day < 0) || (day > 31))
     return false;
@@ -17,7 +17,8 @@ bool mistake(int year, int month, int day, int hour, int minute, int second) {
   if ((prime(year)) && (month == 2) && (day > 28)) return false;
   return true;
 }
-void timemaking() {
+
+uint64_t timemaking() {
   int counts = 0, i, j, k;
   int day31[7] = {1, 3, 5, 7, 8, 10, 12};
   int day30[4] = {4, 6, 9, 11};
@@ -72,6 +73,6 @@ void timemaking() {
     time = time + i * 60;
   }
   time += second;
-  printf("%I64u", time);
-  return;
+
+  return time;
 }
