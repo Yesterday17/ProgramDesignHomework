@@ -1,6 +1,6 @@
 #include "linkedlist.h"
-#include <stdlib.h>
-#include <stdio.h>
+
+#include <cstdio>
 
 LinkedList CreateLinkedList(void) {  //¶¨Òå¿ÕÁ´±í
   LinkedListNode *top, *rear;

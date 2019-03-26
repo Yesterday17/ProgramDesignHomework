@@ -9,7 +9,7 @@
 typedef struct {
   int index;           // 索引
   char* name;          // 配件名称
-  char* type;  // 配件型号
+  char* type;         // 配件型号
   char* manufacturer;  // 制造商
 } Component;
 

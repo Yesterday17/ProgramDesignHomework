@@ -1,5 +1,5 @@
 #include "purchase.h"
-#include <stdio.h>
+#include <cstdio>
 #include "io.h"
 #include "time.h"
 
