@@ -1,18 +1,42 @@
 #include "ui.h"
 
-void UI_We  lcome() { 
+void UI_Welcome() { 
   printf("Welcome to use 3021 APP\n\n");
 }
 
 void UI_MainMenu() { 
-  int i, j;
-  char oper[6][20] = {"( )1: InputPurchase",
-                      "( )2: InputSales", 
-                      "( )3: OutputPurchase", 
-                      "( )4: OutputSales", 
-                      "( )5"};
+  int i, floor=1;
+  char ch1, ch2;
+  char oper[6][20] =
+  { "1: 进货记录",
+    "2: 销售记录",
+    "3: 库存",
+    "4: 金额"};
   printf("Operation List:\n");
-  
+  for (i = 0; i < 4; i++)  printf("[ ]%s", oper[i]);
+  gotoxy(2, 1);
+  printf("\b*]%s",oper[0]);
+  while ((ch1 = _getch()) != '1') {
+    ch2 = _getch();
+    if (ch2 == 80) {
+      if (floor < 4) {
+        gotoxy(2, floor);
+        printf("\b ]%s", oper[floor - 1]);
+        floor++;
+        gotoxy(2, floor);
+        printf("\b*]%s", oper[floor - 1]);
+      }
+    }
+    if (ch2 == 72) {
+      if (floor > 1) {
+        gotoxy(2, floor);
+        printf("\b ]%s", oper[floor - 1]);
+        floor--;
+        gotoxy(2, floor);
+        printf("\b*]%s", oper[floor - 1]);
+      }
+    }
+  }
   printf("Please select the operation you want to perform:");
 }
 
