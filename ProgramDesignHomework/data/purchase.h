@@ -2,7 +2,7 @@
 #include "time.h"
 #include"component.h"
 typedef struct {
-  Component prime;
+  Component *prime;
   uint64_t time;
   int price;       // 进货单价
   int quantity;    // 进货数量

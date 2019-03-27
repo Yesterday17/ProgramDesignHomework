@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include"purchase.h"
 #include"cJSON.h"
+#incldue"component.h"
 Purchase cJSON_to_struct(char *json_string, Purchase *purchase)
 {
 	cJSON *item;
@@ -25,13 +26,12 @@ Purchase cJSON_to_struct(char *json_string, Purchase *purchase)
 			item = cJSON_GetObjectItem(object, "prime");
 			if (item != NULL)
 			{
-				//cjson中不能储存结构体？？//
-				item->
+				purchase->prime = read_jsoncomponent(item);
 			}
 			item = cJSON_GetObjectItem(object, "time");
 			if (item != NULL)
 			{
-				purchase->time = item->valuedouble;//64位不能用double储存？？//
+				purchase->time = item->valueint;
 			}
 
 			item = cJSON_GetObjectItem(object, "price");
@@ -63,7 +63,7 @@ Purchase cJSON_to_struct(char *json_string, Purchase *purchase)
 		}
 
 		cJSON_Delete(root);
-		return Purchase;
+		return purchase;
 	}
 	return 0;
 }

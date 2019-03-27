@@ -17,6 +17,6 @@ typedef struct {
 #ifndef UNIT_TEST
 
 Component ReadComponent();
-
+Component read_structcomponent();
 
 #endif
