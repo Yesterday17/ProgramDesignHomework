@@ -3,7 +3,7 @@
 #include "time.h"
 
 typedef struct sales {
-  Time time;
+  UINT64_C time;
   Component component;
   bool sales_mode; // 销售模式（true表示批发，false表示零售）
   int price;       // 销售单价

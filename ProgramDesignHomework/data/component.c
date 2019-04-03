@@ -21,39 +21,51 @@ Component* ReadComponent() {
 bool FindName_Component(LinkedListNode *node) {
   return strcmp(((Component *)node->data)->name, nameToSearch) == 0;
 }
-Component* read_structcomponent(cJSON *item);
+
+
+Component* readjson_component(cJSON *json_string,Compoment *comp)
 {
-	Component* comp;
+	
 	cJSON *item;
-	cJSON *object = cJSON_GetObjectItem(root, "prime");
-	if (object == NULL)
+	cJSON *root = cJSON_Parse(json_string);
+	if (!root)
 	{
 		printf("Error before: [%s]\n", cJSON_GetErrorPtr());
 		cJSON_Delete(root);
 		return -1;
 	}
 
-	if (object != NULL)
+	else
 	{
-		item = cJSON_GetObjectItem(object, "index");
-		if (item != NULL)
+		cJSON *object = cJSON_GetObjectItem(root, "comp");
+		if (object == NULL)
 		{
-			comp->index = item->valueint;
+			printf("Error before: [%s]\n", cJSON_GetErrorPtr());
+			cJSON_Delete(root);
+			return -1;
 		}
-		item = cJSON_GetObjectItem(object, "name");
-		if (item != NULL)
+		else
 		{
-			memcpy(comp->name, item->name, strlen(comp->name));
-		}
-		item = cJSON_GetObjectItem(object, "type");
-		if (item != NULL)
-		{
-			memcpy(comp->type, item->type, strlen(comp->type));
-		}
-		item = cJSON_GetObjectItem(object, "manufacturer");
-		if (item != NULL)
-		{
-			memcpy(comp->manufacturer, item->manufacturer, strlen(comp->manufacturer));
+			item = cJSON_GetObjectItem(object, "index");
+			if (item != NULL)
+			{
+				comp->index = item->valueint;
+			}
+			item = cJSON_GetObjectItem(object, "name");
+			if (item != NULL)
+			{
+				memcpy(comp->name, item->name, strlen(comp->name));
+			}
+			item = cJSON_GetObjectItem(object, "type");
+			if (item != NULL)
+			{
+				memcpy(comp->type, item->type, strlen(comp->type));
+			}
+			item = cJSON_GetObjectItem(object, "manufacturer");
+			if (item != NULL)
+			{
+				memcpy(comp->manufacturer, item->manufacturer, strlen(comp->manufacturer));
+			}
 		}
 	}
 	return comp;

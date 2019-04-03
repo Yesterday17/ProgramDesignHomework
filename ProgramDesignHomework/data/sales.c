@@ -12,3 +12,38 @@ Sales ReadSales() {
   ReadComponent();
   return prime;
 }
+Sales * readjson_sales(char *json_string, Sales *prime)
+{
+	cJSON *item;
+	cJSON *root = cJSON_Parse(json_string);
+	if (!root)
+	{
+		printf("Error before: [%s]\n", cJSON_GetErrorPtr());
+		cJSON_Delete(root);
+		return -1;
+	}
+	else
+	{
+		item = cJSON_GetObjectItem(root, "prime");
+		if (item != NULL)
+		{
+			comp->index = item->valueint;
+		}
+		item = cJSON_GetObjectItem(object, "name");
+		if (item != NULL)
+		{
+			memcpy(comp->name, item->name, strlen(comp->name));
+		}
+		item = cJSON_GetObjectItem(object, "type");
+		if (item != NULL)
+		{
+			memcpy(comp->type, item->type, strlen(comp->type));
+		}
+		item = cJSON_GetObjectItem(object, "manufacturer");
+		if (item != NULL)
+		{
+			memcpy(comp->manufacturer, item->manufacturer, strlen(comp->manufacturer));
+		}
+	}
+	return comp;
+}
