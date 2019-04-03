@@ -2,6 +2,7 @@
 #include<conio.h>
 #include<stdlib.h>
 #include<Windows.h>
+#include"./utils/global.h"
 
 typedef enum {
   MENU_Exit = -1,
@@ -24,6 +25,10 @@ void UI_Exit();
 void UI_Clear();
 
 void UI_WaitForNext(void* nextDo());
+
+void gotoxy(int x, int y);
+
+extern Menu menuNow;
 
 #endif
 

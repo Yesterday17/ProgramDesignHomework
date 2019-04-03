@@ -1,15 +1,12 @@
 #pragma once
 #include <stdint.h>
 #include "./data/component.h"
-#include "./ui/ui.h"
 #include "./utils/linkedlist.h"
 
 #ifndef UNIT_TEST
 
 extern const char NAME[];
 extern const char VERSION[];
-
-extern Menu menuNow;
 
 extern LinkedList component;
 extern LinkedList purchase;

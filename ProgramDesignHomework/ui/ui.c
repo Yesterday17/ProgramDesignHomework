@@ -1,5 +1,14 @@
 #include "ui.h"
 
+Menu menuNow = MENU_Welcome;
+
+void gotoxy(int x, int y) {
+  HANDLE a;
+  a = GetStdHandle(STD_OUTPUT_HANDLE);
+  COORD cos = { x,y };
+  SetConsoleCursorPosition(a, cos);
+}//光标定位函数
+
 void UI_Welcome() { 
   printf("Welcome to use 3021 APP\n\n");
 }
@@ -85,6 +94,7 @@ void UI_SubMenu(Menu menu)
   {
     switch (y) {
     case 0:
+      
       break;
     case 1:
       break;
