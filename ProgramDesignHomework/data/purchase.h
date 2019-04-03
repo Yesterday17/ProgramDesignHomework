@@ -13,7 +13,6 @@ typedef struct {
 
 #ifndef UNIT_TEST
 
-Purchase readjson_purchase(char *json_string, Purchase *purchase);
-
+Purchase* readjson_purchase(char *json_string, Purchase *purchase);
 
 #endif

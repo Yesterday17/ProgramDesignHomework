@@ -1,7 +1,5 @@
 #include "linkedlist.h"
 
-#include <cstdio>
-
 LinkedList CreateLinkedList(void) {  //∂®“Âø’¡¥±Ì
   LinkedListNode *top, *rear;
   top = NULL;
@@ -51,7 +49,7 @@ LinkedListFindResult FindLinkedList(LinkedList list, bool* callback(LinkedListNo
 			res.result[res.count] = p;
 			res.count++;
 		}
-		if (count + 1 == 100) {
+		if (res.count + 1 == 100) {
 			a *= 2;
 			res.result = realloc(res.result, sizeof(LinkedListNode*)*a);
 		}

@@ -1,5 +1,5 @@
 #include "component.h"
-#include"cJSON.h"
+#include "../utils/cJSON/cJSON.h"
 #ifndef UNIT_TEST
 #include "../global.h"
 #include "../utils/io.h"
@@ -11,7 +11,7 @@
 
 
 Component* ReadComponent() {
-  Component *comp;
+  Component *comp = malloc(sizeof(Component));
   comp->name = InputString("Input component name:", "Computer");
   comp->type = InputString("Input component type:", "3021");
   comp->manufacturer = InputString("manufacturer", "3021");
@@ -23,7 +23,7 @@ bool FindName_Component(LinkedListNode *node) {
 }
 
 
-Component* readjson_component(cJSON *json_string,Compoment *comp)
+Component* readjson_component(cJSON *json_string,Component *comp)
 {
 	
 	cJSON *item;
@@ -54,7 +54,7 @@ Component* readjson_component(cJSON *json_string,Compoment *comp)
 			item = cJSON_GetObjectItem(object, "name");
 			if (item != NULL)
 			{
-				memcpy(comp->name, item->name, strlen(comp->name));
+				memcpy(comp->name, item->valuestring, strlen(comp->name));
 			}
 			item = cJSON_GetObjectItem(object, "type");
 			if (item != NULL)
@@ -64,7 +64,7 @@ Component* readjson_component(cJSON *json_string,Compoment *comp)
 			item = cJSON_GetObjectItem(object, "manufacturer");
 			if (item != NULL)
 			{
-				memcpy(comp->manufacturer, item->manufacturer, strlen(comp->manufacturer));
+				memcpy(comp->manufacturer, item->valuestring, strlen(comp->manufacturer));
 			}
 		}
 	}

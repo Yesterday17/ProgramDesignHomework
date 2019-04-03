@@ -1,18 +1,20 @@
 #include "sales.h"
+#include "../utils/io.h"
+#include <malloc.h>
 
-Sales ReadSales() {
-  Sales prime;
-  prime.time = ReadTime();
+Sales* ReadSales() {
+  Sales *prime = malloc(sizeof(Sales));
+  // prime->time = ReadTime();
   printf("批发/零售价格：");  //批发零售价格
-  scanf("%d", &prime.price);
+  scanf("%d", &prime->price);
   printf("批发/零售数量：");//批发/零售数量：
-  scanf("%d", &prime.quantity);
-  prime.total = prime.price * prime.quantity;
-  prime.customer = InputString("please input customer：", "3021 bosses");
-  ReadComponent();
+  scanf("%d", &prime->quantity);
+  prime->total = prime->price * prime->quantity;
+  prime->customer = InputString("please input customer：", "3021 bosses");
+  // ReadComponent();
   return prime;
 }
-Sales * readjson_sales(char *json_string, Sales *sales)
+Sales* readjson_sales(char *json_string, Sales *sales)
 {
 	cJSON *item;
 	cJSON *root = cJSON_Parse(json_string);
@@ -41,7 +43,7 @@ Sales * readjson_sales(char *json_string, Sales *sales)
 			item = cJSON_GetObjectItem(object, "component");
 			if (item != NULL)
 			{
-				sales->component = readjson_component(cJSON *json_string, Compoment *component);
+				sales->component = readjson_component(json_string, &sales->component);
 			}
 			item = cJSON_GetObjectItem(object, "sales_mode");
 			if (item != NULL)
@@ -71,7 +73,7 @@ Sales * readjson_sales(char *json_string, Sales *sales)
 			item = cJSON_GetObjectItem(object, "gift");//结构体中的结构体直接赋值？？
 			if (item != NULL)
 			{
-				sales->gift = readjson_component(cJSON *json_string, Sales *gift);
+				sales->gift = readjson_component(json_string, sales->gift);
 			}
 
 		}

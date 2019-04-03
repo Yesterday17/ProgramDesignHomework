@@ -10,7 +10,7 @@ void gotoxy(int x, int y) {
 }//光标定位函数
 
 void UI_Welcome() { 
-  printf("Welcome to use 3021 APP\n\n");
+  // printf("Welcome to use 3021 APP\n\n");
 }
 
 Menu UI_MainMenu() { 
@@ -62,7 +62,7 @@ void UI_SubMenu(Menu menu)
     printf("( )3.修改记录\n");
     printf("( )4.删除记录\n");
     printf("( )5.查找指定记录\n");
- 
+
     char c = _getch();
     if (c == 13) break;
     if (c < 0)
@@ -94,7 +94,7 @@ void UI_SubMenu(Menu menu)
   {
     switch (y) {
     case 0:
-      
+
       break;
     case 1:
       break;
@@ -104,24 +104,28 @@ void UI_SubMenu(Menu menu)
       break;
     case 4:
       break;
-  }
-  if (menu == MENU_Sales)
-  {
-    switch (y) {
-    case 0:
-      break;
-    case 1:
-      break;
-    case 2:
-      break;
-    case 3:
-      break;
-    case 4:
-      break;
+    }
+    if (menu == MENU_Sales)
+    {
+      switch (y) {
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+      }
+    }
   }
 }
 
-void UI_Exit() {}
+void UI_Exit() {
+// 
+}
 
 void UI_Clear() {}
 

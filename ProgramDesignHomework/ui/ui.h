@@ -2,7 +2,7 @@
 #include<conio.h>
 #include<stdlib.h>
 #include<Windows.h>
-#include"./utils/global.h"
+#include "../global.h"
 
 typedef enum {
   MENU_Exit = -1,
@@ -16,7 +16,7 @@ typedef enum {
 
 void UI_Welcome();
 
-void UI_MainMenu();
+Menu UI_MainMenu();
 
 void UI_SubMenu(Menu menu);
 
@@ -31,10 +31,3 @@ void gotoxy(int x, int y);
 extern Menu menuNow;
 
 #endif
-
-void gotoxy(int x, int y) {
-  HANDLE a;
-  a = GetStdHandle(STD_OUTPUT_HANDLE);
-  COORD cos = {x,y};
-  SetConsoleCursorPosition(a, cos);
-}//光标定位函数

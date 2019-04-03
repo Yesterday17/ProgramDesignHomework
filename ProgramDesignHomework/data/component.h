@@ -1,7 +1,7 @@
  #pragma once
 
 #include "../utils/linkedlist.h"
-#include"cJSON.h"
+#include "../utils/cJson/cJSON.h"
 
 /**
  * 计算机配件 - 管理系统所管理物品
@@ -16,7 +16,7 @@ typedef struct {
 
 #ifndef UNIT_TEST
 
-Component ReadComponent();
-Component* readjson_component(cJSON *item, Compoment *comp);
+Component* ReadComponent();
+Component* readjson_component(cJSON *item, Component *comp);
 
 #endif
