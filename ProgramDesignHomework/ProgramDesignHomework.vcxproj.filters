@@ -53,8 +53,8 @@
       <Filter>ui</Filter>
     </ClCompile>
     <ClCompile Include="global.c" />
-    <ClCompile Include="utils\readjson.c">
-      <Filter>utils</Filter>
+    <ClCompile Include="ui\menu.c">
+      <Filter>ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,8 +100,8 @@
       <Filter>ui</Filter>
     </ClInclude>
     <ClInclude Include="global.h" />
-    <ClInclude Include="utils\readjson.h">
-      <Filter>utils</Filter>
+    <ClInclude Include="ui\menu.h">
+      <Filter>ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

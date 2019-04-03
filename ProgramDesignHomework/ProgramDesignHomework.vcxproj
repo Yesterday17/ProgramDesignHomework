@@ -125,6 +125,7 @@
     <ClCompile Include="data\time.c" />
     <ClCompile Include="global.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="ui\menu.c" />
     <ClCompile Include="ui\ui.c" />
     <ClCompile Include="utils\cJSON\cJSON.c" />
     <ClCompile Include="utils\fs.c" />
@@ -144,6 +145,7 @@
     <ClInclude Include="data\sales.h" />
     <ClInclude Include="data\time.h" />
     <ClInclude Include="global.h" />
+    <ClInclude Include="ui\menu.h" />
     <ClInclude Include="ui\ui.h" />
     <ClInclude Include="utils\cJSON\cJSON.h" />
     <ClInclude Include="utils\fs.h" />
