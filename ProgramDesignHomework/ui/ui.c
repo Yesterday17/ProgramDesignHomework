@@ -4,7 +4,7 @@ void UI_Welcome() {
   printf("Welcome to use 3021 APP\n\n");
 }
 
-void UI_MainMenu() { 
+Menu UI_MainMenu() { 
   int i, floor=1;
   char ch1, ch2;
   char oper[6][20] =
@@ -42,58 +42,73 @@ void UI_MainMenu() {
 
 void UI_SubMenu(Menu menu)
 {
-	char ch;
-  if (menu == MENU_Main) UI_MainMenu();
-	if (menu == MENU_) {
-		printf("1.读取\n");
-		printf("2.添加\n");
-		printf("3.删除\n");
-    printf("4.查找\n");
-		ch = getch();
-		switch (ch)
-		{
-			case '1':
-				system("cls");
-				//进货记录
-        
-				break;
-			case '2':
-				system("cls"); 
-				//添加进货
-				break;
-			case '3':
-				system("cls"); 
-				//删除进货
-				break;
-			case '4':
-				//查找进货
-				system("cls"); 
-				break;
-		}
-	}
-	if (menu == MENU_) {
-     printf("1.读取\n");
-     printf("2.添加\n");
-     printf("3.删除\n");
-     printf("4.查找\n");
-     ch = getch();
-		switch (ch)
-		{
-		case '1':
-      //读取销售
+  int x = 1, y = 0;
+  gotoxy(x, y);
+  printf("*");
+  char ch;
+  while (1)
+  {
+    printf("( )1.读取目前记录\n");
+    printf("( )2.添加记录\n");
+    printf("( )3.修改记录\n");
+    printf("( )4.删除记录\n");
+    printf("( )5.查找指定记录\n");
+ 
+    char c = _getch();
+    if (c == 13) break;
+    if (c < 0)
+    {
+      ch = _getch();
+      switch (ch) {
+      case 72:
+        if (y > 0) {
+          gotoxy(x, y);
+          printf(" ");
+          y--;
+          gotoxy(x, y);
+          printf("*");
+        }
+        break;
+      case 80:
+        if (y < 4) {
+          gotoxy(x, y);
+          printf(" ");
+          y++;
+          gotoxy(x, y);
+          printf("*");
+        }
+      }
+    }
+  }
+  system("cls");
+  if (menu == MENU_Purchase)
+  {
+    switch (y) {
+    case 0:
       break;
-		case '2':
-      //添加销售
+    case 1:
       break;
-		case '3':
-      //删除销售
+    case 2:
       break;
-		case '4':
-      //查找销售
+    case 3:
       break;
-		}
-	}
-	
+    case 4:
+      break;
+  }
+  if (menu == MENU_Sales)
+  {
+    switch (y) {
+    case 0:
+      break;
+    case 1:
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+    case 4:
+      break;
+  }
 }
 
 void UI_Exit() {}

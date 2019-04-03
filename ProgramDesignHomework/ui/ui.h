@@ -1,17 +1,14 @@
 #pragma once
 #include<conio.h>
 #include<stdlib.h>
+#include<Windows.h>
 
 typedef enum {
   MENU_Exit = -1,
   MENU_Welcome = 0,
   MENU_Main = 1,
-  MENU_InputPurchase = 2,
-  MENU_InputSales = 3,
-  MENU_OutputPurchase = 4,
-  MENU_OutputSales = 5,
-  MENU_OutputAmount = 6,
-  MENU_OutputStock = 7,
+  MENU_Purchase = 2,
+  MENU_Sales = 3,
 } Menu;
 
 #ifndef UNIT_TEST
@@ -29,3 +26,10 @@ void UI_Clear();
 void UI_WaitForNext(void* nextDo());
 
 #endif
+
+void gotoxy(int x, int y) {
+  HANDLE a;
+  a = GetStdHandle(STD_OUTPUT_HANDLE);
+  COORD cos = {x,y};
+  SetConsoleCursorPosition(a, cos);
+}//光标定位函数
