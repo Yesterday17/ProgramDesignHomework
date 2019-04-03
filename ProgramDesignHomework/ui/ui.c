@@ -10,7 +10,9 @@ void gotoxy(int x, int y) {
 }//光标定位函数
 
 void UI_Welcome() { 
-  // printf("Welcome to use 3021 APP\n\n");
+  printf("\n\nWelcome to use 3021 APP\n\n");
+  Sleep(1000);
+  system("cls");
 }
 
 Menu UI_MainMenu() { 
@@ -22,7 +24,7 @@ Menu UI_MainMenu() {
     "3: 库存",
     "4: 金额"};
   printf("Operation List:\n");
-  for (i = 0; i < 4; i++)  printf("[ ]%s", oper[i]);
+  for (i = 0; i < 4; i++)  printf("[ ]%s\n", oper[i]);
   gotoxy(2, 1);
   printf("\b*]%s",oper[0]);
   while ((ch1 = _getch()) != '1') {
@@ -49,20 +51,20 @@ Menu UI_MainMenu() {
   printf("Please select the operation you want to perform:");
 }
 
-void UI_SubMenu(Menu menu)
+Menu UI_SubMenu(Menu menu)
 {
+  printf("[ ]1.读取目前记录\n");
+  printf("[ ]2.添加记录\n");
+  printf("[ ]3.修改记录\n");
+  printf("[ ]4.删除记录\n");
+  printf("[ ]5.查找指定记录\n");
+  printf("[ ]6.返回上一级\n");
   int x = 1, y = 0;
   gotoxy(x, y);
   printf("*");
   char ch;
   while (1)
   {
-    printf("( )1.读取目前记录\n");
-    printf("( )2.添加记录\n");
-    printf("( )3.修改记录\n");
-    printf("( )4.删除记录\n");
-    printf("( )5.查找指定记录\n");
-
     char c = _getch();
     if (c == 13) break;
     if (c < 0)
@@ -79,7 +81,7 @@ void UI_SubMenu(Menu menu)
         }
         break;
       case 80:
-        if (y < 4) {
+        if (y < 5) {
           gotoxy(x, y);
           printf(" ");
           y++;
@@ -97,6 +99,26 @@ void UI_SubMenu(Menu menu)
 
       break;
     case 1:
+      system("cls");
+      break;
+    case 2:
+
+      break;
+    case 3:
+      break;
+    case 4:
+      break;
+    case 5:
+      return MENU_Main;
+    }
+    return MENU_Purchase;
+  }
+  if (menu == MENU_Sales)
+  {
+    switch (y) {
+    case 0:
+      break;
+    case 1:
       break;
     case 2:
       break;
@@ -104,22 +126,10 @@ void UI_SubMenu(Menu menu)
       break;
     case 4:
       break;
+    case 5:
+      return MENU_Main;
     }
-    if (menu == MENU_Sales)
-    {
-      switch (y) {
-      case 0:
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-        break;
-      }
-    }
+    return MENU_Sales;
   }
 }
 

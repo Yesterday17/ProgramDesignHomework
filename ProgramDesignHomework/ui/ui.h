@@ -18,7 +18,7 @@ void UI_Welcome();
 
 Menu UI_MainMenu();
 
-void UI_SubMenu(Menu menu);
+Menu UI_SubMenu(Menu menu);
 
 void UI_Exit();
 

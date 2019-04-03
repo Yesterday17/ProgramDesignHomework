@@ -6,14 +6,17 @@
 
 int main() {
   UI_Welcome();
-  UI_WaitForNext(UI_Clear);
+  
+  menuNow = MENU_Welcome;
+  while (menuNow != MENU_Exit)
+  {
+    //menuNow = UI_MainMenu();
+    menuNow = MENU_Purchase;
+    while (menuNow != MENU_Main) {
 
-  // UI_MainMenu();
-
-  while (menuNow != MENU_Exit) {
-    UI_SubMenu(menuNow);
+      menuNow = UI_SubMenu(menuNow);
+    }
   }
-
   UI_Exit();
   return 0;
 }
