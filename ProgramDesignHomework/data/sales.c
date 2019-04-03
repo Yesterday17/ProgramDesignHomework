@@ -12,7 +12,7 @@ Sales ReadSales() {
   ReadComponent();
   return prime;
 }
-Sales * readjson_sales(char *json_string, Sales *prime)
+Sales * readjson_sales(char *json_string, Sales *sales)
 {
 	cJSON *item;
 	cJSON *root = cJSON_Parse(json_string);
@@ -24,26 +24,57 @@ Sales * readjson_sales(char *json_string, Sales *prime)
 	}
 	else
 	{
-		item = cJSON_GetObjectItem(root, "prime");
-		if (item != NULL)
+		cJSON *object = cJSON_GetObjectItem(root, "sales");
+		if (object == NULL)
 		{
-			comp->index = item->valueint;
+			printf("Error before: [%s]\n", cJSON_GetErrorPtr());
+			cJSON_Delete(root);
+			return -1;
 		}
-		item = cJSON_GetObjectItem(object, "name");
-		if (item != NULL)
+		else 
 		{
-			memcpy(comp->name, item->name, strlen(comp->name));
-		}
-		item = cJSON_GetObjectItem(object, "type");
-		if (item != NULL)
-		{
-			memcpy(comp->type, item->type, strlen(comp->type));
-		}
-		item = cJSON_GetObjectItem(object, "manufacturer");
-		if (item != NULL)
-		{
-			memcpy(comp->manufacturer, item->manufacturer, strlen(comp->manufacturer));
+			item = cJSON_GetObjectItem(root, "time");
+			if (item != NULL)
+			{
+				sales->time = item->valueint;
+			}
+			item = cJSON_GetObjectItem(object, "component");
+			if (item != NULL)
+			{
+				sales->component = readjson_component(cJSON *json_string, Compoment *component);
+			}
+			item = cJSON_GetObjectItem(object, "sales_mode");
+			if (item != NULL)
+			{
+				sales->sales_mode = item->valueint;
+			}
+			item = cJSON_GetObjectItem(object, "price");
+			if (item != NULL)
+			{
+				sales->price = item->valueint;
+			}
+			item = cJSON_GetObjectItem(object, "quantity");
+			if (item != NULL)
+			{
+				sales->quantity = item->valueint;
+			}
+			item = cJSON_GetObjectItem(object, "total");
+			if (item != NULL)
+			{
+				sales->total = item->valueint;
+			}
+			item = cJSON_GetObjectItem(object, "customer");
+			if (item != NULL)
+			{
+				memcpy(sales->customer, item->valuestring, strlen(item->valuestring));
+			}
+			item = cJSON_GetObjectItem(object, "gift");//结构体中的结构体直接赋值？？
+			if (item != NULL)
+			{
+				sales->gift = readjson_component(cJSON *json_string, Sales *gift);
+			}
+
 		}
 	}
-	return comp;
+	return sales;
 }
