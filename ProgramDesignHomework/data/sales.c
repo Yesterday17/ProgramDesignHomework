@@ -80,3 +80,7 @@ Sales* readjson_sales(char *json_string, Sales *sales)
 	}
 	return sales;
 }
+void  PrintSalesTitle()
+{
+
+}
