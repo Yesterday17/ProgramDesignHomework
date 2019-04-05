@@ -58,15 +58,16 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   printf("[ ]添加记录\n");
   printf("[ ]查找指定记录\n");
   printf("[ ]返回上一级\n");
-  int y=OptionBar(4);
+  int y=OptionBar(1,4);
   LinkedListNode* p;
   if (menu == MENU_Purchase)
   {
     switch (y) {
     case 0:
+      printf(PrintPurchaseTitle());
       for (p = purchase.top; p != NULL; p = p->next)
       {
-        printf(PrintPurchaseTitle());
+        printf("[ ]");
         printf(PrintPurchase(p, 1));
       }
       break;
@@ -95,7 +96,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   }
 }
 
-int OptionBar(int length) {
+int OptionBar(int start,int end) {//start为起始行，end为终止行
   int x = 1, y = 0;
   gotoxy(x, y);
   printf("*");
@@ -109,7 +110,7 @@ int OptionBar(int length) {
       ch = _getch();
       switch (ch) {
       case 72:
-        if (y > 0) {
+        if (y > start-1) {
           gotoxy(x, y);
           printf(" ");
           y--;
@@ -118,7 +119,7 @@ int OptionBar(int length) {
         }
         break;
       case 80:
-        if (y < length-1) {
+        if (y < end-1) {
           gotoxy(x, y);
           printf(" ");
           y++;

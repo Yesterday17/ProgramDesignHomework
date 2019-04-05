@@ -15,7 +15,7 @@ typedef struct {
 
 Purchase* readjson_purchase(char *json_string, Purchase *purchase);
 
-char* PrintPurchaseTitle();
-char* PrintPurchase(void* node, uint8_t id);
+char* PrintPurchaseTitle();/*带上\n*/
+char* PrintPurchase(void* node, uint8_t id);/*带上\n*/
 
 #endif
