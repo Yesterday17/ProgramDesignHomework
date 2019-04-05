@@ -64,12 +64,13 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   {
     switch (y) {
     case 0:
-      printf(PrintPurchaseTitle());
+      PrintPurchaseTitle();
       for (p = purchase.top; p != NULL; p = p->next)
       {
         printf("[ ]");
-        printf(PrintPurchase(p, 1));
+        PrintPurchase(p, 1);
       }
+      OptionBar(2, 11);
       break;
     case 1:
       break;
