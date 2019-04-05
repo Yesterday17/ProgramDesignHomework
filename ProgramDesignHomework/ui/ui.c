@@ -1,6 +1,7 @@
 #include "ui.h"
 #include "../data/purchase.h"
 
+#define hangshu 10//记录最大行数
 Menu menuNow = MENU_Welcome;
 
 void gotoxy(int x, int y) {
@@ -59,18 +60,42 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   printf("[ ]查找指定记录\n");
   printf("[ ]返回上一级\n");
   int y=OptionBar(1,4);
-  LinkedListNode* p;
+  LinkedListNode *p,*re[100]; 
+  int count = 1,i=0;
+  char a, b;
   if (menu == MENU_Purchase)
   {
     switch (y) {
     case 0:
+      printf("   ");
       PrintPurchaseTitle();
-      for (p = purchase.top; p != NULL; p = p->next)
+      p = purchase.top;
+      re[i] = purchase.top;
+      while(p != NULL)
       {
         printf("[ ]");
         PrintPurchase(p, 1);
+        if (count % hangshu==0) {
+          re[++i] = p->next;
+          
+          a = getch();
+          if (a < 0) {
+            b = getch();
+            if (b == 75) {
+              system("cls");
+              count -= hangshu;
+              p = re[--i];
+              continue;
+            }
+            if (b == 77) {
+              system("cls");
+            }
+          }
+        }
+        p = p->next;
+        count++;
       }
-      OptionBar(2, 11);
+      OptionBar(2, 2+hangshu-1); 
       break;
     case 1:
       break;
@@ -98,7 +123,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
 }
 
 int OptionBar(int start,int end) {//start为起始行，end为终止行
-  int x = 1, y = 0;
+  int x = 1, y = start-1;
   gotoxy(x, y);
   printf("*");
   char ch;
