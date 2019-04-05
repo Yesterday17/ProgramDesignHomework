@@ -66,7 +66,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
     case 0:
       for (p = purchase.top; p != NULL; p = p->next)
       {
-        printf(Print);
+        printf(PrintPurchaseTitle());
         printf(PrintPurchase(p, 1));
       }
       break;
