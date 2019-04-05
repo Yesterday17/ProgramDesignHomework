@@ -1,4 +1,5 @@
 #include "ui.h"
+#include "../data/purchase.h"
 
 Menu menuNow = MENU_Welcome;
 
@@ -51,14 +52,50 @@ Menu UI_MainMenu() {
   printf("Please select the operation you want to perform:");
 }
 
-Menu UI_SubMenu(Menu menu)
+Menu UI_SubMenu(Menu menu)//二级目录及执行
 {
-  printf("[ ]1.读取目前记录\n");
-  printf("[ ]2.添加记录\n");
-  printf("[ ]3.修改记录\n");
-  printf("[ ]4.删除记录\n");
-  printf("[ ]5.查找指定记录\n");
-  printf("[ ]6.返回上一级\n");
+  printf("[ ]读取目前记录\n");
+  printf("[ ]添加记录\n");
+  printf("[ ]查找指定记录\n");
+  printf("[ ]返回上一级\n");
+  int y=OptionBar(4);
+  LinkedListNode* p;
+  if (menu == MENU_Purchase)
+  {
+    switch (y) {
+    case 0:
+      for (p = purchase.top; p != NULL; p = p->next)
+      {
+        printf(Print);
+        printf(PrintPurchase(p, 1));
+      }
+      break;
+    case 1:
+      break;
+    case 2:
+      break;
+    case 3:
+      return MENU_Main;
+    }
+    return MENU_Purchase;
+  }
+  if (menu == MENU_Sales)
+  {
+    switch (y) {
+    case 0:
+      break;
+    case 1:
+      break;
+    case 2:
+      break;
+    case 3:
+      return MENU_Main;
+    }
+    return MENU_Sales;
+  }
+}
+
+int OptionBar(int length) {
   int x = 1, y = 0;
   gotoxy(x, y);
   printf("*");
@@ -81,7 +118,7 @@ Menu UI_SubMenu(Menu menu)
         }
         break;
       case 80:
-        if (y < 5) {
+        if (y < length-1) {
           gotoxy(x, y);
           printf(" ");
           y++;
@@ -92,45 +129,7 @@ Menu UI_SubMenu(Menu menu)
     }
   }
   system("cls");
-  if (menu == MENU_Purchase)
-  {
-    switch (y) {
-    case 0:
-
-      break;
-    case 1:
-      system("cls");
-      break;
-    case 2:
-
-      break;
-    case 3:
-      break;
-    case 4:
-      break;
-    case 5:
-      return MENU_Main;
-    }
-    return MENU_Purchase;
-  }
-  if (menu == MENU_Sales)
-  {
-    switch (y) {
-    case 0:
-      break;
-    case 1:
-      break;
-    case 2:
-      break;
-    case 3:
-      break;
-    case 4:
-      break;
-    case 5:
-      return MENU_Main;
-    }
-    return MENU_Sales;
-  }
+  return y;
 }
 
 void UI_Exit() {

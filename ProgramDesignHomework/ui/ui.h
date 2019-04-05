@@ -28,6 +28,8 @@ void UI_WaitForNext(void* nextDo());
 
 void gotoxy(int x, int y);
 
+int OptionBar(int length);
+
 extern Menu menuNow;
 
 #endif
