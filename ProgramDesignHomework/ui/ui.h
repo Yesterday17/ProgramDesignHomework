@@ -30,7 +30,7 @@ void gotoxy(int x, int y);
 
 int OptionBar(int start,int end);
 
-void RecordPage();
+void RecordPage(LinkedList data,char* title,char(* record)(void*, uint8_t));
 
 extern Menu menuNow;
 

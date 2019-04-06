@@ -1,7 +1,8 @@
 #include "ui.h"
 #include "../data/purchase.h"
+#include"../data/sales.h"
 
-#define hangshu 10//记录最大行数
+#define hangshu 10//记录每页最大行数
 Menu menuNow = MENU_Welcome;
 
 void gotoxy(int x, int y) {
@@ -14,7 +15,7 @@ void gotoxy(int x, int y) {
 void UI_Welcome() { 
   printf("\n\nWelcome to use 3021 APP\n\n");
   Sleep(1000);
-  system("cls");
+  cls();
 }
 
 Menu UI_MainMenu() { 
@@ -60,12 +61,14 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   printf("[ ]查找指定记录\n");
   printf("[ ]返回上一级\n");
   int y=OptionBar(1,4);
+  int record;//选中记录
   if (menu == MENU_Purchase)
   {
+   
     switch (y) {
     case 0:
-      RecordPage(purchase, PrintPurchaseTitle, PrintPurchase);
-      y = OptionBar(2, 2 + hangshu-1);
+      record=RecordPage(purchase, PrintPurchaseTitle(), PrintPurchase);
+
       break;
     case 1:
       break;
@@ -80,6 +83,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   {
     switch (y) {
     case 0:
+      record=RecordPage(sales,PrintSalesTitle(), PrintSales);
       break;
     case 1:
       break;
@@ -100,7 +104,7 @@ int OptionBar(int start,int end) {//start为起始行，end为终止行
   while (1)
   {
     char c = _getch();
-    if (c == 13) break;
+    if (c == 13) break;//回车退出
     if (c < 0)
     {
       ch = _getch();
@@ -125,13 +129,13 @@ int OptionBar(int start,int end) {//start为起始行，end为终止行
       }
     }
   }
-  system("cls");
+  cls();
   return y;
 }
 
-void RecordPage(LinkedList data,char* title,char* record) {//记录翻页函数
+int RecordPage(LinkedList data,char* title,char(* record)(void*,uint8_t)) {//记录翻页函数
   LinkedListNode *p, *re[100];//目标节点，分页数组
-  int count = 1, j = 0;//计数器，页码
+  int num = 0, count = 1, j = 0, y = 0;//序号，计数器，页码，选中行
   char a, b;//读取按键ascii码
   int end;//最终记录条数+1
   p = data.top;
@@ -150,7 +154,7 @@ void RecordPage(LinkedList data,char* title,char* record) {//记录翻页函数
       if (a < 0) {
         b = _getch();
         if (b == 75 && count > 1+hangshu) {//左翻页
-          system("cls");
+          cls();
           printf(title);
           count -= hangshu;
           if (j > 0)
@@ -160,7 +164,7 @@ void RecordPage(LinkedList data,char* title,char* record) {//记录翻页函数
         else if (b == 77 && p != data.rear->next) {//右翻页
           j++;
           re[j] = p;
-          system("cls");
+          cls();
           printf(title);
         }
         else//锁定其他按键
@@ -168,22 +172,77 @@ void RecordPage(LinkedList data,char* title,char* record) {//记录翻页函数
       }
       if (a == 13)break;//回车退出
     }
+    num++;
     printf("[ ]");
-    printf(record);
+    printf(record(p,num));
     p = p->next;
     count++;
   }
   int count0 = end;//拷贝（真实记录行数+1）
   if ((count0 - 1) % hangshu == 0) {
-    OptionBar(2, 2+hangshu-1);
+    y=OptionBar(2, 2+hangshu-1);
   }
   else
   {
     if (count0 > hangshu) {
       count0 = count0 - (count0 / hangshu * hangshu) - 1;//记录末页行数：如记录38条，末页8行
     }
-    OptionBar(2, 2 + count0-1);
+    y=OptionBar(2, 2 + count0-1);
   }
+  return j * hangshu + (y + 1);
+}
+
+void cls()
+{
+  HANDLE hConsole;
+
+  hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+  COORD coordScreen = { 0, 0 };    // home for the cursor 
+  DWORD cCharsWritten;
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  DWORD dwConSize;
+
+  // Get the number of character cells in the current buffer. 
+
+  if (!GetConsoleScreenBufferInfo(hConsole, &csbi))
+  {
+    return;
+  }
+
+  dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
+
+  // Fill the entire screen with blanks.
+
+  if (!FillConsoleOutputCharacter(hConsole,        // Handle to console screen buffer 
+    (TCHAR) ' ',     // Character to write to the buffer
+    dwConSize,       // Number of cells to write 
+    coordScreen,     // Coordinates of first cell 
+    &cCharsWritten))// Receive number of characters written
+  {
+    return;
+  }
+
+  // Get the current text attribute.
+
+  if (!GetConsoleScreenBufferInfo(hConsole, &csbi))
+  {
+    return;
+  }
+
+  // Set the buffer's attributes accordingly.
+
+  if (!FillConsoleOutputAttribute(hConsole,         // Handle to console screen buffer 
+    csbi.wAttributes, // Character attributes to use
+    dwConSize,        // Number of cells to set attribute 
+    coordScreen,      // Coordinates of first cell 
+    &cCharsWritten)) // Receive number of characters written
+  {
+    return;
+  }
+
+  // Put the cursor at its home coordinates.
+
+  SetConsoleCursorPosition(hConsole, coordScreen);
 }
 
 void UI_Exit() {

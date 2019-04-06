@@ -18,7 +18,7 @@ typedef struct sales {
 
 Sales* ReadSales();
 
-void PrintSalesTitle();
+char* PrintSalesTitle();
 char* PrintSales(void* node, uint8_t id);
 
 #endif
