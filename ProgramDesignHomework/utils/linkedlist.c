@@ -51,7 +51,7 @@ LinkedListFindResult FindLinkedList(LinkedList list, bool* callback(LinkedListNo
 		}
 		if (res.count + 1 == 100) {
 			a *= 2;
-			res.result = realloc(res.result, sizeof(LinkedListNode*)*a);
+			res.result = (LinkedListNode**)realloc(res.result, sizeof(LinkedListNode*)*a);
 		}
 	}
 	return res;
