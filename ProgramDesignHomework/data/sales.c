@@ -82,9 +82,9 @@ Sales* readjson_sales(char *json_string, Sales *sales)
 }
 void  PrintSalesTitle()
 {
-	printf("\t序号\t\t\t名称\t\t\t型号\t\t\t时间\t\t\t制造商\t\t\t模式\t\t\t单价\t\t\t数量\t\t\t总价\t\t\t赠品 ");
-	printf("\n");
-	return;
+	char a[100];
+	a[100]= " 名称  型号  制造商 销售模式  数量  单价  总价  赠品";
+	return a;
 }
 char* PrintSales(void* node, uint8_t id)
 {
