@@ -129,10 +129,11 @@ int OptionBar(int start,int end) {//start为起始行，end为终止行
   return y;
 }
 
-void RecordPage(LinkedList data,char* title,char* record) {
-  LinkedListNode *p, *re[100];
-  int count = 1, j = 0;
-  char a, b;
+void RecordPage(LinkedList data,char* title,char* record) {//记录翻页函数
+  LinkedListNode *p, *re[100];//目标节点，分页数组
+  int count = 1, j = 0;//计数器，页码
+  char a, b;//读取按键ascii码
+  int end;//最终记录条数+1
   p = data.top;
   re[0] = data.top;
   printf(title);
@@ -141,14 +142,14 @@ void RecordPage(LinkedList data,char* title,char* record) {
 
     if ((count - 1) % hangshu == 0 && count != 1 || p == data.rear->next) {
 
-
+      end = count;
       if (p == data.rear->next && (count - 1) % hangshu != 0) {
-        count = (count + hangshu-1) / hangshu * hangshu + 1;
+        count = (count + hangshu-1) / hangshu * hangshu + 1;//进位取整+1：如39->41
       }
       a = _getch();
       if (a < 0) {
         b = _getch();
-        if (b == 75 && count > 1+hangshu) {
+        if (b == 75 && count > 1+hangshu) {//左翻页
           system("cls");
           printf(title);
           count -= hangshu;
@@ -156,22 +157,33 @@ void RecordPage(LinkedList data,char* title,char* record) {
             j--;
           p = re[j];
         }
-        else if (b == 77 && p != data.rear->next) {
+        else if (b == 77 && p != data.rear->next) {//右翻页
           j++;
           re[j] = p;
           system("cls");
           printf(title);
         }
-        else
+        else//锁定其他按键
           continue;
       }
+      if (a == 13)break;//回车退出
     }
     printf("[ ]");
     printf(record);
     p = p->next;
     count++;
   }
-  system("pause>nul");
+  int count0 = end;//拷贝（真实记录行数+1）
+  if ((count0 - 1) % hangshu == 0) {
+    OptionBar(2, 2+hangshu-1);
+  }
+  else
+  {
+    if (count0 > hangshu) {
+      count0 = count0 - (count0 / hangshu * hangshu) - 1;//记录末页行数：如记录38条，末页8行
+    }
+    OptionBar(2, 2 + count0-1);
+  }
 }
 
 void UI_Exit() {
