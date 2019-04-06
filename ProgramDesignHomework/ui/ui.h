@@ -28,7 +28,9 @@ void UI_WaitForNext(void* nextDo());
 
 void gotoxy(int x, int y);
 
-int OptionBar(int length);
+int OptionBar(int start,int end);
+
+void RecordPage();
 
 extern Menu menuNow;
 

@@ -60,42 +60,12 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   printf("[ ]查找指定记录\n");
   printf("[ ]返回上一级\n");
   int y=OptionBar(1,4);
-  LinkedListNode *p,*re[100]; 
-  int count = 1,i=0;
-  char a, b;
   if (menu == MENU_Purchase)
   {
     switch (y) {
     case 0:
-      printf("   ");
-      PrintPurchaseTitle();
-      p = purchase.top;
-      re[i] = purchase.top;
-      while(p != NULL)
-      {
-        printf("[ ]");
-        PrintPurchase(p, 1);
-        if (count % hangshu==0) {
-          re[++i] = p->next;
-          
-          a = getch();
-          if (a < 0) {
-            b = getch();
-            if (b == 75) {
-              system("cls");
-              count -= hangshu;
-              p = re[--i];
-              continue;
-            }
-            if (b == 77) {
-              system("cls");
-            }
-          }
-        }
-        p = p->next;
-        count++;
-      }
-      OptionBar(2, 2+hangshu-1); 
+      RecordPage(purchase, PrintPurchaseTitle, PrintPurchase);
+      y = OptionBar(2, 2 + hangshu-1);
       break;
     case 1:
       break;
@@ -157,6 +127,51 @@ int OptionBar(int start,int end) {//start为起始行，end为终止行
   }
   system("cls");
   return y;
+}
+
+void RecordPage(LinkedList data,char* title,char* record) {
+  LinkedListNode *p, *re[100];
+  int count = 1, j = 0;
+  char a, b;
+  p = data.top;
+  re[0] = data.top;
+  printf(title);
+  while (1)
+  {
+
+    if ((count - 1) % hangshu == 0 && count != 1 || p == data.rear->next) {
+
+
+      if (p == data.rear->next && (count - 1) % hangshu != 0) {
+        count = (count + hangshu-1) / hangshu * hangshu + 1;
+      }
+      a = _getch();
+      if (a < 0) {
+        b = _getch();
+        if (b == 75 && count > 1+hangshu) {
+          system("cls");
+          printf(title);
+          count -= hangshu;
+          if (j > 0)
+            j--;
+          p = re[j];
+        }
+        else if (b == 77 && p != data.rear->next) {
+          j++;
+          re[j] = p;
+          system("cls");
+          printf(title);
+        }
+        else
+          continue;
+      }
+    }
+    printf("[ ]");
+    printf(record);
+    p = p->next;
+    count++;
+  }
+  system("pause>nul");
 }
 
 void UI_Exit() {
