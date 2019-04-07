@@ -17,5 +17,7 @@ extern uint64_t timeToSearch;
 extern Component* componentToSearch;
 extern char* customerToSearch;
 extern char* retailerToSearch;
+extern char *typeToSearch;
+extern char * manufacturerToSearch;
 
 #endif

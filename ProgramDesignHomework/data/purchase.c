@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "io.h"
 #include "time.h"
-
+#include "../global.c"
 #include"component.h"
 Purchase* ReadPurchase() {
   Purchase prime;
@@ -79,5 +79,17 @@ Purchase* readjson_purchase(char *json_string, Purchase *purchase)
     return purchase;
   }
   return 0;
+}
+bool FindTime_Purchase(LinkedListNode *node)
+{
+	if (((Component *)node->data)->name == timeToSearch)
+		return true;
+	else
+		return false;
+}
+bool Findretailer_Purchase(LinkedListNode *node)
+{
+	return strcmp(((Purchase*)node->data)->retailer, retailerToSearch) == 0;
+
 }
 

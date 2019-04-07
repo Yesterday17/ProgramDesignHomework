@@ -19,4 +19,8 @@ typedef struct {
 Component* ReadComponent();
 Component* readjson_component(cJSON *item, Component *comp);
 
+bool FindName_Component(LinkedListNode *node);
+bool FindType_Component(LinkedListNode *node);
+bool FindMan_Component(LinkedListNode *node);
+
 #endif

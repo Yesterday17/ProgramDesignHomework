@@ -1,7 +1,7 @@
 #include "sales.h"
 #include "../utils/io.h"
 #include <malloc.h>
-
+#include "../global.h"
 Sales* ReadSales() {
   Sales *prime = malloc(sizeof(Sales));
   // prime->time = ReadTime();
@@ -89,4 +89,7 @@ void  PrintSalesTitle()
 char* PrintSales(void* node, uint8_t id)
 {
 
+}
+bool Findcustomer_Component(LinkedListNode *node) {
+	return strcmp(((Sales *)node->data)->customer, customerToSearch) == 0;
 }

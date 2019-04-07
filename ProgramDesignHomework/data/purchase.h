@@ -18,5 +18,6 @@ Purchase* readjson_purchase(char *json_string, Purchase *purchase);
 
 char* PrintPurchaseTitle();/*带上\n*/
 char* PrintPurchase(void* node, uint8_t id);/*带上\n*/
+bool FindTime_Purchase(LinkedListNode *node);
 
 #endif
