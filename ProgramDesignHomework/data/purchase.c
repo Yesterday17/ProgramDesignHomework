@@ -4,7 +4,7 @@
 #include "time.h"
 
 #include"component.h"
-Purchase ReadPurchase() {
+Purchase* ReadPurchase() {
   Purchase prime;
   prime.time = 0; // FIXME
   // prime.price = InputString("请输入进货单价", "1");

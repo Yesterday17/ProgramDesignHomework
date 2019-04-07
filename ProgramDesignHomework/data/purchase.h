@@ -13,6 +13,7 @@ typedef struct {
 
 #ifndef UNIT_TEST
 
+Purchase* ReadPurchase();
 Purchase* readjson_purchase(char *json_string, Purchase *purchase);
 
 char* PrintPurchaseTitle();/*´øÉÏ\n*/

@@ -30,7 +30,6 @@ LinkedListNode* DeleteLinkedList(LinkedList list, bool *callback(LinkedListNode 
   for (p = list.top; p != NULL; p0 = p, p = p->next) {
     if (callback(p)) {
       p0->next = p->next;  //删除p0所指项
-      free(p->next);  //释放空间
       p = p0;  //指向删除项的下一项
       break;
     }

@@ -84,6 +84,22 @@ Menu UI_SubMenu(Menu menu)//¶þ¼¶Ä¿Â¼¼°Ö´ÐÐ
     switch (y) {
     case 0:
       record=RecordPage(sales,PrintSalesTitle(), PrintSales);
+      gotoxy(1, 10);
+      printf("ÐÞ¸Ä¼ÇÂ¼Enter   É¾³ý¼ÇÂ¼Delete\n");
+      while (1) {
+        char key1 = _getch();
+        char key2;
+        if (key1 == 13) {//enter
+          //DeleteLinkedList(purchase, );
+          InsertLinkedList(purchase,ReadPurchase());
+          break;
+        }
+        if (key1<0) 
+          if(key2==83){//delete
+            //DeleteLinkedList(purchase, );
+            break;
+          }
+      }
       break;
     case 1:
       break;
@@ -189,7 +205,7 @@ int RecordPage(LinkedList data,char* title,char(* record)(void*,uint8_t)) {//¼ÇÂ
     }
     y=OptionBar(2, 2 + count0-1);
   }
-  return j * hangshu + (y + 1);
+  return j * hangshu + y;
 }
 
 void cls()
