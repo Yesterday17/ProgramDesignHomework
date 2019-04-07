@@ -18,7 +18,13 @@ Component* ReadComponent() {
 }
 
 bool FindName_Component(LinkedListNode *node) {
-  return strcmp(((Component *)node->data)->name, nameToSearch) == 0;
+  return strcmp(((Component *)node->data)->name, retailerToSearch) == 0;
+}
+bool FindType_Component(LinkedListNode *node) {
+	return strcmp(((Component *)node->data)->type, typeToSearch) == 0;
+}
+bool FindMan_Component(LinkedListNode *node) {
+	return strcmp(((Component *)node->data)->manufacturer, retailerToSearch) == 0;
 }
 
 Component* readjson_component(cJSON *root, Component *comp)
