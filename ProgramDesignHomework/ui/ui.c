@@ -5,12 +5,7 @@
 #define hangshu 10//¼ÇÂ¼Ã¿Ò³×î´óÐÐÊý
 Menu menuNow = MENU_Welcome;
 
-void gotoxy(int x, int y) {
-  HANDLE a;
-  a = GetStdHandle(STD_OUTPUT_HANDLE);
-  COORD cos = { x,y };
-  SetConsoleCursorPosition(a, cos);
-}//¹â±ê¶¨Î»º¯Êý
+
 
 void UI_Welcome() { 
   printf("\n\nWelcome to use 3021 APP\n\n");
@@ -61,18 +56,37 @@ Menu UI_SubMenu(Menu menu)//¶þ¼¶Ä¿Â¼¼°Ö´ÐÐ
   printf("[ ]²éÕÒÖ¸¶¨¼ÇÂ¼\n");
   printf("[ ]·µ»ØÉÏÒ»¼¶\n");
   int y=OptionBar(1,4);
+  cls();
   int record;//Ñ¡ÖÐ¼ÇÂ¼
   if (menu == MENU_Purchase)
   {
    
     switch (y) {
     case 0:
-      record=RecordPage(purchase, PrintPurchaseTitle(), PrintPurchase);
-
+      record = RecordPage(purchase, PrintPurchseTitle(), PrintPurchase);
+      gotoxy(1, 1 + hangshu);
+      printf("ÐÞ¸Ä¼ÇÂ¼Enter   É¾³ý¼ÇÂ¼Delete\n");
+      while (1) {
+        char key1 = _getch();
+        char key2;
+        if (key1 == 13) {//enter
+          //DeleteLinkedList(purchase, );
+          cls();
+          InsertLinkedList(purchase, ReadPurchase());
+          break;
+        }
+        if (key1 < 0)
+          if (key2 == 83) {//delete
+            //DeleteLinkedList(purchase, );
+            break;
+          }
+      }
       break;
     case 1:
+      InsertLinkedList(purchase, ReadPurchase());
       break;
     case 2:
+
       break;
     case 3:
       return MENU_Main;
@@ -84,24 +98,26 @@ Menu UI_SubMenu(Menu menu)//¶þ¼¶Ä¿Â¼¼°Ö´ÐÐ
     switch (y) {
     case 0:
       record=RecordPage(sales,PrintSalesTitle(), PrintSales);
-      gotoxy(1, 10);
+      gotoxy(1, 1+hangshu);
       printf("ÐÞ¸Ä¼ÇÂ¼Enter   É¾³ý¼ÇÂ¼Delete\n");
       while (1) {
         char key1 = _getch();
         char key2;
         if (key1 == 13) {//enter
-          //DeleteLinkedList(purchase, );
-          InsertLinkedList(purchase,ReadPurchase());
+          //DeleteLinkedList(sales, );
+          cls();
+          InsertLinkedList(sales,ReadSales());
           break;
         }
         if (key1<0) 
           if(key2==83){//delete
-            //DeleteLinkedList(purchase, );
+            //DeleteLinkedList(sales, );
             break;
           }
       }
       break;
     case 1:
+      InsertLinkedList(sales, ReadSales());
       break;
     case 2:
       break;
@@ -145,9 +161,15 @@ int OptionBar(int start,int end) {//startÎªÆðÊ¼ÐÐ£¬endÎªÖÕÖ¹ÐÐ
       }
     }
   }
-  cls();
   return y;
 }
+
+void gotoxy(int x, int y) {
+  HANDLE a;
+  a = GetStdHandle(STD_OUTPUT_HANDLE);
+  COORD cos = { x,y };
+  SetConsoleCursorPosition(a, cos);
+}//¹â±ê¶¨Î»º¯Êý
 
 int RecordPage(LinkedList data,char* title,char(* record)(void*,uint8_t)) {//¼ÇÂ¼·­Ò³º¯Êý
   LinkedListNode *p, *re[100];//Ä¿±ê½Úµã£¬·ÖÒ³Êý×é
@@ -205,6 +227,7 @@ int RecordPage(LinkedList data,char* title,char(* record)(void*,uint8_t)) {//¼ÇÂ
     }
     y=OptionBar(2, 2 + count0-1);
   }
+  cls();
   return j * hangshu + y;
 }
 

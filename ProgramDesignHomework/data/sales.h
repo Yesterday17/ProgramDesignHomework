@@ -1,4 +1,4 @@
-a#pragma once
+#pragma once
 #include "component.h"
 #include "time.h"
 
