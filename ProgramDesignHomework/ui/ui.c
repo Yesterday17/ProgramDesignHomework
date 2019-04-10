@@ -98,9 +98,10 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       InsertLinkedList(purchase, ReadPurchase());
       break;
     case 2:
-      printf("[ ]");
-      printf("[ ]");
-      printf("[ ]");
+      printf("[ ]1.按配件种类检索");
+      printf("[ ]2.按供货商检索");
+      printf("[ ]3.按时间范围检索");
+      int y = OptionBar(1, 3);
       break;
     case 3:
       return MENU_Main;
@@ -145,9 +146,10 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       InsertLinkedList(sales, ReadSales());
       break;
     case 2:
-      printf("[ ]");
-      printf("[ ]");
-      printf("[ ]");
+      printf("[ ]1.按配件种类检索");
+      printf("[ ]2.按客户检索");
+      printf("[ ]3.按时间范围检索");
+      int y = OptionBar(1, 3);
       break;
     case 3:
       return MENU_Main;
