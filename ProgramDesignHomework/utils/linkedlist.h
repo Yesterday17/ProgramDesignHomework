@@ -19,13 +19,13 @@ typedef struct {
 
 #ifndef UNIT_TEST
 
-LinkedList CreateLinkedList(void);
+LinkedList* CreateLinkedList();
 
-void InsertLinkedList(LinkedList list, void* data);
+void InsertLinkedList(LinkedList* list, void* data);
 
-LinkedListNode* DeleteLinkedList(LinkedList list,
+LinkedListNode* DeleteLinkedList(LinkedList* list,
   bool* callback(LinkedListNode*));
 
-LinkedListFindResult FindLinkedList(LinkedList list, bool* callback(LinkedListNode*));
+LinkedListFindResult FindLinkedList(LinkedList* list, bool* callback(LinkedListNode*));
 
 #endif

@@ -173,21 +173,21 @@ void gotoxy(int x, int y) {
   SetConsoleCursorPosition(a, cos);
 }//π‚±Í∂®Œª∫Ø ˝
 
-int RecordPage(LinkedList data, char* title, char* record(void*, uint8_t)) { //º«¬º∑≠“≥∫Ø ˝
+int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t)) { //º«¬º∑≠“≥∫Ø ˝
   LinkedListNode *p, *re[100];//ƒø±ÍΩ⁄µ„£¨∑÷“≥ ˝◊È
   int num = 0, count = 1, j = 0, y = 0;//–Ú∫≈£¨º∆ ˝∆˜£¨“≥¬Î£¨—°÷–––
   char a, b;//∂¡»°∞¥º¸ascii¬Î
   int end;//◊Ó÷’º«¬ºÃı ˝+1
-  p = data.top;
-  re[0] = data.top;
+  p = data->top;
+  re[0] = data->top;
   printf(title);
   while (1)
   {
 
-    if ((count - 1) % hangshu == 0 && count != 1 || p == data.rear->next) {
+    if ((count - 1) % hangshu == 0 && count != 1 || p == data->rear->next) {
 
       end = count;
-      if (p == data.rear->next && (count - 1) % hangshu != 0) {
+      if (p == data->rear->next && (count - 1) % hangshu != 0) {
         count = (count + hangshu - 1) / hangshu * hangshu + 1;//Ω¯Œª»°’˚+1£∫»Á39->41
       }
       a = _getch();
@@ -201,7 +201,7 @@ int RecordPage(LinkedList data, char* title, char* record(void*, uint8_t)) { //º
             j--;
           p = re[j];
         }
-        else if (b == 77 && p != data.rear->next) {//”“∑≠“≥
+        else if (b == 77 && p != data->rear->next) {//”“∑≠“≥
           j++;
           re[j] = p;
           ClearScreen();
