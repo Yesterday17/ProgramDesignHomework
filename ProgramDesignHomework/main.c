@@ -5,6 +5,7 @@
 #include "utils/io.h"
 int main() {
   srand((unsigned)(time(NULL)));
+
   UI_Welcome();
   
   menuNow = MENU_Welcome;
