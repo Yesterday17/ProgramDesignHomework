@@ -32,7 +32,7 @@ int OptionBar(int start, int end);
 
 int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t));
 
-void ClearScreen();
+void cls();
 
 extern Menu menuNow;
 

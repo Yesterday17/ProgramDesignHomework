@@ -10,7 +10,7 @@ Menu menuNow = MENU_Welcome;
 void UI_Welcome() {
   printf("\n\nWelcome to use 3021 APP\n\n");
   Sleep(1000);
-  ClearScreen();
+  cls();
 }
 
 Menu UI_MainMenu() {
@@ -58,7 +58,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   printf("[ ]查找指定记录\n");
   printf("[ ]返回上一级\n");
   int y = OptionBar(1, 4);
-  ClearScreen();
+  cls();
   int record;//选中记录
   if (menu == MENU_Purchase)
   {
@@ -74,7 +74,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           char key2 = 0;
           if (key1 == 13) {//enter
             //DeleteLinkedList(purchase, );
-            ClearScreen();
+            cls();
             InsertLinkedList(purchase, ReadPurchase());
             break;
           }
@@ -93,6 +93,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           char ch = _getch();
           if (ch == 13)break;
         }
+        cls();
       }
       break;
     case 1:
@@ -122,7 +123,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           char key2 = 0;
           if (key1 == 13) {//enter
             //DeleteLinkedList(sales, );
-            ClearScreen();
+            cls();
             InsertLinkedList(sales, ReadSales());
             break;
           }
@@ -141,6 +142,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           char ch = _getch();
           if (ch == 13)break;
         }
+        cls();
       }
       break;
     case 1:
@@ -223,7 +225,7 @@ int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t)) { //
       if (a < 0) {
         b = _getch();
         if (b == 75 && count > 1 + hangshu) {//左翻页
-          ClearScreen();
+          cls();
           printf(title);
           count -= hangshu;
           if (j > 0)
@@ -233,7 +235,7 @@ int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t)) { //
         else if (b == 77 && p != data->rear->next) {//右翻页
           j++;
           re[j] = p;
-          ClearScreen();
+          cls();
           printf(title);
         }
         else//锁定其他按键
@@ -258,11 +260,11 @@ int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t)) { //
     }
     y = OptionBar(2, 2 + count0 - 1);
   }
-  ClearScreen();
+  cls();
   return j * hangshu + y;
 }
 
-void ClearScreen()
+void cls()
 {
   HANDLE hConsole;
 
