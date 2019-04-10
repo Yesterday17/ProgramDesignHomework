@@ -95,7 +95,8 @@ char* PrintSalesTitle()
 
 char* PrintSales(void* node, uint8_t id)
 {
-  return ((Sales*)node)->customer;
+  string str = concat2(STRING(((Sales*)node)->customer), STRING("\n"));
+  return str->c_str;
 }
 
 bool Findcustomer_Component(LinkedListNode *node) {
