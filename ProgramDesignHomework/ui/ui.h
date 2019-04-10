@@ -10,7 +10,8 @@ typedef enum {
   MENU_Main=1,
   MENU_Purchase = 2,
   MENU_Sales = 3,
-  MENU_
+  MENU_Stock=4,
+  MENU_Amount=5,
 } Menu;
 
 #ifndef UNIT_TEST

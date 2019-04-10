@@ -50,6 +50,7 @@ Menu UI_MainMenu() {
   cls();
   if (floor == 1) return MENU_Purchase;
   else if (floor == 2) return MENU_Sales;
+
 }
 
 Menu UI_SubMenu(Menu menu)//二级目录及执行
