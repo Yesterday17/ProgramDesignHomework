@@ -46,6 +46,7 @@ Menu UI_MainMenu() {
       }
     }
   }
+  cls();
   printf("Please select the operation you want to perform:");
   return MENU_Purchase;
 }
