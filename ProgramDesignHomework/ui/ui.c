@@ -126,6 +126,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         record = RecordPage(sales, PrintSalesTitle(), PrintSales);
         gotoxy(1, 1 + hangshu);
         printf("修改记录Enter   删除记录Delete\n");
+        
         while (1) {
           char key1 = _getch();
           char key2 = 0;
@@ -138,10 +139,12 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           if (key1 < 0) {
             key2 = _getch();
             if (key2 == 83) {//delete
+              cls();
               //DeleteLinkedList(sales, );
               break;
             }
           }
+          
         }
       }
       else {
@@ -273,7 +276,6 @@ int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t)) { //
     }
     y = OptionBar(2, 2 + count0 - 1);
   }
-  cls();
   return j * hangshu + y;
 }
 
