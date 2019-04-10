@@ -3,8 +3,6 @@
 const char NAME[] = "SALES_MANAGEMENT_SYSTEM";
 const char VERSION[] = "0.0.1-SNAPSHOT";
 
-
-
 char* nameToSearch;//
 char* customerToSearch;
 char* retailerToSearch;//
@@ -13,9 +11,6 @@ char *typeToSearch;//
 uint64_t timeToSearch;
 Component* componentToSearch = NULL;
 
-
-
-
-LinkedList component;
-LinkedList purchase;
-LinkedList sales;
+LinkedList* component;
+LinkedList* purchase;
+LinkedList* sales;

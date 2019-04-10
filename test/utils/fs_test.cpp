@@ -5,10 +5,10 @@ extern "C" {
 #include "../../ProgramDesignHomework/utils/fs.c"
 }
 
-TEST(Not_Exist, TestFileExist) {
+TEST(TestFileExist, NOT_EXIST) {
   ASSERT_FALSE(FileExist("THIS_FILE_NOT_EXIST"));
 }
 
-TEST(Exist, TestFileExist) {
+TEST(TestFileExist, EXIST) {
   ASSERT_TRUE(FileExist("ProgramDesignHomework.exe"));
 }

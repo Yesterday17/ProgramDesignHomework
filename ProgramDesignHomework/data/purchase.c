@@ -2,23 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "purchase.h"
 
 #ifndef UNIT_TEST
-
 #include"component.h"
-#include "purchase.h"
 #include "time.h"
 #include "../utils/io.h"
 #include "../global.h"
-
 #else
-
 #include"component.c"
-#include "purchase.c"
 #include "time.c"
 #include "../utils/io.c"
 #include "../global.c"
-
 #endif
 Purchase* ReadPurchase() {
   Purchase *prime = (Purchase*)malloc(sizeof(Purchase));
@@ -55,7 +50,7 @@ Purchase* readjson_purchase(char *json_string, Purchase *purchase)
       item = cJSON_GetObjectItem(object, "prime");
       if (item != NULL)
       {
-        purchase->prime = readjson_component(json_string, purchase->prime);
+        purchase->prime = readjson_component(item, (Component*)malloc(sizeof(Component)));
       }
       item = cJSON_GetObjectItem(object, "time");
       if (item != NULL)
@@ -96,21 +91,25 @@ Purchase* readjson_purchase(char *json_string, Purchase *purchase)
   }
   return 0;
 }
+
 char * PrintPurchaseTitle()
 {
   return NULL;
 }
+
 char * PrintPurchase(void * node, uint8_t id)
 {
   return NULL;
 }
+
 bool FindTime_Purchase(LinkedListNode *node)
 {
-  if (((Component *)node->data)->name == timeToSearch)
+  if (((Purchase *)node->data)->time == timeToSearch)
     return true;
   else
     return false;
 }
+
 bool Findretailer_Purchase(LinkedListNode *node)
 {
   return strcmp(((Purchase*)node->data)->retailer, retailerToSearch) == 0;

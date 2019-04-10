@@ -8,9 +8,9 @@
 extern const char NAME[];
 extern const char VERSION[];
 
-extern LinkedList component;
-extern LinkedList purchase;
-extern LinkedList sales;
+extern LinkedList* component;
+extern LinkedList* purchase;
+extern LinkedList* sales;
 
 extern char* nameToSearch;
 extern uint64_t timeToSearch;

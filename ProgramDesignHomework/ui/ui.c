@@ -64,32 +64,43 @@ Menu UI_SubMenu(Menu menu)//¶þ¼¶Ä¿Â¼¼°Ö´ÐÐ
 
     switch (y) {
     case 0:
-      record = RecordPage(purchase, PrintPurchaseTitle(), PrintPurchase);
-      gotoxy(1, 1 + hangshu);
-      printf("ÐÞ¸Ä¼ÇÂ¼Enter   É¾³ý¼ÇÂ¼Delete\n");
-      while (1) {
-        char key1 = _getch();
-        char key2 = 0;
-        if (key1 == 13) {//enter
-          //DeleteLinkedList(purchase, );
-          ClearScreen();
-          InsertLinkedList(purchase, ReadPurchase());
-          break;
-        }
-        if (key1 < 0)
-          if (key2 == 83) {//delete
+      if (purchase->rear != NULL) {
+        record = RecordPage(purchase, PrintPurchaseTitle(), PrintPurchase);
+        gotoxy(1, 1 + hangshu);
+        printf("ÐÞ¸Ä¼ÇÂ¼Enter   É¾³ý¼ÇÂ¼Delete\n");
+        while (1) {
+          char key1 = _getch();
+          char key2 = 0;
+          if (key1 == 13) {//enter
             //DeleteLinkedList(purchase, );
+            ClearScreen();
+            InsertLinkedList(purchase, ReadPurchase());
             break;
           }
+          if (key1 < 0) {
+            key2 = _getch();
+            if (key2 == 83) {//delete
+              //DeleteLinkedList(purchase, );
+              break;
+            }
+          }
+        }
+      }
+      else {
+        printf("¸Ã¼ÇÂ¼Îª¿Õ£¬°´»Ø³µ·µ»ØÉÏÒ»¼¶");
+        while (1) {
+          char ch = _getch();
+          if (ch == 13)break;
+        }
       }
       break;
     case 1:
       InsertLinkedList(purchase, ReadPurchase());
       break;
     case 2:
-      printf("");
-      printf("");
-      printf("");
+      printf("[ ]");
+      printf("[ ]");
+      printf("[ ]");
       break;
     case 3:
       return MENU_Main;
@@ -100,29 +111,43 @@ Menu UI_SubMenu(Menu menu)//¶þ¼¶Ä¿Â¼¼°Ö´ÐÐ
   {
     switch (y) {
     case 0:
-      record = RecordPage(sales, PrintSalesTitle(), PrintSales);
-      gotoxy(1, 1 + hangshu);
-      printf("ÐÞ¸Ä¼ÇÂ¼Enter   É¾³ý¼ÇÂ¼Delete\n");
-      while (1) {
-        char key1 = _getch();
-        char key2 = 0;
-        if (key1 == 13) {//enter
-          //DeleteLinkedList(sales, );
-          ClearScreen();
-          InsertLinkedList(sales, ReadSales());
-          break;
-        }
-        if (key1 < 0)
-          if (key2 == 83) {//delete
+      if (sales->rear != NULL) {
+        record = RecordPage(sales, PrintSalesTitle(), PrintSales);
+        gotoxy(1, 1 + hangshu);
+        printf("ÐÞ¸Ä¼ÇÂ¼Enter   É¾³ý¼ÇÂ¼Delete\n");
+        while (1) {
+          char key1 = _getch();
+          char key2 = 0;
+          if (key1 == 13) {//enter
             //DeleteLinkedList(sales, );
+            ClearScreen();
+            InsertLinkedList(sales, ReadSales());
             break;
           }
+          if (key1 < 0) {
+            key2 = _getch();
+            if (key2 == 83) {//delete
+              //DeleteLinkedList(sales, );
+              break;
+            }
+          }
+        }
+      }
+      else {
+        printf("¸Ã¼ÇÂ¼Îª¿Õ£¬°´»Ø³µ·µ»ØÉÏÒ»¼¶");
+        while (1) {
+          char ch = _getch();
+          if (ch == 13)break;
+        }
       }
       break;
     case 1:
       InsertLinkedList(sales, ReadSales());
       break;
     case 2:
+      printf("[ ]");
+      printf("[ ]");
+      printf("[ ]");
       break;
     case 3:
       return MENU_Main;
@@ -174,21 +199,21 @@ void gotoxy(int x, int y) {
   SetConsoleCursorPosition(a, cos);
 }//¹â±ê¶¨Î»º¯Êý
 
-int RecordPage(LinkedList data, char* title, char* record(void*, uint8_t)) { //¼ÇÂ¼·­Ò³º¯Êý
+int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t)) { //¼ÇÂ¼·­Ò³º¯Êý
   LinkedListNode *p, *re[100];//Ä¿±ê½Úµã£¬·ÖÒ³Êý×é
   int num = 0, count = 1, j = 0, y = 0;//ÐòºÅ£¬¼ÆÊýÆ÷£¬Ò³Âë£¬Ñ¡ÖÐÐÐ
   char a, b;//¶ÁÈ¡°´¼üasciiÂë
   int end;//×îÖÕ¼ÇÂ¼ÌõÊý+1
-  p = data.top;
-  re[0] = data.top;
+  p = data->top;
+  re[0] = data->top;
   printf(title);
   while (1)
   {
 
-    if ((count - 1) % hangshu == 0 && count != 1 || p == data.rear->next) {
+    if ((count - 1) % hangshu == 0 && count != 1 || p == data->rear->next) {
 
       end = count;
-      if (p == data.rear->next && (count - 1) % hangshu != 0) {
+      if (p == data->rear->next && (count - 1) % hangshu != 0) {
         count = (count + hangshu - 1) / hangshu * hangshu + 1;//½øÎ»È¡Õû+1£ºÈç39->41
       }
       a = _getch();
@@ -202,7 +227,7 @@ int RecordPage(LinkedList data, char* title, char* record(void*, uint8_t)) { //¼
             j--;
           p = re[j];
         }
-        else if (b == 77 && p != data.rear->next) {//ÓÒ·­Ò³
+        else if (b == 77 && p != data->rear->next) {//ÓÒ·­Ò³
           j++;
           re[j] = p;
           ClearScreen();
