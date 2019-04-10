@@ -20,16 +20,17 @@ Menu UI_MainMenu() {
   { "1: 进货记录",
     "2: 销售记录",
     "3: 库存",
-    "4: 金额" };
+    "4: 金额",
+    "5: 退出本程序"};
   printf("Operation List:\n");
-  for (i = 0; i < 4; i++)  printf("[ ]%s\n", oper[i]);
+  for (i = 0; i < 5; i++)  printf("[ ]%s\n", oper[i]);
   printf("Please select the operation you want to perform:");
   gotoxy(2, 1);
   printf("\b*]%s", oper[0]);
   while ((ch1 = _getch()) != 13) {
     ch2 = _getch();
     if (ch2 == 80) {
-      if (floor < 4) {
+      if (floor < 5) {
         gotoxy(2, floor);
         printf("\b ]%s", oper[floor - 1]);
         floor++;
@@ -50,7 +51,9 @@ Menu UI_MainMenu() {
   cls();
   if (floor == 1) return MENU_Purchase;
   else if (floor == 2) return MENU_Sales;
-
+  else if (floor == 3) return MENU_Stock;
+  else if (floor == 4) return MENU_Amount;
+  else if (floor == 5) return MENU_Exit;
 }
 
 Menu UI_SubMenu(Menu menu)//二级目录及执行
