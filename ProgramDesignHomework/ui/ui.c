@@ -75,11 +75,13 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           InsertLinkedList(purchase, ReadPurchase());
           break;
         }
-        if (key1 < 0)
+        if (key1 < 0) {
+          key2 = _getch();
           if (key2 == 83) {//delete
             //DeleteLinkedList(purchase, );
             break;
           }
+        }
       }
       break;
     case 1:
@@ -111,11 +113,13 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           InsertLinkedList(sales, ReadSales());
           break;
         }
-        if (key1 < 0)
+        if (key1 < 0) {
+          key2 = _getch();
           if (key2 == 83) {//delete
             //DeleteLinkedList(sales, );
             break;
           }
+        }
       }
       break;
     case 1:
