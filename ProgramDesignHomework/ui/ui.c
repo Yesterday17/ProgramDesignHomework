@@ -334,7 +334,7 @@ void cls()
 }
 
 void UI_Exit() {
-  // 
+  printf("欢迎下次使用");
 }
 
 void UI_Clear() {}
