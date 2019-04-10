@@ -28,9 +28,11 @@ void UI_WaitForNext(void* nextDo());
 
 void gotoxy(int x, int y);
 
-int OptionBar(int start,int end);
+int OptionBar(int start, int end);
 
-void RecordPage(LinkedList data,char* title,char(* record)(void*, uint8_t));
+int RecordPage(LinkedList data, char* title, char* record(void*, uint8_t));
+
+void ClearScreen();
 
 extern Menu menuNow;
 

@@ -1,17 +1,33 @@
-#include "purchase.h"
+
 #include <stdio.h>
-#include "io.h"
-#include "time.h"
-#include "../global.c"
+#include <stdlib.h>
+#include <string.h>
+
+#ifndef UNIT_TEST
+
 #include"component.h"
+#include "purchase.h"
+#include "time.h"
+#include "../utils/io.h"
+#include "../global.h"
+
+#else
+
+#include"component.c"
+#include "purchase.c"
+#include "time.c"
+#include "../utils/io.c"
+#include "../global.c"
+
+#endif
 Purchase* ReadPurchase() {
-  Purchase prime;
-  prime.time = 0; // FIXME
-  // prime.price = InputString("请输入进货单价", "1");
-  // prime.quantity = InputString("请输入进货数量", "1");
-  // prime.total = prime.price * prime.quantity;
-  // prime.retailer =
-  //   InputString("please input retailer", "3021");
+  Purchase *prime = (Purchase*)malloc(sizeof(Purchase));
+  prime->time = 0; // FIXME
+  prime->price = 0;
+  prime->quantity = 0;
+  prime->total = prime->price * prime->quantity;
+  prime->retailer =
+    InputString("please input retailer", "3021");
   return prime;
 }
 
@@ -22,7 +38,7 @@ Purchase* readjson_purchase(char *json_string, Purchase *purchase)
   if (!root)
   {
     printf("Error before: [%s]\n", cJSON_GetErrorPtr());
-    return -1;
+    return NULL;
   }
   else
   {
@@ -31,7 +47,7 @@ Purchase* readjson_purchase(char *json_string, Purchase *purchase)
     {
       printf("Error before: [%s]\n", cJSON_GetErrorPtr());
       cJSON_Delete(root);
-      return -1;
+      return NULL;
     }
 
     if (object != NULL)
@@ -80,16 +96,24 @@ Purchase* readjson_purchase(char *json_string, Purchase *purchase)
   }
   return 0;
 }
+char * PrintPurchaseTitle()
+{
+  return NULL;
+}
+char * PrintPurchase(void * node, uint8_t id)
+{
+  return NULL;
+}
 bool FindTime_Purchase(LinkedListNode *node)
 {
-	if (((Component *)node->data)->name == timeToSearch)
-		return true;
-	else
-		return false;
+  if (((Component *)node->data)->name == timeToSearch)
+    return true;
+  else
+    return false;
 }
 bool Findretailer_Purchase(LinkedListNode *node)
 {
-	return strcmp(((Purchase*)node->data)->retailer, retailerToSearch) == 0;
+  return strcmp(((Purchase*)node->data)->retailer, retailerToSearch) == 0;
 
 }
 
