@@ -119,6 +119,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cJSON\cJSON.c" />
+    <ClCompile Include="cstring_jslike\cstring_jslike.c" />
     <ClCompile Include="data\component.c" />
     <ClCompile Include="data\purchase.c" />
     <ClCompile Include="data\sales.c" />
@@ -126,7 +128,6 @@
     <ClCompile Include="global.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="ui\ui.c" />
-    <ClCompile Include="utils\cJSON\cJSON.c" />
     <ClCompile Include="utils\fs.c" />
     <ClCompile Include="utils\io.c" />
     <ClCompile Include="utils\linkedlist.c" />
@@ -138,13 +139,14 @@
     <None Include="..\Readme.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cJSON\cJSON.h" />
+    <ClInclude Include="cstring_jslike\cstring_jslike.h" />
     <ClInclude Include="data\component.h" />
     <ClInclude Include="data\purchase.h" />
     <ClInclude Include="data\sales.h" />
     <ClInclude Include="data\time.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="ui\ui.h" />
-    <ClInclude Include="utils\cJSON\cJSON.h" />
     <ClInclude Include="utils\fs.h" />
     <ClInclude Include="utils\io.h" />
     <ClInclude Include="utils\linkedlist.h" />

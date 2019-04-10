@@ -1,12 +1,16 @@
 #include "component.h"
 #ifndef UNIT_TEST
+
+#include "../cJSON/cJSON.h"
 #include "../global.h"
 #include "../utils/io.h"
-#include "../utils/cJSON/cJSON.h"
+
 #else
+
+#include "../cJSON/cJSON.c"
 #include "../global.c"
 #include "../utils/io.c"
-#include "../utils/cJSON/cJSON.c"
+
 #endif
 
 Component* ReadComponent() {
@@ -24,6 +28,7 @@ bool FindName_Component(LinkedListNode *node) {
 bool FindType_Component(LinkedListNode *node) {
 	return strcmp(((Component *)node->data)->type,typeToSearch) == 0;
 }
+
 bool FindMan_Component(LinkedListNode *node) {
 	return strcmp(((Component *)node->data)->manufacturer, manufacturerToSearch) == 0;
 }
