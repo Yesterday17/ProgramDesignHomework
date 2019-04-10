@@ -1,0 +1,6 @@
+[submodule "ProgramDesignHomework/cJSON"]
+	path = ProgramDesignHomework/cJSON
+	url = https://github.com/DaveGamble/cJSON.git
+[submodule "ProgramDesignHomework/cstring_jslike"]
+	path = ProgramDesignHomework/cstring_jslike
+	url = https://github.com/Yesterday17/cstring_jslike.git

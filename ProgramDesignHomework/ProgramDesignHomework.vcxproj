@@ -69,7 +69,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.17763.0\ucrt;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -119,6 +121,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cJSON\cJSON.c" />
+    <ClCompile Include="cstring_jslike\cstring_jslike.c" />
     <ClCompile Include="data\component.c" />
     <ClCompile Include="data\purchase.c" />
     <ClCompile Include="data\sales.c" />
@@ -126,7 +130,6 @@
     <ClCompile Include="global.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="ui\ui.c" />
-    <ClCompile Include="utils\cJSON\cJSON.c" />
     <ClCompile Include="utils\fs.c" />
     <ClCompile Include="utils\io.c" />
     <ClCompile Include="utils\linkedlist.c" />
@@ -138,13 +141,14 @@
     <None Include="..\Readme.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cJSON\cJSON.h" />
+    <ClInclude Include="cstring_jslike\cstring_jslike.h" />
     <ClInclude Include="data\component.h" />
     <ClInclude Include="data\purchase.h" />
     <ClInclude Include="data\sales.h" />
     <ClInclude Include="data\time.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="ui\ui.h" />
-    <ClInclude Include="utils\cJSON\cJSON.h" />
     <ClInclude Include="utils\fs.h" />
     <ClInclude Include="utils\io.h" />
     <ClInclude Include="utils\linkedlist.h" />
