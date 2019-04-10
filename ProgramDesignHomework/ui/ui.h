@@ -1,7 +1,7 @@
 #pragma once
-#include<conio.h>
-#include<stdlib.h>
-#include<Windows.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <Windows.h>
 #include "../global.h"
 
 typedef enum {

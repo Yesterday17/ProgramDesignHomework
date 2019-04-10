@@ -47,6 +47,7 @@ Menu UI_MainMenu() {
     }
   }
   printf("Please select the operation you want to perform:");
+  return MENU_Purchase;
 }
 
 Menu UI_SubMenu(Menu menu)//二级目录及执行

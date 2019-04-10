@@ -5,12 +5,17 @@
 #include "utils/io.h"
 
 int main() {
+  
+  component = CreateLinkedList();
+  purchase = CreateLinkedList();
+  sales = CreateLinkedList();
+
   UI_Welcome();
   
   menuNow = MENU_Welcome;
   while (menuNow != MENU_Exit)
   {
-    //menuNow = UI_MainMenu();
+    menuNow = UI_MainMenu();
     menuNow = MENU_Purchase;
     while (menuNow != MENU_Main) {
 
