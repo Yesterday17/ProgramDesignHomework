@@ -1,17 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="repo">
-      <UniqueIdentifier>{7d63b4f1-562b-4a88-a948-3868efae96bd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="utils">
       <UniqueIdentifier>{2106b43c-50f6-40ea-8ddd-7f88894a6463}</UniqueIdentifier>
     </Filter>
     <Filter Include="data">
       <UniqueIdentifier>{bd21b990-1852-4208-a45b-af340bd8839f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="repo\docs">
-      <UniqueIdentifier>{58b4c10f-232e-47e2-8316-05f347d4d685}</UniqueIdentifier>
     </Filter>
     <Filter Include="ui">
       <UniqueIdentifier>{8ca666d3-541c-4a0d-a942-c70ce2a176c1}</UniqueIdentifier>
@@ -24,6 +18,12 @@
     </Filter>
     <Filter Include="submodules\cstring_jslike">
       <UniqueIdentifier>{d858da7f-86fc-46b2-bbd9-0477fd6775c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\repo">
+      <UniqueIdentifier>{7d63b4f1-562b-4a88-a948-3868efae96bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\repo\docs">
+      <UniqueIdentifier>{58b4c10f-232e-47e2-8316-05f347d4d685}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,13 +65,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Readme.md">
-      <Filter>repo</Filter>
+      <Filter>data\repo</Filter>
     </None>
     <None Include="..\LICENSE">
-      <Filter>repo</Filter>
+      <Filter>data\repo</Filter>
     </None>
     <None Include="..\docs\index.md">
-      <Filter>repo\docs</Filter>
+      <Filter>data\repo\docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

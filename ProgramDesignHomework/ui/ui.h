@@ -7,9 +7,10 @@
 typedef enum {
   MENU_Exit = -1,
   MENU_Welcome = 0,
-  MENU_Main = 1,
+  MENU_Main=1,
   MENU_Purchase = 2,
   MENU_Sales = 3,
+  MENU_
 } Menu;
 
 #ifndef UNIT_TEST
