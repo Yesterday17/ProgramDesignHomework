@@ -13,9 +13,11 @@ int main() {
   UI_Welcome();
   
   menuNow = MENU_Welcome;
-  while (menuNow != MENU_Exit)
+  while (1)
   {
     menuNow = UI_MainMenu();
+    if (menuNow == MENU_Exit)
+      break;
     while (menuNow != MENU_Main) {
     
       menuNow = UI_SubMenu(menuNow);
