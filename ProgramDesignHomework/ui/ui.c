@@ -63,24 +63,33 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
 
     switch (y) {
     case 0:
-      record = RecordPage(purchase, PrintPurchaseTitle(), PrintPurchase);
-      gotoxy(1, 1 + hangshu);
-      printf("修改记录Enter   删除记录Delete\n");
-      while (1) {
-        char key1 = _getch();
-        char key2 = 0;
-        if (key1 == 13) {//enter
-          //DeleteLinkedList(purchase, );
-          ClearScreen();
-          InsertLinkedList(purchase, ReadPurchase());
-          break;
-        }
-        if (key1 < 0) {
-          key2 = _getch();
-          if (key2 == 83) {//delete
+      if (purchase->rear != NULL) {
+        record = RecordPage(purchase, PrintPurchaseTitle(), PrintPurchase);
+        gotoxy(1, 1 + hangshu);
+        printf("修改记录Enter   删除记录Delete\n");
+        while (1) {
+          char key1 = _getch();
+          char key2 = 0;
+          if (key1 == 13) {//enter
             //DeleteLinkedList(purchase, );
+            ClearScreen();
+            InsertLinkedList(purchase, ReadPurchase());
             break;
           }
+          if (key1 < 0) {
+            key2 = _getch();
+            if (key2 == 83) {//delete
+              //DeleteLinkedList(purchase, );
+              break;
+            }
+          }
+        }
+      }
+      else {
+        printf("该记录为空，按回车返回上一级");
+        while (1) {
+          char ch = _getch();
+          if (ch == 13)break;
         }
       }
       break;
@@ -88,9 +97,9 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       InsertLinkedList(purchase, ReadPurchase());
       break;
     case 2:
-      printf("");
-      printf("");
-      printf("");
+      printf("[ ]");
+      printf("[ ]");
+      printf("[ ]");
       break;
     case 3:
       return MENU_Main;
@@ -101,24 +110,33 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   {
     switch (y) {
     case 0:
-      record = RecordPage(sales, PrintSalesTitle(), PrintSales);
-      gotoxy(1, 1 + hangshu);
-      printf("修改记录Enter   删除记录Delete\n");
-      while (1) {
-        char key1 = _getch();
-        char key2 = 0;
-        if (key1 == 13) {//enter
-          //DeleteLinkedList(sales, );
-          ClearScreen();
-          InsertLinkedList(sales, ReadSales());
-          break;
-        }
-        if (key1 < 0) {
-          key2 = _getch();
-          if (key2 == 83) {//delete
+      if (sales->rear != NULL) {
+        record = RecordPage(sales, PrintSalesTitle(), PrintSales);
+        gotoxy(1, 1 + hangshu);
+        printf("修改记录Enter   删除记录Delete\n");
+        while (1) {
+          char key1 = _getch();
+          char key2 = 0;
+          if (key1 == 13) {//enter
             //DeleteLinkedList(sales, );
+            ClearScreen();
+            InsertLinkedList(sales, ReadSales());
             break;
           }
+          if (key1 < 0) {
+            key2 = _getch();
+            if (key2 == 83) {//delete
+              //DeleteLinkedList(sales, );
+              break;
+            }
+          }
+        }
+      }
+      else {
+        printf("该记录为空，按回车返回上一级");
+        while (1) {
+          char ch = _getch();
+          if (ch == 13)break;
         }
       }
       break;
@@ -126,6 +144,9 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       InsertLinkedList(sales, ReadSales());
       break;
     case 2:
+      printf("[ ]");
+      printf("[ ]");
+      printf("[ ]");
       break;
     case 3:
       return MENU_Main;
