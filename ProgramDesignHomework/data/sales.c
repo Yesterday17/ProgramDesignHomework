@@ -90,7 +90,7 @@ Sales* readjson_sales(char *json_string, Sales *sales)
 
 char* PrintSalesTitle()
 {
-  char a[100] = " 名称  型号  制造商 销售模式  数量  单价  总价  赠品";
+  char a[] = " 名称  型号  制造商 销售模式  数量  单价  总价  赠品";
   return a;
 }
 

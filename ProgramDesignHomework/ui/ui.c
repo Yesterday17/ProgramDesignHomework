@@ -54,16 +54,15 @@ Menu UI_MainMenu() {
 
 Menu UI_SubMenu(Menu menu)//二级目录及执行
 {
-  printf("[ ]读取目前记录\n");
-  printf("[ ]添加记录\n");
-  printf("[ ]查找指定记录\n");
-  printf("[ ]返回上一级\n");
-  int y = OptionBar(1, 4);
-  cls();
   int record;//选中记录
   if (menu == MENU_Purchase)
   {
-
+    printf("[ ]读取目前记录\n");
+    printf("[ ]添加记录\n");
+    printf("[ ]查找指定记录\n");
+    printf("[ ]返回上一级\n");
+    int y = OptionBar(1, 4);
+    cls();
     switch (y) {
     case 0:
       if (purchase->rear != NULL) {
@@ -115,6 +114,13 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   }
   if (menu == MENU_Sales)
   {
+    printf("[ ]读取目前记录\n");
+    printf("[ ]添加记录\n");
+    printf("[ ]查找指定记录\n");
+    printf("[ ]统计赠品\n");
+    printf("[ ]返回上一级\n");
+    int y = OptionBar(1, 5);
+    cls();
     switch (y) {
     case 0:
       if (sales->rear != NULL) {
@@ -160,6 +166,9 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       cls();
       break;
     case 3:
+      //
+      break;
+    case 4:
       return MENU_Main;
     }
     return MENU_Sales;
