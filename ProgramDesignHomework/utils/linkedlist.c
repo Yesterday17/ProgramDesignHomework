@@ -1,4 +1,5 @@
 #include "linkedlist.h"
+#include <stdlib.h>
 
 LinkedList* CreateLinkedList() {  //¶¨Òå¿ÕÁ´±í
   LinkedListNode *top, *rear;
