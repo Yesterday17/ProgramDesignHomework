@@ -1,7 +1,14 @@
-#include "sales.h"
-#include "../utils/io.h"
+
 #include <malloc.h>
+#include "sales.h"
+
+#ifndef UNIT_TEST
+#include "../utils/io.h"
 #include "../global.h"
+#else
+#include "../utils/io.c"
+#include "../global.c"
+#endif
 Sales* ReadSales() {
   Sales *prime = malloc(sizeof(Sales));
   // prime->time = ReadTime();

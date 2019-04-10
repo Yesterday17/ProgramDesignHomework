@@ -1,8 +1,9 @@
-#include "io.h"
 #include <malloc.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "io.h"
 
 char* InputString(char* comment, char* defaultValue) {
   int len = 0, capability = 16;
