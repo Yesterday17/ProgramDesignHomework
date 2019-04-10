@@ -86,7 +86,9 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       InsertLinkedList(purchase, ReadPurchase());
       break;
     case 2:
-
+      printf("");
+      printf("");
+      printf("");
       break;
     case 3:
       return MENU_Main;

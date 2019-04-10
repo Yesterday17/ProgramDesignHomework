@@ -53,9 +53,6 @@
       <Filter>ui</Filter>
     </ClCompile>
     <ClCompile Include="global.c" />
-    <ClCompile Include="ui\menu.c">
-      <Filter>ui</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Readme.md">
@@ -100,8 +97,5 @@
       <Filter>ui</Filter>
     </ClInclude>
     <ClInclude Include="global.h" />
-    <ClInclude Include="ui\menu.h">
-      <Filter>ui</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
