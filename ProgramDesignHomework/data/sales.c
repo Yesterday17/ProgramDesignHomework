@@ -5,17 +5,17 @@
 #ifndef UNIT_TEST
 #include "../utils/io.h"
 #include "../global.h"
+#include "../cstring_jslike/cstring_jslike.h"
 #else
 #include "../utils/io.c"
 #include "../global.c"
+#include "../cstring_jslike/cstring_jslike.c"
 #endif
 Sales* ReadSales() {
   Sales *prime = malloc(sizeof(Sales));
   // prime->time = ReadTime();
-  printf("批发/零售价格：");  //批发零售价格
-  scanf("%d", &prime->price);
-  printf("批发/零售数量：");//批发/零售数量：
-  scanf("%d", &prime->quantity);
+  prime->price = InputInt("批发/零售价格", 0);
+  prime->quantity = InputInt("批发/零售数量", 0);
   prime->total = prime->price * prime->quantity;
   prime->customer = InputString("please input customer：", "3021 bosses");
   // ReadComponent();
@@ -90,13 +90,12 @@ Sales* readjson_sales(char *json_string, Sales *sales)
 
 char* PrintSalesTitle()
 {
-  char a[] = " 名称  型号  制造商 销售模式  数量  单价  总价  赠品";
-  return a;
+  return " 名称  型号  制造商 销售模式  数量  单价  总价  赠品\n";
 }
 
 char* PrintSales(void* node, uint8_t id)
 {
-
+  return ((Sales*)node)->customer;
 }
 
 bool Findcustomer_Component(LinkedListNode *node) {
