@@ -5,8 +5,6 @@
 #define hangshu 10//记录每页最大行数
 Menu menuNow = MENU_Welcome;
 
-
-
 void UI_Welcome() {
   printf("\n\nWelcome to use 3021 APP\n\n");
   Sleep(1000);
@@ -263,7 +261,7 @@ int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t)) { //
     }
     num++;
     printf("[ ]");
-    printf(record(p, num));
+    printf(record(p->data, num));
     p = p->next;
     count++;
   }
