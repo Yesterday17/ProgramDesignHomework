@@ -16,7 +16,6 @@ int main() {
   while (menuNow != MENU_Exit)
   {
     menuNow = UI_MainMenu();
-    menuNow = MENU_Sales;
     while (menuNow != MENU_Main) {
 
       menuNow = UI_SubMenu(menuNow);
