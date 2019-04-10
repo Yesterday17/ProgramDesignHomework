@@ -1,7 +1,7 @@
  #pragma once
 
 #include "../utils/linkedlist.h"
-#include "../utils/cJson/cJSON.h"
+#include "../cJson/cJSON.h"
 
 /**
  * 计算机配件 - 管理系统所管理物品
