@@ -5,8 +5,11 @@
 #include "utils/io.h"
 #include "utils/utils.h"
 
+/**
+ * 主函数
+ */
 int main() {
-  srand((unsigned)(time(NULL)));
+  srand((unsigned) (time(NULL)));
   color();
 
   component = CreateLinkedList();
@@ -14,15 +17,14 @@ int main() {
   sales = CreateLinkedList();
 
   UI_Welcome();
-  
+
   menuNow = MENU_Welcome;
-  while (1)
-  {
+  while (1) {
     menuNow = UI_MainMenu();
     if (menuNow == MENU_Exit)
       break;
     while (menuNow != MENU_Main) {
-    
+
       menuNow = UI_SubMenu(menuNow);
     }
   }

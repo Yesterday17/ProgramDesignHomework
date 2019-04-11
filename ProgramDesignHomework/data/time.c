@@ -25,11 +25,11 @@ uint64_t timemaking() {
   uint64_t time = 0;
   int flag;
   int year, month, day, hour, minute, second;
-  printf("请输入时间（例：2019-03-20--14:42:38):");
+  printf("璇疯緭鍏ユ椂闂达紙渚嬶細2019-03-20--14:42:38):");
   scanf("%d-%d-%d--%d:%d:%d", &year, &month, &day, &hour, &minute, &second);
   while (mistake(year, month, day, hour, minute, second) == false) {
-    printf("输入错误 请重新输入！\n");
-    printf("请输入时间（例：2019-03-20--14:42:38):");
+    printf("杈撳叆閿欒 璇烽噸鏂拌緭鍏ワ紒\n");
+    printf("璇疯緭鍏ユ椂闂达紙渚嬶細2019-03-20--14:42:38):");
     scanf("%d-%d-%d--%d:%d:%d", &year, &month, &day, &hour, &minute, &second);
   }
 

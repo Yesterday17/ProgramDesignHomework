@@ -1,58 +1,57 @@
 #include "linkedlist.h"
 #include <stdlib.h>
 
-LinkedList* CreateLinkedList() {  //¶¨Òå¿ÕÁ´±í
+LinkedList *CreateLinkedList() {  //å®šä¹‰ç©ºé“¾è¡¨
   LinkedListNode *top, *rear;
   top = NULL;
   rear = NULL;
-  LinkedList *data = (LinkedList*) malloc(sizeof(LinkedList));
+  LinkedList *data = (LinkedList *) malloc(sizeof(LinkedList));
   data->rear = rear;
   data->top = top;
   return data;
 }
 
-void InsertLinkedList(LinkedList* list, void *data) {  //Ä¿±êÁ´±í  ´æ´¢Êý¾Ý
+void InsertLinkedList(LinkedList *list, void *data) {  //ç›®æ ‡é“¾è¡¨  å­˜å‚¨æ•°æ®
   LinkedListNode *p;
-  p = (LinkedListNode *)malloc(sizeof(LinkedListNode));
+  p = (LinkedListNode *) malloc(sizeof(LinkedListNode));
   p->data = data;
-  if (list->rear == NULL) {  // Ê×½áµã
+  if (list->rear == NULL) {  // é¦–ç»“ç‚¹
     list->top = p;
     list->rear = p;
-  }
-  else {  //ÏÂÒ»½Úµã
+  } else {  //ä¸‹ä¸€èŠ‚ç‚¹
     list->rear->next = p;
     list->rear = p;
   }
 }
 
-LinkedListNode* DeleteLinkedList(LinkedList* list, bool *callback(LinkedListNode *)) {//É¾³ýÁ´±í£ºÄ¿±ê½áµã ÅÐ¶Ïº¯Êý£¨ÖµÕæÎªÉ¾³ýÄ¿±ê£©
+LinkedListNode *DeleteLinkedList(LinkedList *list, bool *callback(LinkedListNode *)) {//åˆ é™¤é“¾è¡¨ï¼šç›®æ ‡ç»“ç‚¹ åˆ¤æ–­å‡½æ•°ï¼ˆå€¼çœŸä¸ºåˆ é™¤ç›®æ ‡ï¼‰
   LinkedListNode *p, *p0;
   p0 = NULL;
   for (p = list->top; p != NULL; p0 = p, p = p->next) {
     if (callback(p)) {
-      p0->next = p->next;  //É¾³ýp0ËùÖ¸Ïî
-      p = p0;  //Ö¸ÏòÉ¾³ýÏîµÄÏÂÒ»Ïî
+      p0->next = p->next;  //åˆ é™¤p0æ‰€æŒ‡é¡¹
+      p = p0;  //æŒ‡å‘åˆ é™¤é¡¹çš„ä¸‹ä¸€é¡¹
       break;
     }
   }
   return p;
 }
 
-LinkedListFindResult FindLinkedList(LinkedList* list, bool* callback(LinkedListNode*)) {
-	LinkedListNode *p;
-	LinkedListFindResult res;
-	res.count = 0;
-	int a = 100;
-	res.result = (LinkedListNode **)malloc(sizeof(LinkedListNode*)*a);
-	for (p = list->top; p != NULL;p = p->next) {
-		if (callback(p)) {
-			res.result[res.count] = p;
-			res.count++;
-		}
-		if (res.count + 1 == 100) {
-			a *= 2;
-			res.result = (LinkedListNode**)realloc(res.result, sizeof(LinkedListNode*)*a);
-		}
-	}
-	return res;
+LinkedListFindResult FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *)) {
+  LinkedListNode *p;
+  LinkedListFindResult res;
+  res.count = 0;
+  int a = 100;
+  res.result = (LinkedListNode **) malloc(sizeof(LinkedListNode *) * a);
+  for (p = list->top; p != NULL; p = p->next) {
+    if (callback(p)) {
+      res.result[res.count] = p;
+      res.count++;
+    }
+    if (res.count + 1 == 100) {
+      a *= 2;
+      res.result = (LinkedListNode **) realloc(res.result, sizeof(LinkedListNode *) * a);
+    }
+  }
+  return res;
 }

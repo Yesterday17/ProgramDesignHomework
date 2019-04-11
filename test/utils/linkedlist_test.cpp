@@ -4,7 +4,7 @@
 
 extern "C" {
 #include "../../ProgramDesignHomework/utils/linkedlist.h"
-//#include "../../ProgramDesignHomework/data/purchase.h"
+#include "../../ProgramDesignHomework/data/purchase.h"
 }
 
 typedef struct {
@@ -13,6 +13,9 @@ typedef struct {
   char* c;
 }TestStruct;
 
+/**
+ * 测试创建链表
+ */
 TEST(TestLinkedList, CreateLinkedList) {
   LinkedList *list = CreateLinkedList();
   EXPECT_TRUE(list->top == NULL);
@@ -20,6 +23,9 @@ TEST(TestLinkedList, CreateLinkedList) {
   free(list);
 }
 
+/**
+ * 测试向链表中加入一个元素
+ */
 TEST(TestLinkedList, InputOneStruct) {
   LinkedList *list = CreateLinkedList();
 
@@ -31,9 +37,12 @@ TEST(TestLinkedList, InputOneStruct) {
   free(list);
 }
 
+/**
+ * 测试向链表中加入两个元素
+ */
 TEST(TestLinkedList, InputTwoStruct) {
   LinkedList *list = CreateLinkedList();
-  
+
   TestStruct *test1 = (TestStruct*)malloc(sizeof(TestStruct));
   TestStruct *test2 = (TestStruct*)malloc(sizeof(TestStruct));
   InsertLinkedList(list, (void*)test1);
@@ -47,6 +56,9 @@ TEST(TestLinkedList, InputTwoStruct) {
   free(list);
 }
 
+/**
+ * 测试向链表中加入多个元素
+ */
 TEST(TestLinkedList, InputMultipleStruct) {
   LinkedList *list = CreateLinkedList();
 

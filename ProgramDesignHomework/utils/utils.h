@@ -3,6 +3,10 @@
 
 #include <time.h>
 
+/**
+ * 其他工具函数
+ */
+
 int Rand(int min, int max);
 
 #endif

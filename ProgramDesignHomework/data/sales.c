@@ -3,75 +3,60 @@
 #include "../global.h"
 #include "../utils/io.h"
 
-Sales* ReadSales() {
+Sales *ReadSales() {
   Sales *prime = malloc(sizeof(Sales));
   // prime->time = ReadTime();
-  prime->price = InputInt(LITERAL("Åú·¢/ÁãÊÛ¼Û¸ñ"));
-  prime->quantity = InputInt(LITERAL("Åú·¢/ÁãÊÛÊýÁ¿"));
+  prime->price = InputInt(LITERAL("æ‰¹å‘/é›¶å”®ä»·æ ¼: "));
+  prime->quantity = InputInt(LITERAL("æ‰¹å‘/é›¶å”®æ•°é‡: "));
   prime->total = prime->price * prime->quantity;
-  prime->customer = InputString(LITERAL("please input customer£º"), LITERAL("3021 bosses"));
+  prime->customer = InputString(LITERAL("please input customer: "), LITERAL("3021 bosses"));
   prime->component = ReadComponent();
   return prime;
 }
-Sales* readjson_sales(char *json_string, Sales *sales)
-{
+Sales *readjson_sales(char *json_string, Sales *sales) {
   cJSON *item;
   cJSON *root = cJSON_Parse(json_string);
-  if (!root)
-  {
+  if (!root) {
     printf("Error before: [%s]\n", cJSON_GetErrorPtr());
     cJSON_Delete(root);
     return NULL;
-  }
-  else
-  {
+  } else {
     cJSON *object = cJSON_GetObjectItem(root, "sales");
-    if (object == NULL)
-    {
+    if (object == NULL) {
       printf("Error before: [%s]\n", cJSON_GetErrorPtr());
       cJSON_Delete(root);
       return NULL;
-    }
-    else
-    {
+    } else {
       item = cJSON_GetObjectItem(root, "time");
-      if (item != NULL)
-      {
+      if (item != NULL) {
         sales->time = item->valueint;
       }
       item = cJSON_GetObjectItem(object, "component");
-      if (item != NULL)
-      {
+      if (item != NULL) {
         sales->component = readjson_component(item, sales->component);
       }
       item = cJSON_GetObjectItem(object, "sales_mode");
-      if (item != NULL)
-      {
+      if (item != NULL) {
         sales->sales_mode = item->valueint;
       }
       item = cJSON_GetObjectItem(object, "price");
-      if (item != NULL)
-      {
+      if (item != NULL) {
         sales->price = item->valueint;
       }
       item = cJSON_GetObjectItem(object, "quantity");
-      if (item != NULL)
-      {
+      if (item != NULL) {
         sales->quantity = item->valueint;
       }
       item = cJSON_GetObjectItem(object, "total");
-      if (item != NULL)
-      {
+      if (item != NULL) {
         sales->total = item->valueint;
       }
       item = cJSON_GetObjectItem(object, "customer");
-      if (item != NULL)
-      {
+      if (item != NULL) {
         memcpy(sales->customer, item->valuestring, strlen(item->valuestring));
       }
-      item = cJSON_GetObjectItem(object, "gift");//½á¹¹ÌåÖÐµÄ½á¹¹ÌåÖ±½Ó¸³Öµ£¿£¿
-      if (item != NULL)
-      {
+      item = cJSON_GetObjectItem(object, "gift");//ç»“æž„ä½“ä¸­çš„ç»“æž„ä½“ç›´æŽ¥èµ‹å€¼ï¼Ÿï¼Ÿ
+      if (item != NULL) {
         sales->gift = readjson_component(item, sales->gift);
       }
 
@@ -80,16 +65,14 @@ Sales* readjson_sales(char *json_string, Sales *sales)
   return sales;
 }
 
-string PrintSalesTitle()
-{
-  return STR_BUF(" Ãû³Æ  ÐÍºÅ  ÖÆÔìÉÌ ÏúÊÛÄ£Ê½  ÊýÁ¿  µ¥¼Û  ×Ü¼Û  ÔùÆ·\n");
+string PrintSalesTitle() {
+  return STR_BUF(" åç§°  åž‹å·  åˆ¶é€ å•† é”€å”®æ¨¡å¼  æ•°é‡  å•ä»·  æ€»ä»·  èµ å“\n");
 }
 
-string PrintSales(void* node, uint8_t id)
-{
-  return concat2(((Sales*)node)->customer, STRING("\n"));
+string PrintSales(void *node, uint8_t id) {
+  return concat2(((Sales *) node)->customer, STRING("\n"));
 }
 
 bool Findcustomer_Component(LinkedListNode *node) {
-  return compareString(((Sales *)node->data)->customer, customerToSearch) == STRING_EQUAL;
+  return compareString(((Sales *) node->data)->customer, customerToSearch) == STRING_EQUAL;
 }

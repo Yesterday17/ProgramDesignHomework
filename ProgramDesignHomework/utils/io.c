@@ -5,17 +5,17 @@ string InputString(string comment, string defaultValue) {
   char buf[2];
   string ans = newSizedString(127);
 
-  // Êä³öÌáÊ¾ĞÅÏ¢
+  // è¾“å‡ºæç¤ºä¿¡æ¯
   PrintString(comment);
   buf[0] = getchar();
   buf[1] = '\0';
 
-  // ²ÉÓÃÄ¬ÈÏÖµ
+  // é‡‡ç”¨é»˜è®¤å€¼
   if (buf[0] == '\n') {
     return cloneString(defaultValue);
   }
 
-  // ÓĞÊäÈë
+  // æœ‰è¾“å…¥
   do {
     freeAssign(&ans, concat2(ans, STRING(buf)));
     buf[0] = getchar();

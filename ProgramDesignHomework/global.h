@@ -6,6 +6,10 @@
 #include "cstring_jslike/cstring_jslike.h"
 #include "data/component.h"
 
+/**
+ * 声明全局变量的头文件
+ */
+
 extern const char NAME[];
 extern const char VERSION[];
 

@@ -10,14 +10,17 @@
 #include"../data/sales.h"
 #include "../global.h"
 
+/**
+ * 记录菜单状态的枚举
+ */
 typedef enum {
   MENU_Exit = -1,
   MENU_Welcome = 0,
-  MENU_Main=1,
+  MENU_Main = 1,
   MENU_Purchase = 2,
   MENU_Sales = 3,
-  MENU_Stock=4,
-  MENU_Amount=5,
+  MENU_Stock = 4,
+  MENU_Amount = 5,
 } Menu;
 
 void UI_Welcome();
@@ -30,13 +33,13 @@ void UI_Exit();
 
 void UI_Clear();
 
-void UI_WaitForNext(void* nextDo());
+void UI_WaitForNext(void *nextDo());
 
 void gotoxy(int x, int y);
 
 int OptionBar(int start, int end);
 
-int RecordPage(LinkedList* data, string title, string record(void*, uint8_t));
+int RecordPage(LinkedList *data, string title, string record(void *, uint8_t));
 
 void cls();
 

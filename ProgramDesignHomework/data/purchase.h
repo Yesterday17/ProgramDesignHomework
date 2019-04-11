@@ -12,17 +12,17 @@
 typedef struct {
   Component *prime;
   uint64_t time;
-  int price;       // 进货单价
-  int quantity;    // 进货数量
-  int total;       //商品总价
-  string retailer;  //商品销售商
+  int price;       // 杩涜揣鍗曚环
+  int quantity;    // 杩涜揣鏁伴噺
+  int total;       //鍟嗗搧鎬讳环
+  string retailer;  //鍟嗗搧閿�鍞晢
 } Purchase;
 
-Purchase* ReadPurchase();
-Purchase* readjson_purchase(char *json_string, Purchase *purchase);
+Purchase *ReadPurchase();
+Purchase *readjson_purchase(char *json_string, Purchase *purchase);
 
-string PrintPurchaseTitle();/*带上\n*/
-string PrintPurchase(void* node, uint8_t id);/*带上\n*/
+string PrintPurchaseTitle();/*甯︿笂\n*/
+string PrintPurchase(void *node, uint8_t id);/*甯︿笂\n*/
 bool FindTime_Purchase(LinkedListNode *node);
 
 #endif

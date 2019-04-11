@@ -1,5 +1,9 @@
 #include "global.h"
 
+/**
+ * 定义全局变量的源文件
+ */
+
 const char NAME[] = "SALES_MANAGEMENT_SYSTEM";
 const char VERSION[] = "0.0.1-SNAPSHOT";
 
@@ -9,8 +13,8 @@ string retailerToSearch;
 string manufacturerToSearch;
 string typeToSearch;
 uint64_t timeToSearch;
-Component* componentToSearch = NULL;
+Component *componentToSearch = NULL;
 
-LinkedList* component;
-LinkedList* purchase;
-LinkedList* sales;
+LinkedList *component;
+LinkedList *purchase;
+LinkedList *sales;

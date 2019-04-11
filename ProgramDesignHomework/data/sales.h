@@ -10,12 +10,12 @@
 typedef struct sales {
   uint64_t time;
   Component* component;
-  int  sales_mode; // ÏúÊÛÄ£Ê½£¨1±íÊ¾Åú·¢£¬0±íÊ¾ÁãÊÛ£©
-  int price;       // ÏúÊÛµ¥¼Û
-  int quantity;    // ÏúÊÛÊıÁ¿
-  int total;       // ÉÌÆ·×Ü¼Û
-  string customer;  //¿Í»§ĞÅÏ¢
-  Component* gift;  //ÔùÆ·
+  int  sales_mode; // é”€å”®æ¨¡å¼ï¼ˆ1è¡¨ç¤ºæ‰¹å‘ï¼Œ0è¡¨ç¤ºé›¶å”®ï¼‰
+  int price;       // é”€å”®å•ä»·
+  int quantity;    // é”€å”®æ•°é‡
+  int total;       // å•†å“æ€»ä»·
+  string customer;  //å®¢æˆ·ä¿¡æ¯
+  Component* gift;  //èµ å“
 } Sales;
 
 Sales* ReadSales();

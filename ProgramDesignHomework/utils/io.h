@@ -7,6 +7,10 @@
 #include <string.h>
 #include "../cstring_jslike/cstring_jslike.h"
 
+/**
+ * 控制台输入输出相关函数
+ */
+
 string InputString(string comment, string defaultValue);
 int InputInteger(string comment, string errorMessage, int defaultValue);
 

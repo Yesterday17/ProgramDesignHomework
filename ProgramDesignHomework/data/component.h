@@ -8,17 +8,17 @@
 #include "../utils/linkedlist.h"
 
 /**
- * ¼ÆËã»úÅä¼ş - ¹ÜÀíÏµÍ³Ëù¹ÜÀíÎïÆ·
+ * è®¡ç®—æœºé…ä»¶ - ç®¡ç†ç³»ç»Ÿæ‰€ç®¡ç†ç‰©å“
  */
 typedef struct {
-  int index;           // Ë÷Òı
-  string name;          // Åä¼şÃû³Æ
-  string type;         // Åä¼şĞÍºÅ
-  string manufacturer;  // ÖÆÔìÉÌ
+  int index;           // ç´¢å¼•
+  string name;          // é…ä»¶åç§°
+  string type;         // é…ä»¶å‹å·
+  string manufacturer;  // åˆ¶é€ å•†
 } Component;
 
-Component* ReadComponent();
-Component* readjson_component(cJSON *root, Component *comp);
+Component *ReadComponent();
+Component *readjson_component(cJSON *root, Component *comp);
 
 bool FindName_Component(LinkedListNode *node);
 bool FindType_Component(LinkedListNode *node);

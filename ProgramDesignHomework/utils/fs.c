@@ -1,24 +1,29 @@
 #include "fs.h"
 
-// https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/access-waccess?view=vs-2017
-int FileExist(char* fileName) { return (_access(fileName, 04) != -1); }
+/**
+ * 判断文件是否存在
+ * https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/access-waccess?view=vs-2017
+ * @param fileName 文件名
+ * @return
+ */
+int FileExist(char *fileName) { return (_access(fileName, 04) != -1); }
 
 // https://stackoverflow.com/questions/3747086/reading-the-whole-text-file-into-a-char-array-in-c
-char* ReadFile(char* filename) {
-  FILE* fp = fopen(filename, "r");
+char *ReadFile(char *filename) {
+  FILE *fp = fopen(filename, "r");
   if (!fp) {
     perror("Failed to open file!");
     exit(1);
   }
 
-  char* buffer;
+  char *buffer;
   long fileSize;
 
   fseek(fp, 0L, SEEK_END);
   fileSize = ftell(fp);
   rewind(fp);
 
-  buffer = (char*)calloc(1, fileSize + 1);
+  buffer = (char *) calloc(1, fileSize + 1);
   if (!buffer) {
     fclose(fp);
     fputs("memory alloc fails", stderr);

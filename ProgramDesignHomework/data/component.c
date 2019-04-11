@@ -3,6 +3,10 @@
 #include "../global.h"
 #include "../utils/io.h"
 
+/**
+ * 从控制台读取数据
+ * @return Component*
+ */
 Component* ReadComponent() {
   Component *comp = (Component*)malloc(sizeof(Component));
   comp->name = InputString(LITERAL("Input component name:"), LITERAL("Computer"));
@@ -11,18 +15,39 @@ Component* ReadComponent() {
   return comp;
 }
 
+/**
+ * 判断链表节点是否与 name 匹配的回调函数
+ * @param node
+ * @return
+ */
 bool FindName_Component(LinkedListNode *node) {
   return compareString(((Component*)(node->data))->name, nameToSearch) == STRING_EQUAL;
 }
 
+/**
+ * 判断链表节点是否与 Component 类型匹配的回调函数
+ * @param node
+ * @return
+ */
 bool FindType_Component(LinkedListNode *node) {
   return compareString(((Component *)node->data)->type, typeToSearch) == STRING_EQUAL;
 }
 
+/**
+ * 判断链表节点是否与 manufacturer 匹配的回调函数
+ * @param node
+ * @return
+ */
 bool FindMan_Component(LinkedListNode *node) {
   return compareString(((Component *)node->data)->manufacturer, manufacturerToSearch) == STRING_EQUAL;
 }
 
+/**
+ * 从 Json 读取数据
+ * @param root
+ * @param comp
+ * @return
+ */
 Component* readjson_component(cJSON *root, Component *comp)
 {
   cJSON *item;

@@ -1,9 +1,12 @@
 #include "ui.h"
 
-#define hangshu 10//¼ÇÂ¼Ã¿Ò³×î´óĞĞÊı
+#define UNICODE
+#define hangshu 10 //è®°å½•æ¯é¡µæœ€å¤§è¡Œæ•°
 Menu menuNow = MENU_Welcome;
 
 void UI_Welcome() {
+  SetConsoleOutputCP(CP_UTF8);
+  SetConsoleCP(CP_UTF8);
   PrintLITERAL("\n\nWelcome to use 3021 APP\n\n");
   Sleep(1000);
   cls();
@@ -12,35 +15,47 @@ void UI_Welcome() {
 Menu UI_MainMenu() {
   int i, floor = 1;
   char ch1, ch2;
-  char oper[6][20] =
-  { "1: ½ø»õ¼ÇÂ¼",
-    "2: ÏúÊÛ¼ÇÂ¼",
-    "3: ¿â´æ",
-    "4: ½ğ¶î",
-    "5: ÍË³ö±¾³ÌĞò" };
-  printf("Operation List:\n");
-  for (i = 0; i < 5; i++)  printf("[ ]%s\n", oper[i]);
-  printf("Please select the operation you want to perform:");
+  string oper[] = {
+   LITERAL("1. è¿›è´§è®°å½•"),
+   LITERAL("2. å”®è´§è®°å½•"),
+   LITERAL("3. åº“å­˜"),
+   LITERAL("4. é‡‘é¢"),
+   LITERAL("5. é€€å‡ºæœ¬ç¨‹åº")
+  };
+  PrintLITERAL("Operation List:\n");
+  for (i = 0; i < 5; i++) {
+    PrintLITERAL("[ ]");
+    PrintString(oper[i]);
+    PrintLITERAL("\n");
+  }
+  PrintLITERAL("Please select the operation you want to perform:");
   gotoxy(2, 1);
-  printf("\b*]%s", oper[0]);
+
+  PrintLITERAL("\b*]");
+  PrintString(oper[0]);
+
   while ((ch1 = _getch()) != 13) {
     ch2 = _getch();
     if (ch2 == 80) {
       if (floor < 5) {
         gotoxy(2, floor);
-        printf("\b ]%s", oper[floor - 1]);
+        PrintLITERAL("\b ]");
+        PrintString(oper[floor - 1]);
         floor++;
         gotoxy(2, floor);
-        printf("\b*]%s", oper[floor - 1]);
+        PrintLITERAL("\b*]");
+        PrintString(oper[floor - 1]);
       }
     }
     if (ch2 == 72) {
       if (floor > 1) {
         gotoxy(2, floor);
-        printf("\b ]%s", oper[floor - 1]);
+        PrintLITERAL("\b ]");
+        PrintString(oper[floor - 1]);
         floor--;
         gotoxy(2, floor);
-        printf("\b*]%s", oper[floor - 1]);
+        PrintLITERAL("\b*]");
+        PrintString(oper[floor - 1]);
       }
     }
   }
@@ -52,15 +67,14 @@ Menu UI_MainMenu() {
   else if (floor == 5) return MENU_Exit;
 }
 
-Menu UI_SubMenu(Menu menu)//¶ş¼¶Ä¿Â¼¼°Ö´ĞĞ
+Menu UI_SubMenu(Menu menu)//äºŒçº§ç›®å½•åŠæ‰§è¡Œ
 {
-  int record;//Ñ¡ÖĞ¼ÇÂ¼
-  if (menu == MENU_Purchase)
-  {
-    PrintLITERAL("[ ]¶ÁÈ¡Ä¿Ç°¼ÇÂ¼\n");
-    PrintLITERAL("[ ]Ìí¼Ó¼ÇÂ¼\n");
-    PrintLITERAL("[ ]²éÕÒÖ¸¶¨¼ÇÂ¼\n");
-    PrintLITERAL("[ ]·µ»ØÉÏÒ»¼¶\n");
+  int record;//é€‰ä¸­è®°å½•
+  if (menu == MENU_Purchase) {
+    PrintLITERAL("[ ]è¯»å–ç›®å‰è®°å½•\n");
+    PrintLITERAL("[ ]æ·»åŠ è®°å½•\n");
+    PrintLITERAL("[ ]æŸ¥æ‰¾æŒ‡å®šè®°å½•\n");
+    PrintLITERAL("[ ]è¿”å›ä¸Šä¸€çº§\n");
     int y = OptionBar(1, 4);
     cls();
     switch (y) {
@@ -68,7 +82,7 @@ Menu UI_SubMenu(Menu menu)//¶ş¼¶Ä¿Â¼¼°Ö´ĞĞ
       if (purchase->rear != NULL) {
         record = RecordPage(purchase, PrintPurchaseTitle(), PrintPurchase);
         gotoxy(1, 1 + hangshu);
-        PrintLITERAL("ĞŞ¸Ä¼ÇÂ¼Enter   É¾³ı¼ÇÂ¼Delete\n");
+        PrintLITERAL("ä¿®æ”¹è®°å½•Enter   åˆ é™¤è®°å½•Delete\n");
         while (1) {
           char key1 = _getch();
           char key2 = 0;
@@ -88,7 +102,7 @@ Menu UI_SubMenu(Menu menu)//¶ş¼¶Ä¿Â¼¼°Ö´ĞĞ
         }
       }
       else {
-        PrintLITERAL("¸Ã¼ÇÂ¼Îª¿Õ£¬°´»Ø³µ·µ»ØÉÏÒ»¼¶");
+        PrintLITERAL("è¯¥è®°å½•ä¸ºç©º, æŒ‰å›è½¦è¿”å›ä¸Šä¸€çº§  ");
         while (1) {
           char ch = _getch();
           if (ch == 13)break;
@@ -96,29 +110,25 @@ Menu UI_SubMenu(Menu menu)//¶ş¼¶Ä¿Â¼¼°Ö´ĞĞ
         cls();
       }
       break;
-    case 1:
-      InsertLinkedList(purchase, ReadPurchase());
+    case 1:InsertLinkedList(purchase, ReadPurchase());
       cls();
       break;
-    case 2:
-      PrintLITERAL("[ ]1.°´Åä¼şÖÖÀà¼ìË÷\n");
-      PrintLITERAL("[ ]2.°´¹©»õÉÌ¼ìË÷\n");
-      PrintLITERAL("[ ]3.°´Ê±¼ä·¶Î§¼ìË÷\n");
+    case 2:PrintLITERAL("[ ]1.æŒ‰é…ä»¶ç§ç±»æ£€ç´¢\n");
+      PrintLITERAL("[ ]2.æŒ‰ä¾›è´§å•†æ£€ç´¢\n");
+      PrintLITERAL("[ ]3.æŒ‰æ—¶é—´èŒƒå›´æ£€ç´¢\n");
       OptionBar(1, 3);
       cls();
       break;
-    case 3:
-      return MENU_Main;
+    case 3:return MENU_Main;
     }
     return MENU_Purchase;
   }
-  if (menu == MENU_Sales)
-  {
-    PrintLITERAL("[ ]¶ÁÈ¡Ä¿Ç°¼ÇÂ¼\n");
-    PrintLITERAL("[ ]Ìí¼Ó¼ÇÂ¼\n");
-    PrintLITERAL("[ ]²éÕÒÖ¸¶¨¼ÇÂ¼\n");
-    PrintLITERAL("[ ]Í³¼ÆÔùÆ·\n");
-    PrintLITERAL("[ ]·µ»ØÉÏÒ»¼¶\n");
+  if (menu == MENU_Sales) {
+    PrintLITERAL("[ ]è¯»å–ç›®å‰è®°å½•\n");
+    PrintLITERAL("[ ]æ·»åŠ è®°å½•\n");
+    PrintLITERAL("[ ]æŸ¥æ‰¾æŒ‡å®šè®°å½•\n");
+    PrintLITERAL("[ ]ç»Ÿè®¡èµ å“\n");
+    PrintLITERAL("[ ]è¿”å›ä¸Šä¸€çº§\n");
     int y = OptionBar(1, 5);
     cls();
     switch (y) {
@@ -126,7 +136,7 @@ Menu UI_SubMenu(Menu menu)//¶ş¼¶Ä¿Â¼¼°Ö´ĞĞ
       if (sales->rear != NULL) {
         record = RecordPage(sales, PrintSalesTitle(), PrintSales);
         gotoxy(1, 1 + hangshu);
-        PrintLITERAL("ĞŞ¸Ä¼ÇÂ¼Enter   É¾³ı¼ÇÂ¼Delete\n");
+        PrintLITERAL("ä¿®æ”¹è®°å½•Enter   åˆ é™¤è®°å½•Delete\n");
 
         while (1) {
           char key1 = _getch();
@@ -149,7 +159,7 @@ Menu UI_SubMenu(Menu menu)//¶ş¼¶Ä¿Â¼¼°Ö´ĞĞ
         }
       }
       else {
-        PrintLITERAL("¸Ã¼ÇÂ¼Îª¿Õ£¬°´»Ø³µ·µ»ØÉÏÒ»¼¶");
+        PrintLITERAL("è¯¥è®°å½•ä¸ºç©º, æŒ‰å›è½¦è¿”å›ä¸Šä¸€çº§ ");
         while (1) {
           char ch = _getch();
           if (ch == 13)break;
@@ -157,38 +167,33 @@ Menu UI_SubMenu(Menu menu)//¶ş¼¶Ä¿Â¼¼°Ö´ĞĞ
         cls();
       }
       break;
-    case 1:
-      InsertLinkedList(sales, ReadSales());
+    case 1:InsertLinkedList(sales, ReadSales());
       cls();
       break;
-    case 2:
-      PrintLITERAL("[ ]1.°´Åä¼şÖÖÀà¼ìË÷\n");
-      PrintLITERAL("[ ]2.°´¿Í»§¼ìË÷\n");
-      PrintLITERAL("[ ]3.°´Ê±¼ä·¶Î§¼ìË÷\n");
+    case 2:PrintLITERAL("[ ]1.æŒ‰é…ä»¶ç§ç±»æ£€ç´¢\n");
+      PrintLITERAL("[ ]2.æŒ‰å®¢æˆ·æ£€ç´¢\n");
+      PrintLITERAL("[ ]3.æŒ‰æ—¶é—´èŒƒå›´æ£€ç´¢\n");
       int y = OptionBar(1, 3);
       cls();
       break;
     case 3:
       //
       break;
-    case 4:
-      return MENU_Main;
+    case 4:return MENU_Main;
     }
     return MENU_Sales;
   }
 }
 
-int OptionBar(int start, int end) {//startÎªÆğÊ¼ĞĞ£¬endÎªÖÕÖ¹ĞĞ
+int OptionBar(int start, int end) {//startä¸ºèµ·å§‹è¡Œï¼Œendä¸ºç»ˆæ­¢è¡Œ
   int x = 1, y = start - 1;
   gotoxy(x, y);
   PrintLITERAL("*");
   char ch;
-  while (1)
-  {
+  while (1) {
     char c = _getch();
-    if (c == 13) break;//»Ø³µÍË³ö
-    if (c < 0)
-    {
+    if (c == 13) break;//å›è½¦é€€å‡º
+    if (c < 0) {
       ch = _getch();
       switch (ch) {
       case 72:
@@ -217,31 +222,30 @@ int OptionBar(int start, int end) {//startÎªÆğÊ¼ĞĞ£¬endÎªÖÕÖ¹ĞĞ
 void gotoxy(int x, int y) {
   HANDLE a;
   a = GetStdHandle(STD_OUTPUT_HANDLE);
-  COORD cos = { x,y };
+  COORD cos = { x, y };
   SetConsoleCursorPosition(a, cos);
-}//¹â±ê¶¨Î»º¯Êı
+}//å…‰æ ‡å®šä½å‡½æ•°
 
-int RecordPage(LinkedList* data, string title, string record(void*, uint8_t)) { //¼ÇÂ¼·­Ò³º¯Êı
-  LinkedListNode *p, *re[100];//Ä¿±ê½Úµã£¬·ÖÒ³Êı×é
-  int num = 0, count = 1, j = 0, y = 0;//ĞòºÅ£¬¼ÆÊıÆ÷£¬Ò³Âë£¬Ñ¡ÖĞĞĞ
-  char a, b;//¶ÁÈ¡°´¼üasciiÂë
-  int end;//×îÖÕ¼ÇÂ¼ÌõÊı+1
+int RecordPage(LinkedList *data, string title, string record(void *, uint8_t)) { //è®°å½•ç¿»é¡µå‡½æ•°
+  LinkedListNode *p, *re[100];//ç›®æ ‡èŠ‚ç‚¹ï¼Œåˆ†é¡µæ•°ç»„
+  int num = 0, count = 1, j = 0, y = 0;//åºå·ï¼Œè®¡æ•°å™¨ï¼Œé¡µç ï¼Œé€‰ä¸­è¡Œ
+  char a, b;//è¯»å–æŒ‰é”®asciiç 
+  int end;//æœ€ç»ˆè®°å½•æ¡æ•°+1
   p = data->top;
   re[0] = data->top;
   PrintString(title);
-  while (1)
-  {
+  while (1) {
 
     if ((count - 1) % hangshu == 0 && count != 1 || p == data->rear->next) {
 
       end = count;
       if (p == data->rear->next && (count - 1) % hangshu != 0) {
-        count = (count + hangshu - 1) / hangshu * hangshu + 1;//½øÎ»È¡Õû+1£ºÈç39->41
+        count = (count + hangshu - 1) / hangshu * hangshu + 1;//è¿›ä½å–æ•´+1ï¼šå¦‚39->41
       }
       a = _getch();
       if (a < 0) {
         b = _getch();
-        if (b == 75 && count > 1 + hangshu) {//×ó·­Ò³
+        if (b == 75 && count > 1 + hangshu) {//å·¦ç¿»é¡µ
           cls();
           PrintString(title);
           count -= hangshu;
@@ -249,16 +253,16 @@ int RecordPage(LinkedList* data, string title, string record(void*, uint8_t)) { 
             j--;
           p = re[j];
         }
-        else if (b == 77 && p != data->rear->next) {//ÓÒ·­Ò³
+        else if (b == 77 && p != data->rear->next) {//å³ç¿»é¡µ
           j++;
           re[j] = p;
           cls();
           PrintString(title);
         }
-        else//Ëø¶¨ÆäËû°´¼ü
+        else//é”å®šå…¶ä»–æŒ‰é”®
           continue;
       }
-      if (a == 13)break;//»Ø³µÍË³ö
+      if (a == 13)break;//å›è½¦é€€å‡º
     }
     num++;
     PrintLITERAL("[ ]");
@@ -266,34 +270,31 @@ int RecordPage(LinkedList* data, string title, string record(void*, uint8_t)) { 
     p = p->next;
     count++;
   }
-  int count0 = end;//¿½±´£¨ÕæÊµ¼ÇÂ¼ĞĞÊı+1£©
+  int count0 = end;//æ‹·è´ï¼ˆçœŸå®è®°å½•è¡Œæ•°+1ï¼‰
   if ((count0 - 1) % hangshu == 0) {
     y = OptionBar(2, 2 + hangshu - 1);
   }
-  else
-  {
+  else {
     if (count0 > hangshu) {
-      count0 = count0 - (count0 / hangshu * hangshu) - 1;//¼ÇÂ¼Ä©Ò³ĞĞÊı£ºÈç¼ÇÂ¼38Ìõ£¬Ä©Ò³8ĞĞ
+      count0 = count0 - (count0 / hangshu * hangshu) - 1;//è®°å½•æœ«é¡µè¡Œæ•°ï¼šå¦‚è®°å½•38æ¡ï¼Œæœ«é¡µ8è¡Œ
     }
     y = OptionBar(2, 2 + count0 - 1);
   }
   return j * hangshu + y;
 }
 
-void cls()
-{
+void cls() {
   HANDLE hConsole;
 
   hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-  COORD coordScreen = { 0, 0 };    // home for the cursor 
+  COORD coordScreen = { 0, 0 };    // home for the cursor
   DWORD cCharsWritten;
   CONSOLE_SCREEN_BUFFER_INFO csbi;
   DWORD dwConSize;
 
   // Get the number of character cells in the current buffer. 
 
-  if (!GetConsoleScreenBufferInfo(hConsole, &csbi))
-  {
+  if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) {
     return;
   }
 
@@ -303,8 +304,8 @@ void cls()
 
   if (!FillConsoleOutputCharacter(hConsole,        // Handle to console screen buffer 
     (TCHAR) ' ',     // Character to write to the buffer
-    dwConSize,       // Number of cells to write 
-    coordScreen,     // Coordinates of first cell 
+    dwConSize,       // Number of cells to write
+    coordScreen,     // Coordinates of first cell
     &cCharsWritten))// Receive number of characters written
   {
     return;
@@ -312,8 +313,7 @@ void cls()
 
   // Get the current text attribute.
 
-  if (!GetConsoleScreenBufferInfo(hConsole, &csbi))
-  {
+  if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) {
     return;
   }
 
@@ -321,8 +321,8 @@ void cls()
 
   if (!FillConsoleOutputAttribute(hConsole,         // Handle to console screen buffer 
     csbi.wAttributes, // Character attributes to use
-    dwConSize,        // Number of cells to set attribute 
-    coordScreen,      // Coordinates of first cell 
+    dwConSize,        // Number of cells to set attribute
+    coordScreen,      // Coordinates of first cell
     &cCharsWritten)) // Receive number of characters written
   {
     return;
@@ -338,9 +338,9 @@ void color() {
 }
 
 void UI_Exit() {
-  PrintLITERAL("»¶Ó­ÏÂ´ÎÊ¹ÓÃ");
+  PrintLITERAL("æ¬¢è¿ä¸‹æ¬¡ä½¿ç”¨");
 }
 
 void UI_Clear() {}
 
-void UI_WaitForNext(void* nextDo()) { nextDo(); }
+void UI_WaitForNext(void *nextDo()) { nextDo(); }
