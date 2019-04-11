@@ -1,20 +1,8 @@
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "purchase.h"
 
-#ifndef UNIT_TEST
-#include"component.h"
-#include "time.h"
-#include "../utils/io.h"
 #include "../global.h"
-#else
-#include"component.c"
-#include "time.c"
-#include "../utils/io.c"
-#include "../global.c"
-#endif
+#include "../utils/io.h"
+
 Purchase* ReadPurchase() {
   Purchase *prime = (Purchase*)malloc(sizeof(Purchase));
   prime->time = 0; // FIXME
@@ -22,7 +10,7 @@ Purchase* ReadPurchase() {
   prime->quantity = 0;
   prime->total = prime->price * prime->quantity;
   prime->retailer =
-    InputString("please input retailer", "3021");
+    InputString(LITERAL("please input retailer"), LITERAL("3021"));
   return prime;
 }
 
@@ -76,7 +64,7 @@ Purchase* readjson_purchase(char *json_string, Purchase *purchase)
       }
       else
       {
-        printf("cJSON_GetObjectItem: total failed\n");
+        PrintLITERAL("cJSON_GetObjectItem: total failed\n");
       }
 
       item = cJSON_GetObjectItem(object, "retailer");
@@ -92,14 +80,14 @@ Purchase* readjson_purchase(char *json_string, Purchase *purchase)
   return 0;
 }
 
-char * PrintPurchaseTitle()
+string PrintPurchaseTitle()
 {
-  return NULL;
+  return STR_BUF("");
 }
 
-char * PrintPurchase(void * node, uint8_t id)
+string PrintPurchase(void * node, uint8_t id)
 {
-  return NULL;
+  return STR_BUF("");
 }
 
 bool FindTime_Purchase(LinkedListNode *node)
@@ -112,7 +100,6 @@ bool FindTime_Purchase(LinkedListNode *node)
 
 bool Findretailer_Purchase(LinkedListNode *node)
 {
-  return strcmp(((Purchase*)node->data)->retailer, retailerToSearch) == 0;
-
+  return compareString(((Purchase*)node->data)->retailer, retailerToSearch) == STRING_EQUAL;
 }
 

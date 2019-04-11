@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 
 extern "C" {
-#include "../../ProgramDesignHomework/data/component.c"
+#include "../../ProgramDesignHomework/data/component.h"
 }
 
 TEST(TestComponent, Struct) {

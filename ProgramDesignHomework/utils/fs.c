@@ -1,7 +1,4 @@
 #include "fs.h"
-#include <io.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 // https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/access-waccess?view=vs-2017
 int FileExist(char* fileName) { return (_access(fileName, 04) != -1); }

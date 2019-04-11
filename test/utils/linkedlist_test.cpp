@@ -3,8 +3,8 @@
 #include <stdlib.h>
 
 extern "C" {
-#include "../../ProgramDesignHomework/utils/linkedlist.c"
-  // #include "../../ProgramDesignHomework/data/purchase.c"
+#include "../../ProgramDesignHomework/utils/linkedlist.h"
+//#include "../../ProgramDesignHomework/data/purchase.h"
 }
 
 typedef struct {

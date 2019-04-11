@@ -1,12 +1,10 @@
 #include "ui.h"
-#include "../data/purchase.h"
-#include"../data/sales.h"
 
 #define hangshu 10//记录每页最大行数
 Menu menuNow = MENU_Welcome;
 
 void UI_Welcome() {
-  printf("\n\nWelcome to use 3021 APP\n\n");
+  PrintLITERAL("\n\nWelcome to use 3021 APP\n\n");
   Sleep(1000);
   cls();
 }
@@ -19,7 +17,7 @@ Menu UI_MainMenu() {
     "2: 销售记录",
     "3: 库存",
     "4: 金额",
-    "5: 退出本程序"};
+    "5: 退出本程序" };
   printf("Operation List:\n");
   for (i = 0; i < 5; i++)  printf("[ ]%s\n", oper[i]);
   printf("Please select the operation you want to perform:");
@@ -59,10 +57,10 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   int record;//选中记录
   if (menu == MENU_Purchase)
   {
-    printf("[ ]读取目前记录\n");
-    printf("[ ]添加记录\n");
-    printf("[ ]查找指定记录\n");
-    printf("[ ]返回上一级\n");
+    PrintLITERAL("[ ]读取目前记录\n");
+    PrintLITERAL("[ ]添加记录\n");
+    PrintLITERAL("[ ]查找指定记录\n");
+    PrintLITERAL("[ ]返回上一级\n");
     int y = OptionBar(1, 4);
     cls();
     switch (y) {
@@ -70,7 +68,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       if (purchase->rear != NULL) {
         record = RecordPage(purchase, PrintPurchaseTitle(), PrintPurchase);
         gotoxy(1, 1 + hangshu);
-        printf("修改记录Enter   删除记录Delete\n");
+        PrintLITERAL("修改记录Enter   删除记录Delete\n");
         while (1) {
           char key1 = _getch();
           char key2 = 0;
@@ -90,7 +88,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         }
       }
       else {
-        printf("该记录为空，按回车返回上一级");
+        PrintLITERAL("该记录为空，按回车返回上一级");
         while (1) {
           char ch = _getch();
           if (ch == 13)break;
@@ -103,9 +101,9 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       cls();
       break;
     case 2:
-      printf("[ ]1.按配件种类检索\n");
-      printf("[ ]2.按供货商检索\n");
-      printf("[ ]3.按时间范围检索\n");
+      PrintLITERAL("[ ]1.按配件种类检索\n");
+      PrintLITERAL("[ ]2.按供货商检索\n");
+      PrintLITERAL("[ ]3.按时间范围检索\n");
       OptionBar(1, 3);
       cls();
       break;
@@ -116,11 +114,11 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   }
   if (menu == MENU_Sales)
   {
-    printf("[ ]读取目前记录\n");
-    printf("[ ]添加记录\n");
-    printf("[ ]查找指定记录\n");
-    printf("[ ]统计赠品\n");
-    printf("[ ]返回上一级\n");
+    PrintLITERAL("[ ]读取目前记录\n");
+    PrintLITERAL("[ ]添加记录\n");
+    PrintLITERAL("[ ]查找指定记录\n");
+    PrintLITERAL("[ ]统计赠品\n");
+    PrintLITERAL("[ ]返回上一级\n");
     int y = OptionBar(1, 5);
     cls();
     switch (y) {
@@ -128,8 +126,8 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       if (sales->rear != NULL) {
         record = RecordPage(sales, PrintSalesTitle(), PrintSales);
         gotoxy(1, 1 + hangshu);
-        printf("修改记录Enter   删除记录Delete\n");
-        
+        PrintLITERAL("修改记录Enter   删除记录Delete\n");
+
         while (1) {
           char key1 = _getch();
           char key2 = 0;
@@ -147,11 +145,11 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               break;
             }
           }
-          
+
         }
       }
       else {
-        printf("该记录为空，按回车返回上一级");
+        PrintLITERAL("该记录为空，按回车返回上一级");
         while (1) {
           char ch = _getch();
           if (ch == 13)break;
@@ -164,9 +162,9 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       cls();
       break;
     case 2:
-      printf("[ ]1.按配件种类检索\n");
-      printf("[ ]2.按客户检索\n");
-      printf("[ ]3.按时间范围检索\n");
+      PrintLITERAL("[ ]1.按配件种类检索\n");
+      PrintLITERAL("[ ]2.按客户检索\n");
+      PrintLITERAL("[ ]3.按时间范围检索\n");
       int y = OptionBar(1, 3);
       cls();
       break;
@@ -183,7 +181,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
 int OptionBar(int start, int end) {//start为起始行，end为终止行
   int x = 1, y = start - 1;
   gotoxy(x, y);
-  printf("*");
+  PrintLITERAL("*");
   char ch;
   while (1)
   {
@@ -196,19 +194,19 @@ int OptionBar(int start, int end) {//start为起始行，end为终止行
       case 72:
         if (y > start - 1) {
           gotoxy(x, y);
-          printf(" ");
+          PrintLITERAL(" ");
           y--;
           gotoxy(x, y);
-          printf("*");
+          PrintLITERAL("*");
         }
         break;
       case 80:
         if (y < end - 1) {
           gotoxy(x, y);
-          printf(" ");
+          PrintLITERAL(" ");
           y++;
           gotoxy(x, y);
-          printf("*");
+          PrintLITERAL("*");
         }
       }
     }
@@ -223,14 +221,14 @@ void gotoxy(int x, int y) {
   SetConsoleCursorPosition(a, cos);
 }//光标定位函数
 
-int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t)) { //记录翻页函数
+int RecordPage(LinkedList* data, string title, string record(void*, uint8_t)) { //记录翻页函数
   LinkedListNode *p, *re[100];//目标节点，分页数组
   int num = 0, count = 1, j = 0, y = 0;//序号，计数器，页码，选中行
   char a, b;//读取按键ascii码
   int end;//最终记录条数+1
   p = data->top;
   re[0] = data->top;
-  printf(title);
+  PrintString(title);
   while (1)
   {
 
@@ -245,7 +243,7 @@ int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t)) { //
         b = _getch();
         if (b == 75 && count > 1 + hangshu) {//左翻页
           cls();
-          printf(title);
+          PrintString(title);
           count -= hangshu;
           if (j > 0)
             j--;
@@ -255,7 +253,7 @@ int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t)) { //
           j++;
           re[j] = p;
           cls();
-          printf(title);
+          PrintString(title);
         }
         else//锁定其他按键
           continue;
@@ -263,8 +261,8 @@ int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t)) { //
       if (a == 13)break;//回车退出
     }
     num++;
-    printf("[ ]");
-    printf(record(p->data, num));
+    PrintLITERAL("[ ]");
+    PrintString(record(p->data, num));
     p = p->next;
     count++;
   }
@@ -340,8 +338,7 @@ void color() {
 }
 
 void UI_Exit() {
-  printf("欢迎下次使用");
-  Sleep(1000);
+  PrintLITERAL("欢迎下次使用");
 }
 
 void UI_Clear() {}

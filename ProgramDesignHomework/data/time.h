@@ -1,10 +1,9 @@
-#pragma once
+#ifndef _DATA_TIME_H_
+#define _DATA_TIME_H_
 
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
-
-#ifndef UNIT_TEST
 
 bool prime(int a);
 bool mistake(int year, int month, int day, int hour, int minute, int second);

@@ -1,24 +1,16 @@
-
-#include <malloc.h>
 #include "sales.h"
 
-#ifndef UNIT_TEST
-#include "../utils/io.h"
 #include "../global.h"
-#include "../cstring_jslike/cstring_jslike.h"
-#else
-#include "../utils/io.c"
-#include "../global.c"
-#include "../cstring_jslike/cstring_jslike.c"
-#endif
+#include "../utils/io.h"
+
 Sales* ReadSales() {
   Sales *prime = malloc(sizeof(Sales));
   // prime->time = ReadTime();
-  prime->price = InputInt("批发/零售价格", 0);
-  prime->quantity = InputInt("批发/零售数量", 0);
+  prime->price = InputInt(LITERAL("批发/零售价格"));
+  prime->quantity = InputInt(LITERAL("批发/零售数量"));
   prime->total = prime->price * prime->quantity;
-  prime->customer = InputString("please input customer：", "3021 bosses");
-  // ReadComponent();
+  prime->customer = InputString(LITERAL("please input customer："), LITERAL("3021 bosses"));
+  prime->component = ReadComponent();
   return prime;
 }
 Sales* readjson_sales(char *json_string, Sales *sales)
@@ -29,7 +21,7 @@ Sales* readjson_sales(char *json_string, Sales *sales)
   {
     printf("Error before: [%s]\n", cJSON_GetErrorPtr());
     cJSON_Delete(root);
-    return -1;
+    return NULL;
   }
   else
   {
@@ -38,7 +30,7 @@ Sales* readjson_sales(char *json_string, Sales *sales)
     {
       printf("Error before: [%s]\n", cJSON_GetErrorPtr());
       cJSON_Delete(root);
-      return -1;
+      return NULL;
     }
     else
     {
@@ -50,7 +42,7 @@ Sales* readjson_sales(char *json_string, Sales *sales)
       item = cJSON_GetObjectItem(object, "component");
       if (item != NULL)
       {
-        sales->component = readjson_component(json_string, &sales->component);
+        sales->component = readjson_component(item, sales->component);
       }
       item = cJSON_GetObjectItem(object, "sales_mode");
       if (item != NULL)
@@ -80,7 +72,7 @@ Sales* readjson_sales(char *json_string, Sales *sales)
       item = cJSON_GetObjectItem(object, "gift");//结构体中的结构体直接赋值？？
       if (item != NULL)
       {
-        sales->gift = readjson_component(json_string, sales->gift);
+        sales->gift = readjson_component(item, sales->gift);
       }
 
     }
@@ -88,17 +80,16 @@ Sales* readjson_sales(char *json_string, Sales *sales)
   return sales;
 }
 
-char* PrintSalesTitle()
+string PrintSalesTitle()
 {
-  return " 名称  型号  制造商 销售模式  数量  单价  总价  赠品\n";
+  return STR_BUF(" 名称  型号  制造商 销售模式  数量  单价  总价  赠品\n");
 }
 
-char* PrintSales(void* node, uint8_t id)
+string PrintSales(void* node, uint8_t id)
 {
-  string str = concat2(STRING(((Sales*)node)->customer), STRING("\n"));
-  return str->c_str;
+  return concat2(((Sales*)node)->customer, STRING("\n"));
 }
 
 bool Findcustomer_Component(LinkedListNode *node) {
-  return strcmp(((Sales *)node->data)->customer, customerToSearch) == 0;
+  return compareString(((Sales *)node->data)->customer, customerToSearch) == STRING_EQUAL;
 }

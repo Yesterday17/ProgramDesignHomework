@@ -34,6 +34,18 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="..\ProgramDesignHomework\cJSON\cJSON.c" />
+    <ClCompile Include="..\ProgramDesignHomework\cstring_jslike\cstring_jslike.c" />
+    <ClCompile Include="..\ProgramDesignHomework\data\component.c" />
+    <ClCompile Include="..\ProgramDesignHomework\data\purchase.c" />
+    <ClCompile Include="..\ProgramDesignHomework\data\sales.c" />
+    <ClCompile Include="..\ProgramDesignHomework\data\time.c" />
+    <ClCompile Include="..\ProgramDesignHomework\global.c" />
+    <ClCompile Include="..\ProgramDesignHomework\ui\ui.c" />
+    <ClCompile Include="..\ProgramDesignHomework\utils\fs.c" />
+    <ClCompile Include="..\ProgramDesignHomework\utils\io.c" />
+    <ClCompile Include="..\ProgramDesignHomework\utils\linkedlist.c" />
+    <ClCompile Include="..\ProgramDesignHomework\utils\utils.c" />
     <ClCompile Include="data\component_test.cpp" />
     <ClCompile Include="utils\fs_test.cpp" />
     <ClCompile Include="utils\linkedlist_test.cpp" />
@@ -45,6 +57,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\ProgramDesignHomework\cJSON\cJSON.h" />
+    <ClInclude Include="..\ProgramDesignHomework\cstring_jslike\cstring_jslike.h" />
+    <ClInclude Include="..\ProgramDesignHomework\data\component.h" />
+    <ClInclude Include="..\ProgramDesignHomework\data\purchase.h" />
+    <ClInclude Include="..\ProgramDesignHomework\data\sales.h" />
+    <ClInclude Include="..\ProgramDesignHomework\data\time.h" />
+    <ClInclude Include="..\ProgramDesignHomework\global.h" />
+    <ClInclude Include="..\ProgramDesignHomework\ui\ui.h" />
+    <ClInclude Include="..\ProgramDesignHomework\utils\fs.h" />
+    <ClInclude Include="..\ProgramDesignHomework\utils\io.h" />
+    <ClInclude Include="..\ProgramDesignHomework\utils\linkedlist.h" />
+    <ClInclude Include="..\ProgramDesignHomework\utils\utils.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

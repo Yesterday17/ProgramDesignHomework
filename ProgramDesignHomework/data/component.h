@@ -1,20 +1,21 @@
- #pragma once
+#include <stdbool.h>
 
-#include "../utils/linkedlist.h"
+#ifndef _DATA_COMPONENT_H_
+#define _DATA_COMPONENT_H_
+
+#include "../cstring_jslike/cstring_jslike.h"
 #include "../cJson/cJSON.h"
+#include "../utils/linkedlist.h"
 
 /**
  * 计算机配件 - 管理系统所管理物品
  */
 typedef struct {
   int index;           // 索引
-  char* name;          // 配件名称
-  char* type;         // 配件型号
-  char* manufacturer;  // 制造商
+  string name;          // 配件名称
+  string type;         // 配件型号
+  string manufacturer;  // 制造商
 } Component;
-
-
-#ifndef UNIT_TEST
 
 Component* ReadComponent();
 Component* readjson_component(cJSON *root, Component *comp);

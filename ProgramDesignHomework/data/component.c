@@ -1,36 +1,26 @@
 #include "component.h"
-#ifndef UNIT_TEST
 
-#include "../cJSON/cJSON.h"
 #include "../global.h"
 #include "../utils/io.h"
 
-#else
-
-#include "../cJSON/cJSON.c"
-#include "../global.c"
-#include "../utils/io.c"
-
-#endif
-
 Component* ReadComponent() {
   Component *comp = (Component*)malloc(sizeof(Component));
-  comp->name = InputString("Input component name:", "Computer");
-  comp->type = InputString("Input component type:", "3021");
-  comp->manufacturer = InputString("manufacturer", "3021");
+  comp->name = InputString(LITERAL("Input component name:"), LITERAL("Computer"));
+  comp->type = InputString(LITERAL("Input component type:"), LITERAL("3021"));
+  comp->manufacturer = InputString(LITERAL("manufacturer"), LITERAL("3021"));
   return comp;
 }
 
 bool FindName_Component(LinkedListNode *node) {
-  return strcmp(((Component *)node->data)->name, nameToSearch) == 0;
+  return compareString(((Component*)(node->data))->name, nameToSearch) == STRING_EQUAL;
 }
 
 bool FindType_Component(LinkedListNode *node) {
-	return strcmp(((Component *)node->data)->type,typeToSearch) == 0;
+  return compareString(((Component *)node->data)->type, typeToSearch) == STRING_EQUAL;
 }
 
 bool FindMan_Component(LinkedListNode *node) {
-	return strcmp(((Component *)node->data)->manufacturer, manufacturerToSearch) == 0;
+  return compareString(((Component *)node->data)->manufacturer, manufacturerToSearch) == STRING_EQUAL;
 }
 
 Component* readjson_component(cJSON *root, Component *comp)
@@ -62,17 +52,17 @@ Component* readjson_component(cJSON *root, Component *comp)
       item = cJSON_GetObjectItem(object, "name");
       if (item != NULL)
       {
-        memcpy(comp->name, item->valuestring, strlen(comp->name));
+        memcpy(comp->name, item->valuestring, comp->name->bufSize);
       }
       item = cJSON_GetObjectItem(object, "type");
       if (item != NULL)
       {
-        memcpy(comp->type, item->valuestring, strlen(comp->type));
+        memcpy(comp->type, item->valuestring, comp->type->bufSize);
       }
       item = cJSON_GetObjectItem(object, "manufacturer");
       if (item != NULL)
       {
-        memcpy(comp->manufacturer, item->valuestring, strlen(comp->manufacturer));
+        memcpy(comp->manufacturer, item->valuestring, comp->manufacturer->bufSize);
       }
     }
   }

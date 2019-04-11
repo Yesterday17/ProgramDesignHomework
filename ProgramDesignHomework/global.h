@@ -1,9 +1,10 @@
-#pragma once
-#include <stdint.h>
-#include "./data/component.h"
-#include "./utils/linkedlist.h"
+#ifndef _GLOBAL_H_
+#define _GLOBAL_H_
 
-#ifndef UNIT_TEST
+#include <stdint.h>
+#include "utils/linkedlist.h"
+#include "cstring_jslike/cstring_jslike.h"
+#include "data/component.h"
 
 extern const char NAME[];
 extern const char VERSION[];
@@ -12,12 +13,12 @@ extern LinkedList* component;
 extern LinkedList* purchase;
 extern LinkedList* sales;
 
-extern char* nameToSearch;
+extern string nameToSearch;
 extern uint64_t timeToSearch;
 extern Component* componentToSearch;
-extern char* customerToSearch;
-extern char* retailerToSearch;
-extern char *typeToSearch;
-extern char * manufacturerToSearch;
+extern string customerToSearch;
+extern string retailerToSearch;
+extern string typeToSearch;
+extern string manufacturerToSearch;
 
 #endif

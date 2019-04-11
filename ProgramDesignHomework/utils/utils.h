@@ -1,6 +1,7 @@
-#pragma once
+#ifndef _UTILS_UTILS_H_
+#define _UTILS_UTILS_H_
 
-#ifndef UNIT_TEST
+#include <time.h>
 
 int Rand(int min, int max);
 

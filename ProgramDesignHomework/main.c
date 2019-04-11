@@ -1,8 +1,10 @@
 #include <stdio.h>
-#include "./utils/linkedlist.h"
 #include "global.h"
+#include "./utils/linkedlist.h"
 #include "ui/ui.h"
 #include "utils/io.h"
+#include "utils/utils.h"
+
 int main() {
   srand((unsigned)(time(NULL)));
   color();

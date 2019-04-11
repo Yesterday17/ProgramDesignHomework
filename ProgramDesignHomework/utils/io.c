@@ -1,62 +1,47 @@
-#include <malloc.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <string.h>
-
 #include "io.h"
 
-char* InputString(char* comment, char* defaultValue) {
+string InputString(string comment, string defaultValue) {
   int len = 0, capability = 16;
-  char c, *ans = (char*)malloc(capability * sizeof(char));
+  char buf[2];
+  string ans = newSizedString(127);
 
   // 输出提示信息
-  printf("%s: ", comment);
-  c = getchar();
+  PrintString(comment);
+  buf[0] = getchar();
+  buf[1] = '\0';
 
   // 采用默认值
-  if (c == '\n') {
-    return defaultValue;
+  if (buf[0] == '\n') {
+    return cloneString(defaultValue);
   }
 
   // 有输入
   do {
-    // 容量已满
-    if (len == capability - 1) {
-      capability *= 2;
-      ans = (char*)realloc(ans, capability * sizeof(char));
-    }
-    ans[len] = c;
-    len++;
-    c = getchar();
-  } while (c != '\n');
+    freeAssign(&ans, concat2(ans, STRING(buf)));
+    buf[0] = getchar();
+  } while (buf[0] != '\n');
 
-  // 加入 \0
-  if (len == capability - 1) {
-    capability++;
-    ans = (char*)realloc(ans, capability * sizeof(char));
-  }
-  ans[len] = '\0';
   return ans;
 }
 
-int InputInteger(char* comment, char* errorMessage, int defaultValue) {
-  char* input = InputString(comment, "\n");
+int InputInteger(string comment, string errorMessage, int defaultValue) {
+  string input = InputString(comment, LITERAL("\n"));
   int ans;
 
-  if (strcmp(input, "\n") == 0) {
+  if (compareString(input, LITERAL("\n")) == STRING_EQUAL) {
     return defaultValue;
   }
 
-  while (sscanf(input, "%d", &ans) != 1) {
+  while (sscanf(U8_CSTR(input), "%d", &ans) != 1) {
     printf("%s\n", errorMessage);
-    free(input);
-    input = InputString(comment, "\n");
+    $STR_BUF(input);
+    input = InputString(comment, LITERAL("\n"));
   }
   return ans;
 }
 
-int InputInt(char* comment) {
-  return InputInteger(comment, "Error inputing integer, retry please.", 0);
+int InputInt(string comment) {
+  return InputInteger(comment, LITERAL("Error inputing integer, retry please."), 0);
 }
 
-char* InputStr(char* comment) { return InputString(comment, ""); }
+string InputStr(string comment) { return InputString(comment, LITERAL("")); }

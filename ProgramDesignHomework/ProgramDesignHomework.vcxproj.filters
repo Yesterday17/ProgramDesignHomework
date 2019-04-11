@@ -19,10 +19,10 @@
     <Filter Include="submodules\cstring_jslike">
       <UniqueIdentifier>{d858da7f-86fc-46b2-bbd9-0477fd6775c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="data\repo">
+    <Filter Include="repo">
       <UniqueIdentifier>{7d63b4f1-562b-4a88-a948-3868efae96bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="data\repo\docs">
+    <Filter Include="repo\docs">
       <UniqueIdentifier>{58b4c10f-232e-47e2-8316-05f347d4d685}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -65,13 +65,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Readme.md">
-      <Filter>data\repo</Filter>
+      <Filter>repo</Filter>
     </None>
     <None Include="..\LICENSE">
-      <Filter>data\repo</Filter>
+      <Filter>repo</Filter>
     </None>
     <None Include="..\docs\index.md">
-      <Filter>data\repo\docs</Filter>
+      <Filter>repo\docs</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

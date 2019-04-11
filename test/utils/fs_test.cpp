@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 
 extern "C" {
-#include "../../ProgramDesignHomework/utils/fs.c"
+#include "../../ProgramDesignHomework/utils/fs.h"
 }
 
 TEST(TestFileExist, NOT_EXIST) {

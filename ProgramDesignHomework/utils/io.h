@@ -1,11 +1,19 @@
-#pragma once
+#ifndef _UTILS_IO_H_
+#define _UTILS_IO_H_
 
-#ifndef UNIT_TEST
+#include <stdio.h>
+#include <malloc.h>
+#include <stdbool.h>
+#include <string.h>
+#include "../cstring_jslike/cstring_jslike.h"
 
-char* InputString(char* comment, char* defaultValue);
-int InputInteger(char* comment, char* errorMessage, int defaultValue);
+string InputString(string comment, string defaultValue);
+int InputInteger(string comment, string errorMessage, int defaultValue);
 
-char* InputStr(char* comment);
-int InputInt(char* comment);
+string InputStr(string comment);
+int InputInt(string comment);
+
+#define PrintString(str) printf("%s", CSTR(str))
+#define PrintLITERAL(str) printf("%s", CSTR(LITERAL(str)))
 
 #endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _UTILS_LINKEDLIST_H_
+#define _UTILS_LINKEDLIST_H_
+
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -16,8 +18,6 @@ typedef struct {
   size_t count;
   LinkedListNode** result;
 } LinkedListFindResult;
-
-#ifndef UNIT_TEST
 
 LinkedList* CreateLinkedList();
 

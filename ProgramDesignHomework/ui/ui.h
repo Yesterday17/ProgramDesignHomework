@@ -1,7 +1,13 @@
-#pragma once
+#ifndef _UI_H_
+#define _UI_H_
+
 #include <conio.h>
 #include <stdlib.h>
 #include <Windows.h>
+
+#include "../utils/io.h"
+#include "../data/purchase.h"
+#include"../data/sales.h"
 #include "../global.h"
 
 typedef enum {
@@ -13,8 +19,6 @@ typedef enum {
   MENU_Stock=4,
   MENU_Amount=5,
 } Menu;
-
-#ifndef UNIT_TEST
 
 void UI_Welcome();
 
@@ -32,7 +36,7 @@ void gotoxy(int x, int y);
 
 int OptionBar(int start, int end);
 
-int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t));
+int RecordPage(LinkedList* data, string title, string record(void*, uint8_t));
 
 void cls();
 

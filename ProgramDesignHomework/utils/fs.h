@@ -1,6 +1,10 @@
-#pragma once
+#ifndef _UTILS_FS_H_
+#define _UTILS_FS_H_
 
-#ifndef UNIT_TEST
+#include <io.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 
 int FileExist(const char* fileName);
 char* ReadFile(char* filename);
