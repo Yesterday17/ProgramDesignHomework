@@ -5,6 +5,7 @@
 #include "utils/io.h"
 int main() {
   srand((unsigned)(time(NULL)));
+  color();
 
   component = CreateLinkedList();
   purchase = CreateLinkedList();

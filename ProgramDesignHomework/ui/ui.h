@@ -36,6 +36,8 @@ int RecordPage(LinkedList* data, char* title, char* record(void*, uint8_t));
 
 void cls();
 
+void color();
+
 extern Menu menuNow;
 
 #endif

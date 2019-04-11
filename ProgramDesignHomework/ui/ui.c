@@ -335,6 +335,10 @@ void cls()
   SetConsoleCursorPosition(hConsole, coordScreen);
 }
 
+void color() {
+  system("color 80");
+}
+
 void UI_Exit() {
   printf("欢迎下次使用");
   Sleep(1000);
