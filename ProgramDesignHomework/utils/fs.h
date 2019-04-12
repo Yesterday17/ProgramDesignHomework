@@ -4,12 +4,13 @@
 #include <io.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "../cstring_jslike/cstring_jslike.h"
 
 /**
  * 文件读写相关函数封装
  */
 
-int FileExist(const char *fileName);
-char *ReadFile(char *filename);
+bool FileExist(string fileName);
+string ReadFile(string filename);
 
 #endif

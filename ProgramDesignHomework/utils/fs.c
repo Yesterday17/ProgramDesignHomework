@@ -6,33 +6,27 @@
  * @param fileName 文件名
  * @return
  */
-int FileExist(char *fileName) { return (_access(fileName, 04) != -1); }
+bool FileExist(string fileName) { return (_access(U8_CSTR(fileName), 04) != -1); }
 
 // https://stackoverflow.com/questions/3747086/reading-the-whole-text-file-into-a-char-array-in-c
-char *ReadFile(char *filename) {
-  FILE *fp = fopen(filename, "r");
+string ReadFile(string filename) {
+  FILE *fp = fopen(U8_CSTR(filename), "r");
   if (!fp) {
     perror("Failed to open file!");
     exit(1);
   }
 
-  char *buffer;
   long fileSize;
 
   fseek(fp, 0L, SEEK_END);
   fileSize = ftell(fp);
   rewind(fp);
 
-  buffer = (char *) calloc(1, fileSize + 1);
-  if (!buffer) {
-    fclose(fp);
-    fputs("memory alloc fails", stderr);
-    exit(1);
-  }
+  stringbuf buffer = newSizedString(fileSize);
 
-  if (1 != fread(buffer, fileSize, 1, fp)) {
+  if (1 != fread(buffer->c_str, fileSize, 1, fp)) {
     fclose(fp);
-    free(buffer);
+    $STR_BUF(buffer);
     fputs("entire read fails", stderr);
     exit(1);
   }

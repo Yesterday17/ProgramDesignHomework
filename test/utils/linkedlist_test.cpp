@@ -9,7 +9,6 @@ extern "C" {
 typedef struct {
   int a;
   double b;
-  char* c;
 }TestStruct;
 
 /**
