@@ -23,8 +23,8 @@ LinkedList *CreateLinkedList();
 
 void InsertLinkedList(LinkedList *list, void *data);
 
-LinkedListNode *DeleteLinkedList(LinkedList *list,
-                                 bool *callback(LinkedListNode *));
+void DeleteLinkedList(LinkedList *list,
+                                 int key);
 
 LinkedListFindResult FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *));
 

@@ -4,6 +4,13 @@
 #define hangshu 10 //记录每页最大行数
 Menu menuNow = MENU_Welcome;
 
+void Initial() {
+  srand((unsigned)(time(NULL)));
+  color();
+  component = CreateLinkedList();
+  purchase = CreateLinkedList();
+  sales = CreateLinkedList();
+}
 void UI_Welcome() {
   SetConsoleOutputCP(CP_UTF8);
   SetConsoleCP(CP_UTF8);
@@ -87,15 +94,17 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           char key1 = _getch();
           char key2 = 0;
           if (key1 == 13) {//enter
-            //DeleteLinkedList(purchase, );
+            DeleteLinkedList(purchase,record);
             cls();
             InsertLinkedList(purchase, ReadPurchase());
+            cls();
             break;
           }
           if (key1 < 0) {
             key2 = _getch();
             if (key2 == 83) {//delete
-              //DeleteLinkedList(purchase, );
+              cls();
+              DeleteLinkedList(purchase, record);
               break;
             }
           }
@@ -142,16 +151,17 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           char key1 = _getch();
           char key2 = 0;
           if (key1 == 13) {//enter
-            //DeleteLinkedList(sales, );
+            DeleteLinkedList(sales,record);
             cls();
             InsertLinkedList(sales, ReadSales());
+            cls();
             break;
           }
           if (key1 < 0) {
             key2 = _getch();
             if (key2 == 83) {//delete
               cls();
-              //DeleteLinkedList(sales, );
+              DeleteLinkedList(sales,record);
               break;
             }
           }

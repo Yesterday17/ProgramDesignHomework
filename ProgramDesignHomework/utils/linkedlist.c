@@ -24,17 +24,25 @@ void InsertLinkedList(LinkedList *list, void *data) {  //目标链表  存储数
   }
 }
 
-LinkedListNode *DeleteLinkedList(LinkedList *list, bool *callback(LinkedListNode *)) {//删除链表：目标结点 判断函数（值真为删除目标）
+void DeleteLinkedList(LinkedList *list,int key) {//删除链表：目标结点 判断函数（值真为删除目标）
   LinkedListNode *p, *p0;
   p0 = NULL;
+  int count = 1;
   for (p = list->top; p != NULL; p0 = p, p = p->next) {
-    if (callback(p)) {
-      p0->next = p->next;  //删除p0所指项
-      p = p0;  //指向删除项的下一项
-      break;
+    if (count == key) {
+      if (p0 != NULL) {
+        p0->next = p->next;  //删除p0所指项
+        p = p0->next;  //指向删除项的下一项
+        break;
+      }
+      else {
+        list->top = p->next;
+        p->next = NULL;
+        break;
+      }
     }
   }
-  return p;
+  return NULL;
 }
 
 LinkedListFindResult FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *)) {

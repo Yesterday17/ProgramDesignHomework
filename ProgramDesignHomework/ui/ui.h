@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <Windows.h>
+#include <time.h>
 
 #include "../utils/io.h"
 #include "../data/purchase.h"
@@ -22,6 +23,8 @@ typedef enum {
   MENU_Stock = 4,
   MENU_Amount = 5,
 } Menu;
+
+void Initial();
 
 void UI_Welcome();
 

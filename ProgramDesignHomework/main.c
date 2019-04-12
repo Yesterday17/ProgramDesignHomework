@@ -9,12 +9,7 @@
  * 主函数
  */
 int main() {
-  srand((unsigned) (time(NULL)));
-  color();
-
-  component = CreateLinkedList();
-  purchase = CreateLinkedList();
-  sales = CreateLinkedList();
+  Initial();
 
   UI_Welcome();
 
