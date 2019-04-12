@@ -1,5 +1,5 @@
 #include "sales.h"
-
+#include"component.h"
 #include "../global.h"
 #include "../utils/io.h"
 
@@ -66,11 +66,10 @@ Sales *readjson_sales(char *json_string, Sales *sales) {
 }
 cJSON*sales_cjson(Sales *prime)
 {
+	
 	cJSON * root = cJSON_CreateObject();
 	cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
-	
-
-	//
+	cJSON_AddItemToObject(root, "component", component_cjson(prime->component));
 	cJSON_AddItemToObject(root, "sales_mode", cJSON_CreateNumber(prime->sales_mode));
 	cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
 	cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
@@ -78,6 +77,7 @@ cJSON*sales_cjson(Sales *prime)
 
 	if (root)
 		return root;
+
 	else
 		printf("error!!!");
 }

@@ -22,5 +22,5 @@ Sales* ReadSales();
 
 string PrintSalesTitle();
 string PrintSales(void* node, uint8_t id);
-
+cJSON*sales_cjson(Sales *prime);
 #endif

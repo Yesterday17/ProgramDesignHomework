@@ -23,5 +23,5 @@ Component *readjson_component(cJSON *root, Component *comp);
 bool FindName_Component(LinkedListNode *node);
 bool FindType_Component(LinkedListNode *node);
 bool FindMan_Component(LinkedListNode *node);
-
+cJSON*component_cjson(Component *prime);
 #endif

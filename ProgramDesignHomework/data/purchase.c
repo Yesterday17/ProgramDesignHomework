@@ -74,24 +74,21 @@ Purchase *readjson_purchase(char *json_string, Purchase *purchase) {
     return purchase;
   }
 }
-cJSON*purchase_struct(Purchase prime)
+cJSON*sales_cjson(Purchase *prime)
 {
 	cJSON * root = cJSON_CreateObject();
-	cJSON * item = cJSON_CreateObject();
-	cJSON * next = cJSON_CreateObject();
+	cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
+	cJSON_AddItemToObject(root, "component", component_cjson(prime->prime));
+	cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
+	cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
+	cJSON_AddItemToObject(root, "total", cJSON_CreateNumber(prime->total));
+	cJSON_AddItemToObject(root, "quantity", cJSON_CreateString(prime->retailer));
 
-	cJSON_AddItemToObject(root, "rc", cJSON_CreateNumber(0));//根节点下添加
-	cJSON_AddItemToObject(root, "operation", cJSON_CreateString("CALL"));
-	cJSON_AddItemToObject(root, "service", cJSON_CreateString("telephone"));
-	cJSON_AddItemToObject(root, "text", cJSON_CreateString("打电话给张三"));
-	cJSON_AddItemToObject(root, "semantic", item);//root节点下添加semantic节点
-	cJSON_AddItemToObject(item, "slots", next);//semantic节点下添加item节点
-	cJSON_AddItemToObject(next, "name", cJSON_CreateString("张三"));//添加name节点
-
-	printf("%s\n", cJSON_Print(root));
-
-	return 0;
-
+	if (root)
+		return root;
+	else
+		printf("error!!!");
+}
 
 string PrintPurchaseTitle() {
   return STR_BUF("");
