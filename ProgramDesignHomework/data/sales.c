@@ -64,6 +64,23 @@ Sales *readjson_sales(char *json_string, Sales *sales) {
   }
   return sales;
 }
+cJSON*sales_cjson(Sales *prime)
+{
+	cJSON * root = cJSON_CreateObject();
+	cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
+	
+
+	//
+	cJSON_AddItemToObject(root, "sales_mode", cJSON_CreateNumber(prime->sales_mode));
+	cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
+	cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
+	cJSON_AddItemToObject(root, "total", cJSON_CreateNumber(prime->total));
+
+	if (root)
+		return root;
+	else
+		printf("error!!!");
+}
 
 string PrintSalesTitle() {
   return STR_BUF(" 名称  型号  制造商 销售模式  数量  单价  总价  赠品\n");
