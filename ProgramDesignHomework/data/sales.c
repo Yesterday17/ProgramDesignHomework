@@ -5,7 +5,7 @@
 
 Sales *ReadSales() {
   Sales *prime = malloc(sizeof(Sales));
-  // prime->time = ReadTime();
+  
   prime->price = InputInt(LITERAL("批发/零售价格: "));
   prime->quantity = InputInt(LITERAL("批发/零售数量: "));
   prime->total = prime->price * prime->quantity;
