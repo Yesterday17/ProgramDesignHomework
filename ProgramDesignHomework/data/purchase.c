@@ -74,7 +74,7 @@ Purchase *readjson_purchase(char *json_string, Purchase *purchase) {
     return purchase;
   }
 }
-cJSON*sales_cjson(Purchase *prime)
+cJSON*purchase_cjson(Purchase *prime)
 {
 	cJSON * root = cJSON_CreateObject();
 	cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
