@@ -3,18 +3,22 @@
 #include "../global.h"
 #include "../utils/io.h"
 
+
 /**
  * 从控制台读取数据
  * @return Purchase*
  */
-Purchase *ReadPurchase() {
-  Purchase *prime = (Purchase *) malloc(sizeof(Purchase));
+Purchase *ReadPurchase() 
+{  
+  
+	Purchase *prime = (Purchase *) malloc(sizeof(Purchase));
   prime->time = 0; // FIXME
   prime->price = 0;
   prime->quantity = 0;
   prime->total = prime->price * prime->quantity;
   prime->retailer =
       InputString(LITERAL("please input retailer"), LITERAL("3021"));
+  
   return prime;
 }
 
@@ -74,10 +78,12 @@ Purchase *readjson_purchase(char *json_string, Purchase *purchase) {
 
 		cJSON_Delete(root);
 		return purchase;
+	
 	}
 }
 cJSON*purchase_cjson(Purchase *prime)
 {
+	
 	cJSON * root = cJSON_CreateObject();
 	cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
 	cJSON_AddItemToObject(root, "component", component_cjson(prime->prime));
@@ -88,6 +94,7 @@ cJSON*purchase_cjson(Purchase *prime)
 
 	if (root)
 		return root;
+	
 	else
 		printf("error!!!");
 }
@@ -123,10 +130,19 @@ bool FindComponentType_Purchase(LinkedListNode *node) {
 
 
 
-Purchase *purchasejson_struct(string filename)
+Purchase * purchasejson_struct(string filename)
 {
+	
+	Purchase *purchase;
 	if (FileExist(filename))
 	{
-		return readjson_purchase(ReadFile(filename), purchase);
+		string prime;
+		int i;
+		prime = ReadFile(filename);
+		cJSON *root = cJSON_Parse(prime);
+		for (;root!=NULL;root++)
+		{
+			Purchase *readjson_purchase(char *json_string, Purchase *purchase);
+		}
 	}
 }
