@@ -90,7 +90,7 @@ string PrintSales(void *node, uint8_t id) {
   return concat2(((Sales *) node)->customer, STRING("\n"));
 }
 
-bool Findcustomer_Component(LinkedListNode *node) {
+bool FindCustomer_Sales(LinkedListNode *node) {
   return compareString(((Sales *) node->data)->customer, customerToSearch) == STRING_EQUAL;
 }
 bool FindComponentName_Sales(LinkedListNode *node) {

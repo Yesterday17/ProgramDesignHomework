@@ -23,6 +23,7 @@ Purchase *readjson_purchase(char *json_string, Purchase *purchase);
 
 string PrintPurchaseTitle();/*带上\n*/
 string PrintPurchase(void *node, uint8_t id);/*带上\n*/
+bool FindRetailer_Purchase(LinkedListNode *node);
 bool FindTime_Purchase(LinkedListNode *node);
 bool FindComponentName_Purchase(LinkedListNode *node);
 bool FindComponentType_Purchase(LinkedListNode *node);

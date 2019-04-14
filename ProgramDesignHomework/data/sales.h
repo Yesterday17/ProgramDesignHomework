@@ -23,6 +23,7 @@ Sales* ReadSales();
 string PrintSalesTitle();
 string PrintSales(void* node, uint8_t id);
 cJSON*sales_cjson(Sales *prime);
+bool FindCustomer_Sales(LinkedListNode *node);
 bool FindComponentName_Sales(LinkedListNode *node);
 bool FindComponentType_Sales(LinkedListNode *node);
 #endif

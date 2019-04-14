@@ -105,7 +105,7 @@ bool FindTime_Purchase(LinkedListNode *node) {
     return false;
 }
 
-bool Findretailer_Purchase(LinkedListNode *node) {
+bool FindRetailer_Purchase(LinkedListNode *node) {
   return compareString(((Purchase *) node->data)->retailer, retailerToSearch) == STRING_EQUAL;
 }
 

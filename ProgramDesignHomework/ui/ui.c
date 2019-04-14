@@ -129,15 +129,20 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       PrintLITERAL("[ ]3.按时间范围检索\n");
       y=OptionBar(1, 3);
       cls();
-	  if (y == 0) {
+      LinkedListFindResult res;
+      if (y == 0) {
+        res = FindLinkedList(purchase, FindComponentType_Purchase);
 
-	  }
-	  if (y == 1) {
-
-	  }
-	  if (y == 2) {
-
-	  }
+      }
+      if (y == 1) {
+        res = FindLinkedList(purchase,FindRetailer_Purchase);
+      }
+      if (y == 2) {
+        res = FindLinkedList(purchase, FindTime_Purchase);
+      }
+      for (int i = 0; i < res.count; i++) {
+        PrintLITERAL(PrintPurchase(res.result[i], i));
+      }
       break;
     case 3:return MENU_Main;
     }
@@ -204,10 +209,10 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       
 	  }
 	  if (y == 1) {
-
+      res = FindLinkedList(sales, FindCustomer_Sales);
 	  }
 	  if (y == 2) {
-
+      //
 	  }
     for (int i = 0; i < res.count; i++) {
         PrintLITERAL(PrintSales(res.result[i],i));
