@@ -141,7 +141,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         res = FindLinkedList(purchase, FindTime_Purchase);
       }
       for (int i = 0; i < res.count; i++) {
-        PrintLITERAL(PrintPurchase(res.result[i], i));
+        PrintString(PrintPurchase(res.result[i], i));
       }
       break;
     case 3:return MENU_Main;
@@ -205,6 +205,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       cls();
       LinkedListFindResult res;
 	  if (y == 0) {
+      typeToSearch = InputStr("请输入配件型号: ");
       res=FindLinkedList(sales, FindComponentType_Sales);
       
 	  }
@@ -215,7 +216,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       //
 	  }
     for (int i = 0; i < res.count; i++) {
-        PrintLITERAL(PrintSales(res.result[i],i));
+        PrintString(PrintSales(res.result[i],i));
       }
       break;
     case 3:

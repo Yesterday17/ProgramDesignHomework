@@ -75,3 +75,30 @@ TEST(TestLinkedList, InputMultipleStruct) {
   free(test3);
   free(list);
 }
+
+TEST(TestLinkedList, FinalNULL) {
+  LinkedList *list = CreateLinkedList();
+  int a = 0;
+
+  EXPECT_TRUE(list->top == NULL);
+  EXPECT_TRUE(list->rear == NULL);
+
+  InsertLinkedList(list, &a);
+  EXPECT_TRUE(list->top != NULL);
+  EXPECT_TRUE(list->rear != NULL);
+  EXPECT_TRUE(list->top->next != NULL);
+  EXPECT_TRUE(list->rear->next == NULL);
+
+  InsertLinkedList(list, &a);
+  EXPECT_TRUE(list->top != NULL);
+  EXPECT_TRUE(list->rear != NULL);
+  EXPECT_TRUE(list->top->next != NULL);
+  EXPECT_TRUE(list->rear->next == NULL);
+  
+  InsertLinkedList(list, &a);
+  EXPECT_TRUE(list->top != NULL);
+  EXPECT_TRUE(list->rear != NULL);
+  EXPECT_TRUE(list->top->next != NULL);
+  EXPECT_TRUE(list->rear->next == NULL);
+  free(list);
+}
