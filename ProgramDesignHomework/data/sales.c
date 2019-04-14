@@ -100,3 +100,6 @@ bool FindComponentName_Sales(LinkedListNode *node) {
 bool FindComponentType_Sales(LinkedListNode *node) {
   return compareString(((Sales*)(node->data))->prime->type, nameToSearch) == STRING_EQUAL;
 }
+
+Component* Gift(Component* component) {
+}
