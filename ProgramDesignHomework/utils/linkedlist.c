@@ -18,7 +18,8 @@ void InsertLinkedList(LinkedList *list, void *data) {  //目标链表  存储数
   if (list->rear == NULL) {  // 首结点
     list->top = p;
     list->rear = p;
-  } else {  //下一节点
+  } 
+  else {  //下一节点
     list->rear->next = p;
     list->rear = p;
   }
@@ -29,6 +30,7 @@ void DeleteLinkedList(LinkedList *list,int key) {//删除链表：目标结点 �
   LinkedListNode *p, *p0;
   p0 = NULL;
   int count = 1;
+
   for (p = list->top; p != NULL; p0 = p, p = p->next) {
     if (count == key) {
       if (p0 != NULL) {
@@ -42,6 +44,7 @@ void DeleteLinkedList(LinkedList *list,int key) {//删除链表：目标结点 �
         break;
       }
     }
+    count++;
   }
   return NULL;
 }
