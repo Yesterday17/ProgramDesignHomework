@@ -83,7 +83,7 @@ cJSON*sales_cjson(Sales *prime)
 }
 
 string PrintSalesTitle() {
-  return STR_BUF(" 名称  型号  制造商 销售模式  数量  单价  总价  赠品\n");
+  return STR_BUF(" 名称  型号  制造商 销售模式  数量  单价  总价  客户信息  赠品\n");
 }
 
 string PrintSales(void *node, uint8_t id) {
