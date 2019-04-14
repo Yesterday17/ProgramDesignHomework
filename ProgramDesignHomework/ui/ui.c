@@ -202,7 +202,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         cls();
         LinkedList* res=NULL;
         if (y == 0) {
-          typeToSearch = InputStr("请输入配件型号: ");
+          typeToSearch = InputStr(LITERAL("请输入配件型号: "));
           res = FindLinkedList(sales, FindComponentType_Sales);
         }
         if (y == 1) {
