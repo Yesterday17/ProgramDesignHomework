@@ -1,6 +1,7 @@
 #include "sales.h"
 #include"component.h"
 #include "../global.h"
+#include"../utils/fs.h"
 #include "../utils/io.h"
 
 Sales *ReadSales() {
@@ -109,4 +110,16 @@ bool FindTime_Sales(LinkedListNode *node) {
 		return true;
 	else
 		return false;
+}
+
+
+Sales *salesjson_struct(string filename)
+{
+	
+	if (FileExist(filename))
+	{
+		
+		return readjson_sales(ReadFile(filename), sales);
+	
+	}
 }
