@@ -14,10 +14,11 @@ typedef struct {  // 链表指针
   LinkedListNode *rear;
 } LinkedList;
 
-typedef struct {
-  size_t count;
-  LinkedListNode **result;
-} LinkedListFindResult;
+
+typedef struct LinkedlistResult{
+  LinkedListNode* res0;
+  int count ;
+}LinkedListResult;
 
 LinkedList *CreateLinkedList();
 
@@ -26,6 +27,6 @@ void InsertLinkedList(LinkedList *list, void *data);
 void DeleteLinkedList(LinkedList *list,
                                  int key);
 
-LinkedListFindResult FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *));
+LinkedList* FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *));
 
 #endif

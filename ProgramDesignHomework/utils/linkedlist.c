@@ -49,21 +49,19 @@ void DeleteLinkedList(LinkedList *list,int key) {//删除链表：目标结点 �
   return NULL;
 }
 
-LinkedListFindResult FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *)) {
+ LinkedList* FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *)) {
   LinkedListNode *p;
-  LinkedListFindResult res;
-  res.count = 0;
-  int a = 100;
-  res.result = (LinkedListNode **) malloc(sizeof(LinkedListNode *) * a);
+  LinkedList*  result=CreateLinkedList();
+  LinkedListResult* res=NULL; 
+  res->count = 0;
+  int count = 0;
   for (p = list->top; p != NULL; p = p->next) {
     if (callback(p)) {
-      res.result[res.count] = p;
-      res.count++;
+      res->count = count;
+      res->res0 = p;
+      InsertLinkedList(result, res);
     }
-    if (res.count + 1 == 100) {
-      a *= 2;
-      res.result = (LinkedListNode **) realloc(res.result, sizeof(LinkedListNode *) * a);
-    }
+    count++;
   }
-  return res;
+  return result;
 }
