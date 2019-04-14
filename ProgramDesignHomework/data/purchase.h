@@ -19,7 +19,8 @@ typedef struct {
 } Purchase;
 
 Purchase *ReadPurchase();
-Purchase *readjson_purchase(char *json_string, Purchase *purchase);
+Purchase *readjson_purchase(cJSON *root);
+LinkedList* purchasejson_struct(string filename);
 
 string PrintPurchaseTitle();/*带上\n*/
 string PrintPurchase(void *node, uint8_t id);/*带上\n*/

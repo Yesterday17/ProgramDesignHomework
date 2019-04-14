@@ -14,9 +14,9 @@ Sales *ReadSales() {
   prime->prime = ReadComponent();
   return prime;
 }
-Sales *readjson_sales(char *json_string, Sales *sales) {
-  cJSON *item;
-  cJSON *root = cJSON_Parse(json_string);
+Sales *readjson_sales(cJSON*root) {
+	cJSON *object = cJSON_GetObjectItem(root, "purchase"), *item;
+	Sales*sales = (Sales*)malloc(sizeof(Sales));
   if (!root) {
     printf("Error before: [%s]\n", cJSON_GetErrorPtr());
     cJSON_Delete(root);
@@ -113,13 +113,19 @@ bool FindTime_Sales(LinkedListNode *node) {
 }
 
 
-Sales *salesjson_struct(string filename)
+LinkedList* salesjson_struct(string filename)
 {
-	
+	LinkedList *list = CreateLinkedList();
 	if (FileExist(filename))
 	{
-		
-		return readjson_sales(ReadFile(filename), sales);
-	
+		string prime;
+		int i;
+		prime = ReadFile(filename);
+		cJSON * root = cJSON_Parse(prime);
+		int count = cJSON_GetArraySize(root);
+		for (int i = 0; i < count; i++) {
+			InsertLinkedList(list, readjson_sales(cJSON_GetArrayItem(root, i)));
+		}
 	}
+	return list;
 }
