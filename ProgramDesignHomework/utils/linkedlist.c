@@ -34,13 +34,26 @@ void DeleteLinkedList(LinkedList *list,int key) {//删除链表：目标结点 �
   for (p = list->top; p != NULL; p0 = p, p = p->next) {
     if (count == key) {
       if (p0 != NULL) {
-        p0->next = p->next;  //删除p0所指项
-        p = p0->next;  //指向删除项的下一项
+        if (p != list->rear) {
+          p0->next = p->next;  //删除p0所指项
+          p = p0->next;  //指向删除项的下一项
+        }
+        else {
+          list->rear = p0;
+          p = NULL;
+        }
         break;
       }
       else {
-        list->top = p->next;
-        p->next = NULL;
+        if (p != list->rear) {
+          list->top = p->next;
+          p->next = NULL;
+        }
+        else {
+          list->top = NULL;
+          free(p);
+          list->rear = NULL;
+        }
         break;
       }
     }
@@ -52,7 +65,7 @@ void DeleteLinkedList(LinkedList *list,int key) {//删除链表：目标结点 �
  LinkedList* FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *)) {
   LinkedListNode *p;
   LinkedList*  result=CreateLinkedList();
-  LinkedListResult* res=NULL; 
+  LinkedListResult* res = (LinkedListResult*)malloc(sizeof(LinkedListResult));
   res->count = 0;
   int count = 0;
   for (p = list->top; p != NULL; p = p->next) {

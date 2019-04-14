@@ -87,6 +87,9 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
     switch (y) {
     case 0:
       if (purchase->rear != NULL) {
+        PrintLITERAL("选中页面请按Enter，返回上一级请按Backspace\n");
+        Sleep(1000);
+        cls();
         record = RecordPage(purchase, PrintPurchaseTitle(), PrintPurchase);
         gotoxy(1, 1 + hangshu);
         PrintLITERAL("修改记录Enter   删除记录Delete\n");
@@ -94,7 +97,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           char key1 = _getch();
           char key2 = 0;
           if (key1 == 13) {//enter
-            DeleteLinkedList(purchase,record);
+            DeleteLinkedList(purchase, record);
             cls();
             InsertLinkedList(purchase, ReadPurchase());
             cls();
@@ -111,7 +114,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         }
       }
       else {
-        PrintLITERAL("该记录为空, 按回车返回上一级  ");
+        PrintLITERAL("该记录为空, 按回车返回上一级\n");
         while (1) {
           char ch = _getch();
           if (ch == 13)break;
@@ -120,24 +123,72 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       }
       break;
     case 1:
-		  InsertLinkedList(purchase, ReadPurchase());
+      InsertLinkedList(purchase, ReadPurchase());
       cls();
       break;
     case 2:
       PrintLITERAL("[ ]1.按配件型号检索\n");
       PrintLITERAL("[ ]2.按供货商检索\n");
       PrintLITERAL("[ ]3.按时间范围检索\n");
-      y=OptionBar(1, 3);
+      y = OptionBar(1, 3);
       cls();
       LinkedList* res;
       if (y == 0) {
         //res = FindLinkedList(purchase, FindRetailer_Purchase);
       }
       if (y == 1) {
-       // res = FindLinkedList(purchase,FindRetailer_Purchase);
+        // res = FindLinkedList(purchase,FindRetailer_Purchase);
       }
       if (y == 2) {
         res = FindLinkedList(purchase, FindTime_Purchase);
+      }
+      cls();
+      LinkedList* result = CreateLinkedList();
+      for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
+        InsertLinkedList(result, ((LinkedListResult*)p->data)->res0);
+      }
+      PrintLITERAL("选中页面请按Enter，返回上一级请按Backspace\n");
+      Sleep(1000);
+      cls();
+      int num = RecordPage(result, PrintPurchaseTitle, PrintPurchase);
+      int count = 0;
+      if (num != -1) {
+        for (LinkedListNode* p = res->top; p != NULL; p++) {
+          if (num == count) {
+            record = ((LinkedListResult*)p->data)->count;
+            break;
+          }
+          count++;
+        }
+        gotoxy(1, 1 + hangshu);
+        PrintLITERAL("修改记录Enter   删除记录Delete\n");
+        while (1) {
+          char key1 = _getch();
+          char key2 = 0;
+          if (key1 == 13) {//enter
+            DeleteLinkedList(purchase, record);
+            cls();
+            InsertLinkedList(purchase, ReadPurchase());
+            cls();
+            break;
+          }
+          if (key1 < 0) {
+            key2 = _getch();
+            if (key2 == 83) {//delete
+              cls();
+              DeleteLinkedList(purchase, record);
+              break;
+            }
+          }
+        }
+      }
+      else {
+        PrintLITERAL("该记录为空, 按回车返回上一级 ");
+        while (1) {
+          char ch = _getch();
+          if (ch == 13)break;
+        }
+        cls();
       }
       break;
     case 3:return MENU_Main;
@@ -155,26 +206,30 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
     switch (y) {
     case 0:
       if (sales->rear != NULL) {
+        PrintLITERAL("选中页面请按Enter，返回上一级请按Backspace\n");
+        Sleep(1000);
+        cls();
         record = RecordPage(sales, PrintSalesTitle(), PrintSales);
-        gotoxy(1, 1 + hangshu);
-        PrintLITERAL("修改记录Enter   删除记录Delete\n");
-
-        while (1) {
-          char key1 = _getch();
-          char key2 = 0;
-          if (key1 == 13) {//enter
-            DeleteLinkedList(sales,record);
-            cls();
-            InsertLinkedList(sales, ReadSales());
-            cls();
-            break;
-          }
-          if (key1 < 0) {
-            key2 = _getch();
-            if (key2 == 83) {//delete
+        if (record != -1) {
+          gotoxy(1, 1 + hangshu);
+          PrintLITERAL("修改记录Enter   删除记录Delete\n\n");
+          while (1) {
+            char key1 = _getch();
+            char key2 = 0;
+            if (key1 == 13) {//enter
+              DeleteLinkedList(sales, record);
               cls();
-              DeleteLinkedList(sales,record);
+              InsertLinkedList(sales, ReadSales());
+              cls();
               break;
+            }
+            if (key1 < 0) {
+              key2 = _getch();
+              if (key2 == 83) {//delete
+                cls();
+                DeleteLinkedList(sales, record);
+                break;
+              }
             }
           }
 
@@ -200,7 +255,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         PrintLITERAL("[ ]3.按时间范围检索\n");
         int y = OptionBar(1, 3);
         cls();
-        LinkedList* res=NULL;
+        LinkedList* res = NULL;
         if (y == 0) {
           typeToSearch = InputStr(LITERAL("请输入配件型号: "));
           res = FindLinkedList(sales, FindComponentType_Sales);
@@ -216,33 +271,38 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
           InsertLinkedList(result, ((LinkedListResult*)p->data)->res0);
         }
-        int num=RecordPage(result, PrintSalesTitle, PrintSales);
+        PrintLITERAL("选中页面请按Enter，返回上一级请按Backspace\n");
+        Sleep(1000);
+        cls();
+        int num = RecordPage(result, PrintSalesTitle, PrintSales);
         int count = 0;
-        for (LinkedListNode* p = res->top; p != NULL; p++) {
-          if (num == count) {
-            record = ((LinkedListResult*)p->data)->count;
-            break;
-          }
-          count++;
-        }
-        gotoxy(1, 1 + hangshu);
-        PrintLITERAL("修改记录Enter   删除记录Delete\n");
-        while (1) {
-          char key1 = _getch();
-          char key2 = 0;
-          if (key1 == 13) {//enter
-            DeleteLinkedList(sales, record);
-            cls();
-            InsertLinkedList(sales, ReadSales());
-            cls();
-            break;
-          }
-          if (key1 < 0) {
-            key2 = _getch();
-            if (key2 == 83) {//delete
-              cls();
-              DeleteLinkedList(sales, record);
+        if (num != -1) {
+          for (LinkedListNode* p = res->top; p != NULL; p++) {
+            if (num == count) {
+              record = ((LinkedListResult*)p->data)->count;
               break;
+            }
+            count++;
+          }
+          gotoxy(1, 1 + hangshu);
+          PrintLITERAL("修改记录Enter   删除记录Delete\n");
+          while (1) {
+            char key1 = _getch();
+            char key2 = 0;
+            if (key1 == 13) {//enter
+              DeleteLinkedList(sales, record);
+              cls();
+              InsertLinkedList(sales, ReadSales());
+              cls();
+              break;
+            }
+            if (key1 < 0) {
+              key2 = _getch();
+              if (key2 == 83) {//delete
+                cls();
+                DeleteLinkedList(sales, record);
+                break;
+              }
             }
           }
         }
@@ -318,7 +378,6 @@ int RecordPage(LinkedList *data, string title, string record(void *, uint8_t)) {
   while (1) {
 
     if ((count - 1) % hangshu == 0 && count != 1 || p == data->rear->next) {
-
       end = count;
       if (p == data->rear->next && (count - 1) % hangshu != 0) {
         count = (count + hangshu - 1) / hangshu * hangshu + 1;//进位取整+1：如39->41
@@ -343,6 +402,10 @@ int RecordPage(LinkedList *data, string title, string record(void *, uint8_t)) {
         else//锁定其他按键
           continue;
       }
+      if (a == 8) {
+        cls();
+        return -1;
+      }//Backspace
       if (a == 13)break;//回车退出
     }
     num++;
