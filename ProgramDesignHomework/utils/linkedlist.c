@@ -22,6 +22,7 @@ void InsertLinkedList(LinkedList *list, void *data) {  //目标链表  存储数
     list->rear->next = p;
     list->rear = p;
   }
+  list->rear->next = NULL;
 }
 
 void DeleteLinkedList(LinkedList *list,int key) {//删除链表：目标结点 判断函数（值真为删除目标）
