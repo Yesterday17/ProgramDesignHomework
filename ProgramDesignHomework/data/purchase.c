@@ -99,7 +99,7 @@ string PrintPurchase(void *node, uint8_t id) {
 }
 
 bool FindTime_Purchase(LinkedListNode *node) {
-  if (((Purchase *) node->data)->time == timeToSearch)
+  if (((Purchase *) node->data)->time <= timeToSearchearly && ((Purchase *)node->data)->time>= timeToSearchearly)
     return true;
   else
     return false;

@@ -18,11 +18,13 @@ extern LinkedList* purchase;
 extern LinkedList* sales;
 
 extern string nameToSearch;
-extern uint64_t timeToSearch;
+extern uint64_t timeToSearchearly;
+extern uint64_t timeToSearchlate;
 extern Component* componentToSearch;
 extern string customerToSearch;
 extern string retailerToSearch;
 extern string typeToSearch;
 extern string manufacturerToSearch;
+
 
 #endif

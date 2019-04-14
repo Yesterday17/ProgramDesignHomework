@@ -12,7 +12,8 @@ string customerToSearch;
 string retailerToSearch;
 string manufacturerToSearch;
 string typeToSearch;
-uint64_t timeToSearch;
+uint64_t timeToSearchearly;
+uint64_t timeToSearchlate;
 Component *componentToSearch = NULL;
 
 LinkedList *component;
