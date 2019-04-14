@@ -103,6 +103,7 @@ bool FindComponentType_Sales(LinkedListNode *node) {
 }
 
 Component* Gift(Component* component) {
+		
 }
 
 bool FindTime_Sales(LinkedListNode *node) {
