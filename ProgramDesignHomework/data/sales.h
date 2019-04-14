@@ -9,7 +9,7 @@
 
 typedef struct sales {
   uint64_t time;
-  Component* component;
+  Component* prime;
   int  sales_mode; // 销售模式（1表示批发，0表示零售）
   int price;       // 销售单价
   int quantity;    // 销售数量
@@ -23,4 +23,6 @@ Sales* ReadSales();
 string PrintSalesTitle();
 string PrintSales(void* node, uint8_t id);
 cJSON*sales_cjson(Sales *prime);
+bool FindComponentName_Sales(LinkedListNode *node);
+bool FindComponentType_Sales(LinkedListNode *node);
 #endif

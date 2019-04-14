@@ -109,3 +109,10 @@ bool Findretailer_Purchase(LinkedListNode *node) {
   return compareString(((Purchase *) node->data)->retailer, retailerToSearch) == STRING_EQUAL;
 }
 
+bool FindComponentName_Purchase(LinkedListNode *node) {
+  return compareString(((Purchase*)(node->data))->prime->name, nameToSearch) == STRING_EQUAL;
+}
+
+bool FindComponentType_Purchase(LinkedListNode *node) {
+  return compareString(((Purchase*)(node->data))->prime->type, nameToSearch) == STRING_EQUAL;
+}

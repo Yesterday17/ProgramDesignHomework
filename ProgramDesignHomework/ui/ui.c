@@ -119,14 +119,25 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         cls();
       }
       break;
-    case 1:InsertLinkedList(purchase, ReadPurchase());
+    case 1:
+		  InsertLinkedList(purchase, ReadPurchase());
       cls();
       break;
-    case 2:PrintLITERAL("[ ]1.按配件种类检索\n");
+    case 2:
+      PrintLITERAL("[ ]1.按配件型号检索\n");
       PrintLITERAL("[ ]2.按供货商检索\n");
       PrintLITERAL("[ ]3.按时间范围检索\n");
-      OptionBar(1, 3);
+      y=OptionBar(1, 3);
       cls();
+	  if (y == 0) {
+
+	  }
+	  if (y == 1) {
+
+	  }
+	  if (y == 2) {
+
+	  }
       break;
     case 3:return MENU_Main;
     }
@@ -177,19 +188,36 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         cls();
       }
       break;
-    case 1:InsertLinkedList(sales, ReadSales());
+    case 1:
+      InsertLinkedList(sales, ReadSales());
       cls();
       break;
-    case 2:PrintLITERAL("[ ]1.按配件种类检索\n");
+    case 2:
+      PrintLITERAL("[ ]1.按配件型号检索\n");
       PrintLITERAL("[ ]2.按客户检索\n");
       PrintLITERAL("[ ]3.按时间范围检索\n");
       int y = OptionBar(1, 3);
       cls();
+      LinkedListFindResult res;
+	  if (y == 0) {
+      res=FindLinkedList(sales, FindComponentType_Sales);
+      
+	  }
+	  if (y == 1) {
+
+	  }
+	  if (y == 2) {
+
+	  }
+    for (int i = 0; i < res.count; i++) {
+        PrintLITERAL(PrintSales(res.result[i],i));
+      }
       break;
     case 3:
       //
       break;
-    case 4:return MENU_Main;
+    case 4:
+      return MENU_Main;
     }
     return MENU_Sales;
   }

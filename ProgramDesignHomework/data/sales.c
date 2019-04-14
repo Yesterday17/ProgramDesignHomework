@@ -10,7 +10,7 @@ Sales *ReadSales() {
   prime->quantity = InputInt(LITERAL("批发/零售数量: "));
   prime->total = prime->price * prime->quantity;
   prime->customer = InputString(LITERAL("please input customer: "), LITERAL("3021 bosses"));
-  prime->component = ReadComponent();
+  prime->prime = ReadComponent();
   return prime;
 }
 Sales *readjson_sales(char *json_string, Sales *sales) {
@@ -33,7 +33,7 @@ Sales *readjson_sales(char *json_string, Sales *sales) {
       }
       item = cJSON_GetObjectItem(object, "component");
       if (item != NULL) {
-        sales->component = readjson_component(item, sales->component);
+        sales->prime = readjson_component(item, sales->prime);
       }
       item = cJSON_GetObjectItem(object, "sales_mode");
       if (item != NULL) {
@@ -69,7 +69,7 @@ cJSON*sales_cjson(Sales *prime)
 	
 	cJSON * root = cJSON_CreateObject();
 	cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
-	cJSON_AddItemToObject(root, "component", component_cjson(prime->component));
+	cJSON_AddItemToObject(root, "component", component_cjson(prime->prime));
 	cJSON_AddItemToObject(root, "sales_mode", cJSON_CreateNumber(prime->sales_mode));
 	cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
 	cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
@@ -92,4 +92,11 @@ string PrintSales(void *node, uint8_t id) {
 
 bool Findcustomer_Component(LinkedListNode *node) {
   return compareString(((Sales *) node->data)->customer, customerToSearch) == STRING_EQUAL;
+}
+bool FindComponentName_Sales(LinkedListNode *node) {
+  return compareString(((Sales*)(node->data))->prime->name, nameToSearch) == STRING_EQUAL;
+}
+
+bool FindComponentType_Sales(LinkedListNode *node) {
+  return compareString(((Sales*)(node->data))->prime->type, nameToSearch) == STRING_EQUAL;
 }
