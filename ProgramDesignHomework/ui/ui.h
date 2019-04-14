@@ -14,7 +14,7 @@
 /**
  * 记录菜单状态的枚举
  */
-typedef enum {
+typedef enum Menu {
   MENU_Exit = -1,
   MENU_Welcome = 0,
   MENU_Main = 1,

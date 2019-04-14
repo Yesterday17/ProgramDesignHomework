@@ -9,7 +9,7 @@ typedef struct LinkedListNode {  //链表结点
   struct LinkedListNode *next;
 } LinkedListNode;
 
-typedef struct {  // 链表指针
+typedef struct LinkedList{  // 链表指针
   LinkedListNode *top;
   LinkedListNode *rear;
 } LinkedList;

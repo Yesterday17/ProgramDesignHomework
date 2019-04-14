@@ -9,7 +9,7 @@
 #include "component.h"
 #include "time.h"
 
-typedef struct {
+typedef struct Purchase {
   Component *prime;
   uint64_t time;
   int price;       // 进货单价

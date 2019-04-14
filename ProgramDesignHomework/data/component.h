@@ -10,7 +10,7 @@
 /**
  * 计算机配件 - 管理系统所管理物品
  */
-typedef struct {
+typedef struct Component {
   int index;           // 索引
   string name;          // 配件名称
   string type;         // 配件型号
