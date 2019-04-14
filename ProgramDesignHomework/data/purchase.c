@@ -91,7 +91,7 @@ cJSON*purchase_cjson(Purchase *prime)
 }
 
 string PrintPurchaseTitle() {
-	return STR_BUF(" 名称  型号  制造商  时间  单价  数量  总价  销售商\n");
+  return STR_BUF("");
 }
 
 string PrintPurchase(void *node, uint8_t id) {
@@ -107,7 +107,7 @@ bool FindTime_Purchase(LinkedListNode *node) {
 
 }
 
-bool FindRetailer_Purchase(LinkedListNode *node) {
+bool Findretailer_Purchase(LinkedListNode *node) {
   return compareString(((Purchase *) node->data)->retailer, retailerToSearch) == STRING_EQUAL;
 }
 
