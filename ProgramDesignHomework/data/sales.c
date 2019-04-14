@@ -91,7 +91,7 @@ string PrintSales(void *node, uint8_t id) {
 }
 
 bool FindCustomer_Sales(LinkedListNode *node) {
-  return compareString(((Sales *) node->data)->customer, customerToSearch) == STRING_EQUAL;
+  return compareString(((Sales *)(node->data))->customer, customerToSearch) == STRING_EQUAL;
 }
 bool FindComponentName_Sales(LinkedListNode *node) {
   return compareString(((Sales*)(node->data))->prime->name, nameToSearch) == STRING_EQUAL;

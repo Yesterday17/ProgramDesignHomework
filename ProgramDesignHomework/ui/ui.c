@@ -216,7 +216,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       //
 	  }
     for (int i = 0; i < res.count; i++) {
-        PrintString(PrintSales(res.result[i],i));
+        PrintString(PrintSales(res.result[i]->data,i));
       }
       break;
     case 3:
