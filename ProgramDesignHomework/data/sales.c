@@ -1,4 +1,4 @@
-#include "sales.h"
+﻿#include "sales.h"
 #include"component.h"
 #include "../global.h"
 #include"../utils/fs.h"

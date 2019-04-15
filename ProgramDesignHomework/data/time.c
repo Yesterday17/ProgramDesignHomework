@@ -1,4 +1,4 @@
-#include "time.h"
+﻿#include "time.h"
 
 bool prime(int a) {
   if ((a % 4 == 0 && a % 100 != 0) || (a % 400 == 0))

@@ -1,4 +1,4 @@
-#include "io.h"
+﻿#include "io.h"
 
 string InputString(string comment, string defaultValue) {
   int len = 0, capability = 16;
@@ -25,23 +25,23 @@ string InputString(string comment, string defaultValue) {
 }
 
 int InputInteger(string comment, string errorMessage, int defaultValue) {
-  string input = InputString(comment, LITERAL("\n"));
+  string input = InputString(comment, STRING("\n"));
   int ans;
 
-  if (compareString(input, LITERAL("\n")) == STRING_EQUAL) {
+  if (compareString(input, STRING("\n")) == STRING_EQUAL) {
     return defaultValue;
   }
 
   while (sscanf(U8_CSTR(input), "%d", &ans) != 1) {
     printf("%s\n", errorMessage);
     $STR_BUF(input);
-    input = InputString(comment, LITERAL("\n"));
+    input = InputString(comment, STRING("\n"));
   }
   return ans;
 }
 
 int InputInt(string comment) {
-  return InputInteger(comment, LITERAL("Error inputing integer, retry please."), 0);
+  return InputInteger(comment, STRING("Error inputing integer, retry please."), 0);
 }
 
-string InputStr(string comment) { return InputString(comment, LITERAL("")); }
+string InputStr(string comment) { return InputString(comment, STRING("")); }

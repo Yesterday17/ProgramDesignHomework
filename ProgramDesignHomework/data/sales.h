@@ -1,4 +1,4 @@
-#ifndef _DATA_SALES_H_
+﻿#ifndef _DATA_SALES_H_
 #define _DATA_SALES_H_
 
 #include <malloc.h>
@@ -7,7 +7,7 @@
 #include "component.h"
 #include "time.h"
 
-typedef struct sales {
+typedef struct Sales {
   uint64_t time;
   Component* prime;
   int  sales_mode; // 销售模式（1表示批发，0表示零售）

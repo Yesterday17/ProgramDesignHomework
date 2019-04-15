@@ -1,4 +1,4 @@
-#include "purchase.h"
+﻿#include "purchase.h"
 #include"../utils/fs.h"
 #include "../global.h"
 #include "../utils/io.h"

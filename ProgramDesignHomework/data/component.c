@@ -1,4 +1,4 @@
-#include "component.h"
+﻿#include "component.h"
 
 #include "../global.h"
 #include "../utils/io.h"

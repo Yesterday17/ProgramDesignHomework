@@ -1,4 +1,4 @@
-#include "linkedlist.h"
+﻿#include "linkedlist.h"
 #include <stdlib.h>
 
 LinkedList *CreateLinkedList() {  //定义空链表

@@ -1,4 +1,4 @@
-#ifndef _UTILS_LINKEDLIST_H_
+﻿#ifndef _UTILS_LINKEDLIST_H_
 #define _UTILS_LINKEDLIST_H_
 
 #include <stdbool.h>

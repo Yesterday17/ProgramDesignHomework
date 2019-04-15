@@ -1,4 +1,4 @@
-#include "global.h"
+﻿#include "global.h"
 
 /**
  * 定义全局变量的源文件

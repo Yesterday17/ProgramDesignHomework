@@ -1,4 +1,4 @@
-#ifndef _UTILS_IO_H_
+﻿#ifndef _UTILS_IO_H_
 #define _UTILS_IO_H_
 
 #include <stdio.h>
@@ -17,7 +17,8 @@ int InputInteger(string comment, string errorMessage, int defaultValue);
 string InputStr(string comment);
 int InputInt(string comment);
 
-#define PrintString(str) printf("%s", CSTR(str))
-#define PrintLITERAL(str) printf("%s", CSTR(LITERAL(str)))
+#define PrintString(str) printf(U8_CSTR(str))
+#define PrintLITERAL(str) printf(U8_CSTR(LITERAL(str)))
+#define NewLine() printf("\n")
 
 #endif

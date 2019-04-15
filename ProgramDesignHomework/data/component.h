@@ -1,4 +1,4 @@
-#include <stdbool.h>
+﻿#include <stdbool.h>
 
 #ifndef _DATA_COMPONENT_H_
 #define _DATA_COMPONENT_H_

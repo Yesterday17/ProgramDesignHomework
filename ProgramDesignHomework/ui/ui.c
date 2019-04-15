@@ -1,4 +1,4 @@
-#include "ui.h"
+﻿#include "ui.h"
 
 #define UNICODE
 #define hangshu 10 //记录每页最大行数
