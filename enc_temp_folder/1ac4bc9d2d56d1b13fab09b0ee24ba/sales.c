@@ -6,11 +6,12 @@
 
 Sales *ReadSales() {
   Sales *prime = malloc(sizeof(Sales));
-  prime->prime = ReadComponent();
+
   prime->price = InputInt(LITERAL("批发/零售价格: "));
   prime->quantity = InputInt(LITERAL("批发/零售数量: "));
   prime->total = prime->price * prime->quantity;
-  prime->customer = InputString(LITERAL("客户信息: "), LITERAL("无"));
+  prime->customer = InputString(LITERAL("please input customer: "), LITERAL("3021 bosses"));
+  prime->prime = ReadComponent();
   return prime;
 }
 Sales *readjson_sales(cJSON*root) {
@@ -131,7 +132,7 @@ LinkedList* Gift(LinkedList *node) {
 
 
 bool FindTime_Sales(LinkedListNode *node) {
-  if (((Sales *)node->data)->time <= timeToSearchearly && ((Sales *)node->data)->time >= timeToSearchlate)
+  if (((Sales *)node->data)->time <= timeToSearchearly && ((Sales *)node->data)->time >= timeToSearchearly)
     return true;
   else
     return false;
