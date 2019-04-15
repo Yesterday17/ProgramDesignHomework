@@ -13,49 +13,57 @@ Sales *ReadSales() {
   prime->customer = InputString(LITERAL("客户信息: "), LITERAL("无"));
   return prime;
 }
-Sales *readjson_sales(cJSON *root) {
+Sales *JSONToSales(cJSON *root) {
   Sales *sales = (Sales*)malloc(sizeof(Sales));
 
   cJSON *item = cJSON_GetObjectItem(root, "time");
   if (item != NULL) {
     sales->time = item->valueint;
   }
+
   item = cJSON_GetObjectItem(root, "component");
   if (item != NULL) {
-    sales->prime = readjson_component(item, sales->prime);
+    sales->prime = ReadComponentJSON(item);
   }
+
   item = cJSON_GetObjectItem(root, "sales_mode");
   if (item != NULL) {
     sales->sales_mode = item->valueint;
   }
+
   item = cJSON_GetObjectItem(root, "price");
   if (item != NULL) {
     sales->price = item->valueint;
   }
+
   item = cJSON_GetObjectItem(root, "quantity");
   if (item != NULL) {
     sales->quantity = item->valueint;
   }
+
   item = cJSON_GetObjectItem(root, "total");
   if (item != NULL) {
     sales->total = item->valueint;
   }
+
   item = cJSON_GetObjectItem(root, "customer");
   if (item != NULL) {
     sales->customer = newString(item->valuestring);
   }
-  item = cJSON_GetObjectItem(root, "gift");//结构体中的结构体直接赋值？？
+
+  item = cJSON_GetObjectItem(root, "gift");
   if (item != NULL) {
-    sales->gift = readjson_component(item, sales->gift);
+    sales->gift = ReadComponentJSON(item);
   }
+
   return sales;
 }
-cJSON*sales_cjson(Sales *prime)
+cJSON*SalesToJSON(Sales *prime)
 {
 
   cJSON * root = cJSON_CreateObject();
   cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
-  cJSON_AddItemToObject(root, "component", component_cjson(prime->prime));
+  cJSON_AddItemToObject(root, "component", ComponentToJSON(prime->prime));
   cJSON_AddItemToObject(root, "sales_mode", cJSON_CreateNumber(prime->sales_mode));
   cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
   cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
@@ -127,12 +135,11 @@ LinkedList* ReadSalesJSON(string filename)
   LinkedList *list = CreateLinkedList();
   if (FileExist(filename))
   {
-    string prime;
-    prime = ReadFile(filename);
+    string prime = ReadFile(filename);
     cJSON * root = cJSON_Parse(U8_CSTR(prime));
     int count = cJSON_GetArraySize(root);
     for (int i = 0; i < count; i++) {
-      InsertLinkedList(list, readjson_sales(cJSON_GetArrayItem(root, i)));
+      InsertLinkedList(list, JSONToSales(cJSON_GetArrayItem(root, i)));
     }
   }
   return list;

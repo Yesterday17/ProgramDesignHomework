@@ -48,52 +48,37 @@ bool FindMan_Component(LinkedListNode *node) {
  * @param comp
  * @return
  */
-Component* readjson_component(cJSON *root, Component *comp)
+Component* ReadComponentJSON(cJSON *root)
 {
-  cJSON *item;
-  if (!root)
+  Component *comp = (Component*)malloc(sizeof(Component));
+
+  cJSON* item = cJSON_GetObjectItem(root, "index");
+  if (item != NULL)
   {
-    printf("Error before: [%s]\n", cJSON_GetErrorPtr());
-    cJSON_Delete(root);
-    return NULL;
+    comp->index = item->valueint;
   }
 
-  else
+  item = cJSON_GetObjectItem(root, "name");
+  if (item != NULL)
   {
-    cJSON *object = cJSON_GetObjectItem(root, "comp");
-    if (object == NULL)
-    {
-      printf("Error before: [%s]\n", cJSON_GetErrorPtr());
-      cJSON_Delete(root);
-      return NULL;
-    }
-    else
-    {
-      item = cJSON_GetObjectItem(object, "index");
-      if (item != NULL)
-      {
-        comp->index = item->valueint;
-      }
-      item = cJSON_GetObjectItem(object, "name");
-      if (item != NULL)
-      {
-        memcpy(comp->name, item->valuestring, comp->name->bufSize);
-      }
-      item = cJSON_GetObjectItem(object, "type");
-      if (item != NULL)
-      {
-        memcpy(comp->type, item->valuestring, comp->type->bufSize);
-      }
-      item = cJSON_GetObjectItem(object, "manufacturer");
-      if (item != NULL)
-      {
-        memcpy(comp->manufacturer, item->valuestring, comp->manufacturer->bufSize);
-      }
-    }
+    comp->name = newString(item->valuestring);
   }
+
+  item = cJSON_GetObjectItem(root, "type");
+  if (item != NULL)
+  {
+    comp->type = newString(item->valuestring);
+  }
+
+  item = cJSON_GetObjectItem(root, "manufacturer");
+  if (item != NULL)
+  {
+    comp->manufacturer = newString(item->valuestring);
+  }
+
   return comp;
 }
-cJSON*component_cjson(Component *prime)
+cJSON *ComponentToJSON(Component *prime)
 {
   cJSON * root = cJSON_CreateObject();
   cJSON_AddItemToObject(root, "index", cJSON_CreateNumber(prime->index));//根节点下添加

@@ -7,8 +7,8 @@
 
 void FS_Init() {
   component = CreateLinkedList();
-  sales = ReadSalesJSON(LITERAL("D:\\sales.json"));
-  purchase = ReadPurchaseJSON(LITERAL("purchase.json"));
+  sales = ReadSalesJSON(LITERAL("sales.json"));
+  purchase = CreateLinkedList();// ReadPurchaseJSON(LITERAL("purchase.json"));
 }
 
 int main() {

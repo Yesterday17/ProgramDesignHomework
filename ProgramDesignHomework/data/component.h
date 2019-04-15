@@ -17,11 +17,12 @@ typedef struct Component {
   string manufacturer;  // 制造商
 } Component;
 
-Component *ReadComponent();
-Component *readjson_component(cJSON *root, Component *comp);
-
 bool FindName_Component(LinkedListNode *node);
 bool FindType_Component(LinkedListNode *node);
 bool FindMan_Component(LinkedListNode *node);
-cJSON*component_cjson(Component *prime);
+
+Component *ReadComponent();
+Component *ReadComponentJSON(cJSON *root);
+cJSON *ComponentToJSON(Component *prime);
+
 #endif
