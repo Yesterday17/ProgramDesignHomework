@@ -145,13 +145,13 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       cls();
       LinkedList* result = CreateLinkedList();
       for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
-        InsertLinkedList(result, ((LinkedListResult*)(p->data))->res0->data);
+        InsertLinkedList(result, ((LinkedListResult*)p->data)->res0->data);
       }
       PrintLITERAL("选中页面请按Enter，返回上一级请按Backspace\n");
       Sleep(1000);
       cls();
       int num = RecordPage(result, PrintPurchaseTitle(), PrintPurchase);
-      int count = 0;
+      int count = 1;
       if (num != -1) {
         for (LinkedListNode* p = res->top; p != NULL; p++) {
           if (num == count) {

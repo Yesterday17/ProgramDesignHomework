@@ -9,9 +9,9 @@
  */
 Component* ReadComponent() {
   Component *comp = (Component*)malloc(sizeof(Component));
-  comp->name = InputString(LITERAL("Input component name:"), LITERAL("Computer"));
-  comp->type = InputString(LITERAL("Input component type:"), LITERAL("3021"));
-  comp->manufacturer = InputString(LITERAL("manufacturer"), LITERAL("3021"));
+  comp->name = InputString(LITERAL("配件名称:"), LITERAL("未知"));
+  comp->type = InputString(LITERAL("配件类型:"), LITERAL("未知"));
+  comp->manufacturer = InputString(LITERAL("制造商："), LITERAL("未知"));
   return comp;
 }
 
