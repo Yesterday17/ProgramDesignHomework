@@ -95,14 +95,14 @@ Component* readjson_component(cJSON *root, Component *comp)
 }
 cJSON*component_cjson(Component *prime)
 {
-	cJSON * root = cJSON_CreateObject();
-	cJSON_AddItemToObject(root, "index", cJSON_CreateNumber(prime->index));//根节点下添加
-	cJSON_AddItemToObject(root, "name", cJSON_CreateString(prime->name));
-	cJSON_AddItemToObject(root, "type", cJSON_CreateString(prime->type));
-	cJSON_AddItemToObject(root, "manufacturer", cJSON_CreateString(prime->manufacturer));
+  cJSON * root = cJSON_CreateObject();
+  cJSON_AddItemToObject(root, "index", cJSON_CreateNumber(prime->index));//根节点下添加
+  cJSON_AddItemToObject(root, "name", cJSON_CreateString(U8_CSTR(prime->name)));
+  cJSON_AddItemToObject(root, "type", cJSON_CreateString(U8_CSTR(prime->type)));
+  cJSON_AddItemToObject(root, "manufacturer", cJSON_CreateString(U8_CSTR(prime->manufacturer)));
 
-	if (root)
-		return root;
-	else
-		printf("error!!!");
+  if (root)
+    return root;
+  else
+    return NULL;
 }

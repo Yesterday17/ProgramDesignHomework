@@ -69,8 +69,8 @@ Purchase *readjson_purchase(cJSON *root) {
 			memcpy(purchase->retailer, item->valuestring, strlen(item->valuestring));
 		}
 		return purchase;
-
 	}
+  return NULL;
 }
 cJSON*purchase_cjson(Purchase *prime)
 {
@@ -81,13 +81,12 @@ cJSON*purchase_cjson(Purchase *prime)
 	cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
 	cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
 	cJSON_AddItemToObject(root, "total", cJSON_CreateNumber(prime->total));
-	cJSON_AddItemToObject(root, "quantity", cJSON_CreateString(prime->retailer));
+	cJSON_AddItemToObject(root, "retailer", cJSON_CreateString(U8_CSTR(prime->retailer)));
 
-	if (root)
-		return root;
-
-	else
-		printf("error!!!");
+  if (root)
+    return root;
+  else
+    return NULL;
 }
 
 string PrintPurchaseTitle() {
@@ -127,9 +126,8 @@ LinkedList* purchasejson_struct(string filename)
 	if (FileExist(filename))
 	{
 		string prime;
-		int i;
 		prime = ReadFile(filename);
-		cJSON * root = cJSON_Parse(prime);
+		cJSON * root = cJSON_Parse(U8_CSTR(prime));
 		int count = cJSON_GetArraySize(root);
 		for (int i = 0; i < count; i++) {
 			InsertLinkedList(list, readjson_purchase(cJSON_GetArrayItem(root, i)));

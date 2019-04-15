@@ -33,7 +33,7 @@ int InputInteger(string comment, string errorMessage, int defaultValue) {
   }
 
   while (sscanf(U8_CSTR(input), "%d", &ans) != 1) {
-    printf("%s\n", errorMessage);
+    printf("%s\n", U8_CSTR(errorMessage));
     $STR_BUF(input);
     input = InputString(comment, STRING("\n"));
   }
