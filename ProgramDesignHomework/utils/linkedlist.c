@@ -67,7 +67,7 @@ void DeleteLinkedList(LinkedList *list,int key) {//删除链表：目标结点 �
   LinkedList*  result=CreateLinkedList();
   LinkedListResult* res = (LinkedListResult*)malloc(sizeof(LinkedListResult));
   res->count = 0;
-  int count = 0;
+  int count = 1;
   for (p = list->top; p != NULL; p = p->next) {
     if (callback(p)) {
       res->count = count;

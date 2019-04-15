@@ -145,12 +145,12 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       cls();
       LinkedList* result = CreateLinkedList();
       for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
-        InsertLinkedList(result, ((LinkedListResult*)p->data)->res0);
+        InsertLinkedList(result, ((LinkedListResult*)(p->data))->res0->data);
       }
       PrintLITERAL("选中页面请按Enter，返回上一级请按Backspace\n");
       Sleep(1000);
       cls();
-      int num = RecordPage(result, PrintPurchaseTitle, PrintPurchase);
+      int num = RecordPage(result, PrintPurchaseTitle(), PrintPurchase);
       int count = 0;
       if (num != -1) {
         for (LinkedListNode* p = res->top; p != NULL; p++) {
@@ -270,17 +270,17 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         cls();
         LinkedList* result = CreateLinkedList();
         for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
-          InsertLinkedList(result, ((LinkedListResult*)p->data)->res0);
+          InsertLinkedList(result, ((LinkedListResult*)p->data)->res0->data);
         }
         PrintLITERAL("选中页面请按Enter，返回上一级请按Backspace\n");
         Sleep(1000);
         cls();
-        int num = RecordPage(result, PrintSalesTitle, PrintSales);
-        int count = 0;
+        int num = RecordPage(result, PrintSalesTitle(), PrintSales);
+        int count = 1;
         if (num != -1) {
-          for (LinkedListNode* p = res->top; p != NULL; p++) {
+          for (LinkedListNode* p = res->top; p != NULL; p=p->next) {
             if (num == count) {
-              record = ((LinkedListResult*)p->data)->count;
+              record = ((LinkedListResult*)(p->data))->count;
               break;
             }
             count++;
