@@ -132,7 +132,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       PrintLITERAL("[ ]3.按时间范围检索\n");
       y = OptionBar(1, 3);
       cls();
-      LinkedList* res;
+      LinkedList* res=NULL;
       if (y == 0) {
         //res = FindLinkedList(purchase, FindRetailer_Purchase);
       }
@@ -261,6 +261,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           res = FindLinkedList(sales, FindComponentType_Sales);
         }
         if (y == 1) {
+			    customerToSearch = InputStr(LITERAL("请输入客户信息: "));
           res = FindLinkedList(sales, FindCustomer_Sales);
         }
         if (y == 2) {
