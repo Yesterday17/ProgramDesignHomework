@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+﻿#include "gtest/gtest.h"
 #include <stdlib.h>
 
 extern "C" {
@@ -86,7 +86,7 @@ TEST(TestLinkedList, FinalNULL) {
   InsertLinkedList(list, &a);
   EXPECT_TRUE(list->top != NULL);
   EXPECT_TRUE(list->rear != NULL);
-  EXPECT_TRUE(list->top->next != NULL);
+  EXPECT_TRUE(list->top->next == NULL);
   EXPECT_TRUE(list->rear->next == NULL);
 
   InsertLinkedList(list, &a);

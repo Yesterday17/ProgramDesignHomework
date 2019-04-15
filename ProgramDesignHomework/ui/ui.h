@@ -24,7 +24,7 @@ typedef enum Menu {
   MENU_Amount = 5,
 } Menu;
 
-void Initial();
+void UI_Init();
 
 void UI_Welcome();
 

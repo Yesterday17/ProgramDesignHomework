@@ -4,12 +4,9 @@
 #define hangshu 10 //记录每页最大行数
 Menu menuNow = MENU_Welcome;
 
-void Initial() {
+void UI_Init() {
   srand((unsigned)(time(NULL)));
   color();
-  component = CreateLinkedList();
-  purchase = CreateLinkedList();
-  sales = CreateLinkedList();
 }
 void UI_Welcome() {
   SetConsoleOutputCP(CP_UTF8);

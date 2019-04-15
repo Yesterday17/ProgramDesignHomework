@@ -120,7 +120,7 @@ bool FindComponentType_Purchase(LinkedListNode *node) {
 
 
 
-LinkedList* purchasejson_struct(string filename)
+LinkedList* ReadPurchaseJSON(string filename)
 {
 	LinkedList *list = CreateLinkedList();
 	if (FileExist(filename))

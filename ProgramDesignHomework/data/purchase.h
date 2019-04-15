@@ -20,7 +20,7 @@ typedef struct Purchase {
 
 Purchase *ReadPurchase();
 Purchase *readjson_purchase(cJSON *root);
-LinkedList* purchasejson_struct(string filename);
+LinkedList* ReadPurchaseJSON(string filename);
 
 string PrintPurchaseTitle();/*带上\n*/
 string PrintPurchase(void *node, uint8_t id);/*带上\n*/

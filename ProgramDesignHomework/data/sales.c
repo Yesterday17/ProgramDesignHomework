@@ -13,56 +13,40 @@ Sales *ReadSales() {
   prime->customer = InputString(LITERAL("客户信息: "), LITERAL("无"));
   return prime;
 }
-Sales *readjson_sales(cJSON*root) {
-  cJSON *object = cJSON_GetObjectItem(root, "purchase"), *item;
-  Sales*sales = (Sales*)malloc(sizeof(Sales));
-  if (!root) {
-    printf("Error before: [%s]\n", cJSON_GetErrorPtr());
-    cJSON_Delete(root);
-    return NULL;
-  }
-  else {
-    cJSON *object = cJSON_GetObjectItem(root, "sales");
-    if (object == NULL) {
-      printf("Error before: [%s]\n", cJSON_GetErrorPtr());
-      cJSON_Delete(root);
-      return NULL;
-    }
-    else {
-      item = cJSON_GetObjectItem(root, "time");
-      if (item != NULL) {
-        sales->time = item->valueint;
-      }
-      item = cJSON_GetObjectItem(object, "component");
-      if (item != NULL) {
-        sales->prime = readjson_component(item, sales->prime);
-      }
-      item = cJSON_GetObjectItem(object, "sales_mode");
-      if (item != NULL) {
-        sales->sales_mode = item->valueint;
-      }
-      item = cJSON_GetObjectItem(object, "price");
-      if (item != NULL) {
-        sales->price = item->valueint;
-      }
-      item = cJSON_GetObjectItem(object, "quantity");
-      if (item != NULL) {
-        sales->quantity = item->valueint;
-      }
-      item = cJSON_GetObjectItem(object, "total");
-      if (item != NULL) {
-        sales->total = item->valueint;
-      }
-      item = cJSON_GetObjectItem(object, "customer");
-      if (item != NULL) {
-        memcpy(sales->customer, item->valuestring, strlen(item->valuestring));
-      }
-      item = cJSON_GetObjectItem(object, "gift");//结构体中的结构体直接赋值？？
-      if (item != NULL) {
-        sales->gift = readjson_component(item, sales->gift);
-      }
+Sales *readjson_sales(cJSON *root) {
+  Sales *sales = (Sales*)malloc(sizeof(Sales));
 
-    }
+  cJSON *item = cJSON_GetObjectItem(root, "time");
+  if (item != NULL) {
+    sales->time = item->valueint;
+  }
+  item = cJSON_GetObjectItem(root, "component");
+  if (item != NULL) {
+    sales->prime = readjson_component(item, sales->prime);
+  }
+  item = cJSON_GetObjectItem(root, "sales_mode");
+  if (item != NULL) {
+    sales->sales_mode = item->valueint;
+  }
+  item = cJSON_GetObjectItem(root, "price");
+  if (item != NULL) {
+    sales->price = item->valueint;
+  }
+  item = cJSON_GetObjectItem(root, "quantity");
+  if (item != NULL) {
+    sales->quantity = item->valueint;
+  }
+  item = cJSON_GetObjectItem(root, "total");
+  if (item != NULL) {
+    sales->total = item->valueint;
+  }
+  item = cJSON_GetObjectItem(root, "customer");
+  if (item != NULL) {
+    sales->customer = newString(item->valuestring);
+  }
+  item = cJSON_GetObjectItem(root, "gift");//结构体中的结构体直接赋值？？
+  if (item != NULL) {
+    sales->gift = readjson_component(item, sales->gift);
   }
   return sales;
 }
@@ -138,7 +122,7 @@ bool FindTime_Sales(LinkedListNode *node) {
 }
 
 
-LinkedList* salesjson_struct(string filename)
+LinkedList* ReadSalesJSON(string filename)
 {
   LinkedList *list = CreateLinkedList();
   if (FileExist(filename))

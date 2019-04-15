@@ -1,0 +1,21 @@
+[
+  {
+    "time": 0,
+    "prime": {
+      "index": 1,
+      "name": "TEST",
+      "type": "AAA",
+      "manufacturer": "3021"
+    },
+    "sales_mode": 1,
+    "price": 114514,
+    "quantity": 1919810,
+    "customer": "A",
+    "gift": {
+      "index": 1,
+      "name": "TEST",
+      "type": "AAA",
+      "manufacturer": "3021"
+    }
+  }
+]

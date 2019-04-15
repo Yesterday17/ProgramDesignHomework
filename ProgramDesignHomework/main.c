@@ -5,14 +5,19 @@
 #include "utils/io.h"
 #include "utils/utils.h"
 
-/**
- * 主函数
- */
+void FS_Init() {
+  component = CreateLinkedList();
+  sales = ReadSalesJSON(LITERAL("D:\\sales.json"));
+  purchase = ReadPurchaseJSON(LITERAL("purchase.json"));
+}
+
 int main() {
-  Initial();
+  // 初始化
+  UI_Init();
+  FS_Init();
 
+  // 欢迎
   UI_Welcome();
-
   menuNow = MENU_Welcome;
   while (1) {
     menuNow = UI_MainMenu();
