@@ -6,7 +6,7 @@
 
 Sales *ReadSales() {
   Sales *prime = malloc(sizeof(Sales));
-  prime->prime = ReadComponent();
+  prime->component = ReadComponent();
   prime->price = InputInt(LITERAL("批发/零售价格: "));
   prime->quantity = InputInt(LITERAL("批发/零售数量: "));
   prime->total = prime->price * prime->quantity;
@@ -23,7 +23,7 @@ Sales *JSONToSales(cJSON *root) {
 
   item = cJSON_GetObjectItem(root, "component");
   if (item != NULL) {
-    sales->prime = ReadComponentJSON(item);
+    sales->component = ReadComponentJSON(item);
   }
 
   item = cJSON_GetObjectItem(root, "sales_mode");
@@ -41,10 +41,7 @@ Sales *JSONToSales(cJSON *root) {
     sales->quantity = item->valueint;
   }
 
-  item = cJSON_GetObjectItem(root, "total");
-  if (item != NULL) {
-    sales->total = item->valueint;
-  }
+  sales->total = sales->price * sales->quantity;
 
   item = cJSON_GetObjectItem(root, "customer");
   if (item != NULL) {
@@ -63,7 +60,7 @@ cJSON*SalesToJSON(Sales *prime)
 
   cJSON * root = cJSON_CreateObject();
   cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
-  cJSON_AddItemToObject(root, "component", ComponentToJSON(prime->prime));
+  cJSON_AddItemToObject(root, "component", ComponentToJSON(prime->component));
   cJSON_AddItemToObject(root, "sales_mode", cJSON_CreateNumber(prime->sales_mode));
   cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
   cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
@@ -76,22 +73,45 @@ cJSON*SalesToJSON(Sales *prime)
 }
 
 string PrintSalesTitle() {
-  return STR_BUF(" 名称  型号  制造商 销售模式  数量  单价  总价  客户信息  赠品\n");
+  char ans[200];
+  sprintf(ans, "   %s\t%s\t%s\t%s\t%s\t\t%s\t\t%s\t\t%s\t%s\n",
+    U8_CSTR(LITERAL("名称")),
+    U8_CSTR(LITERAL("型号")),
+    U8_CSTR(LITERAL("制造商")),
+    U8_CSTR(LITERAL("销售模式")),
+    U8_CSTR(LITERAL("数量")),
+    U8_CSTR(LITERAL("单价")),
+    U8_CSTR(LITERAL("总价")),
+    U8_CSTR(LITERAL("客户信息")),
+    U8_CSTR(LITERAL("赠品")));
+  return newString(ans);
 }
 
 string PrintSales(void *node, uint8_t id) {
-  return concat2(((Sales *)node)->customer, STRING("\n"));
+  Sales* sales = (Sales *)node;
+  char ans[200];
+  sprintf(ans, "%s\t%s\t%s\t%s\t\t%d\t\t%d\t\t%d\t\t%s\t%s\n", 
+    U8_CSTR(sales->component->name),
+    U8_CSTR(sales->component->type),
+    U8_CSTR(sales->component->manufacturer), 
+    ((sales->sales_mode == 1) ? U8_CSTR(LITERAL("批发")) : U8_CSTR(LITERAL("零售"))),
+    sales->quantity,
+    sales->price,
+    sales->total,
+    U8_CSTR(sales->customer),
+    U8_CSTR(sales->gift->name));
+  return newString(ans);
 }
 
 bool FindCustomer_Sales(LinkedListNode *node) {
   return compareString(((Sales *)(node->data))->customer, customerToSearch) == STRING_EQUAL;
 }
 bool FindComponentName_Sales(LinkedListNode *node) {
-  return compareString(((Sales*)(node->data))->prime->name, nameToSearch) == STRING_EQUAL;
+  return compareString(((Sales*)(node->data))->component->name, nameToSearch) == STRING_EQUAL;
 }
 
 bool FindComponentType_Sales(LinkedListNode *node) {
-  return compareString(((Sales*)(node->data))->prime->type, typeToSearch) == STRING_EQUAL;
+  return compareString(((Sales*)(node->data))->component->type, typeToSearch) == STRING_EQUAL;
 }
 
 LinkedList* Gift(LinkedList *node) {
@@ -128,7 +148,6 @@ bool FindTime_Sales(LinkedListNode *node) {
   else
     return false;
 }
-
 
 LinkedList* ReadSalesJSON(string filename)
 {
