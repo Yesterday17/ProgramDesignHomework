@@ -102,9 +102,33 @@ bool FindComponentType_Sales(LinkedListNode *node) {
   return compareString(((Sales*)(node->data))->prime->type, typeToSearch) == STRING_EQUAL;
 }
 
-Component* Gift(Component* component) {
-		
+LinkedList* Gift(LinkedList *node) {
+	
+	LinkedListNode *head, *p;
+	LinkedList *prime,*q;
+	prime = CreateLinkedList();
+	int size=0, counts=3;
+	for (p = node->top->next; p != NULL; p = p->next)
+	{
+		size++;
+	}
+	q = CreateLinkedList();
+	q = prime;
+	prime->rear = NULL;
+	while (counts--)
+	{
+		int t = rand() % size;
+		head = node->top->next;
+		while (t--)
+		{
+			head = head->next;
+		}
+		InsertLinkedList(head, head->data);
+		free(head);
+	}
+	return prime;
 }
+
 
 bool FindTime_Sales(LinkedListNode *node) {
 	if (((Sales *)node->data)->time <= timeToSearchearly && ((Sales *)node->data)->time >= timeToSearchearly)
