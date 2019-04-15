@@ -262,7 +262,9 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           res = FindLinkedList(sales, FindCustomer_Sales);
         }
         if (y == 2) {
-          //
+          timeToSearchearly = InputStr(LITERAL("请输入起始时间: "));
+          timeToSearchlate = InputStr(LITERAL("请输入终止时间: "));
+          res = FindLinkedList(sales, FindTime_Sales);
         }
         cls();
         LinkedList* result = CreateLinkedList();
