@@ -145,36 +145,46 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         InsertLinkedList(result, ((LinkedListResult*)p->data)->res0->data);
       }
       UI_Clear();
-      int num = RecordPage(result, PrintPurchaseTitle(), PrintPurchase);
-      int count = 1;
-      if (num != -1) {
-        for (LinkedListNode* p = res->top; p != NULL; p++) {
-          if (num == count) {
-            record = ((LinkedListResult*)p->data)->count;
-            break;
-          }
-          count++;
-        }
-        gotoxy(1, 1 + hangshu);
-        PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
-        while (1) {
-          char key1 = _getch();
-          char key2 = 0;
-          if (key1 == 13) {//enter
-            DeleteLinkedList(purchase, record);
-            UI_Clear();
-            InsertLinkedList(purchase, ReadPurchase());
-            UI_Clear();
-            break;
-          }
-          if (key1 < 0) {
-            key2 = _getch();
-            if (key2 == 83) {//delete
-              UI_Clear();
-              DeleteLinkedList(purchase, record);
+      if (result->rear != NULL) {
+        int num = RecordPage(result, PrintPurchaseTitle(), PrintPurchase);
+        int count = 1;
+        if (num != -1) {
+          for (LinkedListNode* p = res->top; p != NULL; p++) {
+            if (num == count) {
+              record = ((LinkedListResult*)p->data)->count;
               break;
             }
+            count++;
           }
+          gotoxy(1, 1 + hangshu);
+          PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
+          while (1) {
+            char key1 = _getch();
+            char key2 = 0;
+            if (key1 == 13) {//enter
+              DeleteLinkedList(purchase, record);
+              UI_Clear();
+              InsertLinkedList(purchase, ReadPurchase());
+              UI_Clear();
+              break;
+            }
+            if (key1 < 0) {
+              key2 = _getch();
+              if (key2 == 83) {//delete
+                UI_Clear();
+                DeleteLinkedList(purchase, record);
+                break;
+              }
+            }
+          }
+        }
+        else {
+          PrintLITERAL("没有查找到结果 ");
+          while (1) {
+            char ch = _getch();
+            if (ch == 13)break;
+          }
+          UI_Clear();
         }
       }
       else {
@@ -304,8 +314,10 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               }
             }
           }
+          UI_Clear();
         }
       }
+
       else {
         PrintLITERAL("该记录为空, 按回车返回上一级 ");
         while (1) {

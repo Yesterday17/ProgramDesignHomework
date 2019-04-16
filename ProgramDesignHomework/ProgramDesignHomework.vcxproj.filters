@@ -27,9 +27,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="utils\utils.c">
-      <Filter>utils</Filter>
-    </ClCompile>
     <ClCompile Include="utils\linkedlist.c">
       <Filter>utils</Filter>
     </ClCompile>
@@ -75,9 +72,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="utils\utils.h">
-      <Filter>utils</Filter>
-    </ClInclude>
     <ClInclude Include="utils\linkedlist.h">
       <Filter>utils</Filter>
     </ClInclude>

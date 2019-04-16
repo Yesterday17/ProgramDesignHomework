@@ -4,13 +4,21 @@
 #include"../utils/fs.h"
 #include "../utils/io.h"
 
+#define Ltotal 1000000  //规定额度
+#define Lquantity 9     //规定数量
+
 Sales *ReadSales() {
   Sales *prime = (Sales*)malloc(sizeof(Sales));
   prime->component = ReadComponent();
+  //prime->time=
+  prime->sales_mode= InputInt(LITERAL("批发(0)/零售(1): "))%2;
   prime->price = InputInt(LITERAL("批发/零售价格: "));
   prime->quantity = InputInt(LITERAL("批发/零售数量: "));
   prime->total = prime->price * prime->quantity;
-  prime->customer = InputString(LITERAL("客户信息: "), LITERAL("无"));
+  prime->customer = InputString(LITERAL("客户信息: "), LITERAL("未知"));
+  if (prime->sales_mode == 0)
+    if(prime->total>Ltotal||prime->quantity>Lquantity)
+      prime->gift = Gift(sales);
   return prime;
 }
 
@@ -116,29 +124,11 @@ bool FindTime_Sales(LinkedListNode *node) {
     return false;
 }
 
-LinkedList* Gift(LinkedList *node) {
-  LinkedListNode *head, *p;
-  LinkedList *prime, *q;
-  prime = CreateLinkedList();
-  int size = 0, counts = 3;
-  for (p = node->top->next; p != NULL; p = p->next)
-  {
-    size++;
-  }
-  q = CreateLinkedList();
-  q = prime;
-  prime->rear = NULL;
-  while (counts--)
-  {
-    int t = rand() % size;
-    head = node->top->next;
-    while (t--)
-    {
-      head = head->next;
-    }
-    InsertLinkedList(prime, head->data);
-    free(head);
-  }
+LinkedList* Gift() {
+  int a[50],i,w;
+  for (i = 0; i < 50; i++)
+    a[i] = i + 1;
+
   return prime;
 }
 

@@ -11,12 +11,11 @@
 Purchase *ReadPurchase()
 {
   Purchase *prime = (Purchase *)malloc(sizeof(Purchase));
-  prime->time = 0; // FIXME
-  prime->price = 0;
-  prime->quantity = 0;
+  //prime->time
+  prime->prime = ReadComponent();
+  prime->price = InputInt(LITERAL("进价单价: "));
+  prime->quantity = InputInt(LITERAL("进货数量: "));
   prime->total = prime->price * prime->quantity;
-  prime->retailer =
-    InputString(LITERAL("please input retailer"), LITERAL("3021"));
   return prime;
 }
 
