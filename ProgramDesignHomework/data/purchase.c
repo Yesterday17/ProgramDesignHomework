@@ -6,7 +6,7 @@
 Purchase * NewPurchase()
 {
   Purchase *purchase = (Purchase *)malloc(sizeof(Purchase));
-  purchase->component = NewComponent();
+  purchase->component = -1;
   purchase->time = 0;
   purchase->price = 1;
   purchase->quantity = 1;
@@ -17,7 +17,6 @@ Purchase * NewPurchase()
 
 void FreePurchase(Purchase * purchase)
 {
-  FreeComponent(purchase->component);
   $STR_BUF(purchase->retailer);
   free(purchase);
 }
@@ -30,8 +29,7 @@ Purchase *ReadPurchase()
 {
   Purchase *purchase = NewPurchase();
 
-  free(purchase->component);
-  purchase->component = ReadComponent();
+  purchase->component = -1;
 
   // FIXME: 输入时间字符串而非整数
   purchase->time = InputInt(LITERAL("进货时间: "));
@@ -53,8 +51,7 @@ Purchase *JSONToPurchase(cJSON *root) {
 
   cJSON *item = cJSON_GetObjectItem(root, "component");
   if (item != NULL) {
-    FreeComponent(purchase->component);
-    purchase->component = ReadComponentJSON(item);
+    purchase->component = item->valueint;
   }
   item = cJSON_GetObjectItem(root, "time");
   if (item != NULL) {
@@ -107,11 +104,12 @@ string PrintPurchaseTitle() {
 
 string PrintPurchase(void *node, uint8_t id) {
   Purchase* purchase = (Purchase *)node;
+  Component* comp = AtLinkedList(component, purchase->component)->data;
   char ans[200];
   sprintf(ans, "%-10s|%-10s|%-10s|%-10d|%-10d|%-10d|%-10s\n",
-    U8_CSTR(purchase->component->name),
-    U8_CSTR(purchase->component->type),
-    U8_CSTR(purchase->component->manufacturer),
+    U8_CSTR(comp->name),
+    U8_CSTR(comp->type),
+    U8_CSTR(comp->manufacturer),
     purchase->quantity,
     purchase->price,
     purchase->total,
@@ -129,11 +127,13 @@ bool FindRetailer_Purchase(LinkedListNode *node) {
 }
 
 bool FindComponentName_Purchase(LinkedListNode *node) {
-  return compareString(((Purchase*)(node->data))->component->name, nameToSearch) == STRING_EQUAL;
+  Component *comp = AtLinkedList(component, ((Purchase*)(node->data))->component);
+  return compareString(comp->name, nameToSearch) == STRING_EQUAL;
 }
 
 bool FindComponentType_Purchase(LinkedListNode *node) {
-  return compareString(((Purchase*)(node->data))->component->type, nameToSearch) == STRING_EQUAL;
+  Component *comp = AtLinkedList(component, ((Purchase*)(node->data))->component);
+  return compareString(comp->type, nameToSearch) == STRING_EQUAL;
 }
 
 LinkedList* ReadPurchaseJSON(string filename)
@@ -141,9 +141,8 @@ LinkedList* ReadPurchaseJSON(string filename)
   LinkedList *list = CreateLinkedList();
   if (FileExist(filename))
   {
-    string prime;
-    prime = ReadFile(filename);
-    cJSON * root = cJSON_Parse(U8_CSTR(prime));
+    string content = ReadFile(filename);
+    cJSON * root = cJSON_Parse(U8_CSTR(content));
     int count = cJSON_GetArraySize(root);
     for (int i = 0; i < count; i++) {
       InsertLinkedList(list, JSONToPurchase(cJSON_GetArrayItem(root, i)));

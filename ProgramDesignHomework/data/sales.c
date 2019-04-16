@@ -1,5 +1,6 @@
 ﻿#include "sales.h"
 #include"component.h"
+#include <conio.h>
 #include "../global.h"
 #include"../utils/fs.h"
 #include "../utils/io.h"
@@ -10,8 +11,8 @@
 Sales * NewSales()
 {
   Sales *sales = (Sales*)malloc(sizeof(Sales));
-  sales->component = NewComponent();
-  sales->gift = NewComponent();
+  sales->component = -1;
+  sales->gift = -1;
   sales->time = 0;
   sales->sales_mode = 1;
   sales->price = 1;
@@ -23,8 +24,6 @@ Sales * NewSales()
 
 void FreeSales(Sales * sales)
 {
-  FreeComponent(sales->component);
-  FreeComponent(sales->gift);
   $STR_BUF(sales->customer);
   free(sales);
 }
@@ -54,8 +53,7 @@ Sales *JSONToSales(cJSON *root) {
 
   item = cJSON_GetObjectItem(root, "component");
   if (item != NULL) {
-    FreeComponent(sales->component);
-    sales->component = ReadComponentJSON(item);
+    sales->component = item->valueint;
   }
 
   item = cJSON_GetObjectItem(root, "sales_mode");
@@ -82,8 +80,7 @@ Sales *JSONToSales(cJSON *root) {
 
   item = cJSON_GetObjectItem(root, "gift");
   if (item != NULL) {
-    FreeComponent(sales->gift);
-    sales->gift = ReadComponentJSON(item);
+    sales->gift = item->valueint;
   }
 
   return sales;
@@ -92,12 +89,12 @@ cJSON *SalesToJSON(Sales *prime)
 {
   cJSON * root = cJSON_CreateObject();
   cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
-  cJSON_AddItemToObject(root, "component", ComponentToJSON(prime->component));
+  cJSON_AddItemToObject(root, "component", cJSON_CreateNumber(prime->component));
   cJSON_AddItemToObject(root, "sales_mode", cJSON_CreateNumber(prime->sales_mode));
   cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
   cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
   cJSON_AddItemToObject(root, "customer", cJSON_CreateString(U8_CSTR(prime->customer)));
-  cJSON_AddItemToObject(root, "gift", ComponentToJSON(prime->gift));
+  cJSON_AddItemToObject(root, "gift", cJSON_CreateNumber(prime->gift));
   return root;
 }
 
@@ -118,17 +115,19 @@ string PrintSalesTitle() {
 
 string PrintSales(void *node, uint8_t id) {
   Sales* sales = (Sales *)node;
+  Component* comp = AtLinkedList(component, sales->component)->data;
+  Component* gift = AtLinkedList(component, sales->gift)->data;
   char ans[200];
   sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10d|%-10d|%-10s|%-10s\n",
-    U8_CSTR(sales->component->name),
-    U8_CSTR(sales->component->type),
-    U8_CSTR(sales->component->manufacturer),
+    U8_CSTR(comp->name),
+    U8_CSTR(comp->type),
+    U8_CSTR(comp->manufacturer),
     ((sales->sales_mode == 1) ? U8_CSTR(LITERAL("批发")) : U8_CSTR(LITERAL("零售"))),
     sales->quantity,
-    sales->price,
+    sales->price, 
     sales->total,
     U8_CSTR(sales->customer),
-    U8_CSTR(sales->gift->name));
+    U8_CSTR(gift->name));
   return newString(ans);
 }
 
@@ -136,10 +135,12 @@ bool FindCustomer_Sales(LinkedListNode *node) {
   return compareString(((Sales *)(node->data))->customer, customerToSearch) == STRING_EQUAL;
 }
 bool FindComponentName_Sales(LinkedListNode *node) {
-  return compareString(((Sales*)(node->data))->component->name, nameToSearch) == STRING_EQUAL;
+  Component *comp = AtLinkedList(component, ((Sales*)(node->data))->component)->data;
+  return compareString(comp->name, nameToSearch) == STRING_EQUAL;
 }
 bool FindComponentType_Sales(LinkedListNode *node) {
-  return compareString(((Sales*)(node->data))->component->type, typeToSearch) == STRING_EQUAL;
+  Component *comp = AtLinkedList(component, ((Sales*)(node->data))->component)->data;
+  return compareString(comp->type, typeToSearch) == STRING_EQUAL;
 }
 bool FindTime_Sales(LinkedListNode *node) {
   return (((Sales *)node->data)->time <= timeToSearchearly
@@ -189,8 +190,8 @@ LinkedList* ReadSalesJSON(string filename)
   LinkedList *list = CreateLinkedList();
   if (FileExist(filename))
   {
-    string prime = ReadFile(filename);
-    cJSON * root = cJSON_Parse(U8_CSTR(prime));
+    string content = ReadFile(filename);
+    cJSON * root = cJSON_Parse(U8_CSTR(content));
     int count = cJSON_GetArraySize(root);
     for (int i = 0; i < count; i++) {
       InsertLinkedList(list, JSONToSales(cJSON_GetArrayItem(root, i)));

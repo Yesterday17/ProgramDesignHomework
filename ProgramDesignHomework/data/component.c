@@ -2,6 +2,7 @@
 
 #include "../global.h"
 #include "../utils/io.h"
+#include "../utils/fs.h"
 
 Component * NewComponent()
 {
@@ -66,7 +67,7 @@ bool FindMan_Component(LinkedListNode *node) {
  * @param comp
  * @return
  */
-Component* ReadComponentJSON(cJSON *root)
+Component* JSONToComponent(cJSON *root)
 {
   Component *comp = NewComponent();
 
@@ -104,4 +105,19 @@ cJSON *ComponentToJSON(Component *prime)
   cJSON_AddItemToObject(root, "type", cJSON_CreateString(U8_CSTR(prime->type)));
   cJSON_AddItemToObject(root, "manufacturer", cJSON_CreateString(U8_CSTR(prime->manufacturer)));
   return root;
+}
+
+LinkedList* ReadComponentJSON(string filename)
+{
+  LinkedList *list = CreateLinkedList();
+  if (FileExist(filename))
+  {
+    string content = ReadFile(filename);
+    cJSON * root = cJSON_Parse(U8_CSTR(content));
+    int count = cJSON_GetArraySize(root);
+    for (int i = 0; i < count; i++) {
+      InsertLinkedList(list, JSONToComponent(cJSON_GetArrayItem(root, i)));
+    }
+  }
+  return list;
 }

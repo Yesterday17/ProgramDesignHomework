@@ -10,7 +10,7 @@
 #include "time.h"
 
 typedef struct Purchase {
-  Component *component;
+  int component;
   uint64_t time;
   uint16_t price;       // 进货单价
   uint16_t quantity;    // 进货数量

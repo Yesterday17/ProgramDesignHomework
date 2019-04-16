@@ -9,24 +9,22 @@ typedef struct LinkedListNode {  //链表结点
   struct LinkedListNode *next;
 } LinkedListNode;
 
-typedef struct LinkedList{  // 链表指针
+typedef struct LinkedList {  // 链表指针
   LinkedListNode *top;
   LinkedListNode *rear;
 } LinkedList;
 
 
-typedef struct LinkedlistResult{
+typedef struct LinkedlistResult {
   LinkedListNode* res0;
-  int count ;
+  int count;
 }LinkedListResult;
 
 LinkedList *CreateLinkedList();
 
 void InsertLinkedList(LinkedList *list, void *data);
-
-void DeleteLinkedList(LinkedList *list,
-                                 int key);
-
+void DeleteLinkedList(LinkedList *list, int key);
 LinkedList* FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *));
+LinkedListNode *AtLinkedList(LinkedList *list, int pos);
 
 #endif

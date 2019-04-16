@@ -5,7 +5,7 @@
 #include "utils/io.h"
 
 void FS_Init() {
-  component = ReadSalesJSON(COMPONENT_FILENAME);
+  component = ReadComponentJSON(COMPONENT_FILENAME);
   sales = ReadSalesJSON(SALES_FILENAME);
   purchase = ReadPurchaseJSON(PURCHASE_FILENAME);
 }
