@@ -124,11 +124,17 @@ bool FindTime_Sales(LinkedListNode *node) {
     return false;
 }
 
-LinkedList* Gift() {
-  int a[50],i,w;
+Component* Gift() {
+  int a[50], i, w;
+  int t;
   for (i = 0; i < 50; i++)
     a[i] = i + 1;
-
+  for (i = 0; i < 50; i++) {
+    w = rand() % 50;
+    t = a[i];
+    a[i] = a[w];
+    a[w] = t;
+  }
   return prime;
 }
 
