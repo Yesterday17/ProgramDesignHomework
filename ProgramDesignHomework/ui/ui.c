@@ -402,175 +402,176 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
     //打印
     return MENU_Main;
   }
+}
 
-  int OptionBar(int start, int end) {//start为起始行，end为终止行
-    int x = 1, y = start - 1;
-    gotoxy(x, y);
-    PrintLITERAL("*");
-    char ch;
-    while (1) {
-      char c = _getch();
-      if (c == 13) break;//回车退出
-      if (c < 0) {
-        ch = _getch();
-        switch (ch) {
-        case 72:
-          if (y > start - 1) {
-            gotoxy(x, y);
-            PrintLITERAL(" ");
-            y--;
-            gotoxy(x, y);
-            PrintLITERAL("*");
-          }
-          break;
-        case 80:
-          if (y < end - 1) {
-            gotoxy(x, y);
-            PrintLITERAL(" ");
-            y++;
-            gotoxy(x, y);
-            PrintLITERAL("*");
-          }
+int OptionBar(int start, int end) {//start为起始行，end为终止行
+  int x = 1, y = start - 1;
+  gotoxy(x, y);
+  PrintLITERAL("*");
+  char ch;
+  while (1) {
+    char c = _getch();
+    if (c == 13) break;//回车退出
+    if (c < 0) {
+      ch = _getch();
+      switch (ch) {
+      case 72:
+        if (y > start - 1) {
+          gotoxy(x, y);
+          PrintLITERAL(" ");
+          y--;
+          gotoxy(x, y);
+          PrintLITERAL("*");
+        }
+        break;
+      case 80:
+        if (y < end - 1) {
+          gotoxy(x, y);
+          PrintLITERAL(" ");
+          y++;
+          gotoxy(x, y);
+          PrintLITERAL("*");
         }
       }
     }
-    return y;
   }
+  return y;
+}
 
-  //光标定位函数
-  void gotoxy(int x, int y) {
-    HANDLE a;
-    a = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD cos = { x, y };
-    SetConsoleCursorPosition(a, cos);
-  }
+//光标定位函数
+void gotoxy(int x, int y) {
+  HANDLE a;
+  a = GetStdHandle(STD_OUTPUT_HANDLE);
+  COORD cos = { x, y };
+  SetConsoleCursorPosition(a, cos);
+}
 
-  int RecordPage(LinkedList *data, string title, string record(void *, uint8_t)) { //记录翻页函数
-    LinkedListNode *p, *re[100];//目标节点，分页数组
-    int num = 0, count = 1, j = 0, y = 0;//序号，计数器，页码，选中行
-    bool printed = false;
-    char a, b;//读取按键ascii码
-    int end;//最终记录条数+1
-    p = data->top;
-    re[0] = data->top;
-    PrintString(title);
-    while (1) {
-      if ((count - 1) % hangshu == 0 && count != 1 || p == data->rear->next) {
-        end = count;
-        if (p == data->rear->next && (count - 1) % hangshu != 0) {
-          count = (count + hangshu - 1) / hangshu * hangshu + 1;//进位取整+1：如39->41
-        }
+int RecordPage(LinkedList *data, string title, string record(void *, uint8_t)) { //记录翻页函数
+  LinkedListNode *p, *re[100];//目标节点，分页数组
+  int num = 0, count = 1, j = 0, y = 0;//序号，计数器，页码，选中行
+  bool printed = false;
+  char a, b;//读取按键ascii码
+  int end;//最终记录条数+1
+  p = data->top;
+  re[0] = data->top;
+  PrintString(title);
+  while (1) {
+    if ((count - 1) % hangshu == 0 && count != 1 || p == data->rear->next) {
+      end = count;
+      if (p == data->rear->next && (count - 1) % hangshu != 0) {
+        count = (count + hangshu - 1) / hangshu * hangshu + 1;//进位取整+1：如39->41
+      }
 
-        if (!printed) {
-          gotoxy(0, 11);
-          PrintLITERAL("  修改记录: Enter  返回上一级: Backspace  左翻页: ←  右翻页: →\n");
-          printed = true;
-        }
+      if (!printed) {
+        gotoxy(0, 11);
+        PrintLITERAL("  修改记录: Enter  返回上一级: Backspace  左翻页: ←  右翻页: →\n");
+        printed = true;
+      }
 
-        a = _getch();
-        if (a < 0) {
-          b = _getch();
-          if (b == 75 && count > 1 + hangshu) {//左翻页
-            count -= hangshu;
-            if (j > 0) j--;
-            p = re[j];
-            UI_Clear();
-            PrintString(title);
-            printed = false;
-          }
-          else if (b == 77 && p != data->rear->next) {//右翻页
-            j++;
-            re[j] = p;
-            UI_Clear();
-            PrintString(title);
-            printed = false;
-          }
-          else//锁定其他按键
-            continue;
-        }
-        if (a == 8) {
+      a = _getch();
+      if (a < 0) {
+        b = _getch();
+        if (b == 75 && count > 1 + hangshu) {//左翻页
+          count -= hangshu;
+          if (j > 0) j--;
+          p = re[j];
           UI_Clear();
-          return -1;
-        }//Backspace
-        if (a == 13)break;//回车退出
+          PrintString(title);
+          printed = false;
+        }
+        else if (b == 77 && p != data->rear->next) {//右翻页
+          j++;
+          re[j] = p;
+          UI_Clear();
+          PrintString(title);
+          printed = false;
+        }
+        else//锁定其他按键
+          continue;
       }
-      num++;
-      PrintLITERAL("[ ]");
-      PrintString(record(p->data, num));
-      p = p->next;
-      count++;
+      if (a == 8) {
+        UI_Clear();
+        return -1;
+      }//Backspace
+      if (a == 13)break;//回车退出
     }
-    gotoxy(0, 11);
-    PrintLITERAL("  向上移动: ↑  向下移动: ↓                                                     ");
-    int count0 = end;//拷贝（真实记录行数+1）
-    if ((count0 - 1) % hangshu == 0) {
-      y = OptionBar(2, 2 + hangshu - 1);
+    num++;
+    PrintLITERAL("[ ]");
+    PrintString(record(p->data, num));
+    p = p->next;
+    count++;
+  }
+  gotoxy(0, 11);
+  PrintLITERAL("  向上移动: ↑  向下移动: ↓                                                     ");
+  int count0 = end;//拷贝（真实记录行数+1）
+  if ((count0 - 1) % hangshu == 0) {
+    y = OptionBar(2, 2 + hangshu - 1);
+  }
+  else {
+    if (count0 > hangshu) {
+      count0 = count0 - (count0 / hangshu * hangshu) - 1;//记录末页行数：如记录38条，末页8行
     }
-    else {
-      if (count0 > hangshu) {
-        count0 = count0 - (count0 / hangshu * hangshu) - 1;//记录末页行数：如记录38条，末页8行
-      }
-      y = OptionBar(2, 2 + count0 - 1);
-    }
-    return j * hangshu + y;
+    y = OptionBar(2, 2 + count0 - 1);
+  }
+  return j * hangshu + y;
+}
+
+void UI_Clear() {
+  HANDLE hConsole;
+
+  hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+  COORD coordScreen = { 0, 0 };    // home for the cursor
+  DWORD cCharsWritten;
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  DWORD dwConSize;
+
+  // Get the number of character cells in the current buffer. 
+
+  if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) {
+    return;
   }
 
-  void UI_Clear() {
-    HANDLE hConsole;
+  dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
 
-    hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD coordScreen = { 0, 0 };    // home for the cursor
-    DWORD cCharsWritten;
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-    DWORD dwConSize;
+  // Fill the entire screen with blanks.
 
-    // Get the number of character cells in the current buffer. 
-
-    if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) {
-      return;
-    }
-
-    dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
-
-    // Fill the entire screen with blanks.
-
-    if (!FillConsoleOutputCharacter(hConsole,        // Handle to console screen buffer 
-      (TCHAR) ' ',     // Character to write to the buffer
-      dwConSize,       // Number of cells to write
-      coordScreen,     // Coordinates of first cell
-      &cCharsWritten))// Receive number of characters written
-    {
-      return;
-    }
-
-    // Get the current text attribute.
-
-    if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) {
-      return;
-    }
-
-    // Set the buffer's attributes accordingly.
-
-    if (!FillConsoleOutputAttribute(hConsole,         // Handle to console screen buffer 
-      csbi.wAttributes, // Character attributes to use
-      dwConSize,        // Number of cells to set attribute
-      coordScreen,      // Coordinates of first cell
-      &cCharsWritten)) // Receive number of characters written
-    {
-      return;
-    }
-
-    // Put the cursor at its home coordinates.
-
-    SetConsoleCursorPosition(hConsole, coordScreen);
+  if (!FillConsoleOutputCharacter(hConsole,        // Handle to console screen buffer 
+    (TCHAR) ' ',     // Character to write to the buffer
+    dwConSize,       // Number of cells to write
+    coordScreen,     // Coordinates of first cell
+    &cCharsWritten))// Receive number of characters written
+  {
+    return;
   }
 
-  void UI_Color() {
-    system("color 80");
+  // Get the current text attribute.
+
+  if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) {
+    return;
   }
 
-  void UI_Exit() {
-    PrintLITERAL("欢迎下次使用");
+  // Set the buffer's attributes accordingly.
+
+  if (!FillConsoleOutputAttribute(hConsole,         // Handle to console screen buffer 
+    csbi.wAttributes, // Character attributes to use
+    dwConSize,        // Number of cells to set attribute
+    coordScreen,      // Coordinates of first cell
+    &cCharsWritten)) // Receive number of characters written
+  {
+    return;
   }
 
-  void UI_WaitForNext(void *nextDo()) { nextDo(); }
+  // Put the cursor at its home coordinates.
+
+  SetConsoleCursorPosition(hConsole, coordScreen);
+}
+
+void UI_Color() {
+  system("color 80");
+}
+
+void UI_Exit() {
+  PrintLITERAL("欢迎下次使用");
+}
+
+void UI_WaitForNext(void *nextDo()) { nextDo(); }

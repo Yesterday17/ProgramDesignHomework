@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include"../cstring_jslike/cstring_jslike.h"
 
 /**
  * 处理时间相关

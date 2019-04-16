@@ -1,5 +1,4 @@
 ﻿#include "time.h"
-#include"../cstring_jslike/cstring_jslike.h"
 bool prime(int a) {
   if ((a % 4 == 0 && a % 100 != 0) || (a % 400 == 0))
     return true;
@@ -82,12 +81,11 @@ string callbacktime(uint64_t time)
 	int day31[7] = { 1, 3, 5, 7, 8, 10, 12 };
 	int day30[4] = { 4, 6, 9, 11 };
 	uint64_t test = 0;
-	int flag;
-	string a;
+	int flag = 0;
 	int year=1970, month=1, day=1, hour=0, minute=0, second=0;
 		while (test<time)
 		{
-			int flag = 1;
+			flag = 1;
 			if (prime(year))
 			{
 				test += 366 * 24 * 60 * 60;
@@ -171,6 +169,7 @@ string callbacktime(uint64_t time)
 		minute--;
 		test -= 60;
 		second = time - test;
-		sprintf(a, "%d年%d月%d日%d时%d分%d秒", year, month, day, hour, minute, second);
-		return a;
+    char str[200];
+		sprintf(str, "%d年%d月%d日%d时%d分%d秒", year, month, day, hour, minute, second);
+		return newString(str);
 }
