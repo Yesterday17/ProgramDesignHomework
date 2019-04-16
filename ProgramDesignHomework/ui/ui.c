@@ -281,38 +281,47 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           InsertLinkedList(result, ((LinkedListResult*)p->data)->res0->data);
         }
         UI_Clear();
-        int num = RecordPage(result, PrintSalesTitle(), PrintSales);
-        int count = 1;
-        if (num != -1) {
-          for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
-            if (num == count) {
-              record = ((LinkedListResult*)(p->data))->count;
-              break;
+        if (result->rear != NULL) {
+          int num = RecordPage(result, PrintSalesTitle(), PrintSales);
+          int count = 1;
+          if (num != -1) {
+            for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
+              if (num == count) {
+                record = ((LinkedListResult*)(p->data))->count;
+                break;
+              }
+              count++;
             }
-            count++;
-          }
-          gotoxy(1, 1 + hangshu);
-          PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
-          while (1) {
-            char key1 = _getch();
-            char key2 = 0;
-            if (key1 == 13) {//enter
-              DeleteLinkedList(sales, record);
-              UI_Clear();
-              InsertLinkedList(sales, ReadSales());
-              UI_Clear();
-              WriteSalesJSON(SALES_FILENAME);
-              break;
-            }
-            if (key1 < 0) {
-              key2 = _getch();
-              if (key2 == 83) {//delete
-                UI_Clear();
+            gotoxy(1, 1 + hangshu);
+            PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
+            while (1) {
+              char key1 = _getch();
+              char key2 = 0;
+              if (key1 == 13) {//enter
                 DeleteLinkedList(sales, record);
+                UI_Clear();
+                InsertLinkedList(sales, ReadSales());
+                UI_Clear();
                 WriteSalesJSON(SALES_FILENAME);
                 break;
               }
+              if (key1 < 0) {
+                key2 = _getch();
+                if (key2 == 83) {//delete
+                  UI_Clear();
+                  DeleteLinkedList(sales, record);
+                  WriteSalesJSON(SALES_FILENAME);
+                  break;
+                }
+              }
             }
+          }
+        }
+        else {
+          PrintLITERAL("没有查找到结果 ");
+          while (1) {
+            char ch = _getch();
+            if (ch == 13)break;
           }
           UI_Clear();
         }
