@@ -76,3 +76,7 @@ uint64_t timemaking() {
 
   return time;
 }
+callbacktime(UINT64_C)
+{
+
+}
