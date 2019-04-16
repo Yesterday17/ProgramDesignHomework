@@ -3,16 +3,34 @@
 #include "../global.h"
 #include "../utils/io.h"
 
+Component * NewComponent()
+{
+  Component *component = (Component*)malloc(sizeof(Component));
+  component->index = -1;
+  component->manufacturer = newString("未知");
+  component->name = newString("未知");
+  component->type = newString("UNKNOWN");
+  return component;
+}
+
+void FreeComponent(Component * component)
+{
+  $STR_BUF(component->manufacturer);
+  $STR_BUF(component->name);
+  $STR_BUF(component->type);
+  free(component);
+}
+
 /**
  * 从控制台读取数据
  * @return Component*
  */
 Component* ReadComponent() {
-  Component *comp = (Component*)malloc(sizeof(Component));
-  comp->name = InputString(LITERAL("配件名称:"), LITERAL("未知"));
-  comp->type = InputString(LITERAL("配件类型:"), LITERAL("未知"));
-  comp->manufacturer = InputString(LITERAL("制造商："), LITERAL("未知"));
-  return comp;
+  Component *component = NewComponent();
+  freeAssign(&component->name, InputString(LITERAL("配件名称:"), LITERAL("未知")));
+  freeAssign(&component->type, InputString(LITERAL("配件类型:"), LITERAL("未知")));
+  freeAssign(&component->manufacturer, InputString(LITERAL("制造商："), LITERAL("未知")));
+  return component;
 }
 
 /**
@@ -61,19 +79,19 @@ Component* ReadComponentJSON(cJSON *root)
   item = cJSON_GetObjectItem(root, "name");
   if (item != NULL)
   {
-    comp->name = newString(item->valuestring);
+    freeAssign(&comp->name, newString(item->valuestring));
   }
 
   item = cJSON_GetObjectItem(root, "type");
   if (item != NULL)
   {
-    comp->type = newString(item->valuestring);
+    freeAssign(&comp->type, newString(item->valuestring));
   }
 
   item = cJSON_GetObjectItem(root, "manufacturer");
   if (item != NULL)
   {
-    comp->manufacturer = newString(item->valuestring);
+    freeAssign(&comp->manufacturer, newString(item->valuestring));
   }
 
   return comp;
@@ -85,9 +103,5 @@ cJSON *ComponentToJSON(Component *prime)
   cJSON_AddItemToObject(root, "name", cJSON_CreateString(U8_CSTR(prime->name)));
   cJSON_AddItemToObject(root, "type", cJSON_CreateString(U8_CSTR(prime->type)));
   cJSON_AddItemToObject(root, "manufacturer", cJSON_CreateString(U8_CSTR(prime->manufacturer)));
-
-  if (root)
-    return root;
-  else
-    return NULL;
+  return root;
 }

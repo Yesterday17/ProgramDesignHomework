@@ -10,7 +10,7 @@
 #include "time.h"
 
 typedef struct Purchase {
-  Component *prime;
+  Component *component;
   uint64_t time;
   uint16_t price;       // 进货单价
   uint16_t quantity;    // 进货数量
@@ -18,6 +18,8 @@ typedef struct Purchase {
   string retailer;  //商品销售商
 } Purchase;
 
+Purchase *NewPurchase();
+void FreePurchase(Purchase *purchase);
 Purchase *ReadPurchase();
 Purchase *readjson_purchase(cJSON *root);
 LinkedList* ReadPurchaseJSON(string filename);

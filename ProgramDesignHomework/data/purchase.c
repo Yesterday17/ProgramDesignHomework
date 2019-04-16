@@ -3,6 +3,24 @@
 #include "../global.h"
 #include "../utils/io.h"
 
+Purchase * NewPurchase()
+{
+  Purchase *purchase = (Purchase *)malloc(sizeof(Purchase));
+  purchase->component = NewComponent();
+  purchase->time = 0;
+  purchase->price = 1;
+  purchase->quantity = 1;
+  purchase->total = 1;
+  purchase->retailer = newString("3021");
+  return purchase;
+}
+
+void FreePurchase(Purchase * purchase)
+{
+  FreeComponent(purchase->component);
+  $STR_BUF(purchase->retailer);
+  free(purchase);
+}
 
 /**
  * 从控制台读取数据
@@ -10,13 +28,18 @@
  */
 Purchase *ReadPurchase()
 {
-  Purchase *prime = (Purchase *)malloc(sizeof(Purchase));
-  //prime->time
-  prime->prime = ReadComponent();
-  prime->price = InputInt(LITERAL("进价单价: "));
-  prime->quantity = InputInt(LITERAL("进货数量: "));
-  prime->total = prime->price * prime->quantity;
-  return prime;
+  Purchase *purchase = NewPurchase();
+
+  free(purchase->component);
+  purchase->component = ReadComponent();
+
+  // FIXME: 输入时间字符串而非整数
+  purchase->time = InputInt(LITERAL("进货时间: "));
+  freeAssign(&purchase->retailer, InputString(LITERAL("供应商: "), LITERAL("3021")));
+  purchase->price = InputInt(LITERAL("进价单价: "));
+  purchase->quantity = InputInt(LITERAL("进货数量: "));
+  purchase->total = purchase->price * purchase->quantity;
+  return purchase;
 }
 
 /**
@@ -30,7 +53,8 @@ Purchase *readjson_purchase(cJSON *root) {
   Purchase *purchase = (Purchase*)malloc(sizeof(Purchase));
   item = cJSON_GetObjectItem(object, "prime");
   if (item != NULL) {
-    purchase->prime = ReadComponentJSON(item);
+    FreeComponent(purchase->component);
+    purchase->component = ReadComponentJSON(item);
   }
   item = cJSON_GetObjectItem(object, "time");
   if (item != NULL) {
@@ -51,7 +75,7 @@ Purchase *readjson_purchase(cJSON *root) {
 
   item = cJSON_GetObjectItem(object, "retailer");
   if (item != NULL) {
-    purchase->retailer = newString(item->valuestring);
+    freeAssign(&purchase->retailer, newString(item->valuestring));
   }
   return purchase;
 }
@@ -59,7 +83,7 @@ cJSON *PurchaseToJSON(Purchase *prime)
 {
   cJSON *root = cJSON_CreateObject();
   cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
-  cJSON_AddItemToObject(root, "component", ComponentToJSON(prime->prime));
+  cJSON_AddItemToObject(root, "component", ComponentToJSON(prime->component));
   cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
   cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
   cJSON_AddItemToObject(root, "total", cJSON_CreateNumber(prime->total));
@@ -77,7 +101,7 @@ string PrintPurchase(void *node, uint8_t id) {
 }
 
 bool FindTime_Purchase(LinkedListNode *node) {
-  return (((Purchase *)node->data)->time <= timeToSearchearly 
+  return (((Purchase *)node->data)->time <= timeToSearchearly
     && ((Purchase *)node->data)->time >= timeToSearchearly);
 }
 
@@ -86,11 +110,11 @@ bool FindRetailer_Purchase(LinkedListNode *node) {
 }
 
 bool FindComponentName_Purchase(LinkedListNode *node) {
-  return compareString(((Purchase*)(node->data))->prime->name, nameToSearch) == STRING_EQUAL;
+  return compareString(((Purchase*)(node->data))->component->name, nameToSearch) == STRING_EQUAL;
 }
 
 bool FindComponentType_Purchase(LinkedListNode *node) {
-  return compareString(((Purchase*)(node->data))->prime->type, nameToSearch) == STRING_EQUAL;
+  return compareString(((Purchase*)(node->data))->component->type, nameToSearch) == STRING_EQUAL;
 }
 
 LinkedList* ReadPurchaseJSON(string filename)

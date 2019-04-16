@@ -7,23 +7,45 @@
 #define Ltotal 1000000  //规定额度
 #define Lquantity 9     //规定数量
 
+Sales * NewSales()
+{
+  Sales *sales = (Sales*)malloc(sizeof(Sales));
+  sales->component = NewComponent();
+  sales->gift = NewComponent();
+  sales->time = 0;
+  sales->sales_mode = 1;
+  sales->price = 1;
+  sales->quantity = 1;
+  sales->total = 1;
+  sales->customer = newString("未知");
+  return sales;
+}
+
+void FreeSales(Sales * sales)
+{
+  FreeComponent(sales->component);
+  FreeComponent(sales->gift);
+  $STR_BUF(sales->customer);
+  free(sales);
+}
+
 Sales *ReadSales() {
-  Sales *prime = (Sales*)malloc(sizeof(Sales));
-  prime->component = ReadComponent();
+  Sales *sales = NewSales();
+  sales->component = ReadComponent();
   //prime->time=
-  prime->sales_mode= InputInt(LITERAL("批发(0)/零售(1): "))%2;
-  prime->price = InputInt(LITERAL("批发/零售价格: "));
-  prime->quantity = InputInt(LITERAL("批发/零售数量: "));
-  prime->total = prime->price * prime->quantity;
-  prime->customer = InputString(LITERAL("客户信息: "), LITERAL("未知"));
-  if (prime->sales_mode == 0)
-    if(prime->total>Ltotal||prime->quantity>Lquantity)
-      prime->gift = Gift(sales);
-  return prime;
+  sales->sales_mode = InputInt(LITERAL("批发(0)/零售(1): ")) % 2;
+  sales->price = InputInt(LITERAL("批发/零售价格: "));
+  sales->quantity = InputInt(LITERAL("批发/零售数量: "));
+  sales->total = sales->price * sales->quantity;
+  freeAssign(&sales->customer, InputString(LITERAL("客户信息: "), LITERAL("未知")));
+  if (sales->sales_mode == 0)
+    if (sales->total > Ltotal || sales->quantity > Lquantity)
+      sales->gift = Gift(sales);
+  return sales;
 }
 
 Sales *JSONToSales(cJSON *root) {
-  Sales *sales = (Sales*)malloc(sizeof(Sales));
+  Sales *sales = NewSales();
 
   cJSON *item = cJSON_GetObjectItem(root, "time");
   if (item != NULL) {
@@ -32,6 +54,7 @@ Sales *JSONToSales(cJSON *root) {
 
   item = cJSON_GetObjectItem(root, "component");
   if (item != NULL) {
+    FreeComponent(sales->component);
     sales->component = ReadComponentJSON(item);
   }
 
@@ -54,11 +77,12 @@ Sales *JSONToSales(cJSON *root) {
 
   item = cJSON_GetObjectItem(root, "customer");
   if (item != NULL) {
-    sales->customer = newString(item->valuestring);
+    freeAssign(&sales->customer, newString(item->valuestring));
   }
 
   item = cJSON_GetObjectItem(root, "gift");
   if (item != NULL) {
+    FreeComponent(sales->gift);
     sales->gift = ReadComponentJSON(item);
   }
 
@@ -95,10 +119,10 @@ string PrintSalesTitle() {
 string PrintSales(void *node, uint8_t id) {
   Sales* sales = (Sales *)node;
   char ans[200];
-  sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10d|%-10d|%-10s|%-10s\n", 
+  sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10d|%-10d|%-10s|%-10s\n",
     U8_CSTR(sales->component->name),
     U8_CSTR(sales->component->type),
-    U8_CSTR(sales->component->manufacturer), 
+    U8_CSTR(sales->component->manufacturer),
     ((sales->sales_mode == 1) ? U8_CSTR(LITERAL("批发")) : U8_CSTR(LITERAL("零售"))),
     sales->quantity,
     sales->price,
@@ -118,10 +142,8 @@ bool FindComponentType_Sales(LinkedListNode *node) {
   return compareString(((Sales*)(node->data))->component->type, typeToSearch) == STRING_EQUAL;
 }
 bool FindTime_Sales(LinkedListNode *node) {
-  if (((Sales *)node->data)->time <= timeToSearchearly && ((Sales *)node->data)->time >= timeToSearchlate)
-    return true;
-  else
-    return false;
+  return (((Sales *)node->data)->time <= timeToSearchearly
+    && ((Sales *)node->data)->time >= timeToSearchlate);
 }
 
 Component* Gift() {

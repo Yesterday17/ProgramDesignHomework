@@ -26,6 +26,8 @@ bool FindComponentName_Sales(LinkedListNode *node);
 bool FindComponentType_Sales(LinkedListNode *node);
 bool FindTime_Sales(LinkedListNode *node);
 
+Sales *NewSales();
+void FreeSales(Sales *sales);
 Sales *ReadSales();
 LinkedList* ReadSalesJSON(string filename);
 cJSON *SalesToJSON(Sales *prime);

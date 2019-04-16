@@ -122,6 +122,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
     case 1:
       InsertLinkedList(purchase, ReadPurchase());
       UI_Clear();
+      WritePurchaseJSON(PURCHASE_FILENAME);
       break;
     case 2:
       PrintLITERAL("[ ]1.按配件型号检索\n");
@@ -143,6 +144,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       LinkedList* result = CreateLinkedList();
       for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
         InsertLinkedList(result, ((LinkedListResult*)p->data)->res0->data);
+        WritePurchaseJSON(PURCHASE_FILENAME);
       }
       UI_Clear();
       if (result->rear != NULL) {
@@ -166,6 +168,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               UI_Clear();
               InsertLinkedList(purchase, ReadPurchase());
               UI_Clear();
+              WritePurchaseJSON(PURCHASE_FILENAME);
               break;
             }
             if (key1 < 0) {
@@ -173,6 +176,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               if (key2 == 83) {//delete
                 UI_Clear();
                 DeleteLinkedList(purchase, record);
+                WritePurchaseJSON(PURCHASE_FILENAME);
                 break;
               }
             }

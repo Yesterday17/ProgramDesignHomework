@@ -21,6 +21,8 @@ bool FindName_Component(LinkedListNode *node);
 bool FindType_Component(LinkedListNode *node);
 bool FindMan_Component(LinkedListNode *node);
 
+Component *NewComponent();
+void FreeComponent(Component* component);
 Component *ReadComponent();
 Component *ReadComponentJSON(cJSON *root);
 cJSON *ComponentToJSON(Component *prime);
