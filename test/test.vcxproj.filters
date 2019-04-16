@@ -16,9 +16,6 @@
     <ClCompile Include="..\ProgramDesignHomework\global.c">
       <Filter>code</Filter>
     </ClCompile>
-    <ClCompile Include="..\ProgramDesignHomework\utils\utils.c">
-      <Filter>code</Filter>
-    </ClCompile>
     <ClCompile Include="..\ProgramDesignHomework\utils\fs.c">
       <Filter>code</Filter>
     </ClCompile>
@@ -75,9 +72,6 @@
       <Filter>code</Filter>
     </ClInclude>
     <ClInclude Include="..\ProgramDesignHomework\utils\linkedlist.h">
-      <Filter>code</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ProgramDesignHomework\utils\utils.h">
       <Filter>code</Filter>
     </ClInclude>
     <ClInclude Include="..\ProgramDesignHomework\utils\fs.h">

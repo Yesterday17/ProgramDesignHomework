@@ -45,7 +45,6 @@
     <ClCompile Include="..\ProgramDesignHomework\utils\fs.c" />
     <ClCompile Include="..\ProgramDesignHomework\utils\io.c" />
     <ClCompile Include="..\ProgramDesignHomework\utils\linkedlist.c" />
-    <ClCompile Include="..\ProgramDesignHomework\utils\utils.c" />
     <ClCompile Include="data\component_test.cpp" />
     <ClCompile Include="utils\fs_test.cpp" />
     <ClCompile Include="utils\linkedlist_test.cpp" />
@@ -71,7 +70,6 @@
     <ClInclude Include="..\ProgramDesignHomework\utils\fs.h" />
     <ClInclude Include="..\ProgramDesignHomework\utils\io.h" />
     <ClInclude Include="..\ProgramDesignHomework\utils\linkedlist.h" />
-    <ClInclude Include="..\ProgramDesignHomework\utils\utils.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
