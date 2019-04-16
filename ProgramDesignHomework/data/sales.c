@@ -148,6 +148,7 @@ bool FindTime_Sales(LinkedListNode *node) {
 
 Component* Gift() {
   int a[50], i, w;
+  Component* result[3];
   int t;
   for (i = 0; i < 50; i++)
     a[i] = i + 1;
@@ -157,7 +158,30 @@ Component* Gift() {
     a[i] = a[w];
     a[w] = t;
   }
-  return prime;
+  i = 0;
+  while (i < 3) {
+    for (LinkedListNode* p = component->top; p != NULL; p = p->next) {
+      if (((Component*)p->data)->index == a[i]) {
+        result[i] = ((Component*)p->data);
+        i++;
+        break;
+      }
+    }
+  }
+  PrintLITERAL("恭喜你获得一个赠品，请输入数字进行选择：\n");
+  for (i = 0; i < 3; i++) {
+    printf("%d.%s%s\n",i+1,U8_CSTR(result[i]->name),U8_CSTR(result[i]->type));
+  }
+  char ch = _getch();
+  while (1) {
+    if (ch == '1') 
+      return result[0];
+    if (ch == '2')
+      return result[1];
+    if (ch == '3')
+      return result[2];
+  }
+  return -1;
 }
 
 LinkedList* ReadSalesJSON(string filename)
