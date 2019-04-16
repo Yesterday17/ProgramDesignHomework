@@ -86,26 +86,28 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       if (purchase->rear != NULL) {
         UI_Clear();
         record = RecordPage(purchase, PrintPurchaseTitle(), PrintPurchase);
-        gotoxy(1, 1 + hangshu);
-        PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
-        while (1) {
-          char key1 = _getch();
-          char key2 = 0;
-          if (key1 == 13) {//enter
-            DeleteLinkedList(purchase, record);
-            UI_Clear();
-            InsertLinkedList(purchase, ReadPurchase());
-            UI_Clear();
-            WritePurchaseJSON(PURCHASE_FILENAME);
-            break;
-          }
-          if (key1 < 0) {
-            key2 = _getch();
-            if (key2 == 83) {//delete
-              UI_Clear();
+        if (record != -1) {
+          gotoxy(1, 1 + hangshu);
+          PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
+          while (1) {
+            char key1 = _getch();
+            char key2 = 0;
+            if (key1 == 13) {//enter
               DeleteLinkedList(purchase, record);
+              UI_Clear();
+              InsertLinkedList(purchase, ReadPurchase());
+              UI_Clear();
               WritePurchaseJSON(PURCHASE_FILENAME);
               break;
+            }
+            if (key1 < 0) {
+              key2 = _getch();
+              if (key2 == 83) {//delete
+                UI_Clear();
+                DeleteLinkedList(purchase, record);
+                WritePurchaseJSON(PURCHASE_FILENAME);
+                break;
+              }
             }
           }
         }
