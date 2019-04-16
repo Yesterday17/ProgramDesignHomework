@@ -11,6 +11,7 @@
  */
 
 bool FileExist(string fileName);
-string ReadFile(string filename);
+string ReadFile(string fileName);
+bool WriteFile(string fileName, char* content);
 
 #endif

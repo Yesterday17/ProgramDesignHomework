@@ -56,10 +56,9 @@ Purchase *readjson_purchase(cJSON *root) {
   }
   return purchase;
 }
-cJSON*purchase_cjson(Purchase *prime)
+cJSON *PurchaseToJSON(Purchase *prime)
 {
-
-  cJSON * root = cJSON_CreateObject();
+  cJSON *root = cJSON_CreateObject();
   cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
   cJSON_AddItemToObject(root, "component", ComponentToJSON(prime->prime));
   cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
@@ -67,10 +66,7 @@ cJSON*purchase_cjson(Purchase *prime)
   cJSON_AddItemToObject(root, "total", cJSON_CreateNumber(prime->total));
   cJSON_AddItemToObject(root, "retailer", cJSON_CreateString(U8_CSTR(prime->retailer)));
 
-  if (root)
-    return root;
-  else
-    return NULL;
+  return root;
 }
 
 string PrintPurchaseTitle() {
@@ -82,12 +78,8 @@ string PrintPurchase(void *node, uint8_t id) {
 }
 
 bool FindTime_Purchase(LinkedListNode *node) {
-  if (((Purchase *)node->data)->time <= timeToSearchearly && ((Purchase *)node->data)->time >= timeToSearchearly)
-    return true;
-
-  else
-    return false;
-
+  return (((Purchase *)node->data)->time <= timeToSearchearly 
+    && ((Purchase *)node->data)->time >= timeToSearchearly);
 }
 
 bool FindRetailer_Purchase(LinkedListNode *node) {
@@ -101,8 +93,6 @@ bool FindComponentName_Purchase(LinkedListNode *node) {
 bool FindComponentType_Purchase(LinkedListNode *node) {
   return compareString(((Purchase*)(node->data))->prime->type, nameToSearch) == STRING_EQUAL;
 }
-
-
 
 LinkedList* ReadPurchaseJSON(string filename)
 {
@@ -118,4 +108,12 @@ LinkedList* ReadPurchaseJSON(string filename)
     }
   }
   return list;
+}
+
+bool WritePurchaseJSON(string filename) {
+  cJSON *result = cJSON_CreateArray();
+  for (LinkedListNode *p = purchase->top; p != NULL; p = p->next) {
+    cJSON_AddItemReferenceToArray(result, PurchaseToJSON(p->data));
+  }
+  return WriteFile(filename, cJSON_Print(result));
 }

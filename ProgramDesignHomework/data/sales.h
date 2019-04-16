@@ -29,6 +29,7 @@ bool FindTime_Sales(LinkedListNode *node);
 Sales *ReadSales();
 LinkedList* ReadSalesJSON(string filename);
 cJSON *SalesToJSON(Sales *prime);
+bool WriteSalesJSON(string filename);
 
 LinkedList* Gift(LinkedList *node);
 

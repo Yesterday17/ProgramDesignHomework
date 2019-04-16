@@ -21,18 +21,18 @@ Menu UI_MainMenu() {
   char ch1, ch2;
   string oper[] = {
    LITERAL("1. 进货记录"),
-   LITERAL("2. 售货记录"),
+   LITERAL("2. 销售记录"),
    LITERAL("3. 库存"),
    LITERAL("4. 金额"),
    LITERAL("5. 退出本程序")
   };
-  PrintLITERAL("Operation List:\n");
+  PrintLITERAL("操作列表: \n");
   for (i = 0; i < 5; i++) {
     PrintLITERAL("[ ]");
     PrintString(oper[i]);
     PrintLITERAL("\n");
   }
-  PrintLITERAL("Please select the operation you want to perform:");
+  PrintLITERAL("请选择您要进行的操作");
   gotoxy(2, 1);
 
   PrintLITERAL("\b*]");
@@ -96,6 +96,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
             UI_Clear();
             InsertLinkedList(purchase, ReadPurchase());
             UI_Clear();
+            WritePurchaseJSON(PURCHASE_FILENAME);
             break;
           }
           if (key1 < 0) {
@@ -103,6 +104,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
             if (key2 == 83) {//delete
               UI_Clear();
               DeleteLinkedList(purchase, record);
+              WritePurchaseJSON(PURCHASE_FILENAME);
               break;
             }
           }
@@ -212,6 +214,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               UI_Clear();
               InsertLinkedList(sales, ReadSales());
               UI_Clear();
+              WriteSalesJSON(SALES_FILENAME);
               break;
             }
             if (key1 < 0) {
@@ -219,6 +222,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               if (key2 == 83) {//delete
                 UI_Clear();
                 DeleteLinkedList(sales, record);
+                WriteSalesJSON(SALES_FILENAME);
                 break;
               }
             }
@@ -238,6 +242,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
     case 1:
       InsertLinkedList(sales, ReadSales());
       UI_Clear();
+      WriteSalesJSON(SALES_FILENAME);
       break;
     case 2:
       if (sales->rear != NULL) {
@@ -286,6 +291,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               UI_Clear();
               InsertLinkedList(sales, ReadSales());
               UI_Clear();
+              WriteSalesJSON(SALES_FILENAME);
               break;
             }
             if (key1 < 0) {
@@ -293,6 +299,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               if (key2 == 83) {//delete
                 UI_Clear();
                 DeleteLinkedList(sales, record);
+                WriteSalesJSON(SALES_FILENAME);
                 break;
               }
             }

@@ -5,7 +5,7 @@
 #include "../utils/io.h"
 
 Sales *ReadSales() {
-  Sales *prime = malloc(sizeof(Sales));
+  Sales *prime = (Sales*)malloc(sizeof(Sales));
   prime->component = ReadComponent();
   prime->price = InputInt(LITERAL("批发/零售价格: "));
   prime->quantity = InputInt(LITERAL("批发/零售数量: "));
@@ -13,6 +13,7 @@ Sales *ReadSales() {
   prime->customer = InputString(LITERAL("客户信息: "), LITERAL("无"));
   return prime;
 }
+
 Sales *JSONToSales(cJSON *root) {
   Sales *sales = (Sales*)malloc(sizeof(Sales));
 
@@ -55,21 +56,17 @@ Sales *JSONToSales(cJSON *root) {
 
   return sales;
 }
-cJSON*SalesToJSON(Sales *prime)
+cJSON *SalesToJSON(Sales *prime)
 {
-
   cJSON * root = cJSON_CreateObject();
   cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
   cJSON_AddItemToObject(root, "component", ComponentToJSON(prime->component));
   cJSON_AddItemToObject(root, "sales_mode", cJSON_CreateNumber(prime->sales_mode));
   cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
   cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
-  cJSON_AddItemToObject(root, "total", cJSON_CreateNumber(prime->total));
-
-  if (root)
-    return root;
-  else
-    return NULL;
+  cJSON_AddItemToObject(root, "customer", cJSON_CreateString(U8_CSTR(prime->customer)));
+  cJSON_AddItemToObject(root, "gift", ComponentToJSON(prime->gift));
+  return root;
 }
 
 string PrintSalesTitle() {
@@ -109,13 +106,17 @@ bool FindCustomer_Sales(LinkedListNode *node) {
 bool FindComponentName_Sales(LinkedListNode *node) {
   return compareString(((Sales*)(node->data))->component->name, nameToSearch) == STRING_EQUAL;
 }
-
 bool FindComponentType_Sales(LinkedListNode *node) {
   return compareString(((Sales*)(node->data))->component->type, typeToSearch) == STRING_EQUAL;
 }
+bool FindTime_Sales(LinkedListNode *node) {
+  if (((Sales *)node->data)->time <= timeToSearchearly && ((Sales *)node->data)->time >= timeToSearchlate)
+    return true;
+  else
+    return false;
+}
 
 LinkedList* Gift(LinkedList *node) {
-
   LinkedListNode *head, *p;
   LinkedList *prime, *q;
   prime = CreateLinkedList();
@@ -141,14 +142,6 @@ LinkedList* Gift(LinkedList *node) {
   return prime;
 }
 
-
-bool FindTime_Sales(LinkedListNode *node) {
-  if (((Sales *)node->data)->time <= timeToSearchearly && ((Sales *)node->data)->time >= timeToSearchlate)
-    return true;
-  else
-    return false;
-}
-
 LinkedList* ReadSalesJSON(string filename)
 {
   LinkedList *list = CreateLinkedList();
@@ -162,4 +155,12 @@ LinkedList* ReadSalesJSON(string filename)
     }
   }
   return list;
+}
+
+bool WriteSalesJSON(string filename) {
+  cJSON *result = cJSON_CreateArray();
+  for (LinkedListNode *p = sales->top; p != NULL; p = p->next) {
+    cJSON_AddItemReferenceToArray(result, SalesToJSON(p->data));
+  }
+  return WriteFile(filename, cJSON_Print(result));
 }

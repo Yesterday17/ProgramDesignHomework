@@ -35,3 +35,15 @@ string ReadFile(string filename) {
   free(str);
   return ans;
 }
+
+bool WriteFile(string fileName, char *content)
+{
+  FILE *fp = fopen(U8_CSTR(fileName), "w");
+  if (fp == NULL) {
+    return false;
+  }
+
+  fprintf(fp, "%s", content);
+  fclose(fp);
+  return true;
+}

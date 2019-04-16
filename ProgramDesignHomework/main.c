@@ -6,9 +6,9 @@
 #include "utils/utils.h"
 
 void FS_Init() {
-  component = CreateLinkedList();
-  sales = ReadSalesJSON(LITERAL("sales.json"));
-  purchase = CreateLinkedList();// ReadPurchaseJSON(LITERAL("purchase.json"));
+  component = ReadSalesJSON(COMPONENT_FILENAME);
+  sales = ReadSalesJSON(SALES_FILENAME);
+  purchase = ReadPurchaseJSON(PURCHASE_FILENAME);
 }
 
 int main() {

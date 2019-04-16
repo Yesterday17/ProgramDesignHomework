@@ -10,6 +10,10 @@
  * 声明全局变量的头文件
  */
 
+#define COMPONENT_FILENAME LITERAL("component.json")
+#define SALES_FILENAME LITERAL("sales.json")
+#define PURCHASE_FILENAME LITERAL("purchase.json")
+
 extern const char NAME[];
 extern const char VERSION[];
 
@@ -25,6 +29,5 @@ extern string customerToSearch;
 extern string retailerToSearch;
 extern string typeToSearch;
 extern string manufacturerToSearch;
-
 
 #endif
