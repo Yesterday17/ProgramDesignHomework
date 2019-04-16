@@ -6,6 +6,9 @@ Menu menuNow = MENU_Welcome;
 
 void UI_Init() {
   srand((unsigned)(time(NULL)));
+  CONSOLE_CURSOR_INFO info = { 1,0 };
+  HANDLE hout = GetStdHandle(STD_OUTPUT_HANDLE);
+  SetConsoleCursorInfo(hout, &info);
   UI_Color();
 }
 void UI_Welcome() {
