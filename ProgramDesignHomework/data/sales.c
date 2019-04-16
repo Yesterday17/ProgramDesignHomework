@@ -32,12 +32,12 @@ Sales *ReadSales() {
   Sales *sales = NewSales();
   sales->component = ReadComponent();
   //prime->time=
-  sales->sales_mode = InputInt(LITERAL("批发(0)/零售(1): ")) % 2;
+  sales->sales_mode = InputInt(LITERAL("批发(1)/零售(0): ")) % 2;
   sales->price = InputInt(LITERAL("批发/零售价格: "));
   sales->quantity = InputInt(LITERAL("批发/零售数量: "));
   sales->total = sales->price * sales->quantity;
   freeAssign(&sales->customer, InputString(LITERAL("客户信息: "), LITERAL("未知")));
-  if (sales->sales_mode == 0)
+  if (sales->sales_mode == 1)
     if (sales->total > Ltotal || sales->quantity > Lquantity)
       sales->gift = Gift(sales);
   return sales;
@@ -118,7 +118,7 @@ string PrintSales(void *node, uint8_t id) {
   Component* comp = AtLinkedList(component, sales->component)->data;
   Component* gift = AtLinkedList(component, sales->gift)->data;
   char ans[200];
-  sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10.2f|%-10.2f|%-10s|%-10s\n",
+  sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10.2f|%-10.2f|%-10s|%-20s\n",
     U8_CSTR(comp->name),
     U8_CSTR(comp->type),
     U8_CSTR(comp->manufacturer),
@@ -127,7 +127,7 @@ string PrintSales(void *node, uint8_t id) {
     sales->price / 100.0f,
     sales->total / 100.0f,
     U8_CSTR(sales->customer),
-    U8_CSTR(gift->name));
+    U8_CSTR(concat(3, gift->name, LITERAL(" "),gift->type)));
   return newString(ans);
 }
 
@@ -147,7 +147,7 @@ bool FindTime_Sales(LinkedListNode *node) {
     && ((Sales *)node->data)->time >= timeToSearchlate);
 }
 
-Component* Gift() {
+int Gift() {
   int a[50], i, w;
   Component* result[3];
   int t;
@@ -160,29 +160,26 @@ Component* Gift() {
     a[w] = t;
   }
   i = 0;
-  while (i < 3) {
-    for (LinkedListNode* p = component->top; p != NULL; p = p->next) {
-      if (((Component*)p->data)->index == a[i]) {
-        result[i] = ((Component*)p->data);
-        i++;
-        break;
-      }
+  for (int pos = 0, len = LengthLinkedList(component); i < 3; pos++) {
+    if (a[pos] < len) {
+      result[i] = AtLinkedList(component, a[pos])->data;
+      a[i] = a[pos];
+      i++;
     }
   }
   PrintLITERAL("恭喜你获得一个赠品，请输入数字进行选择：\n");
   for (i = 0; i < 3; i++) {
-    printf("%d.%s%s\n", i + 1, U8_CSTR(result[i]->name), U8_CSTR(result[i]->type));
+    printf("%d. %s %s\n", i + 1, U8_CSTR(result[i]->name), U8_CSTR(result[i]->type));
   }
   char ch = _getch();
   while (1) {
     if (ch == '1')
-      return result[0];
+      return a[0];
     if (ch == '2')
-      return result[1];
+      return a[1];
     if (ch == '3')
-      return result[2];
+      return a[2];
   }
-  return -1;
 }
 
 LinkedList* ReadSalesJSON(string filename)

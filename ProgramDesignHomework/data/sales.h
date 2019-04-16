@@ -33,6 +33,6 @@ LinkedList* ReadSalesJSON(string filename);
 cJSON *SalesToJSON(Sales *prime);
 bool WriteSalesJSON(string filename);
 
-Component* Gift();
+int Gift();
 
 #endif
