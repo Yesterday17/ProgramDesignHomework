@@ -32,7 +32,7 @@ Purchase *ReadPurchase()
   purchase->component = -1;
 
   // FIXME: 输入时间字符串而非整数
-  purchase->time = InputInt(LITERAL("进货时间: "));
+  purchase->time = timemaking();
   freeAssign(&purchase->retailer, InputString(LITERAL("供应商: "), LITERAL("3021")));
   purchase->price = InputInt(LITERAL("进价单价: "));
   purchase->quantity = InputInt(LITERAL("进货数量: "));

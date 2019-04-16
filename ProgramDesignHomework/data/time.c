@@ -1,4 +1,6 @@
 ﻿#include "time.h"
+#include "../utils/io.h"
+
 bool prime(int a) {
   if ((a % 4 == 0 && a % 100 != 0) || (a % 400 == 0))
     return true;
@@ -10,7 +12,7 @@ bool mistake(int year, int month, int day, int hour, int minute, int second) {
   if ((year < 1970) || (month < 1) || (month > 12) || (day < 0) || (day > 31))
     return false;
   if ((hour < 0) || (hour > 24) || (minute < 0) || (minute > 60) ||
-      (second < 0) || (second > 60))
+    (second < 0) || (second > 60))
     return false;
   if ((prime(year)) && (month == 2) && (day > 29)) return false;
   if ((prime(year)) && (month == 2) && (day > 28)) return false;
@@ -19,17 +21,17 @@ bool mistake(int year, int month, int day, int hour, int minute, int second) {
 
 uint64_t timemaking() {
   int counts = 0, i, j, k;
-  int day31[7] = {1, 3, 5, 7, 8, 10, 12};
-  int day30[4] = {4, 6, 9, 11};
+  int day31[7] = { 1, 3, 5, 7, 8, 10, 12 };
+  int day30[4] = { 4, 6, 9, 11 };
   uint64_t time = 0;
   int flag;
   int year, month, day, hour, minute, second;
-  printf("请输入时间（例：2019-03-20--14:42:38):");
-  scanf("%d-%d-%d--%d:%d:%d", &year, &month, &day, &hour, &minute, &second);
+  string str = InputString(LITERAL("请输入时间（例：2019-03-20--14:42:38):"), LITERAL("2019-03-20--14:42:38"));
+  sscanf(U8_CSTR(str), "%d-%d-%d--%d:%d:%d", &year, &month, &day, &hour, &minute, &second);
   while (mistake(year, month, day, hour, minute, second) == false) {
-    printf("输入错误 请重新输入！\n");
-    printf("请输入时间（例：2019-03-20--14:42:38):");
-    scanf("%d-%d-%d--%d:%d:%d", &year, &month, &day, &hour, &minute, &second);
+    PrintLITERAL("输入错误 请重新输入！\n");
+    freeAssign(&str, InputString(LITERAL("请输入时间（例：2019-03-20--14:42:38):"), LITERAL("2019-03-20--14:42:38")));
+    sscanf(U8_CSTR(str), "%d-%d-%d--%d:%d:%d", &year, &month, &day, &hour, &minute, &second);
   }
 
   for (i = 1970; i < year; i++) {
@@ -75,101 +77,101 @@ uint64_t timemaking() {
 
   return time;
 }
-string callbacktime(uint64_t time) 
+string callbacktime(uint64_t time)
 {
-	int counts = 0, i, j, k;
-	int day31[7] = { 1, 3, 5, 7, 8, 10, 12 };
-	int day30[4] = { 4, 6, 9, 11 };
-	uint64_t test = 0;
-	int flag = 0;
-	int year=1970, month=1, day=1, hour=0, minute=0, second=0;
-		while (test<time)
-		{
-			flag = 1;
-			if (prime(year))
-			{
-				test += 366 * 24 * 60 * 60;
-				year++;
-				flag = 2;
-			}
-			else
-			{
-				test += 365 * 24 * 60 * 60;
-				year++;
-				flag = 3;
-			}
-		}
-		year--;
-		if (flag == 2)
-			test -= 366 * 24 * 60 * 60;
-		if (flag == 3)
-			test -= 365 * 24 * 60 * 60;
-		month = 1;
-		int flags = 1;
-		while (time>test)
-		{
-			if ((month == 2) && (!prime(year))) {
-				test= test+ 28 * 24 * 60 * 60;
-				month++;
-				flags = 1;
-			}
-			else if ((month == 2) && (prime(year))) {
-				test = test + 29 * 24 * 60 * 60;
-				month++;
-				flags = 2;
-			}
-			else {
-				flag = 0;
-				for (j = 0; j < 7; j++) {
-					if (month == day31[j]) {
-						test= test + 31 * 24 * 60 * 60;
-						flag = 1;
-						month++;
-						flags = 3;
-						break;
-					}
-				}
-				if (flag == 0) {
-							time = time + 30 * 24 * 60 * 60;
-							month++;
-							flags = 4;
-							break;
-					}
-			}
+  int counts = 0, i, j, k;
+  int day31[7] = { 1, 3, 5, 7, 8, 10, 12 };
+  int day30[4] = { 4, 6, 9, 11 };
+  uint64_t test = 0;
+  int flag = 0;
+  int year = 1970, month = 1, day = 1, hour = 0, minute = 0, second = 0;
+  while (test < time)
+  {
+    flag = 1;
+    if (prime(year))
+    {
+      test += 366 * 24 * 60 * 60;
+      year++;
+      flag = 2;
+    }
+    else
+    {
+      test += 365 * 24 * 60 * 60;
+      year++;
+      flag = 3;
+    }
+  }
+  year--;
+  if (flag == 2)
+    test -= 366 * 24 * 60 * 60;
+  if (flag == 3)
+    test -= 365 * 24 * 60 * 60;
+  month = 1;
+  int flags = 1;
+  while (time > test)
+  {
+    if ((month == 2) && (!prime(year))) {
+      test = test + 28 * 24 * 60 * 60;
+      month++;
+      flags = 1;
+    }
+    else if ((month == 2) && (prime(year))) {
+      test = test + 29 * 24 * 60 * 60;
+      month++;
+      flags = 2;
+    }
+    else {
+      flag = 0;
+      for (j = 0; j < 7; j++) {
+        if (month == day31[j]) {
+          test = test + 31 * 24 * 60 * 60;
+          flag = 1;
+          month++;
+          flags = 3;
+          break;
+        }
+      }
+      if (flag == 0) {
+        time = time + 30 * 24 * 60 * 60;
+        month++;
+        flags = 4;
+        break;
+      }
+    }
 
-		}
-		month--;
-		if (flags == 1)
-			test -= 28 * 24 * 60 * 60;
-		else if (flags == 2)
-			test -= 29 * 24 * 60 * 60;
-		else if (flags == 3)
-			test -= 31 * 24 * 60 * 60;
-		else if (flags == 4)
-			test -= 30 * 24 * 60 * 60;
-		while (test<time)
-		{
-			test += 24 * 60 * 60;
-			day++;
-		}
-		day--;
-		test -= 24 * 60 * 60;
-		while (test<time)
-		{
-			test += 60 * 60;
-			hour++;
-		}
-		hour--;
-		test -= 60 * 60;
-		while (test<time)
-		{
-			test += 60;
-			minute++;
-		}
-		minute--;
-		test -= 60;
-		second = time - test;
-    char str[200];
-		sprintf(str, "%d年%d月%d日%d时%d分%d秒", year, month, day, hour, minute, second);
-		return newString(str);
+  }
+  month--;
+  if (flags == 1)
+    test -= 28 * 24 * 60 * 60;
+  else if (flags == 2)
+    test -= 29 * 24 * 60 * 60;
+  else if (flags == 3)
+    test -= 31 * 24 * 60 * 60;
+  else if (flags == 4)
+    test -= 30 * 24 * 60 * 60;
+  while (test < time)
+  {
+    test += 24 * 60 * 60;
+    day++;
+  }
+  day--;
+  test -= 24 * 60 * 60;
+  while (test < time)
+  {
+    test += 60 * 60;
+    hour++;
+  }
+  hour--;
+  test -= 60 * 60;
+  while (test < time)
+  {
+    test += 60;
+    minute++;
+  }
+  minute--;
+  test -= 60;
+  second = time - test;
+  char str[200];
+  sprintf(str, "%d年%d月%d日%d时%d分%d秒", year, month, day, hour, minute, second);
+  return newString(str);
 }

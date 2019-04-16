@@ -31,7 +31,7 @@ void FreeSales(Sales * sales)
 Sales *ReadSales() {
   Sales *sales = NewSales();
   sales->component = ReadComponent();
-  //prime->time=
+  sales->time = timemaking();
   sales->sales_mode = InputInt(LITERAL("批发(1)/零售(0): ")) % 2;
   sales->price = InputInt(LITERAL("批发/零售价格: "));
   sales->quantity = InputInt(LITERAL("批发/零售数量: "));
@@ -127,7 +127,7 @@ string PrintSales(void *node, uint8_t id) {
     sales->price / 100.0f,
     sales->total / 100.0f,
     U8_CSTR(sales->customer),
-    U8_CSTR(concat(3, gift->name, LITERAL(" "),gift->type)));
+    U8_CSTR(concat(3, gift->name, LITERAL(" "), gift->type)));
   return newString(ans);
 }
 
