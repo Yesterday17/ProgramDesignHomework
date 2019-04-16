@@ -34,8 +34,6 @@ Menu UI_SubMenu(Menu menu);
 
 void UI_Exit();
 
-void UI_Clear();
-
 void UI_WaitForNext(void *nextDo());
 
 void gotoxy(int x, int y);
@@ -44,9 +42,9 @@ int OptionBar(int start, int end);
 
 int RecordPage(LinkedList *data, string title, string record(void *, uint8_t));
 
-void cls();
+void UI_Clear();
 
-void color();
+void UI_Color();
 
 extern Menu menuNow;
 

@@ -74,7 +74,7 @@ cJSON*SalesToJSON(Sales *prime)
 
 string PrintSalesTitle() {
   char ans[200];
-  sprintf(ans, "   %s\t%s\t%s\t%s\t%s\t\t%s\t\t%s\t\t%s\t%s\n",
+  sprintf(ans, "   %-12s|%-12s|%-13s|%-14s|%-12s|%-12s|%-12s|%-14s|%-12s\n",
     U8_CSTR(LITERAL("名称")),
     U8_CSTR(LITERAL("型号")),
     U8_CSTR(LITERAL("制造商")),
@@ -90,7 +90,7 @@ string PrintSalesTitle() {
 string PrintSales(void *node, uint8_t id) {
   Sales* sales = (Sales *)node;
   char ans[200];
-  sprintf(ans, "%s\t%s\t%s\t%s\t\t%d\t\t%d\t\t%d\t\t%s\t%s\n", 
+  sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10d|%-10d|%-10s|%-10s\n", 
     U8_CSTR(sales->component->name),
     U8_CSTR(sales->component->type),
     U8_CSTR(sales->component->manufacturer), 

@@ -6,14 +6,14 @@ Menu menuNow = MENU_Welcome;
 
 void UI_Init() {
   srand((unsigned)(time(NULL)));
-  color();
+  UI_Color();
 }
 void UI_Welcome() {
   SetConsoleOutputCP(CP_UTF8);
   SetConsoleCP(CP_UTF8);
   PrintLITERAL("\n\nWelcome to use 3021 APP\n\n");
   Sleep(1000);
-  cls();
+  UI_Clear();
 }
 
 Menu UI_MainMenu() {
@@ -63,7 +63,7 @@ Menu UI_MainMenu() {
       }
     }
   }
-  cls();
+  UI_Clear();
   if (floor == 1) return MENU_Purchase;
   else if (floor == 2) return MENU_Sales;
   else if (floor == 3) return MENU_Stock;
@@ -80,30 +80,28 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
     PrintLITERAL("[ ]查找指定记录\n");
     PrintLITERAL("[ ]返回上一级\n");
     int y = OptionBar(1, 4);
-    cls();
+    UI_Clear();
     switch (y) {
     case 0:
       if (purchase->rear != NULL) {
-        PrintLITERAL("选中页面请按Enter，返回上一级请按Backspace\n");
-        Sleep(1000);
-        cls();
+        UI_Clear();
         record = RecordPage(purchase, PrintPurchaseTitle(), PrintPurchase);
         gotoxy(1, 1 + hangshu);
-        PrintLITERAL("修改记录Enter   删除记录Delete\n");
+        PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
         while (1) {
           char key1 = _getch();
           char key2 = 0;
           if (key1 == 13) {//enter
             DeleteLinkedList(purchase, record);
-            cls();
+            UI_Clear();
             InsertLinkedList(purchase, ReadPurchase());
-            cls();
+            UI_Clear();
             break;
           }
           if (key1 < 0) {
             key2 = _getch();
             if (key2 == 83) {//delete
-              cls();
+              UI_Clear();
               DeleteLinkedList(purchase, record);
               break;
             }
@@ -116,20 +114,20 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           char ch = _getch();
           if (ch == 13)break;
         }
-        cls();
+        UI_Clear();
       }
       break;
     case 1:
       InsertLinkedList(purchase, ReadPurchase());
-      cls();
+      UI_Clear();
       break;
     case 2:
       PrintLITERAL("[ ]1.按配件型号检索\n");
       PrintLITERAL("[ ]2.按供货商检索\n");
       PrintLITERAL("[ ]3.按时间范围检索\n");
       y = OptionBar(1, 3);
-      cls();
-      LinkedList* res=NULL;
+      UI_Clear();
+      LinkedList* res = NULL;
       if (y == 0) {
         //res = FindLinkedList(purchase, FindRetailer_Purchase);
       }
@@ -139,14 +137,12 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       if (y == 2) {
         res = FindLinkedList(purchase, FindTime_Purchase);
       }
-      cls();
+      UI_Clear();
       LinkedList* result = CreateLinkedList();
       for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
         InsertLinkedList(result, ((LinkedListResult*)p->data)->res0->data);
       }
-      PrintLITERAL("选中页面请按Enter，返回上一级请按Backspace\n");
-      Sleep(1000);
-      cls();
+      UI_Clear();
       int num = RecordPage(result, PrintPurchaseTitle(), PrintPurchase);
       int count = 1;
       if (num != -1) {
@@ -158,21 +154,21 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           count++;
         }
         gotoxy(1, 1 + hangshu);
-        PrintLITERAL("修改记录Enter   删除记录Delete\n");
+        PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
         while (1) {
           char key1 = _getch();
           char key2 = 0;
           if (key1 == 13) {//enter
             DeleteLinkedList(purchase, record);
-            cls();
+            UI_Clear();
             InsertLinkedList(purchase, ReadPurchase());
-            cls();
+            UI_Clear();
             break;
           }
           if (key1 < 0) {
             key2 = _getch();
             if (key2 == 83) {//delete
-              cls();
+              UI_Clear();
               DeleteLinkedList(purchase, record);
               break;
             }
@@ -185,7 +181,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           char ch = _getch();
           if (ch == 13)break;
         }
-        cls();
+        UI_Clear();
       }
       break;
     case 3:return MENU_Main;
@@ -199,31 +195,29 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
     PrintLITERAL("[ ]统计赠品\n");
     PrintLITERAL("[ ]返回上一级\n");
     int y = OptionBar(1, 5);
-    cls();
+    UI_Clear();
     switch (y) {
     case 0:
       if (sales->rear != NULL) {
-        PrintLITERAL("选中页面请按Enter，返回上一级请按Backspace\n");
-        Sleep(1000);
-        cls();
+        UI_Clear();
         record = RecordPage(sales, PrintSalesTitle(), PrintSales);
         if (record != -1) {
           gotoxy(1, 1 + hangshu);
-          PrintLITERAL("修改记录Enter   删除记录Delete\n\n");
+          PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
           while (1) {
             char key1 = _getch();
             char key2 = 0;
             if (key1 == 13) {//enter
               DeleteLinkedList(sales, record);
-              cls();
+              UI_Clear();
               InsertLinkedList(sales, ReadSales());
-              cls();
+              UI_Clear();
               break;
             }
             if (key1 < 0) {
               key2 = _getch();
               if (key2 == 83) {//delete
-                cls();
+                UI_Clear();
                 DeleteLinkedList(sales, record);
                 break;
               }
@@ -238,12 +232,12 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           char ch = _getch();
           if (ch == 13)break;
         }
-        cls();
+        UI_Clear();
       }
       break;
     case 1:
       InsertLinkedList(sales, ReadSales());
-      cls();
+      UI_Clear();
       break;
     case 2:
       if (sales->rear != NULL) {
@@ -251,14 +245,14 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         PrintLITERAL("[ ]2.按客户检索\n");
         PrintLITERAL("[ ]3.按时间范围检索\n");
         int y = OptionBar(1, 3);
-        cls();
+        UI_Clear();
         LinkedList* res = NULL;
         if (y == 0) {
           typeToSearch = InputStr(LITERAL("请输入配件型号: "));
           res = FindLinkedList(sales, FindComponentType_Sales);
         }
         if (y == 1) {
-			    customerToSearch = InputStr(LITERAL("请输入客户信息: "));
+          customerToSearch = InputStr(LITERAL("请输入客户信息: "));
           res = FindLinkedList(sales, FindCustomer_Sales);
         }
         if (y == 2) {
@@ -266,18 +260,16 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           timeToSearchlate = InputStr(LITERAL("请输入终止时间: "));
           res = FindLinkedList(sales, FindTime_Sales);
         }
-        cls();
+        UI_Clear();
         LinkedList* result = CreateLinkedList();
         for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
           InsertLinkedList(result, ((LinkedListResult*)p->data)->res0->data);
         }
-        PrintLITERAL("选中页面请按Enter，返回上一级请按Backspace\n");
-        Sleep(1000);
-        cls();
+        UI_Clear();
         int num = RecordPage(result, PrintSalesTitle(), PrintSales);
         int count = 1;
         if (num != -1) {
-          for (LinkedListNode* p = res->top; p != NULL; p=p->next) {
+          for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
             if (num == count) {
               record = ((LinkedListResult*)(p->data))->count;
               break;
@@ -285,21 +277,21 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
             count++;
           }
           gotoxy(1, 1 + hangshu);
-          PrintLITERAL("修改记录Enter   删除记录Delete\n");
+          PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
           while (1) {
             char key1 = _getch();
             char key2 = 0;
             if (key1 == 13) {//enter
               DeleteLinkedList(sales, record);
-              cls();
+              UI_Clear();
               InsertLinkedList(sales, ReadSales());
-              cls();
+              UI_Clear();
               break;
             }
             if (key1 < 0) {
               key2 = _getch();
               if (key2 == 83) {//delete
-                cls();
+                UI_Clear();
                 DeleteLinkedList(sales, record);
                 break;
               }
@@ -313,7 +305,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           char ch = _getch();
           if (ch == 13)break;
         }
-        cls();
+        UI_Clear();
       }
       break;
     case 3:
@@ -360,50 +352,59 @@ int OptionBar(int start, int end) {//start为起始行，end为终止行
   return y;
 }
 
+//光标定位函数
 void gotoxy(int x, int y) {
   HANDLE a;
   a = GetStdHandle(STD_OUTPUT_HANDLE);
   COORD cos = { x, y };
   SetConsoleCursorPosition(a, cos);
-}//光标定位函数
+}
 
 int RecordPage(LinkedList *data, string title, string record(void *, uint8_t)) { //记录翻页函数
   LinkedListNode *p, *re[100];//目标节点，分页数组
   int num = 0, count = 1, j = 0, y = 0;//序号，计数器，页码，选中行
+  bool printed = false;
   char a, b;//读取按键ascii码
   int end;//最终记录条数+1
   p = data->top;
   re[0] = data->top;
   PrintString(title);
   while (1) {
-
     if ((count - 1) % hangshu == 0 && count != 1 || p == data->rear->next) {
       end = count;
       if (p == data->rear->next && (count - 1) % hangshu != 0) {
         count = (count + hangshu - 1) / hangshu * hangshu + 1;//进位取整+1：如39->41
       }
+
+      if (!printed) {
+        gotoxy(0, 11);
+        PrintLITERAL("  修改记录: Enter  返回上一级: Backspace  左翻页: ←  右翻页: →\n");
+        printed = true;
+      }
+
       a = _getch();
       if (a < 0) {
         b = _getch();
         if (b == 75 && count > 1 + hangshu) {//左翻页
-          cls();
-          PrintString(title);
           count -= hangshu;
-          if (j > 0)
-            j--;
+          if (j > 0) j--;
           p = re[j];
+          UI_Clear();
+          PrintString(title);
+          printed = false;
         }
         else if (b == 77 && p != data->rear->next) {//右翻页
           j++;
           re[j] = p;
-          cls();
+          UI_Clear();
           PrintString(title);
+          printed = false;
         }
         else//锁定其他按键
           continue;
       }
       if (a == 8) {
-        cls();
+        UI_Clear();
         return -1;
       }//Backspace
       if (a == 13)break;//回车退出
@@ -414,6 +415,8 @@ int RecordPage(LinkedList *data, string title, string record(void *, uint8_t)) {
     p = p->next;
     count++;
   }
+  gotoxy(0, 11);
+  PrintLITERAL("  向上移动: ↑  向下移动: ↓                                                     ");
   int count0 = end;//拷贝（真实记录行数+1）
   if ((count0 - 1) % hangshu == 0) {
     y = OptionBar(2, 2 + hangshu - 1);
@@ -427,7 +430,7 @@ int RecordPage(LinkedList *data, string title, string record(void *, uint8_t)) {
   return j * hangshu + y;
 }
 
-void cls() {
+void UI_Clear() {
   HANDLE hConsole;
 
   hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -477,14 +480,12 @@ void cls() {
   SetConsoleCursorPosition(hConsole, coordScreen);
 }
 
-void color() {
+void UI_Color() {
   system("color 80");
 }
 
 void UI_Exit() {
   PrintLITERAL("欢迎下次使用");
 }
-
-void UI_Clear() {}
 
 void UI_WaitForNext(void *nextDo()) { nextDo(); }
