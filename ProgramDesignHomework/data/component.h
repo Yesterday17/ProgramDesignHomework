@@ -23,7 +23,7 @@ bool FindMan_Component(LinkedListNode *node);
 
 Component *NewComponent();
 void FreeComponent(Component* component);
-Component *ReadComponent();
+int ReadComponent();
 LinkedList* ReadComponentJSON(string filename);
 Component *JSONToComponent(cJSON *root);
 cJSON *ComponentToJSON(Component *prime);

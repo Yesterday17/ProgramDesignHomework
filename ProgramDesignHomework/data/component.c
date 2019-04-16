@@ -26,12 +26,73 @@ void FreeComponent(Component * component)
  * 从控制台读取数据
  * @return Component*
  */
-Component* ReadComponent() {
-  Component *component = NewComponent();
-  freeAssign(&component->name, InputString(LITERAL("配件名称:"), LITERAL("未知")));
-  freeAssign(&component->type, InputString(LITERAL("配件类型:"), LITERAL("未知")));
-  freeAssign(&component->manufacturer, InputString(LITERAL("制造商："), LITERAL("未知")));
-  return component;
+int ReadComponent() {
+  int len = 0;
+  LinkedList *nameSearch, *typeSearch, *manufacturerSearch;
+  LinkedListNode *node;
+  int *idMap, *idMap2, *idMap3;
+
+  do {
+    freeAssign(&nameToSearch, InputString(LITERAL("配件名称:"), LITERAL("未知")));
+    nameSearch = FindLinkedList(component, FindName_Component);
+    len = LengthLinkedList(nameSearch);
+
+    idMap = (int*)malloc(sizeof(int) * len);
+    node = nameSearch->top;
+    for (int i = 0; i < len && node != NULL; i++, node = node->next) {
+      idMap[i] = ((LinkedListResult*)(node->data))->count - 1;
+    }
+  } while (len < 1);
+  if (len == 1) {
+    int ans = idMap[0];
+    FreeLinkedList(nameSearch);
+    free(idMap);
+    return ans;
+  }
+
+  do {
+    freeAssign(&typeToSearch, InputString(LITERAL("配件类型:"), LITERAL("未知")));
+    typeSearch = FindLinkedList(MapLinkedList(nameSearch, UnpackLinkedListResult), FindType_Component);
+    len = LengthLinkedList(typeSearch);
+
+    idMap2 = (int*)malloc(sizeof(int) * len);
+    node = typeSearch->top;
+    for (int i = 0; i < len && node != NULL; i++, node = node->next) {
+      idMap2[i] = idMap[((LinkedListResult*)(node->data))->count - 1];
+    }
+  } while (len < 1);
+  if (LengthLinkedList(typeSearch) == 1) {
+    int ans = idMap2[0];
+    FreeLinkedList(nameSearch);
+    FreeLinkedList(typeSearch);
+    free(idMap);
+    free(idMap2);
+    return ans;
+  }
+
+  do {
+    freeAssign(&manufacturerToSearch, InputString(LITERAL("制造商："), LITERAL("未知")));
+    manufacturerSearch = FindLinkedList(MapLinkedList(typeSearch, UnpackLinkedListResult), FindMan_Component);
+    len = LengthLinkedList(manufacturerSearch);
+
+    idMap3 = (int*)malloc(sizeof(int) * len);
+    node = manufacturerSearch->top;
+    for (int i = 0; i < len && node != NULL; i++, node = node->next) {
+      idMap3[i] = idMap2[((LinkedListResult*)(node->data))->count - 1];
+    }
+  } while (len < 1);
+  if (LengthLinkedList(manufacturerSearch) == 1) {
+    int ans = idMap3[0];
+    FreeLinkedList(nameSearch);
+    FreeLinkedList(typeSearch);
+    FreeLinkedList(manufacturerSearch);
+    free(idMap);
+    free(idMap2);
+    free(idMap3);
+    return ans;
+  }
+
+  return -1;
 }
 
 /**

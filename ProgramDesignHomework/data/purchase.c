@@ -81,7 +81,7 @@ cJSON *PurchaseToJSON(Purchase *prime)
 {
   cJSON *root = cJSON_CreateObject();
   cJSON_AddItemToObject(root, "time", cJSON_CreateNumber(prime->time));//根节点下添加
-  cJSON_AddItemToObject(root, "component", ComponentToJSON(prime->component));
+  cJSON_AddItemToObject(root, "component", cJSON_CreateNumber(prime->component));
   cJSON_AddItemToObject(root, "price", cJSON_CreateNumber(prime->price));
   cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
   cJSON_AddItemToObject(root, "total", cJSON_CreateNumber(prime->total));
@@ -106,13 +106,13 @@ string PrintPurchase(void *node, uint8_t id) {
   Purchase* purchase = (Purchase *)node;
   Component* comp = AtLinkedList(component, purchase->component)->data;
   char ans[200];
-  sprintf(ans, "%-10s|%-10s|%-10s|%-10d|%-10d|%-10d|%-10s\n",
+  sprintf(ans, "%-10s|%-10s|%-10s|%-10d|%-10.2f|%-10.2f|%-10s\n",
     U8_CSTR(comp->name),
     U8_CSTR(comp->type),
     U8_CSTR(comp->manufacturer),
     purchase->quantity,
-    purchase->price,
-    purchase->total,
+    purchase->price/100.0f,
+    purchase->total/100.0f,
     U8_CSTR(purchase->retailer));
   return newString(ans);
 }
@@ -127,12 +127,12 @@ bool FindRetailer_Purchase(LinkedListNode *node) {
 }
 
 bool FindComponentName_Purchase(LinkedListNode *node) {
-  Component *comp = AtLinkedList(component, ((Purchase*)(node->data))->component);
+  Component *comp = AtLinkedList(component, ((Purchase*)(node->data))->component)->data;
   return compareString(comp->name, nameToSearch) == STRING_EQUAL;
 }
 
 bool FindComponentType_Purchase(LinkedListNode *node) {
-  Component *comp = AtLinkedList(component, ((Purchase*)(node->data))->component);
+  Component *comp = AtLinkedList(component, ((Purchase*)(node->data))->component)->data;
   return compareString(comp->type, nameToSearch) == STRING_EQUAL;
 }
 

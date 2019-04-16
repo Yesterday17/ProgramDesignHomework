@@ -2,18 +2,21 @@
 #include <stdlib.h>
 
 LinkedList *CreateLinkedList() {  //定义空链表
-  LinkedListNode *top, *rear;
-  top = NULL;
-  rear = NULL;
   LinkedList *data = (LinkedList *)malloc(sizeof(LinkedList));
-  data->rear = rear;
-  data->top = top;
+  data->rear = NULL;
+  data->top = NULL;
   return data;
 }
 
+void FreeLinkedList(LinkedList *list) {
+  for (LinkedListNode *node = list->top; node != NULL; node = list->top) {
+    DeleteLinkedList(list, 1);
+  }
+  free(list);
+}
+
 void InsertLinkedList(LinkedList *list, void *data) {  //目标链表  存储数据
-  LinkedListNode *p;
-  p = (LinkedListNode *)malloc(sizeof(LinkedListNode));
+  LinkedListNode *p = (LinkedListNode *)malloc(sizeof(LinkedListNode));
   p->data = data;
   if (list->rear == NULL) {  // 首结点
     list->top = p;
@@ -59,17 +62,14 @@ void DeleteLinkedList(LinkedList *list, int key) {//删除链表：目标结点 
     }
     count++;
   }
-  return NULL;
 }
 
 LinkedList* FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *)) {
-  LinkedListNode *p;
   LinkedList*  result = CreateLinkedList();
-  LinkedListResult* res = (LinkedListResult*)malloc(sizeof(LinkedListResult));
-  res->count = 0;
   int count = 1;
-  for (p = list->top; p != NULL; p = p->next) {
+  for (LinkedListNode *p = list->top; p != NULL; p = p->next) {
     if (callback(p)) {
+      LinkedListResult* res = (LinkedListResult*)malloc(sizeof(LinkedListResult));
       res->count = count;
       res->res0 = p;
       InsertLinkedList(result, res);
@@ -86,4 +86,27 @@ LinkedListNode* AtLinkedList(LinkedList * list, int pos)
     if (node == NULL) return NULL;
   }
   return node;
+}
+
+
+size_t LengthLinkedList(LinkedList *list) {
+  size_t len = 0;
+  LinkedListNode *node = list->top;
+  while (node != NULL) {
+    node = node->next;
+    len++;
+  }
+  return len;
+}
+
+LinkedList* MapLinkedList(LinkedList *list, void** callback(LinkedListNode*)) {
+  LinkedList *ans = CreateLinkedList();
+  for (LinkedListNode *node = list->top; node != NULL; node = node->next) {
+    InsertLinkedList(ans, callback(node));
+  }
+  return ans;
+}
+
+void* UnpackLinkedListResult(LinkedListNode* node) {
+  return ((LinkedListResult*)node->data)->res0->data;
 }

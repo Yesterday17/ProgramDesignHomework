@@ -118,14 +118,14 @@ string PrintSales(void *node, uint8_t id) {
   Component* comp = AtLinkedList(component, sales->component)->data;
   Component* gift = AtLinkedList(component, sales->gift)->data;
   char ans[200];
-  sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10d|%-10d|%-10s|%-10s\n",
+  sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10.2f|%-10.2f|%-10s|%-10s\n",
     U8_CSTR(comp->name),
     U8_CSTR(comp->type),
     U8_CSTR(comp->manufacturer),
     ((sales->sales_mode == 1) ? U8_CSTR(LITERAL("批发")) : U8_CSTR(LITERAL("零售"))),
     sales->quantity,
-    sales->price, 
-    sales->total,
+    sales->price / 100.0f,
+    sales->total / 100.0f,
     U8_CSTR(sales->customer),
     U8_CSTR(gift->name));
   return newString(ans);
@@ -171,11 +171,11 @@ Component* Gift() {
   }
   PrintLITERAL("恭喜你获得一个赠品，请输入数字进行选择：\n");
   for (i = 0; i < 3; i++) {
-    printf("%d.%s%s\n",i+1,U8_CSTR(result[i]->name),U8_CSTR(result[i]->type));
+    printf("%d.%s%s\n", i + 1, U8_CSTR(result[i]->name), U8_CSTR(result[i]->type));
   }
   char ch = _getch();
   while (1) {
-    if (ch == '1') 
+    if (ch == '1')
       return result[0];
     if (ch == '2')
       return result[1];

@@ -10,10 +10,21 @@ void FS_Init() {
   purchase = ReadPurchaseJSON(PURCHASE_FILENAME);
 }
 
+void GLOBAL_Init() {
+  nameToSearch = newString("");
+  timeToSearchearly = 0;
+  timeToSearchlate = 0;
+  customerToSearch = newString("");
+  retailerToSearch = newString("");
+  typeToSearch = newString("");
+  manufacturerToSearch = newString("");
+}
+
 int main() {
   // 初始化
   UI_Init();
   FS_Init();
+  GLOBAL_Init();
 
   // 欢迎
   UI_Welcome();
