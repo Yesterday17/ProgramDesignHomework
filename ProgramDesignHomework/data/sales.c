@@ -17,7 +17,7 @@ Sales * NewSales()
   sales->price = 1;
   sales->quantity = 1;
   sales->total = 1;
-  sales->customer = newString("未知");
+  sales->customer = newString(u8"UNKNOWN");
   return sales;
 }
 

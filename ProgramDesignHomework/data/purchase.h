@@ -21,7 +21,7 @@ typedef struct Purchase {
 Purchase *NewPurchase();
 void FreePurchase(Purchase *purchase);
 Purchase *ReadPurchase();
-Purchase *readjson_purchase(cJSON *root);
+Purchase *JSONToPurchase(cJSON *root);
 LinkedList* ReadPurchaseJSON(string filename);
 bool WritePurchaseJSON(string filename);
 

@@ -11,7 +11,7 @@ Purchase * NewPurchase()
   purchase->price = 1;
   purchase->quantity = 1;
   purchase->total = 1;
-  purchase->retailer = newString("3021");
+  purchase->retailer = newString(u8"UNKNOWN");
   return purchase;
 }
 
@@ -48,35 +48,36 @@ Purchase *ReadPurchase()
  * @param purchase
  * @return
  */
-Purchase *readjson_purchase(cJSON *root) {
-  cJSON *object = cJSON_GetObjectItem(root, "purchase"), *item;
-  Purchase *purchase = (Purchase*)malloc(sizeof(Purchase));
-  item = cJSON_GetObjectItem(object, "prime");
+Purchase *JSONToPurchase(cJSON *root) {
+  Purchase *purchase = NewPurchase();
+
+  cJSON *item = cJSON_GetObjectItem(root, "component");
   if (item != NULL) {
     FreeComponent(purchase->component);
     purchase->component = ReadComponentJSON(item);
   }
-  item = cJSON_GetObjectItem(object, "time");
+  item = cJSON_GetObjectItem(root, "time");
   if (item != NULL) {
     purchase->time = item->valueint;
   }
 
-  item = cJSON_GetObjectItem(object, "price");
+  item = cJSON_GetObjectItem(root, "price");
   if (item != NULL) {
     purchase->price = item->valueint;
   }
 
-  item = cJSON_GetObjectItem(object, "quantity");
+  item = cJSON_GetObjectItem(root, "quantity");
   if (item != NULL) {
     purchase->quantity = item->valueint;
   }
 
   purchase->total = purchase->price * purchase->quantity;
 
-  item = cJSON_GetObjectItem(object, "retailer");
+  item = cJSON_GetObjectItem(root, "retailer");
   if (item != NULL) {
     freeAssign(&purchase->retailer, newString(item->valuestring));
   }
+
   return purchase;
 }
 cJSON *PurchaseToJSON(Purchase *prime)
@@ -88,16 +89,34 @@ cJSON *PurchaseToJSON(Purchase *prime)
   cJSON_AddItemToObject(root, "quantity", cJSON_CreateNumber(prime->quantity));
   cJSON_AddItemToObject(root, "total", cJSON_CreateNumber(prime->total));
   cJSON_AddItemToObject(root, "retailer", cJSON_CreateString(U8_CSTR(prime->retailer)));
-
   return root;
 }
 
 string PrintPurchaseTitle() {
-  return STR_BUF("");
+  char ans[200];
+  sprintf(ans, "   %-12s|%-12s|%-13s|%-12s|%-12s|%-12s|%-14s\n",
+    U8_CSTR(LITERAL("名称")),
+    U8_CSTR(LITERAL("型号")),
+    U8_CSTR(LITERAL("制造商")),
+    U8_CSTR(LITERAL("数量")),
+    U8_CSTR(LITERAL("单价")),
+    U8_CSTR(LITERAL("总价")),
+    U8_CSTR(LITERAL("经销商")));
+  return newString(ans);
 }
 
 string PrintPurchase(void *node, uint8_t id) {
-  return STR_BUF("");
+  Purchase* purchase = (Purchase *)node;
+  char ans[200];
+  sprintf(ans, "%-10s|%-10s|%-10s|%-10d|%-10d|%-10d|%-10s\n",
+    U8_CSTR(purchase->component->name),
+    U8_CSTR(purchase->component->type),
+    U8_CSTR(purchase->component->manufacturer),
+    purchase->quantity,
+    purchase->price,
+    purchase->total,
+    U8_CSTR(purchase->retailer));
+  return newString(ans);
 }
 
 bool FindTime_Purchase(LinkedListNode *node) {
@@ -127,7 +146,7 @@ LinkedList* ReadPurchaseJSON(string filename)
     cJSON * root = cJSON_Parse(U8_CSTR(prime));
     int count = cJSON_GetArraySize(root);
     for (int i = 0; i < count; i++) {
-      InsertLinkedList(list, readjson_purchase(cJSON_GetArrayItem(root, i)));
+      InsertLinkedList(list, JSONToPurchase(cJSON_GetArrayItem(root, i)));
     }
   }
   return list;

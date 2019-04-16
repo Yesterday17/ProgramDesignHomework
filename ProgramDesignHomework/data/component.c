@@ -7,9 +7,9 @@ Component * NewComponent()
 {
   Component *component = (Component*)malloc(sizeof(Component));
   component->index = -1;
-  component->manufacturer = newString("未知");
-  component->name = newString("未知");
-  component->type = newString("UNKNOWN");
+  component->manufacturer = newString(u8"UNKNOWN");
+  component->name = newString(u8"UNKNOWN");
+  component->type = newString(u8"UNKNOWN");
   return component;
 }
 
@@ -68,7 +68,7 @@ bool FindMan_Component(LinkedListNode *node) {
  */
 Component* ReadComponentJSON(cJSON *root)
 {
-  Component *comp = (Component*)malloc(sizeof(Component));
+  Component *comp = NewComponent();
 
   cJSON* item = cJSON_GetObjectItem(root, "index");
   if (item != NULL)
