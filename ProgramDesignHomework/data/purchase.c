@@ -111,8 +111,8 @@ string PrintPurchase(void *node, uint8_t id) {
     U8_CSTR(comp->type),
     U8_CSTR(comp->manufacturer),
     purchase->quantity,
-    purchase->price/100.0f,
-    purchase->total/100.0f,
+    purchase->price / 100.0f,
+    purchase->total / 100.0f,
     U8_CSTR(purchase->retailer));
   return newString(ans);
 }
