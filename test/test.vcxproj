@@ -48,7 +48,6 @@
     <ClCompile Include="data\component_test.cpp" />
     <ClCompile Include="utils\fs_test.cpp" />
     <ClCompile Include="utils\linkedlist_test.cpp" />
-    <ClCompile Include="utils\utils_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProgramDesignHomework\ProgramDesignHomework.vcxproj">

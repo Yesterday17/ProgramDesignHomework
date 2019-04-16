@@ -43,9 +43,6 @@
     <ClCompile Include="data\component_test.cpp">
       <Filter>data</Filter>
     </ClCompile>
-    <ClCompile Include="utils\utils_test.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="utils">
