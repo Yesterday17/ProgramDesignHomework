@@ -131,69 +131,78 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         PrintLITERAL("[ ]1.按配件型号检索\n");
         PrintLITERAL("[ ]2.按供货商检索\n");
         PrintLITERAL("[ ]3.按时间范围检索\n");
-        y = OptionBar(1, 3);
-        UI_Clear();
-        LinkedList* res = NULL;
-        if (y == 0) {
-          //res = FindLinkedList(purchase, FindRetailer_Purchase);
-        }
-        if (y == 1) {
-          retailerToSearch = InputStr(LITERAL("请输入制造商："));
-          res = FindLinkedList(purchase, FindRetailer_Purchase);
-        }
-        if (y == 2) {
-          res = FindLinkedList(purchase, FindTime_Purchase);
-        }
-        UI_Clear();
-        LinkedList* result = CreateLinkedList();
-        for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
-          InsertLinkedList(result, ((LinkedListResult*)p->data)->res0->data);
-          WritePurchaseJSON(PURCHASE_FILENAME);
-        }
-        UI_Clear();
-        if (result->rear != NULL) {
-          int num = RecordPage(result, PrintPurchaseTitle(), PrintPurchase);
-          int count = 1;
-          if (num != -1) {
-            for (LinkedListNode* p = res->top; p != NULL; p++) {
-              if (num == count) {
-                record = ((LinkedListResult*)p->data)->count;
-                break;
+        PrintLITERAL("\n返回上一级请按Backspace\n");
+        while (1) {
+          char a = _getch();
+          if (a == 8) { 
+            UI_Clear();
+            break;
+          }
+          y = OptionBar(1, 3);
+          UI_Clear();
+          LinkedList* res = NULL;
+          if (y == 0) {
+            //res = FindLinkedList(purchase, FindRetailer_Purchase);
+          }
+          if (y == 1) {
+            retailerToSearch = InputStr(LITERAL("请输入制造商："));
+            res = FindLinkedList(purchase, FindRetailer_Purchase);
+          }
+          if (y == 2) {
+            res = FindLinkedList(purchase, FindTime_Purchase);
+          }
+          UI_Clear();
+          LinkedList* result = CreateLinkedList();
+          for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
+            InsertLinkedList(result, ((LinkedListResult*)p->data)->res0->data);
+            WritePurchaseJSON(PURCHASE_FILENAME);
+          }
+          UI_Clear();
+          if (result->rear != NULL) {
+            int num = RecordPage(result, PrintPurchaseTitle(), PrintPurchase);
+            int count = 1;
+            if (num != -1) {
+              for (LinkedListNode* p = res->top; p != NULL; p++) {
+                if (num == count) {
+                  record = ((LinkedListResult*)p->data)->count;
+                  break;
+                }
+                count++;
               }
-              count++;
-            }
-            gotoxy(1, 1 + hangshu);
-            PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
-            while (1) {
-              char key1 = _getch();
-              char key2 = 0;
-              if (key1 == 13) {//enter
-                DeleteLinkedList(purchase, record);
-                UI_Clear();
-                InsertLinkedList(purchase, ReadPurchase());
-                UI_Clear();
-                WritePurchaseJSON(PURCHASE_FILENAME);
-                break;
-              }
-              if (key1 < 0) {
-                key2 = _getch();
-                if (key2 == 83) {//delete
-                  UI_Clear();
+              gotoxy(1, 1 + hangshu);
+              PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
+              while (1) {
+                char key1 = _getch();
+                char key2 = 0;
+                if (key1 == 13) {//enter
                   DeleteLinkedList(purchase, record);
+                  UI_Clear();
+                  InsertLinkedList(purchase, ReadPurchase());
+                  UI_Clear();
                   WritePurchaseJSON(PURCHASE_FILENAME);
                   break;
+                }
+                if (key1 < 0) {
+                  key2 = _getch();
+                  if (key2 == 83) {//delete
+                    UI_Clear();
+                    DeleteLinkedList(purchase, record);
+                    WritePurchaseJSON(PURCHASE_FILENAME);
+                    break;
+                  }
                 }
               }
             }
           }
-        }
-        else {
-          PrintLITERAL("没有查找到结果 ");
-          while (1) {
-            char ch = _getch();
-            if (ch == 13)break;
+          else {
+            PrintLITERAL("没有查找到结果 ");
+            while (1) {
+              char ch = _getch();
+              if (ch == 13)break;
+            }
+            UI_Clear();
           }
-          UI_Clear();
+          break;
         }
       }
       else {
@@ -268,71 +277,80 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         PrintLITERAL("[ ]1.按配件型号检索\n");
         PrintLITERAL("[ ]2.按客户检索\n");
         PrintLITERAL("[ ]3.按时间范围检索\n");
-        int y = OptionBar(1, 3);
-        UI_Clear();
-        LinkedList* res = NULL;
-        if (y == 0) {
-          typeToSearch = InputStr(LITERAL("请输入配件型号: "));
-          res = FindLinkedList(sales, FindComponentType_Sales);
-        }
-        if (y == 1) {
-          customerToSearch = InputStr(LITERAL("请输入客户信息: "));
-          res = FindLinkedList(sales, FindCustomer_Sales);
-        }
-        if (y == 2) {
-          timeToSearchearly = InputStr(LITERAL("请输入起始时间: "));
-          timeToSearchlate = InputStr(LITERAL("请输入终止时间: "));
-          res = FindLinkedList(sales, FindTime_Sales);
-        }
-        UI_Clear();
-        LinkedList* result = CreateLinkedList();
-        for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
-          InsertLinkedList(result, ((LinkedListResult*)p->data)->res0->data);
-        }
-        UI_Clear();
-        if (result->rear != NULL) {
-          int num = RecordPage(result, PrintSalesTitle(), PrintSales);
-          int count = 1;
-          if (num != -1) {
-            for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
-              if (num == count) {
-                record = ((LinkedListResult*)(p->data))->count;
-                break;
+        PrintLITERAL("\n返回上一级请按Backspace\n");
+        while (1) {
+          char a = _getch();
+          if (a == 8) {
+            UI_Clear();
+            break;
+          }
+          int y = OptionBar(1, 3);
+          UI_Clear();
+          LinkedList* res = NULL;
+          if (y == 0) {
+            typeToSearch = InputStr(LITERAL("请输入配件型号: "));
+            res = FindLinkedList(sales, FindComponentType_Sales);
+          }
+          if (y == 1) {
+            customerToSearch = InputStr(LITERAL("请输入客户信息: "));
+            res = FindLinkedList(sales, FindCustomer_Sales);
+          }
+          if (y == 2) {
+            timeToSearchearly = InputStr(LITERAL("请输入起始时间: "));
+            timeToSearchlate = InputStr(LITERAL("请输入终止时间: "));
+            res = FindLinkedList(sales, FindTime_Sales);
+          }
+          UI_Clear();
+          LinkedList* result = CreateLinkedList();
+          for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
+            InsertLinkedList(result, ((LinkedListResult*)p->data)->res0->data);
+          }
+          UI_Clear();
+          if (result->rear != NULL) {
+            int num = RecordPage(result, PrintSalesTitle(), PrintSales);
+            int count = 1;
+            if (num != -1) {
+              for (LinkedListNode* p = res->top; p != NULL; p = p->next) {
+                if (num == count) {
+                  record = ((LinkedListResult*)(p->data))->count;
+                  break;
+                }
+                count++;
               }
-              count++;
-            }
-            gotoxy(1, 1 + hangshu);
-            PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
-            while (1) {
-              char key1 = _getch();
-              char key2 = 0;
-              if (key1 == 13) {//enter
-                DeleteLinkedList(sales, record);
-                UI_Clear();
-                InsertLinkedList(sales, ReadSales());
-                UI_Clear();
-                WriteSalesJSON(SALES_FILENAME);
-                break;
-              }
-              if (key1 < 0) {
-                key2 = _getch();
-                if (key2 == 83) {//delete
-                  UI_Clear();
+              gotoxy(1, 1 + hangshu);
+              PrintLITERAL("  修改记录: Enter  删除记录: Delete\n");
+              while (1) {
+                char key1 = _getch();
+                char key2 = 0;
+                if (key1 == 13) {//enter
                   DeleteLinkedList(sales, record);
+                  UI_Clear();
+                  InsertLinkedList(sales, ReadSales());
+                  UI_Clear();
                   WriteSalesJSON(SALES_FILENAME);
                   break;
+                }
+                if (key1 < 0) {
+                  key2 = _getch();
+                  if (key2 == 83) {//delete
+                    UI_Clear();
+                    DeleteLinkedList(sales, record);
+                    WriteSalesJSON(SALES_FILENAME);
+                    break;
+                  }
                 }
               }
             }
           }
-        }
-        else {
-          PrintLITERAL("没有查找到结果 ");
-          while (1) {
-            char ch = _getch();
-            if (ch == 13)break;
+          else {
+            PrintLITERAL("没有查找到结果 ");
+            while (1) {
+              char ch = _getch();
+              if (ch == 13)break;
+            }
+            UI_Clear();
           }
-          UI_Clear();
+          break;
         }
       }
 
