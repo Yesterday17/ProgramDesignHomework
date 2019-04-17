@@ -10,7 +10,7 @@
 typedef struct Sales {
   uint64_t time;
   int component;
-  int  sales_mode; // 销售模式（1表示批发，0表示零售）
+  int sales_mode; // 销售模式（1表示批发，0表示零售）
   int price;       // 销售单价
   int quantity;    // 销售数量
   int total;       // 商品总价
