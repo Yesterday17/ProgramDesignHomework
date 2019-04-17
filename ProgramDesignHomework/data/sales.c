@@ -53,19 +53,23 @@ Sales *ReadSales() {
   match = false;
   while (!match) {
     sales->quantity = InputInt(LITERAL("批发/零售数量: "));
-    if (sales->quantity > 0 && sales->quantity <= ((int*)AtLinkedList(globalComponentLinkedList, sales->component)->data)[0]) {
+    if (sales->quantity > 0 && sales->quantity <= ((int*)AtLinkedList(globalStorage, sales->component)->data)[0]) {
       match = true;
       sales->total = sales->price * sales->quantity;
       globalFunds += sales->total;
       salesFunds += sales->total;
+      ((int*)(AtLinkedList(globalStorage, sales->component)->data))[0] -= sales->quantity;
     }
   }
 
   freeAssign(&sales->customer, InputString(LITERAL("客户信息: "), LITERAL("UNKNOWN")));
 
   if (sales->sales_mode == 1 && (sales->total > Ltotal || sales->quantity > Lquantity)) {
-    sales->gift = Gift(sales);
-    ((int*)(AtLinkedList(globalComponentLinkedList, sales->gift)->data))[0]--;
+    sales->gift = Gift();
+    if (sales->gift != -1) {
+      ((int*)(AtLinkedList(globalStorage, sales->gift)->data))[0]--;
+      ((int*)(AtLinkedList(globalGift, sales->gift)->data))[0]++;
+    }
   }
   return sales;
 }
@@ -143,7 +147,7 @@ string PrintSalesTitle() {
 string PrintSales(void *node, uint8_t id) {
   Sales* sales = (Sales *)node;
   Component* comp = AtLinkedList(globalComponentLinkedList, sales->component)->data;
-  Component* gift = AtLinkedList(globalComponentLinkedList, sales->gift)->data;
+  Component* gift = (sales->gift == -1 ? NO_Gift :AtLinkedList(globalComponentLinkedList, sales->gift)->data);
   char ans[200];
   sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10.2f|%-10.2f|%-10s|%-20s\n",
     U8_CSTR(comp->name),
@@ -175,25 +179,33 @@ bool FindTime_Sales(LinkedListNode *node) {
 }
 
 int Gift() {
-  int a[50], i, w;
+  int a[50], i, w, length = LengthLinkedList(globalComponentLinkedList);
   Component* result[3];
   int t;
-  for (i = 0; i < 50; i++)
-    a[i] = i + 1;
-  for (i = 0; i < 50; i++) {
-    w = rand() % 50;
+  for (i = 0; i < length; i++)
+    a[i] = i;
+  for (i = 0; i < length; i++) {
+    w = rand() % length;
     t = a[i];
     a[i] = a[w];
     a[w] = t;
   }
   i = 0;
-  for (int pos = 0, len = LengthLinkedList(globalComponentLinkedList); i < 3; pos++) {
-    if (a[pos] < len) {
+  for (int pos = 0; pos < length && i < 3; pos++) {
+    if (((int*)AtLinkedList(globalStorage, a[pos] - 1)->data)[0] > 0) {
       result[i] = AtLinkedList(globalComponentLinkedList, a[pos])->data;
       a[i] = a[pos];
       i++;
     }
   }
+  if (i == 0)return -1;
+  if (i < 3) {
+    for (int j = i; j < 3; j++) {
+      result[j] = result[i - 1];
+      a[j] = a[i - 1];
+    }
+  }
+
   PrintLITERAL("恭喜你获得一个赠品，请输入数字进行选择：\n");
   for (i = 0; i < 3; i++) {
     printf("%d. %s %s\n", i + 1, U8_CSTR(result[i]->name), U8_CSTR(result[i]->type));

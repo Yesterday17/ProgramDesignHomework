@@ -28,4 +28,5 @@ LinkedList* ReadComponentJSON(string filename);
 Component *JSONToComponent(cJSON *root);
 cJSON *ComponentToJSON(Component *prime);
 
+extern Component* NO_Gift;
 #endif

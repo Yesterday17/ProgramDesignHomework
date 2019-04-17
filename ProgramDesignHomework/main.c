@@ -8,35 +8,8 @@ void FS_Init() {
   globalComponentLinkedList = ReadComponentJSON(COMPONENT_FILENAME);
   sales = ReadSalesJSON(SALES_FILENAME);
   purchase = ReadPurchaseJSON(PURCHASE_FILENAME);
-  globalStorage = MapLinkedList(globalComponentLinkedList, EmptySizeLinkedListCallback);
 
-  // 初始化库存
-  for (LinkedListNode *node = purchase->top; node != NULL; node = node->next) {
-    Purchase *purchase = node->data;
-    ((int*)(AtLinkedList(globalStorage, purchase->component)->data))[0] += purchase->quantity;
-  }
-
-  for (LinkedListNode *node = sales->top; node != NULL; node = node->next) {
-    Sales *sales = node->data;
-    ((int*)(AtLinkedList(globalStorage, sales->component)->data))[0] -= sales->quantity;
-
-    if (sales->gift != -1)
-      ((int*)(AtLinkedList(globalStorage, sales->gift)->data))[0]--;
-  }
-
-  // 初始化资金
-  globalFunds = 500000000;
-  for (LinkedListNode *node = purchase->top; node != NULL; node = node->next) {
-    Purchase *purchase = node->data;
-    globalFunds -= purchase->total;
-    purchaseFunds += purchase->total;
-  }
-
-  for (LinkedListNode *node = sales->top; node != NULL; node = node->next) {
-    Sales *sales = node->data;
-    globalFunds += sales->total;
-    salesFunds += sales->total;
-  }
+  RefreshStorageFund();
 }
 
 void GLOBAL_Init() {

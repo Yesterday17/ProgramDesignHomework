@@ -43,8 +43,9 @@ int OptionBar(int start, int end);
 int RecordPage(LinkedList *data, string title, string record(void *, uint8_t));
 
 void UI_Clear();
-
 void UI_Color();
+
+void RefreshStorageFund();
 
 extern Menu menuNow;
 

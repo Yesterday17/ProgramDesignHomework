@@ -19,7 +19,8 @@ Component *componentToSearch = NULL;
 LinkedList *globalComponentLinkedList;
 LinkedList *purchase;
 LinkedList *sales;
-LinkedList *globalStorage;
+LinkedList *globalStorage = NULL;
+LinkedList* globalGift = NULL;
 
 long globalFunds;
 uint64_t salesFunds;

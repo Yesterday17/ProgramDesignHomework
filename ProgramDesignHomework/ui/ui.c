@@ -101,6 +101,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               InsertLinkedList(purchase, ReadPurchase());
               UI_Clear();
               WritePurchaseJSON(PURCHASE_FILENAME);
+              RefreshStorageFund();
               break;
             }
             if (key1 < 0) {
@@ -109,6 +110,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
                 UI_Clear();
                 DeleteLinkedList(purchase, record);
                 WritePurchaseJSON(PURCHASE_FILENAME);
+                RefreshStorageFund();
                 break;
               }
             }
@@ -183,6 +185,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
                   InsertLinkedList(purchase, ReadPurchase());
                   UI_Clear();
                   WritePurchaseJSON(PURCHASE_FILENAME);
+                  RefreshStorageFund();
                   break;
                 }
                 if (key1 < 0) {
@@ -191,6 +194,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
                     UI_Clear();
                     DeleteLinkedList(purchase, record);
                     WritePurchaseJSON(PURCHASE_FILENAME);
+                    RefreshStorageFund();
                     break;
                   }
                 }
@@ -246,6 +250,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               InsertLinkedList(sales, ReadSales());
               UI_Clear();
               WriteSalesJSON(SALES_FILENAME);
+              RefreshStorageFund();
               break;
             }
             if (key1 < 0) {
@@ -254,6 +259,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
                 UI_Clear();
                 DeleteLinkedList(sales, record);
                 WriteSalesJSON(SALES_FILENAME);
+                RefreshStorageFund();
                 break;
               }
             }
@@ -331,6 +337,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
                   InsertLinkedList(sales, ReadSales());
                   UI_Clear();
                   WriteSalesJSON(SALES_FILENAME);
+                  RefreshStorageFund();
                   break;
                 }
                 if (key1 < 0) {
@@ -339,6 +346,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
                     UI_Clear();
                     DeleteLinkedList(sales, record);
                     WriteSalesJSON(SALES_FILENAME);
+                    RefreshStorageFund();
                     break;
                   }
                 }
@@ -367,7 +375,20 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       }
       break;
     case 3:
-      //
+      PrintLITERAL("赠品详单：\n");
+      RefreshStorageFund();
+      for (int i = 0; i < LengthLinkedList(globalComponentLinkedList); i++) {
+        int count = ((int*)AtLinkedList(globalGift, i)->data)[0];
+        Component *comp = AtLinkedList(globalComponentLinkedList, i)->data;
+        printf("%s %s %s: %d\n",
+          U8_CSTR(comp->name),
+          U8_CSTR(comp->type),
+          U8_CSTR(comp->manufacturer),
+          count);
+      }
+      PrintLITERAL("\n按任意键返回主菜单");
+      _getch();
+      UI_Clear();
       break;
     case 4:
       return MENU_Main;
@@ -376,6 +397,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   }
   if (menu == MENU_Stock)
   {
+    RefreshStorageFund();
     for (int i = 0; i < LengthLinkedList(globalComponentLinkedList); i++) {
       int count = ((int*)AtLinkedList(globalStorage, i)->data)[0];
       Component *comp = AtLinkedList(globalComponentLinkedList, i)->data;
@@ -392,6 +414,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   }
   if (menu == MENU_Amount)
   {
+    RefreshStorageFund();
     PrintLITERAL("目前销售总额：");
     printf("%.2f ", salesFunds / 100.0);
     PrintLITERAL("元\n");
@@ -582,3 +605,44 @@ void UI_Exit() {
 }
 
 void UI_WaitForNext(void *nextDo()) { nextDo(); }
+
+void RefreshStorageFund() {
+  if (globalStorage != NULL) {
+    FreeLinkedList(globalStorage);
+  }
+  if (globalGift != NULL) {
+    FreeLinkedList(globalGift);
+  }
+
+  globalStorage = MapLinkedList(globalComponentLinkedList, EmptySizeLinkedListCallback);
+  globalGift = MapLinkedList(globalComponentLinkedList, EmptySizeLinkedListCallback);
+  // 初始化库存
+  for (LinkedListNode *node = purchase->top; node != NULL; node = node->next) {
+    Purchase *purchase = node->data;
+    ((int*)(AtLinkedList(globalStorage, purchase->component)->data))[0] += purchase->quantity;
+  }
+
+  for (LinkedListNode *node = sales->top; node != NULL; node = node->next) {
+    Sales *sales = node->data;
+    ((int*)(AtLinkedList(globalStorage, sales->component)->data))[0] -= sales->quantity;
+
+    if (sales->gift != -1) {
+      ((int*)(AtLinkedList(globalStorage, sales->gift)->data))[0]--;
+      ((int*)(AtLinkedList(globalGift, sales->gift)->data))[0]++;
+    }
+  }
+
+  // 初始化资金
+  globalFunds = 500000000;
+  for (LinkedListNode *node = purchase->top; node != NULL; node = node->next) {
+    Purchase *purchase = node->data;
+    globalFunds -= purchase->total;
+    purchaseFunds += purchase->total;
+  }
+
+  for (LinkedListNode *node = sales->top; node != NULL; node = node->next) {
+    Sales *sales = node->data;
+    globalFunds += sales->total;
+    salesFunds += sales->total;
+  }
+}

@@ -4,6 +4,8 @@
 #include "../utils/io.h"
 #include "../utils/fs.h"
 
+Component* NO_Gift;
+
 Component * NewComponent()
 {
   Component *component = (Component*)malloc(sizeof(Component));

@@ -21,6 +21,7 @@ extern LinkedList* globalComponentLinkedList;
 extern LinkedList* purchase;
 extern LinkedList* sales;
 extern LinkedList* globalStorage;
+extern LinkedList* globalGift;
 
 extern uint64_t salesFunds;
 extern uint64_t purchaseFunds;
