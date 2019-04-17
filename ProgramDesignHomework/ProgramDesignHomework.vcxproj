@@ -137,6 +137,7 @@
     <ClCompile Include="utils\linkedlist.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.gitignore" />
     <None Include="..\docs\index.md" />
     <None Include="..\LICENSE" />
     <None Include="..\Readme.md" />

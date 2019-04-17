@@ -76,6 +76,9 @@
     <None Include="..\scripts\component.js">
       <Filter>repo\scripts</Filter>
     </None>
+    <None Include="..\.gitignore">
+      <Filter>repo</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\linkedlist.h">

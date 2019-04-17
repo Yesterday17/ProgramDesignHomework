@@ -55,9 +55,11 @@ Sales *ReadSales() {
   match = false;
   while (!match) {
     sales->quantity = InputInt(sales->sales_mode == 1 ? LITERAL("批发数量: ") : LITERAL("零售数量: "));
-    if (sales->quantity > 0 && sales->quantity <= ((int*)AtLinkedList(globalStorage, sales->component)->data)[0]) {
+    sales->total = sales->price * sales->quantity;
+    if (sales->quantity > 0 
+      && sales->total <= 1000000000
+      && sales->quantity <= ((int*)AtLinkedList(globalStorage, sales->component)->data)[0]) {
       match = true;
-      sales->total = sales->price * sales->quantity;
       globalFunds += sales->total;
       salesFunds += sales->total;
       ((int*)(AtLinkedList(globalStorage, sales->component)->data))[0] -= sales->quantity;

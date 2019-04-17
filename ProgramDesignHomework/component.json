@@ -1,0 +1,194 @@
+[
+  {
+    "index": 0,
+    "name": "RTX",
+    "type": "RTX-2060",
+    "manufacturer": "NVIDIA"
+  },
+  {
+    "index": 1,
+    "name": "RTX",
+    "type": "RTX-2070",
+    "manufacturer": "NVIDIA"
+  },
+  {
+    "index": 2,
+    "name": "RTX",
+    "type": "RTX-2080",
+    "manufacturer": "NVIDIA"
+  },
+  {
+    "index": 3,
+    "name": "GTX",
+    "type": "GTX-1060",
+    "manufacturer": "NVIDIA"
+  },
+  {
+    "index": 4,
+    "name": "GTX",
+    "type": "GTX-1070",
+    "manufacturer": "NVIDIA"
+  },
+  {
+    "index": 5,
+    "name": "GTX",
+    "type": "GTX-1070-Ti",
+    "manufacturer": "NVIDIA"
+  },
+  {
+    "index": 6,
+    "name": "GTX",
+    "type": "GTX-1080",
+    "manufacturer": "NVIDIA"
+  },
+  {
+    "index": 7,
+    "name": "GTX",
+    "type": "GTX-1080-Ti",
+    "manufacturer": "NVIDIA"
+  },
+  {
+    "index": 8,
+    "name": "Core-i9",
+    "type": "i9-9900K",
+    "manufacturer": "Intel"
+  },
+  {
+    "index": 9,
+    "name": "Core-i9",
+    "type": "i9-9900KF",
+    "manufacturer": "Intel"
+  },
+  {
+    "index": 10,
+    "name": "Core-i7",
+    "type": "i7-9700K",
+    "manufacturer": "Intel"
+  },
+  {
+    "index": 11,
+    "name": "Core-i7",
+    "type": "i7-9700KF",
+    "manufacturer": "Intel"
+  },
+  {
+    "index": 12,
+    "name": "Core-i5",
+    "type": "i5-9600K",
+    "manufacturer": "Intel"
+  },
+  {
+    "index": 13,
+    "name": "Core-i5",
+    "type": "i5-9600KF",
+    "manufacturer": "Intel"
+  },
+  {
+    "index": 14,
+    "name": "Core-i5",
+    "type": "i5-9400",
+    "manufacturer": "Intel"
+  },
+  {
+    "index": 15,
+    "name": "Core-i5",
+    "type": "i5-9400F",
+    "manufacturer": "Intel"
+  },
+  {
+    "index": 16,
+    "name": "Core-i3",
+    "type": "i3-9350KF",
+    "manufacturer": "Intel"
+  },
+  {
+    "index": 17,
+    "name": "Ryzen-7",
+    "type": "R7-3750H",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 18,
+    "name": "Ryzen-7",
+    "type": "R7-3700U",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 19,
+    "name": "Ryzen-7",
+    "type": "R7-2700X",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 20,
+    "name": "Ryzen-7",
+    "type": "R7-2700",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 21,
+    "name": "Ryzen-7",
+    "type": "R7-2700E",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 22,
+    "name": "Ryzen-5",
+    "type": "R5-3550H",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 23,
+    "name": "Ryzen-5",
+    "type": "R5-3500U",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 24,
+    "name": "Ryzen-5",
+    "type": "R5-2600X",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 25,
+    "name": "Ryzen-5",
+    "type": "R5-2600",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 26,
+    "name": "Ryzen-5",
+    "type": "R5-2500X",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 27,
+    "name": "Ryzen-3",
+    "type": "R3-3300U",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 28,
+    "name": "Ryzen-3",
+    "type": "R3-3200U",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 29,
+    "name": "Ryzen-3",
+    "type": "R3-2300X",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 30,
+    "name": "Ryzen-3",
+    "type": "R3-2300U",
+    "manufacturer": "AMD"
+  },
+  {
+    "index": 31,
+    "name": "Ryzen-3",
+    "type": "R3-1300X",
+    "manufacturer": "AMD"
+  }
+]

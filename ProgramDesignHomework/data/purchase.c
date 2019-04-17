@@ -38,7 +38,7 @@ Purchase *ReadPurchase()
   while (!match) {
     purchase->quantity = InputInt(LITERAL("进货数量: "));
     purchase->total = purchase->price * purchase->quantity;
-    if (purchase->total > 0) {
+    if (purchase->total > 0 && purchase->total <= 1000000000) {
       match = true;
       globalFunds -= purchase->total;
       purchaseFunds += purchase->total;
