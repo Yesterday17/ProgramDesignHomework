@@ -21,6 +21,8 @@ void GLOBAL_Init() {
   typeToSearch = newString("");
   manufacturerToSearch = newString("");
   NO_Gift = NewComponent();
+  freeAssign(&NO_Gift->name, newString("NOT_EXIST"));
+  freeAssign(&NO_Gift->type, newString(""));
 }
 
 int main() {
