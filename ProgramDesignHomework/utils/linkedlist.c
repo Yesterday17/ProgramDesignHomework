@@ -110,3 +110,8 @@ LinkedList* MapLinkedList(LinkedList *list, void** callback(LinkedListNode*)) {
 void* UnpackLinkedListResult(LinkedListNode* node) {
   return ((LinkedListResult*)node->data)->res0->data;
 }
+
+int* EmptySizeLinkedListCallback(LinkedListNode *node) {
+  int *count = (int*)malloc(sizeof(int));
+  return count;
+}

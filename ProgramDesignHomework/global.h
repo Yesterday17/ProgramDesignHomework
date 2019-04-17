@@ -20,6 +20,7 @@ extern const char VERSION[];
 extern LinkedList* component;
 extern LinkedList* purchase;
 extern LinkedList* sales;
+extern LinkedList *globalStorage;
 
 extern string nameToSearch;
 extern uint64_t timeToSearchearly;

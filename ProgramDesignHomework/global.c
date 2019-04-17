@@ -19,3 +19,4 @@ Component *componentToSearch = NULL;
 LinkedList *component;
 LinkedList *purchase;
 LinkedList *sales;
+LinkedList *globalStorage;

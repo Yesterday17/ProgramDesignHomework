@@ -30,6 +30,6 @@ LinkedListNode *AtLinkedList(LinkedList *list, int pos);
 size_t LengthLinkedList(LinkedList *list);
 LinkedList* MapLinkedList(LinkedList *list, void** callback(LinkedListNode*));
 
-void* UnpackLinkedListResult(LinkedListNode* node);
-
+void* UnpackLinkedListResult(LinkedListNode *node);
+int* EmptySizeLinkedListCallback(LinkedListNode *node);
 #endif

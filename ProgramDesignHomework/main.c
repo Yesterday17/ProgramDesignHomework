@@ -8,6 +8,18 @@ void FS_Init() {
   component = ReadComponentJSON(COMPONENT_FILENAME);
   sales = ReadSalesJSON(SALES_FILENAME);
   purchase = ReadPurchaseJSON(PURCHASE_FILENAME);
+  globalStorage = MapLinkedList(component, EmptySizeLinkedListCallback);
+
+  for (LinkedListNode *node = purchase->top; node != NULL; node = node->next) {
+    Purchase *purchase = node->data;
+    ((int*)(AtLinkedList(component, purchase->component)->data))[0] += purchase->quantity;
+  }
+
+  for (LinkedListNode *node = sales->top; node != NULL; node = node->next) {
+    Sales *sales = node->data;
+    ((int*)(AtLinkedList(component, sales->component)->data))[0] -= sales->quantity;
+    ((int*)(AtLinkedList(component, sales->gift)->data))[0]--;
+  }
 }
 
 void GLOBAL_Init() {
