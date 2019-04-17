@@ -29,11 +29,13 @@ void FS_Init() {
   for (LinkedListNode *node = purchase->top; node != NULL; node = node->next) {
     Purchase *purchase = node->data;
     globalFunds -= purchase->total;
+    purchaseFunds += purchase->total;
   }
 
   for (LinkedListNode *node = sales->top; node != NULL; node = node->next) {
     Sales *sales = node->data;
     globalFunds += sales->total;
+    salesFunds += sales->total;
   }
 }
 

@@ -55,11 +55,13 @@ Sales *ReadSales() {
     sales->quantity = InputInt(LITERAL("批发/零售数量: "));
     if (sales->quantity > 0 && sales->quantity <= ((int*)AtLinkedList(globalComponentLinkedList, sales->component)->data)[0]) {
       match = true;
+      sales->total = sales->price * sales->quantity;
+      globalFunds += sales->total;
+      salesFunds += sales->total;
     }
   }
 
-  sales->total = sales->price * sales->quantity;
-  freeAssign(&sales->customer, InputString(LITERAL("客户信息: "), LITERAL("未知")));
+  freeAssign(&sales->customer, InputString(LITERAL("客户信息: "), LITERAL("UNKNOWN")));
 
   if (sales->sales_mode == 1 && (sales->total > Ltotal || sales->quantity > Lquantity)) {
     sales->gift = Gift(sales);

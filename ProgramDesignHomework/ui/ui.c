@@ -14,7 +14,7 @@ void UI_Init() {
 void UI_Welcome() {
   SetConsoleOutputCP(CP_UTF8);
   SetConsoleCP(CP_UTF8);
-  PrintLITERAL("\n\nWelcome to use 3021 APP\n\n");
+  PrintLITERAL("\n\n\n\n\t欢迎使用进货/销售管理系统");
   Sleep(1000);
   UI_Clear();
 }
@@ -392,9 +392,18 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   }
   if (menu == MENU_Amount)
   {
+    PrintLITERAL("目前销售总额：");
+    printf("%.2f ", salesFunds / 100.0);
+    PrintLITERAL("元\n");
+    PrintLITERAL("目前进货总额：");
+    printf("%.2f ", purchaseFunds / 100.0);
+    PrintLITERAL("元\n");
+    PrintLITERAL("目前盈利额：");
+    printf("%.2f ", (int)(salesFunds - purchaseFunds) / 100.0);
+    PrintLITERAL("元\n");
     PrintLITERAL("目前剩余资金：");
-    printf("%.2f ", globalFunds / 100.0f);
-    PrintLITERAL("元");
+    printf("%.2f ", globalFunds / 100.0);
+    PrintLITERAL("元\n");
     PrintLITERAL("\n按任意键返回主菜单");
     _getch();
     UI_Clear();

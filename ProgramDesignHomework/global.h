@@ -21,7 +21,10 @@ extern LinkedList* globalComponentLinkedList;
 extern LinkedList* purchase;
 extern LinkedList* sales;
 extern LinkedList* globalStorage;
-extern uint64_t globalFunds;
+
+extern uint64_t salesFunds;
+extern uint64_t purchaseFunds;
+extern long globalFunds;
 
 extern string nameToSearch;
 extern uint64_t timeToSearchearly;

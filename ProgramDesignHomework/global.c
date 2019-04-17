@@ -20,4 +20,7 @@ LinkedList *globalComponentLinkedList;
 LinkedList *purchase;
 LinkedList *sales;
 LinkedList *globalStorage;
-uint64_t globalFunds;
+
+long globalFunds;
+uint64_t salesFunds;
+uint64_t purchaseFunds;
