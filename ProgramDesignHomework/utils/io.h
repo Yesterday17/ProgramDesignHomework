@@ -13,6 +13,7 @@
 
 string InputString(string comment, string defaultValue);
 int InputInteger(string comment, string errorMessage, int defaultValue);
+int InputMoney(string comment, string errorMessage);
 
 string InputStr(string comment);
 int InputInt(string comment);

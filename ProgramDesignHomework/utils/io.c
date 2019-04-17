@@ -35,9 +35,26 @@ int InputInteger(string comment, string errorMessage, int defaultValue) {
   while (sscanf(U8_CSTR(input), "%d", &ans) != 1) {
     printf("%s\n", U8_CSTR(errorMessage));
     $STR_BUF(input);
-    input = InputString(comment, STRING("\n"));
+    freeAssign(&input, InputString(comment, STRING("\n")));
   }
   return ans;
+}
+
+int InputMoney(string comment, string errorMessage)
+{
+  string input = InputString(comment, "\n");
+  int number = 0;
+  char a, b;
+
+  if (compareString(input, STRING("\n")) == STRING_EQUAL) {
+    return 100000;
+  }
+
+  while (sscanf(U8_CSTR(input), "%d.%c%c", &number, &a, &b) != 3) {
+    PrintString(errorMessage);
+    freeAssign(&input, InputString(comment, errorMessage, "\n"));
+  }
+  return number * 100 + ((a - '0') * 10) + (b - '0');
 }
 
 int InputInt(string comment) {
