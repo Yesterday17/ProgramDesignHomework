@@ -19,6 +19,7 @@ bool IsTimeValid(int year, int month, int day, int hour, int minute, int second)
   return true;
 }
 
+//时间读取函数
 uint64_t ReadTime() {
   int counts = 0, i, j, k;
   int day31[7] = { 1, 3, 5, 7, 8, 10, 12 };
@@ -78,6 +79,7 @@ uint64_t ReadTime() {
   return time;
 }
 
+//时间转换函数
 string TimeToString(uint64_t time)
 {
   int counts = 0, i, j, k;

@@ -129,6 +129,7 @@ cJSON *SalesToJSON(Sales *prime)
   return root;
 }
 
+//返回标题（售货）函数
 string PrintSalesTitle() {
   char ans[200];
   sprintf(ans, "   %-12s|%-12s|%-13s|%-14s|%-12s|%-12s|%-12s|%-14s|%-12s\n",
@@ -144,6 +145,7 @@ string PrintSalesTitle() {
   return newString(ans);
 }
 
+//返回单条售货记录函数
 string PrintSales(void *node, uint8_t id) {
   Sales* sales = (Sales *)node;
   Component* comp = AtLinkedList(globalComponentLinkedList, sales->component)->data;
@@ -162,22 +164,30 @@ string PrintSales(void *node, uint8_t id) {
   return newString(ans);
 }
 
+//判断客户信息函数
 bool FindCustomer_Sales(LinkedListNode *node) {
   return compareString(((Sales *)(node->data))->customer, customerToSearch) == STRING_EQUAL;
 }
+
+//判断配件名称（售货）函数
 bool FindComponentName_Sales(LinkedListNode *node) {
   Component *comp = AtLinkedList(globalComponentLinkedList, ((Sales*)(node->data))->component)->data;
   return compareString(comp->name, nameToSearch) == STRING_EQUAL;
 }
+
+//判断配件型号（售货）函数
 bool FindComponentType_Sales(LinkedListNode *node) {
   Component *comp = AtLinkedList(globalComponentLinkedList, ((Sales*)(node->data))->component)->data;
   return compareString(comp->type, typeToSearch) == STRING_EQUAL;
 }
+
+//判断时间（售货）函数
 bool FindTime_Sales(LinkedListNode *node) {
   return (((Sales *)node->data)->time <= timeToSearchearly
     && ((Sales *)node->data)->time >= timeToSearchlate);
 }
 
+//选择赠品函数
 int Gift() {
   int a[50], i, w, length = LengthLinkedList(globalComponentLinkedList);
   Component* result[3];

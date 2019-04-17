@@ -9,6 +9,7 @@ void UI_Init() {
   CONSOLE_CURSOR_INFO info = { 1,0 };
   HANDLE hout = GetStdHandle(STD_OUTPUT_HANDLE);
   SetConsoleCursorInfo(hout, &info);
+  SetConsoleTitle("3021商品流动记录管理系统");
   UI_Color();
 }
 void UI_Welcome() {

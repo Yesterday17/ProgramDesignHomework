@@ -1,13 +1,15 @@
 ﻿#include "linkedlist.h"
 #include <stdlib.h>
 
-LinkedList *CreateLinkedList() {  //定义空链表
+//创建空链表函数
+LinkedList *CreateLinkedList() {  
   LinkedList *data = (LinkedList *)malloc(sizeof(LinkedList));
   data->rear = NULL;
   data->top = NULL;
   return data;
 }
 
+//释放链表内存函数
 void FreeLinkedList(LinkedList *list) {
   for (LinkedListNode *node = list->top; node != NULL; node = list->top) {
     DeleteLinkedList(list, 1);
@@ -15,7 +17,8 @@ void FreeLinkedList(LinkedList *list) {
   free(list);
 }
 
-void InsertLinkedList(LinkedList *list, void *data) {  //目标链表  存储数据
+ //插入链表（目标，存储数据（指针））
+void InsertLinkedList(LinkedList *list, void *data) { 
   LinkedListNode *p = (LinkedListNode *)malloc(sizeof(LinkedListNode));
   p->data = data;
   if (list->rear == NULL) {  // 首结点
@@ -29,7 +32,8 @@ void InsertLinkedList(LinkedList *list, void *data) {  //目标链表  存储数
   list->rear->next = NULL;
 }
 
-void DeleteLinkedList(LinkedList *list, int key) {//删除链表：目标结点 判断函数（值真为删除目标）
+//删除链表：目标结点 判断函数（值真为删除目标）
+void DeleteLinkedList(LinkedList *list, int key) {
   LinkedListNode *p, *p0;
   p0 = NULL;
   int count = 1;
@@ -37,22 +41,22 @@ void DeleteLinkedList(LinkedList *list, int key) {//删除链表：目标结点 
   for (p = list->top; p != NULL; p0 = p, p = p->next) {
     if (count == key) {
       if (p0 != NULL) {
-        if (p != list->rear) {
+        if (p != list->rear) {//1.p在链表中间
           p0->next = p->next;  //删除p0所指项
           p = p0->next;  //指向删除项的下一项
         }
-        else {
+        else {//2.p在链表尾部
           list->rear = p0;
           p = NULL;
         }
         break;
       }
       else {
-        if (p != list->rear) {
+        if (p != list->rear) {//3.p在链表首部
           list->top = p->next;
           p->next = NULL;
         }
-        else {
+        else {//4.链表只有一个节点时
           list->top = NULL;
           free(p);
           list->rear = NULL;
@@ -64,6 +68,7 @@ void DeleteLinkedList(LinkedList *list, int key) {//删除链表：目标结点 
   }
 }
 
+//查找链表节点函数
 LinkedList* FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *)) {
   LinkedList*  result = CreateLinkedList();
   int count = 1;
@@ -79,6 +84,7 @@ LinkedList* FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *)) {
   return result;
 }
 
+//指定链表结点位置函数
 LinkedListNode* AtLinkedList(LinkedList * list, int pos)
 {
   LinkedListNode * node = list->top;
@@ -88,7 +94,7 @@ LinkedListNode* AtLinkedList(LinkedList * list, int pos)
   return node;
 }
 
-
+//求链表长度函数
 int LengthLinkedList(LinkedList *list) {
   size_t len = 0;
   LinkedListNode *node = list->top;
@@ -99,6 +105,7 @@ int LengthLinkedList(LinkedList *list) {
   return len;
 }
 
+//基于一个链表实现另一个链表函数
 LinkedList* MapLinkedList(LinkedList *list, void** callback(LinkedListNode*)) {
   LinkedList *ans = CreateLinkedList();
   for (LinkedListNode *node = list->top; node != NULL; node = node->next) {
@@ -107,10 +114,12 @@ LinkedList* MapLinkedList(LinkedList *list, void** callback(LinkedListNode*)) {
   return ans;
 }
 
+//解压链表内容函数
 void* UnpackLinkedListResult(LinkedListNode* node) {
   return ((LinkedListResult*)node->data)->res0->data;
 }
 
+//生成长度相同内容为0的链表函数
 int* EmptySizeLinkedListCallback(LinkedListNode *node) {
   int *count = (int*)malloc(sizeof(int));
   count[0] = 0;

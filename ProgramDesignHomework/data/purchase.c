@@ -97,6 +97,7 @@ cJSON *PurchaseToJSON(Purchase *prime)
   return root;
 }
 
+//返回进货记录标题
 string PrintPurchaseTitle() {
   char ans[200];
   sprintf(ans, "   %-12s|%-12s|%-13s|%-12s|%-12s|%-12s|%-14s\n",
@@ -110,6 +111,7 @@ string PrintPurchaseTitle() {
   return newString(ans);
 }
 
+//返回单条进货记录
 string PrintPurchase(void *node, uint8_t id) {
   Purchase* purchase = (Purchase *)node;
   Component* comp = AtLinkedList(globalComponentLinkedList, purchase->component)->data;
@@ -125,20 +127,23 @@ string PrintPurchase(void *node, uint8_t id) {
   return newString(ans);
 }
 
+//判断时间（进货）函数
 bool FindTime_Purchase(LinkedListNode *node) {
   return (((Purchase *)node->data)->time <= timeToSearchearly
     && ((Purchase *)node->data)->time >= timeToSearchearly);
 }
 
+//判断经销商函数
 bool FindRetailer_Purchase(LinkedListNode *node) {
   return compareString(((Purchase *)node->data)->retailer, retailerToSearch) == STRING_EQUAL;
 }
 
+//判断配件名称（进货）函数
 bool FindComponentName_Purchase(LinkedListNode *node) {
   Component *comp = AtLinkedList(globalComponentLinkedList, ((Purchase*)(node->data))->component)->data;
   return compareString(comp->name, nameToSearch) == STRING_EQUAL;
 }
-
+//判断配件类型（进货）函数
 bool FindComponentType_Purchase(LinkedListNode *node) {
   Component *comp = AtLinkedList(globalComponentLinkedList, ((Purchase*)(node->data))->component)->data;
   return compareString(comp->type, nameToSearch) == STRING_EQUAL;

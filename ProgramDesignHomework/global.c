@@ -17,10 +17,10 @@ uint64_t timeToSearchlate;
 Component *componentToSearch = NULL;
 
 LinkedList *globalComponentLinkedList;
-LinkedList *purchase;
-LinkedList *sales;
-LinkedList *globalStorage = NULL;
-LinkedList* globalGift = NULL;
+LinkedList *purchase;//进货记录
+LinkedList *sales;//售货记录
+LinkedList *globalStorage = NULL;//库存链表
+LinkedList* globalGift = NULL;//赠品链表
 
 long globalFunds;
 uint64_t salesFunds;

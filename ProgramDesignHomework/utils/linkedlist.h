@@ -15,7 +15,7 @@ typedef struct LinkedList {  // 链表指针
 } LinkedList;
 
 
-typedef struct LinkedlistResult {
+typedef struct LinkedlistResult {//（销售，进货）链表查找结果
   LinkedListNode* res0;
   int count;
 }LinkedListResult;
