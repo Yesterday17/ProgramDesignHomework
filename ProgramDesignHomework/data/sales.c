@@ -228,11 +228,11 @@ int Gift() {
   }
   char ch = _getch();
   while (1) {
-    if (ch == '1')
+    if (ch == 49)
       return a[0] - 1;
-    if (ch == '2')
+    if (ch == 50)
       return a[1] - 1;
-    if (ch == '3')
+    if (ch == 51)
       return a[2] - 1;
   }
 }
