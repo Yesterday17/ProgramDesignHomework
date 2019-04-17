@@ -11,6 +11,7 @@ void UI_Init() {
   HANDLE hout = GetStdHandle(STD_OUTPUT_HANDLE);
   SetConsoleCursorInfo(hout, &info);
   SetConsoleTitle("3021商品流动记录管理系统");
+  system("mode con cols=140 lines=35");
   UI_Color();
 }
 
