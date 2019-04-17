@@ -35,7 +35,7 @@ int ReadComponent() {
   int *idMap, *idMap2, *idMap3;
 
   do {
-    freeAssign(&nameToSearch, InputString(LITERAL("配件名称:"), LITERAL("UNKNOWN")));
+    freeAssign(&nameToSearch, InputString(LITERAL("配件名称:"), LITERAL("GTX")));
     nameSearch = FindLinkedList(globalComponentLinkedList, FindName_Component);
     len = LengthLinkedList(nameSearch);
 
@@ -53,7 +53,7 @@ int ReadComponent() {
   }
 
   do {
-    freeAssign(&typeToSearch, InputString(LITERAL("配件类型:"), LITERAL("UNKNOWN")));
+    freeAssign(&typeToSearch, InputString(LITERAL("配件类型:"), LITERAL("GTX-1080")));
     typeSearch = FindLinkedList(MapLinkedList(nameSearch, UnpackLinkedListResult), FindType_Component);
     len = LengthLinkedList(typeSearch);
 
@@ -73,7 +73,7 @@ int ReadComponent() {
   }
 
   do {
-    freeAssign(&manufacturerToSearch, InputString(LITERAL("制造商："), LITERAL("UNKNOWN")));
+    freeAssign(&manufacturerToSearch, InputString(LITERAL("制造商："), LITERAL("NVIDIA")));
     manufacturerSearch = FindLinkedList(MapLinkedList(typeSearch, UnpackLinkedListResult), FindMan_Component);
     len = LengthLinkedList(manufacturerSearch);
 
