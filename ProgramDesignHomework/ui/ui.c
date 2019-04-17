@@ -4,6 +4,7 @@
 #define hangshu 10 //记录每页最大行数
 Menu menuNow = MENU_Welcome;
 
+//设置属性及初始化
 void UI_Init() {
   srand((unsigned)(time(NULL)));
   CONSOLE_CURSOR_INFO info = { 1,0 };
@@ -12,6 +13,8 @@ void UI_Init() {
   SetConsoleTitle("3021商品流动记录管理系统");
   UI_Color();
 }
+
+//欢迎
 void UI_Welcome() {
   SetConsoleOutputCP(CP_UTF8);
   SetConsoleCP(CP_UTF8);
@@ -455,7 +458,8 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   }
 }
 
-int OptionBar(int start, int end) {//start为起始行，end为终止行
+//start为起始行，end为终止行
+int OptionBar(int start, int end) {
   int x = 1, y = start - 1;
   gotoxy(x, y);
   PrintLITERAL("*");
@@ -497,7 +501,8 @@ void gotoxy(int x, int y) {
   SetConsoleCursorPosition(a, cos);
 }
 
-int RecordPage(LinkedList *data, string title, string record(void *, uint8_t)) { //记录翻页函数
+//记录翻页函数
+int RecordPage(LinkedList *data, string title, string record(void *, uint8_t)) { 
   LinkedListNode *p, *re[100];//目标节点，分页数组
   int num = 0, count = 1, j = 0, y = 0;//序号，计数器，页码，选中行
   bool printed = false;
@@ -567,6 +572,7 @@ int RecordPage(LinkedList *data, string title, string record(void *, uint8_t)) {
   return j * hangshu + y;
 }
 
+//清屏函数
 void UI_Clear() {
   HANDLE hConsole;
 
@@ -617,10 +623,12 @@ void UI_Clear() {
   SetConsoleCursorPosition(hConsole, coordScreen);
 }
 
+//颜色函数
 void UI_Color() {
   system("color 80");
 }
 
+//程序退出
 void UI_Exit() {
   PrintLITERAL("欢迎下次使用");
 }
