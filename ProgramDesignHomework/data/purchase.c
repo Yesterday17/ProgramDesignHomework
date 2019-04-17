@@ -100,14 +100,15 @@ cJSON *PurchaseToJSON(Purchase *prime)
 //返回进货记录标题
 string PrintPurchaseTitle() {
   char ans[200];
-  sprintf(ans, "   %-12s|%-12s|%-13s|%-12s|%-12s|%-12s|%-14s\n",
+  sprintf(ans, "   %-12s|%-12s|%-13s|%-12s|%-12s|%-12s|%-19s|%-20s\n",
     U8_CSTR(LITERAL("名称")),
     U8_CSTR(LITERAL("型号")),
     U8_CSTR(LITERAL("制造商")),
     U8_CSTR(LITERAL("数量")),
     U8_CSTR(LITERAL("单价")),
     U8_CSTR(LITERAL("总价")),
-    U8_CSTR(LITERAL("经销商")));
+    U8_CSTR(LITERAL("经销商")),
+    U8_CSTR(LITERAL("时间")));
   return newString(ans);
 }
 
@@ -116,14 +117,15 @@ string PrintPurchase(void *node, uint8_t id) {
   Purchase* purchase = (Purchase *)node;
   Component* comp = AtLinkedList(globalComponentLinkedList, purchase->component)->data;
   char ans[200];
-  sprintf(ans, "%-10s|%-10s|%-10s|%-10d|%-10.2f|%-10.2f|%-10s\n",
+  sprintf(ans, "%-10s|%-10s|%-10s|%-10d|%-10.2f|%-10.2f|%-16s|%-20s\n",
     U8_CSTR(comp->name),
     U8_CSTR(comp->type),
     U8_CSTR(comp->manufacturer),
     purchase->quantity,
     purchase->price / 100.0f,
     purchase->total / 100.0f,
-    U8_CSTR(purchase->retailer));
+    U8_CSTR(purchase->retailer),
+    U8_CSTR(TimeToString(purchase->time)));
   return newString(ans);
 }
 

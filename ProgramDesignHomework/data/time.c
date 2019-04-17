@@ -175,6 +175,6 @@ string TimeToString(uint64_t time)
   test -= 60;
   second = time - test;
   char str[200];
-  sprintf(str, "%d年%d月%d日%d时%d分%d秒", year, month, day, hour, minute, second);
+  sprintf(str, u8"%d年%d月%d日%d时%d分%d秒", year, month, day, hour, minute, second);
   return newString(str);
 }
