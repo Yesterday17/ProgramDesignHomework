@@ -37,9 +37,9 @@ uint64_t ReadTime() {
 
   for (i = 1970; i < year; i++) {
     if (isPrime(i))
-      time = time + 366 * 24 * 60 * 60;
+      time += 366 * 24 * 60 * 60;
     else
-      time = time + 365 * 24 * 60 * 60;
+      time += 365 * 24 * 60 * 60;
   }
   for (i = 1; i < month; i++) {
     flag = 0;
@@ -66,13 +66,13 @@ uint64_t ReadTime() {
     }
   }
   for (i = 1; i < day; i++) {
-    time = time + i * 24 * 60 * 60;
+    time = time + 24 * 60 * 60;
   }
   for (i = 1; i < hour; i++) {
-    time = time + i * 60 * 60;
+    time = time + 60 * 60;
   }
   for (i = 1; i < minute; i++) {
-    time = time + i * 60;
+    time = time + 60;
   }
   time += second;
 
@@ -88,7 +88,7 @@ string TimeToString(uint64_t time)
   uint64_t test = 0;
   int flag = 0;
   int year = 1970, month = 1, day = 1, hour = 0, minute = 0, second = 0;
-  while (test < time)
+  while (test <= time)
   {
     flag = 1;
     if (isPrime(year))
@@ -107,11 +107,12 @@ string TimeToString(uint64_t time)
   year--;
   if (flag == 2)
     test -= 366 * 24 * 60 * 60;
-  if (flag == 3)
+  else
     test -= 365 * 24 * 60 * 60;
+
   month = 1;
   int flags = 1;
-  while (time > test)
+  while (time >= test)
   {
     if ((month == 2) && (!isPrime(year))) {
       test = test + 28 * 24 * 60 * 60;
@@ -135,13 +136,11 @@ string TimeToString(uint64_t time)
         }
       }
       if (flag == 0) {
-        time = time + 30 * 24 * 60 * 60;
+        test = test + 30 * 24 * 60 * 60;
         month++;
         flags = 4;
-        break;
       }
     }
-
   }
   month--;
   if (flags == 1)
@@ -150,23 +149,24 @@ string TimeToString(uint64_t time)
     test -= 29 * 24 * 60 * 60;
   else if (flags == 3)
     test -= 31 * 24 * 60 * 60;
-  else if (flags == 4)
+  else
     test -= 30 * 24 * 60 * 60;
-  while (test < time)
+
+  while (test <= time)
   {
     test += 24 * 60 * 60;
     day++;
   }
   day--;
   test -= 24 * 60 * 60;
-  while (test < time)
+  while (test <= time)
   {
     test += 60 * 60;
     hour++;
   }
-  hour--;
+  // hour--;
   test -= 60 * 60;
-  while (test < time)
+  while (test <= time)
   {
     test += 60;
     minute++;
