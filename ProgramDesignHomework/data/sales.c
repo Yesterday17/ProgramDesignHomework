@@ -205,7 +205,7 @@ int Gift() {
   i = 0;
   for (int pos = 0; pos < length && i < 3; pos++) {
     if (((int*)AtLinkedList(globalStorage, a[pos] - 1)->data)[0] > 0) {
-      result[i] = AtLinkedList(globalComponentLinkedList, a[pos])->data;
+      result[i] = AtLinkedList(globalComponentLinkedList, a[pos] - 1)->data;
       a[i] = a[pos];
       i++;
     }
@@ -225,11 +225,11 @@ int Gift() {
   char ch = _getch();
   while (1) {
     if (ch == '1')
-      return a[0];
+      return a[0] - 1;
     if (ch == '2')
-      return a[1];
+      return a[1] - 1;
     if (ch == '3')
-      return a[2];
+      return a[2] - 1;
   }
 }
 

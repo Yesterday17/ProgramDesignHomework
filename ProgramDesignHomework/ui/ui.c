@@ -663,6 +663,8 @@ void RefreshStorageFund() {
 
   // 初始化资金
   globalFunds = 500000000;
+  salesFunds = 0;
+  purchaseFunds = 0;
   for (LinkedListNode *node = purchase->top; node != NULL; node = node->next) {
     Purchase *purchase = node->data;
     globalFunds -= purchase->total;

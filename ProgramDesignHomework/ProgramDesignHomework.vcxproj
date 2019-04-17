@@ -140,6 +140,7 @@
     <None Include="..\docs\index.md" />
     <None Include="..\LICENSE" />
     <None Include="..\Readme.md" />
+    <None Include="..\scripts\component.js" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cJSON\cJSON.h" />

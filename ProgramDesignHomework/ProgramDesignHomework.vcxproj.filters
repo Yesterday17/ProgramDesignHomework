@@ -25,6 +25,9 @@
     <Filter Include="repo\docs">
       <UniqueIdentifier>{58b4c10f-232e-47e2-8316-05f347d4d685}</UniqueIdentifier>
     </Filter>
+    <Filter Include="repo\scripts">
+      <UniqueIdentifier>{f266f6b8-dcb7-42bb-bd01-b8128516fddc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="utils\linkedlist.c">
@@ -69,6 +72,9 @@
     </None>
     <None Include="..\docs\index.md">
       <Filter>repo\docs</Filter>
+    </None>
+    <None Include="..\scripts\component.js">
+      <Filter>repo\scripts</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

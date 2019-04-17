@@ -1,4 +1,4 @@
-const comps = [];
+﻿const comps = [];
 let index = 0;
 
 function newC(name, type, man) {
@@ -13,9 +13,6 @@ function newC(name, type, man) {
 newC("RTX", "RTX 2060", "NVIDIA");
 newC("RTX", "RTX 2070", "NVIDIA");
 newC("RTX", "RTX 2080", "NVIDIA");
-
-newC("GTX", "1660", "NVIDIA");
-newC("GTX", "1660-Ti", "NVIDIA");
 
 newC("GTX", "1060", "NVIDIA");
 newC("GTX", "1070", "NVIDIA");

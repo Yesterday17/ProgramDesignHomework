@@ -50,7 +50,8 @@ int InputMoney(string comment, string errorMessage)
     return 100000;
   }
 
-  while (sscanf(U8_CSTR(input), "%d.%c%c", &number, &a, &b) != 3) {
+  while (sscanf(U8_CSTR(input), "%d.%c%c", &number, &a, &b) != 3
+    || a<'0' || a>'9' || b<'0' || b>'9') {
     PrintString(errorMessage);
     freeAssign(&input, InputString(comment, errorMessage, "\n"));
   }
