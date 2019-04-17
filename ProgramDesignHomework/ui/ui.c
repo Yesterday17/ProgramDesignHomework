@@ -14,7 +14,7 @@ void UI_Init() {
 void UI_Welcome() {
   SetConsoleOutputCP(CP_UTF8);
   SetConsoleCP(CP_UTF8);
-  PrintLITERAL("\n\n\n\n\t欢迎使用进货/销售管理系统");
+  PrintLITERAL("\n\n\n\t欢迎使用进货/销售管理系统");
   Sleep(1000);
   UI_Clear();
 }
@@ -360,7 +360,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
             }
           }
           else {
-            PrintLITERAL("没有查找到结果 ");
+            PrintLITERAL("没有查找到结果，按回车返回上一级");
             while (1) {
               char ch = _getch();
               if (ch == 13)break;
@@ -372,7 +372,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
       }
 
       else {
-        PrintLITERAL("该记录为空, 按回车返回上一级 ");
+        PrintLITERAL("该记录为空, 按回车返回上一级");
         while (1) {
           char ch = _getch();
           if (ch == 13)break;
@@ -392,8 +392,11 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           U8_CSTR(comp->manufacturer),
           count);
       }
-      PrintLITERAL("\n按任意键返回主菜单");
-      _getch();
+      PrintLITERAL("\n按回车返回上一级 ");
+      while (1) {
+        char ch = _getch();
+        if (ch == 13)break;
+      }
       UI_Clear();
       break;
     case 4:
@@ -413,8 +416,11 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
         U8_CSTR(comp->manufacturer),
         count);
     }
-    PrintLITERAL("\n按任意键返回主菜单");
-    _getch();
+    PrintLITERAL("\n按回车返回上一级 ");
+    while (1) {
+      char ch = _getch();
+      if (ch == 13)break;
+    }
     UI_Clear();
     return MENU_Main;
   }
@@ -433,8 +439,11 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
     PrintLITERAL("目前剩余资金：");
     printf("%.2f ", globalFunds / 100.0);
     PrintLITERAL("元\n");
-    PrintLITERAL("\n按任意键返回主菜单");
-    _getch();
+    PrintLITERAL("按回车返回上一级 ");
+    while (1) {
+      char ch = _getch();
+      if (ch == 13)break;
+    }
     UI_Clear();
     return MENU_Main;
   }
