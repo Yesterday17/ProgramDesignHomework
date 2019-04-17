@@ -20,6 +20,7 @@ void GLOBAL_Init() {
   retailerToSearch = newString("");
   typeToSearch = newString("");
   manufacturerToSearch = newString("");
+  NO_Gift = NewComponent();
 }
 
 int main() {

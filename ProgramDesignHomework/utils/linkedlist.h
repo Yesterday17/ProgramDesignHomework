@@ -27,7 +27,7 @@ void InsertLinkedList(LinkedList *list, void *data);
 void DeleteLinkedList(LinkedList *list, int key);
 LinkedList* FindLinkedList(LinkedList *list, bool *callback(LinkedListNode *));
 LinkedListNode *AtLinkedList(LinkedList *list, int pos);
-size_t LengthLinkedList(LinkedList *list);
+int LengthLinkedList(LinkedList *list);
 LinkedList* MapLinkedList(LinkedList *list, void** callback(LinkedListNode*));
 
 void* UnpackLinkedListResult(LinkedListNode *node);

@@ -97,11 +97,12 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
             char key2 = 0;
             if (key1 == 13) {//enter
               DeleteLinkedList(purchase, record);
+              RefreshStorageFund();
               UI_Clear();
               InsertLinkedList(purchase, ReadPurchase());
+              RefreshStorageFund();
               UI_Clear();
               WritePurchaseJSON(PURCHASE_FILENAME);
-              RefreshStorageFund();
               break;
             }
             if (key1 < 0) {
@@ -109,8 +110,8 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               if (key2 == 83) {//delete
                 UI_Clear();
                 DeleteLinkedList(purchase, record);
-                WritePurchaseJSON(PURCHASE_FILENAME);
                 RefreshStorageFund();
+                WritePurchaseJSON(PURCHASE_FILENAME);
                 break;
               }
             }
@@ -181,11 +182,12 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
                 char key2 = 0;
                 if (key1 == 13) {//enter
                   DeleteLinkedList(purchase, record);
+                  RefreshStorageFund();
                   UI_Clear();
                   InsertLinkedList(purchase, ReadPurchase());
+                  RefreshStorageFund();
                   UI_Clear();
                   WritePurchaseJSON(PURCHASE_FILENAME);
-                  RefreshStorageFund();
                   break;
                 }
                 if (key1 < 0) {
@@ -193,8 +195,8 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
                   if (key2 == 83) {//delete
                     UI_Clear();
                     DeleteLinkedList(purchase, record);
-                    WritePurchaseJSON(PURCHASE_FILENAME);
                     RefreshStorageFund();
+                    WritePurchaseJSON(PURCHASE_FILENAME);
                     break;
                   }
                 }
@@ -246,11 +248,12 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
             char key2 = 0;
             if (key1 == 13) {//enter
               DeleteLinkedList(sales, record);
+              RefreshStorageFund();
               UI_Clear();
               InsertLinkedList(sales, ReadSales());
+              RefreshStorageFund();
               UI_Clear();
               WriteSalesJSON(SALES_FILENAME);
-              RefreshStorageFund();
               break;
             }
             if (key1 < 0) {
@@ -258,8 +261,8 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
               if (key2 == 83) {//delete
                 UI_Clear();
                 DeleteLinkedList(sales, record);
-                WriteSalesJSON(SALES_FILENAME);
                 RefreshStorageFund();
+                WriteSalesJSON(SALES_FILENAME);
                 break;
               }
             }
@@ -305,8 +308,10 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
             res = FindLinkedList(sales, FindCustomer_Sales);
           }
           if (y == 2) {
-            timeToSearchearly = InputStr(LITERAL("请输入起始时间: "));
-            timeToSearchlate = InputStr(LITERAL("请输入终止时间: "));
+            PrintLITERAL("请输入起始时间:");
+            timeToSearchearly = ReadTime();
+            PrintLITERAL("请输入终止时间:");
+            timeToSearchlate = ReadTime();
             res = FindLinkedList(sales, FindTime_Sales);
           }
           UI_Clear();
@@ -333,11 +338,12 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
                 char key2 = 0;
                 if (key1 == 13) {//enter
                   DeleteLinkedList(sales, record);
+                  RefreshStorageFund();
                   UI_Clear();
                   InsertLinkedList(sales, ReadSales());
+                  RefreshStorageFund();
                   UI_Clear();
                   WriteSalesJSON(SALES_FILENAME);
-                  RefreshStorageFund();
                   break;
                 }
                 if (key1 < 0) {
@@ -345,8 +351,8 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
                   if (key2 == 83) {//delete
                     UI_Clear();
                     DeleteLinkedList(sales, record);
-                    WriteSalesJSON(SALES_FILENAME);
                     RefreshStorageFund();
+                    WriteSalesJSON(SALES_FILENAME);
                     break;
                   }
                 }

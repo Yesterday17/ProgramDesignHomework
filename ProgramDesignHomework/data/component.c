@@ -4,7 +4,7 @@
 #include "../utils/io.h"
 #include "../utils/fs.h"
 
-Component* NO_Gift;
+Component* NO_Gift = NULL;
 
 Component * NewComponent()
 {
@@ -35,7 +35,7 @@ int ReadComponent() {
   int *idMap, *idMap2, *idMap3;
 
   do {
-    freeAssign(&nameToSearch, InputString(LITERAL("配件名称:"), LITERAL("未知")));
+    freeAssign(&nameToSearch, InputString(LITERAL("配件名称:"), LITERAL("UNKNOWN")));
     nameSearch = FindLinkedList(globalComponentLinkedList, FindName_Component);
     len = LengthLinkedList(nameSearch);
 
@@ -53,7 +53,7 @@ int ReadComponent() {
   }
 
   do {
-    freeAssign(&typeToSearch, InputString(LITERAL("配件类型:"), LITERAL("未知")));
+    freeAssign(&typeToSearch, InputString(LITERAL("配件类型:"), LITERAL("UNKNOWN")));
     typeSearch = FindLinkedList(MapLinkedList(nameSearch, UnpackLinkedListResult), FindType_Component);
     len = LengthLinkedList(typeSearch);
 
@@ -73,7 +73,7 @@ int ReadComponent() {
   }
 
   do {
-    freeAssign(&manufacturerToSearch, InputString(LITERAL("制造商："), LITERAL("未知")));
+    freeAssign(&manufacturerToSearch, InputString(LITERAL("制造商："), LITERAL("UNKNOWN")));
     manufacturerSearch = FindLinkedList(MapLinkedList(typeSearch, UnpackLinkedListResult), FindMan_Component);
     len = LengthLinkedList(manufacturerSearch);
 

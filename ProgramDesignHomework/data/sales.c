@@ -32,7 +32,7 @@ Sales *ReadSales() {
   Sales *sales = NewSales();
   bool match = false;
   sales->component = ReadComponent();
-  sales->time = timemaking();
+  sales->time = ReadTime();
 
   match = false;
   while (!match) {

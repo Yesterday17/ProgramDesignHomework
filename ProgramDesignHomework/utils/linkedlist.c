@@ -89,7 +89,7 @@ LinkedListNode* AtLinkedList(LinkedList * list, int pos)
 }
 
 
-size_t LengthLinkedList(LinkedList *list) {
+int LengthLinkedList(LinkedList *list) {
   size_t len = 0;
   LinkedListNode *node = list->top;
   while (node != NULL) {

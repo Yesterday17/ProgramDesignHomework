@@ -10,9 +10,8 @@
  * 处理时间相关
  */
 
-bool prime(int a);
-bool mistake(int year, int month, int day, int hour, int minute, int second);
-uint64_t timemaking();
-string callbacktime(uint64_t time);
+bool IsTimeValid(int year, int month, int day, int hour, int minute, int second);
+uint64_t ReadTime();
+string TimeToString(uint64_t time);
 
 #endif

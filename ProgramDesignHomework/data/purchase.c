@@ -31,7 +31,7 @@ Purchase *ReadPurchase()
   bool match = false;
 
   purchase->component = ReadComponent();
-  purchase->time = timemaking();
+  purchase->time = ReadTime();
   freeAssign(&purchase->retailer, InputString(LITERAL("供应商: "), LITERAL("3021")));
   purchase->price = InputInt(LITERAL("进价单价: "));
 
