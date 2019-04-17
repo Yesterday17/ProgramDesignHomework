@@ -136,7 +136,7 @@ cJSON *SalesToJSON(Sales *prime)
 //返回标题（售货）函数
 string PrintSalesTitle() {
   char ans[200];
-  sprintf(ans, "   %-12s|%-12s|%-13s|%-14s|%-12s|%-12s|%-12s|%-14s|%-19s|%-20s\n",
+  sprintf(ans, "   %-12s|%-15s|%-13s|%-14s|%-12s|%-12s|%-12s|%-14s|%-19s|%-20s\n",
     U8_CSTR(LITERAL("名称")),
     U8_CSTR(LITERAL("型号")),
     U8_CSTR(LITERAL("制造商")),
@@ -156,7 +156,7 @@ string PrintSales(void *node, uint8_t id) {
   Component* comp = AtLinkedList(globalComponentLinkedList, sales->component)->data;
   Component* gift = (sales->gift == -1 ? NO_Gift : AtLinkedList(globalComponentLinkedList, sales->gift)->data);
   char ans[200];
-  sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10.2f|%-10.2f|%-10s|%-17s|%-20s\n",
+  sprintf(ans, "%-10s|%-13s|%-10s|%-12s|%-10d|%-10.2f|%-10.2f|%-10s|%-17s|%-20s\n",
     U8_CSTR(comp->name),
     U8_CSTR(comp->type),
     U8_CSTR(comp->manufacturer),
