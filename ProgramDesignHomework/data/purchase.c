@@ -32,8 +32,8 @@ Purchase *ReadPurchase()
 
   purchase->component = ReadComponent();
   purchase->time = ReadTime();
-  freeAssign(&purchase->retailer, InputString(LITERAL("供应商: "), LITERAL("3021")));
-  purchase->price = InputInt(LITERAL("进价单价: "));
+  freeAssign(&purchase->retailer, InputString(LITERAL("经销商: "), LITERAL("3021")));
+  purchase->price = InputMoney(LITERAL("进价单价: "), LITERAL("请按照金额格式输入！"));
 
   while (!match) {
     purchase->quantity = InputInt(LITERAL("进货数量: "));
@@ -146,7 +146,7 @@ bool FindComponentName_Purchase(LinkedListNode *node) {
 //判断配件类型（进货）函数
 bool FindComponentType_Purchase(LinkedListNode *node) {
   Component *comp = AtLinkedList(globalComponentLinkedList, ((Purchase*)(node->data))->component)->data;
-  return compareString(comp->type, nameToSearch) == STRING_EQUAL;
+  return compareString(comp->type, typeToSearch) == STRING_EQUAL;
 }
 
 LinkedList* ReadPurchaseJSON(string filename)

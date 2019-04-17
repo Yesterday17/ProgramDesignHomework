@@ -44,7 +44,9 @@ Sales *ReadSales() {
 
   match = false;
   while (!match) {
-    sales->price = InputInt(LITERAL("批发/零售价格: "));
+    sales->price = InputMoney(
+      sales->sales_mode == 1 ? LITERAL("批发单价: ") : LITERAL("零售单价: "),
+      LITERAL("请按照金额格式输入！"));
     if (sales->price > 0) {
       match = true;
     }
@@ -52,7 +54,7 @@ Sales *ReadSales() {
 
   match = false;
   while (!match) {
-    sales->quantity = InputInt(LITERAL("批发/零售数量: "));
+    sales->quantity = InputInt(sales->sales_mode == 1 ? LITERAL("批发数量: ") : LITERAL("零售数量: "));
     if (sales->quantity > 0 && sales->quantity <= ((int*)AtLinkedList(globalStorage, sales->component)->data)[0]) {
       match = true;
       sales->total = sales->price * sales->quantity;
@@ -149,7 +151,7 @@ string PrintSalesTitle() {
 string PrintSales(void *node, uint8_t id) {
   Sales* sales = (Sales *)node;
   Component* comp = AtLinkedList(globalComponentLinkedList, sales->component)->data;
-  Component* gift = (sales->gift == -1 ? NO_Gift :AtLinkedList(globalComponentLinkedList, sales->gift)->data);
+  Component* gift = (sales->gift == -1 ? NO_Gift : AtLinkedList(globalComponentLinkedList, sales->gift)->data);
   char ans[200];
   sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10.2f|%-10.2f|%-10s|%-20s\n",
     U8_CSTR(comp->name),

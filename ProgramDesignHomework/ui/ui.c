@@ -136,7 +136,7 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
     case 2:
       if (purchase->rear != NULL) {
         PrintLITERAL("[ ]1.按配件型号检索\n");
-        PrintLITERAL("[ ]2.按供货商检索\n");
+        PrintLITERAL("[ ]2.按经销商检索\n");
         PrintLITERAL("[ ]3.按时间范围检索\n");
         PrintLITERAL("\n返回上一级请按Backspace\n");
         while (1) {
@@ -149,13 +149,18 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
           UI_Clear();
           LinkedList* res = NULL;
           if (y == 0) {
-            //res = FindLinkedList(purchase, FindRetailer_Purchase);
+            typeToSearch = InputStr(LITERAL("请输入配件型号: "));
+            res = FindLinkedList(purchase, FindComponentType_Purchase);
           }
           if (y == 1) {
-            retailerToSearch = InputStr(LITERAL("请输入制造商："));
+            retailerToSearch = InputStr(LITERAL("请输入经销商："));
             res = FindLinkedList(purchase, FindRetailer_Purchase);
           }
           if (y == 2) {
+            PrintLITERAL("请输入起始时间:");
+            timeToSearchearly = ReadTime();
+            PrintLITERAL("请输入终止时间:");
+            timeToSearchlate = ReadTime();
             res = FindLinkedList(purchase, FindTime_Purchase);
           }
           UI_Clear();
