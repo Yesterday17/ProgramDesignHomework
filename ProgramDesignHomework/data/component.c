@@ -34,7 +34,7 @@ int ReadComponent() {
 
   do {
     freeAssign(&nameToSearch, InputString(LITERAL("配件名称:"), LITERAL("未知")));
-    nameSearch = FindLinkedList(component, FindName_Component);
+    nameSearch = FindLinkedList(globalComponentLinkedList, FindName_Component);
     len = LengthLinkedList(nameSearch);
 
     idMap = (int*)malloc(sizeof(int) * len);

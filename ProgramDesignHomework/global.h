@@ -17,10 +17,11 @@
 extern const char NAME[];
 extern const char VERSION[];
 
-extern LinkedList* component;
+extern LinkedList* globalComponentLinkedList;
 extern LinkedList* purchase;
 extern LinkedList* sales;
-extern LinkedList *globalStorage;
+extern LinkedList* globalStorage;
+extern uint64_t globalFunds;
 
 extern string nameToSearch;
 extern uint64_t timeToSearchearly;

@@ -376,30 +376,28 @@ Menu UI_SubMenu(Menu menu)//二级目录及执行
   }
   if (menu == MENU_Stock)
   {
-    int num[50] = { 0 };
-    for (LinkedListNode *node = purchase->top; node != NULL; node = node->next) {
-      num[((Purchase*)node->data)->component] += ((Purchase*)node->data)->quantity;
+    for (int i = 0; i < LengthLinkedList(globalComponentLinkedList); i++) {
+      int count = ((int*)AtLinkedList(globalStorage, i)->data)[0];
+      Component *comp = AtLinkedList(globalComponentLinkedList, i)->data;
+      printf("%s %s %s: %d\n",
+        U8_CSTR(comp->name),
+        U8_CSTR(comp->type),
+        U8_CSTR(comp->manufacturer),
+        count);
     }
-    for (LinkedListNode *node = sales->top; node != NULL; node = node->next) {
-      num[((Sales*)node->data)->component] -= ((Sales*)node->data)->quantity;
-
-      if (((Sales*)node->data)->gift != -1) {
-        num[((Sales*)node->data)->gift] --;
-      }
-    }
-    //打印
+    PrintLITERAL("\n按任意键返回主菜单");
+    _getch();
+    UI_Clear();
     return MENU_Main;
   }
   if (menu == MENU_Amount)
   {
-    int money[50] = { 0 };
-    for (LinkedListNode *node = purchase->top; node != NULL; node = node->next) {
-      money[((Purchase*)node->data)->price] -= ((Purchase*)node->data)->price;
-    }
-    for (LinkedListNode *node = sales->top; node != NULL; node = node->next) {
-      money[((Sales*)node->data)->price] += ((Sales*)node->data)->price;
-    }
-    //打印
+    PrintLITERAL("目前剩余资金：");
+    printf("%.2f ", globalFunds / 100.0f);
+    PrintLITERAL("元");
+    PrintLITERAL("\n按任意键返回主菜单");
+    _getch();
+    UI_Clear();
     return MENU_Main;
   }
 }

@@ -30,16 +30,41 @@ void FreeSales(Sales * sales)
 
 Sales *ReadSales() {
   Sales *sales = NewSales();
+  bool match = false;
   sales->component = ReadComponent();
   sales->time = timemaking();
-  sales->sales_mode = InputInt(LITERAL("批发(1)/零售(0): ")) % 2;
-  sales->price = InputInt(LITERAL("批发/零售价格: "));
-  sales->quantity = InputInt(LITERAL("批发/零售数量: "));
+
+  match = false;
+  while (!match) {
+    sales->sales_mode = InputInt(LITERAL("批发(1)/零售(0): "));
+    if (sales->sales_mode == 0 || sales->sales_mode == 1) {
+      match = true;
+    }
+  }
+
+  match = false;
+  while (!match) {
+    sales->price = InputInt(LITERAL("批发/零售价格: "));
+    if (sales->price > 0) {
+      match = true;
+    }
+  }
+
+  match = false;
+  while (!match) {
+    sales->quantity = InputInt(LITERAL("批发/零售数量: "));
+    if (sales->quantity > 0 && sales->quantity <= ((int*)AtLinkedList(globalComponentLinkedList, sales->component)->data)[0]) {
+      match = true;
+    }
+  }
+
   sales->total = sales->price * sales->quantity;
   freeAssign(&sales->customer, InputString(LITERAL("客户信息: "), LITERAL("未知")));
-  if (sales->sales_mode == 1)
-    if (sales->total > Ltotal || sales->quantity > Lquantity)
-      sales->gift = Gift(sales);
+
+  if (sales->sales_mode == 1 && (sales->total > Ltotal || sales->quantity > Lquantity)) {
+    sales->gift = Gift(sales);
+    ((int*)(AtLinkedList(globalComponentLinkedList, sales->gift)->data))[0]--;
+  }
   return sales;
 }
 
@@ -115,8 +140,8 @@ string PrintSalesTitle() {
 
 string PrintSales(void *node, uint8_t id) {
   Sales* sales = (Sales *)node;
-  Component* comp = AtLinkedList(component, sales->component)->data;
-  Component* gift = AtLinkedList(component, sales->gift)->data;
+  Component* comp = AtLinkedList(globalComponentLinkedList, sales->component)->data;
+  Component* gift = AtLinkedList(globalComponentLinkedList, sales->gift)->data;
   char ans[200];
   sprintf(ans, "%-10s|%-10s|%-10s|%-12s|%-10d|%-10.2f|%-10.2f|%-10s|%-20s\n",
     U8_CSTR(comp->name),
@@ -135,11 +160,11 @@ bool FindCustomer_Sales(LinkedListNode *node) {
   return compareString(((Sales *)(node->data))->customer, customerToSearch) == STRING_EQUAL;
 }
 bool FindComponentName_Sales(LinkedListNode *node) {
-  Component *comp = AtLinkedList(component, ((Sales*)(node->data))->component)->data;
+  Component *comp = AtLinkedList(globalComponentLinkedList, ((Sales*)(node->data))->component)->data;
   return compareString(comp->name, nameToSearch) == STRING_EQUAL;
 }
 bool FindComponentType_Sales(LinkedListNode *node) {
-  Component *comp = AtLinkedList(component, ((Sales*)(node->data))->component)->data;
+  Component *comp = AtLinkedList(globalComponentLinkedList, ((Sales*)(node->data))->component)->data;
   return compareString(comp->type, typeToSearch) == STRING_EQUAL;
 }
 bool FindTime_Sales(LinkedListNode *node) {
@@ -160,9 +185,9 @@ int Gift() {
     a[w] = t;
   }
   i = 0;
-  for (int pos = 0, len = LengthLinkedList(component); i < 3; pos++) {
+  for (int pos = 0, len = LengthLinkedList(globalComponentLinkedList); i < 3; pos++) {
     if (a[pos] < len) {
-      result[i] = AtLinkedList(component, a[pos])->data;
+      result[i] = AtLinkedList(globalComponentLinkedList, a[pos])->data;
       a[i] = a[pos];
       i++;
     }

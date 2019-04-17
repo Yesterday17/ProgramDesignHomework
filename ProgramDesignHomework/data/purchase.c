@@ -28,13 +28,22 @@ void FreePurchase(Purchase * purchase)
 Purchase *ReadPurchase()
 {
   Purchase *purchase = NewPurchase();
+  bool match = false;
 
   purchase->component = ReadComponent();
   purchase->time = timemaking();
   freeAssign(&purchase->retailer, InputString(LITERAL("供应商: "), LITERAL("3021")));
   purchase->price = InputInt(LITERAL("进价单价: "));
-  purchase->quantity = InputInt(LITERAL("进货数量: "));
-  purchase->total = purchase->price * purchase->quantity;
+
+  while (!match) {
+    purchase->quantity = InputInt(LITERAL("进货数量: "));
+    purchase->total = purchase->price * purchase->quantity;
+    if (purchase->total > 0 && purchase->total <= globalFunds) {
+      match = true;
+      globalFunds -= purchase->total;
+    }
+  }
+
   return purchase;
 }
 
@@ -102,7 +111,7 @@ string PrintPurchaseTitle() {
 
 string PrintPurchase(void *node, uint8_t id) {
   Purchase* purchase = (Purchase *)node;
-  Component* comp = AtLinkedList(component, purchase->component)->data;
+  Component* comp = AtLinkedList(globalComponentLinkedList, purchase->component)->data;
   char ans[200];
   sprintf(ans, "%-10s|%-10s|%-10s|%-10d|%-10.2f|%-10.2f|%-10s\n",
     U8_CSTR(comp->name),
@@ -125,12 +134,12 @@ bool FindRetailer_Purchase(LinkedListNode *node) {
 }
 
 bool FindComponentName_Purchase(LinkedListNode *node) {
-  Component *comp = AtLinkedList(component, ((Purchase*)(node->data))->component)->data;
+  Component *comp = AtLinkedList(globalComponentLinkedList, ((Purchase*)(node->data))->component)->data;
   return compareString(comp->name, nameToSearch) == STRING_EQUAL;
 }
 
 bool FindComponentType_Purchase(LinkedListNode *node) {
-  Component *comp = AtLinkedList(component, ((Purchase*)(node->data))->component)->data;
+  Component *comp = AtLinkedList(globalComponentLinkedList, ((Purchase*)(node->data))->component)->data;
   return compareString(comp->type, nameToSearch) == STRING_EQUAL;
 }
 

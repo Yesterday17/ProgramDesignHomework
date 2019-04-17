@@ -16,7 +16,8 @@ uint64_t timeToSearchearly;
 uint64_t timeToSearchlate;
 Component *componentToSearch = NULL;
 
-LinkedList *component;
+LinkedList *globalComponentLinkedList;
 LinkedList *purchase;
 LinkedList *sales;
 LinkedList *globalStorage;
+uint64_t globalFunds;

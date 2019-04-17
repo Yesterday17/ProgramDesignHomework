@@ -113,5 +113,6 @@ void* UnpackLinkedListResult(LinkedListNode* node) {
 
 int* EmptySizeLinkedListCallback(LinkedListNode *node) {
   int *count = (int*)malloc(sizeof(int));
+  count[0] = 0;
   return count;
 }
