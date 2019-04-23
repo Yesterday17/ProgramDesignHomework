@@ -138,7 +138,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
-    <None Include="..\docs\index.md" />
     <None Include="..\LICENSE" />
     <None Include="..\Readme.md" />
     <None Include="..\scripts\component.js" />

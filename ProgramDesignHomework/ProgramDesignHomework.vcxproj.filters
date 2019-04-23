@@ -22,9 +22,6 @@
     <Filter Include="repo">
       <UniqueIdentifier>{7d63b4f1-562b-4a88-a948-3868efae96bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="repo\docs">
-      <UniqueIdentifier>{58b4c10f-232e-47e2-8316-05f347d4d685}</UniqueIdentifier>
-    </Filter>
     <Filter Include="repo\scripts">
       <UniqueIdentifier>{f266f6b8-dcb7-42bb-bd01-b8128516fddc}</UniqueIdentifier>
     </Filter>
@@ -69,9 +66,6 @@
     </None>
     <None Include="..\LICENSE">
       <Filter>repo</Filter>
-    </None>
-    <None Include="..\docs\index.md">
-      <Filter>repo\docs</Filter>
     </None>
     <None Include="..\scripts\component.js">
       <Filter>repo\scripts</Filter>
